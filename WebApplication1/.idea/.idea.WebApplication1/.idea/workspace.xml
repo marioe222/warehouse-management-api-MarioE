@@ -7,40 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="68549145-381f-40e0-a4f4-49a8821a0bdc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.WebApplication1/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.warehousemanagement/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.warehousemanagement/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.warehousemanagement/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.warehousemanagement/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.warehousemanagement/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement.sln" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/Program.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/Properties/launchSettings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/appsettings.Development.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/appsettings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/obj/Debug/net8.0/WebApplication1.AssemblyInfo.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/obj/Debug/net8.0/WebApplication1.AssemblyInfoInputs.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/obj/Debug/net8.0/WebApplication1.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/obj/Debug/net8.0/WebApplication1.GlobalUsings.g.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/obj/Debug/net8.0/WebApplication1.assets.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/obj/Debug/net8.0/warehousemanagement.AssemblyInfo.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/obj/Debug/net8.0/warehousemanagement.AssemblyInfoInputs.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/obj/Debug/net8.0/warehousemanagement.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/obj/Debug/net8.0/warehousemanagement.GlobalUsings.g.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/obj/Debug/net8.0/warehousemanagement.assets.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/obj/WebApplication1.csproj.nuget.dgspec.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/obj/WebApplication1.csproj.nuget.g.props" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/obj/WebApplication1.csproj.nuget.g.targets" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/obj/project.assets.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/obj/project.nuget.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/obj/project.packagespec.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/obj/rider.project.restore.info" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/obj/warehousemanagement.csproj.nuget.dgspec.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/obj/warehousemanagement.csproj.nuget.g.props" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/obj/warehousemanagement.csproj.nuget.g.targets" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/warehousemanagement.csproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/warehousemanagement/modules/products.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/warehousemanagement/modules/productsImages.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.WebApplication1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WebApplication1/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +18,10 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/warehousemanagement/modules/products.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/warehousemanagement/modules/productsImages.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 1,
@@ -70,6 +43,12 @@
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "git-widget-placeholder": "session-02-first-api",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "C#",
+      "TEXT"
+    ]
   }
 }]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.WebApplication1: IIS Express">
@@ -129,7 +108,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1782906302095</updated>
-      <workItem from="1782906307781" duration="1651000" />
+      <workItem from="1782906307781" duration="3887000" />
     </task>
     <servers />
   </component>
