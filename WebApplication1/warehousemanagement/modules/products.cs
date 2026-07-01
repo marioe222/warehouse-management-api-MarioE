@@ -10,7 +10,7 @@ public class products
     public int QuantityInStock { get; set; }
     public string SupplierName { get; set; }
     public DateTime ExpiryDate { get; set; }
-    public Boolean IsArchived { get; set; }
+    public bool IsArchived { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime LastUpdatedAt { get; set; }
     
