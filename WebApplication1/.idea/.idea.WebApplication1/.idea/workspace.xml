@@ -4,19 +4,39 @@
     <projectFile profileName="IIS Express">WebApplication1/WebApplication1.csproj</projectFile>
     <projectFile profileName="http">WebApplication1/WebApplication1.csproj</projectFile>
     <projectFile profileName="https">WebApplication1/WebApplication1.csproj</projectFile>
+    <projectFile profileName="IIS Express">warehousemanagement/warehousemanagement.csproj</projectFile>
+  </component>
+  <component name="CMakeProjectFlavorService">
+    <option name="flavorId" value="CMakePlainProjectFlavor" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="68549145-381f-40e0-a4f4-49a8821a0bdc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/Contracts/CreateProductRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/Contracts/UpdateProductPriceRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/Contracts/UpdateProductQuantityRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/warehousemanagement/Controllers/ProductsController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/warehousemanagement/Data/FakeWarehouseStore.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WebApplication1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WebApplication1/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/warehousemanagement/Contracts/CreateProductRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/Contracts/CreateProductRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/warehousemanagement/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/warehousemanagement/modules/products.cs" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/modules/products.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/warehousemanagement/obj/Debug/net8.0/warehousemanagement.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/obj/Debug/net8.0/warehousemanagement.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/warehousemanagement/obj/Debug/net8.0/warehousemanagement.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/obj/Debug/net8.0/warehousemanagement.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/warehousemanagement/obj/Debug/net8.0/warehousemanagement.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/obj/Debug/net8.0/warehousemanagement.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/warehousemanagement/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/warehousemanagement/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/warehousemanagement/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/warehousemanagement/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/warehousemanagement/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/warehousemanagement/obj/warehousemanagement.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/obj/warehousemanagement.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/warehousemanagement/obj/warehousemanagement.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/obj/warehousemanagement.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/warehousemanagement/obj/warehousemanagement.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/obj/warehousemanagement.csproj.nuget.g.targets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/warehousemanagement/warehousemanagement.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/warehousemanagement.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DpaMonitoringSettings">
+    <option name="firstShow" value="false" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -25,13 +45,15 @@
     <setting file="file://$PROJECT_DIR$/warehousemanagement/Contracts/CreateProductRequest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/warehousemanagement/Contracts/UpdateProductPriceRequest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/warehousemanagement/Contracts/UpdateProductQuantityRequest.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/warehousemanagement/Controllers/ProductsController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/warehousemanagement/Data/FakeWarehouseStore.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/warehousemanagement/modules/products.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/warehousemanagement/modules/productsImages.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1,
-  "fromUser": false
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1,
+  &quot;fromUser&quot;: false
+}</component>
   <component name="ProjectId" id="3Fttfw5ipJURw0nLscnyppWLtGV" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -39,8 +61,11 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    ".NET Launch Settings Profile.WebApplication1: IIS Express.executor": "Run",
+    ".NET Launch Settings Profile.WebApplication1: https.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
@@ -56,11 +81,11 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.WebApplication1: IIS Express">
+  <component name="RunManager" selected=".NET Launch Settings Profile.WebApplication1: https">
     <configuration name="WebApplication1: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/warehousemanagement/warehousemanagement.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net8.0" />
-      <option name="LAUNCH_PROFILE_NAME" value="IIS Express" />
+      <option name="LAUNCH_PROFILE_NAME" value="https" />
       <option name="USE_MONO" value="0" />
       <option name="RUNTIME_ARGUMENTS" value="" />
       <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
@@ -105,6 +130,28 @@
         <option name="Build" />
       </method>
     </configuration>
+    <configuration name="warehousemanagement: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
+      <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/warehousemanagement/warehousemanagement.csproj" />
+      <option name="LAUNCH_PROFILE_TFM" value="net8.0" />
+      <option name="LAUNCH_PROFILE_NAME" value="IIS Express" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
+      <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
+      <option name="SEND_DEBUG_REQUEST" value="1" />
+      <option name="ADDITIONAL_IIS_EXPRESS_ARGUMENTS" value="" />
+      <option name="AUTO_ATTACH_CHILDREN" value="0" />
+      <option name="MIXED_MODE_DEBUG" value="0" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue=".NET Launch Settings Profile.warehousemanagement: IIS Express" />
+      <item itemvalue=".NET Launch Settings Profile.WebApplication1: http" />
+      <item itemvalue=".NET Launch Settings Profile.WebApplication1: https" />
+      <item itemvalue=".NET Launch Settings Profile.WebApplication1: IIS Express" />
+    </list>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
