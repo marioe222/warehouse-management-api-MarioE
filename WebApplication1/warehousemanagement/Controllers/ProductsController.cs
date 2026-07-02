@@ -216,5 +216,28 @@ namespace warehousemanagement.Controllers
 
             return Ok(formattedDate);
         }
+        
+        [HttpPost("{id}/assign-supplier/{supplierId}")]
+        public IActionResult AssignSupplier(Guid id, Guid supplierId)
+        {
+            var product = FakeWarehouseStore.Products
+                .FirstOrDefault(p => p.Id == id);
+
+            if (product == null)
+                return NotFound("Product not found");
+
+            if (product.IsArchived)
+                return BadRequest("Archived product cannot be assigned");
+
+            var supplier = FakeWarehouseStore.Suppliers
+                .FirstOrDefault(s => s.Id == supplierId);
+
+            if (supplier == null || !supplier.IsActive)
+                return NotFound("Supplier not found or inactive");
+
+            product.Id = supplierId;
+
+            return NoContent();
+        }
     }
 }

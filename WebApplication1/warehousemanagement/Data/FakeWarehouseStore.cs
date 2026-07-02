@@ -6,6 +6,7 @@ namespace warehousemanagement.Data
 {
     public static class FakeWarehouseStore
     {
+        public static List<Supplier> Suppliers = new();
         public static List<products> Products { get; } = new()
         {
             new products

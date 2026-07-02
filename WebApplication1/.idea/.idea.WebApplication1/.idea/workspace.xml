@@ -11,24 +11,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="68549145-381f-40e0-a4f4-49a8821a0bdc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/Controllers/ProductsController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/Data/FakeWarehouseStore.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/warehousemanagement/Contracts/CreateSupplierRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/warehousemanagement/Contracts/UpdateSupplierRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/warehousemanagement/Controllers/SuppliersController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/warehousemanagement/modules/Supplier.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WebApplication1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WebApplication1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/warehousemanagement/Contracts/CreateProductRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/Contracts/CreateProductRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/warehousemanagement/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/warehousemanagement/modules/products.cs" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/modules/products.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/warehousemanagement/obj/Debug/net8.0/warehousemanagement.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/obj/Debug/net8.0/warehousemanagement.AssemblyInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/warehousemanagement/obj/Debug/net8.0/warehousemanagement.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/obj/Debug/net8.0/warehousemanagement.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/warehousemanagement/obj/Debug/net8.0/warehousemanagement.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/obj/Debug/net8.0/warehousemanagement.assets.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/warehousemanagement/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/warehousemanagement/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/obj/project.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/warehousemanagement/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/obj/project.packagespec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/warehousemanagement/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/warehousemanagement/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/obj/rider.project.restore.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/warehousemanagement/obj/warehousemanagement.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/obj/warehousemanagement.csproj.nuget.dgspec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/warehousemanagement/obj/warehousemanagement.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/obj/warehousemanagement.csproj.nuget.g.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/warehousemanagement/obj/warehousemanagement.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/obj/warehousemanagement.csproj.nuget.g.targets" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/warehousemanagement/warehousemanagement.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/warehousemanagement.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/warehousemanagement/Data/FakeWarehouseStore.cs" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/Data/FakeWarehouseStore.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,12 +31,17 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/warehousemanagement/Contracts/CreateProductRequest.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/warehousemanagement/Contracts/CreateSupplierRequest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/warehousemanagement/Contracts/UpdateProductPriceRequest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/warehousemanagement/Contracts/UpdateProductQuantityRequest.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/warehousemanagement/Contracts/UpdateSupplierRequest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/warehousemanagement/Controllers/ProductsController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/warehousemanagement/Controllers/SuppliersController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/warehousemanagement/Data/FakeWarehouseStore.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/warehousemanagement/modules/Supplier.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/warehousemanagement/modules/products.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/warehousemanagement/modules/productsImages.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/warehousemanagement/modules/supplier.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1,
