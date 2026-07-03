@@ -11,8 +11,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="68549145-381f-40e0-a4f4-49a8821a0bdc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/warehousemanagement/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/warehousemanagement/Services/ProductsService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WebApplication1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WebApplication1/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/warehousemanagement/Contracts/CreateProductRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/Contracts/CreateProductRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/warehousemanagement/Contracts/UpdateProductPriceRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/Contracts/UpdateProductPriceRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/warehousemanagement/Controllers/ProductsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/Controllers/ProductsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/warehousemanagement/Data/FakeWarehouseStore.cs" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/Data/FakeWarehouseStore.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/warehousemanagement/modules/Supplier.cs" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/Modules/Supplier.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/warehousemanagement/modules/products.cs" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/Modules/Products.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/warehousemanagement/modules/productsImages.cs" beforeDir="false" afterPath="$PROJECT_DIR$/warehousemanagement/Modules/ProductsImages.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +41,7 @@
     <setting file="file://$PROJECT_DIR$/warehousemanagement/Controllers/ProductsController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/warehousemanagement/Controllers/SuppliersController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/warehousemanagement/Data/FakeWarehouseStore.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/warehousemanagement/Services/ProductsService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/warehousemanagement/modules/Supplier.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/warehousemanagement/modules/products.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/warehousemanagement/modules/productsImages.cs" root0="FORCE_HIGHLIGHTING" />

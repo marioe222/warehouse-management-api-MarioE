@@ -1,6 +1,6 @@
 ﻿namespace warehousemanagement.modules;
 
-public class productsImages
+public class ProductsImages
 {
     public Guid ProductId { get; set; }
     public string FileName { get; set; }

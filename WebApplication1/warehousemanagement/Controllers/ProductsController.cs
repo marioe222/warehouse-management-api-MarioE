@@ -3,6 +3,7 @@ using warehousemanagement.Data;
 using warehousemanagement.Contracts;
 using System.Globalization;
 using warehousemanagement.modules;
+using warehousemanagement.Services;
 
 namespace warehousemanagement.Controllers
 {
@@ -10,31 +11,20 @@ namespace warehousemanagement.Controllers
     [Route("api/products")]
     public class ProductsController : ControllerBase
     {
+        private readonly ProductService _service = new();
+
         // 1 GET /api/products
         [HttpGet]
         public IActionResult GetAll([FromQuery] bool onlyAvailable = false)
         {
-            var products = FakeWarehouseStore.Products
-                .Where(p => !p.IsArchived);
-
-            if (onlyAvailable)
-            {
-                products = products.Where(p => p.QuantityInStock > 0);
-            }
-
-            var result = products
-                .OrderByDescending(p => p.CreatedAt)
-                .ToList();
-
-            return Ok(result);
+            return Ok(_service.GetAll(onlyAvailable));
         }
 
-        // 2️ GET /api/products/{id}
+        // 2 GET /api/products/{id}
         [HttpGet("{id:guid}")]
         public IActionResult GetById([FromRoute] Guid id)
         {
-            var product = FakeWarehouseStore.Products
-                .FirstOrDefault(p => p.Id == id && !p.IsArchived);
+            var product = _service.GetById(id);
 
             if (product == null)
                 return NotFound();
@@ -42,7 +32,7 @@ namespace warehousemanagement.Controllers
             return Ok(product);
         }
 
-        // 3️ GET /api/products/search?name=&supplier=
+        // 3 SEARCH (k)
         [HttpGet("search")]
         public IActionResult Search(
             [FromQuery] string? name,
@@ -72,7 +62,7 @@ namespace warehousemanagement.Controllers
             return Ok(query.ToList());
         }
 
-        // 4️ POST /api/products
+        // 4 CREATE ()
         [HttpPost]
         public IActionResult Create([FromBody] CreateProductRequest request)
         {
@@ -82,7 +72,7 @@ namespace warehousemanagement.Controllers
             if (skuExists)
                 return BadRequest("SKU already exists.");
 
-            var product = new products
+            var product = new Products
             {
                 Id = Guid.NewGuid(),
                 Name = request.Name,
@@ -103,59 +93,43 @@ namespace warehousemanagement.Controllers
                 new { id = product.Id }, product);
         }
 
-        // 5️ POST /api/products/{id}/quantity
+        // 5 UPDATE QUANTITY ()
         [HttpPost("{id:guid}/quantity")]
-        public IActionResult UpdateQuantity(
-            Guid id,
-            [FromBody] UpdateProductQuantityRequest request)
+        public IActionResult UpdateQuantity(Guid id, [FromBody] UpdateProductQuantityRequest request)
         {
             if (request.QuantityInStock < 0)
                 return BadRequest("Quantity cannot be negative.");
 
-            var product = FakeWarehouseStore.Products
-                .FirstOrDefault(p => p.Id == id && !p.IsArchived);
+            var success = _service.UpdateQuantity(id, request.QuantityInStock);
 
-            if (product == null)
+            if (!success)
                 return NotFound();
-
-            product.QuantityInStock = request.QuantityInStock;
-            product.LastUpdatedAt = DateTime.UtcNow;
 
             return NoContent();
         }
 
-        // 6️ POST /api/products/{id}/price
+        // 6 UPDATE PRICE ()
         [HttpPost("{id:guid}/price")]
-        public IActionResult UpdatePrice(
-            Guid id,
-            [FromBody] UpdateProductPriceRequest request)
+        public IActionResult UpdatePrice(Guid id, [FromBody] UpdateProductPriceRequest request)
         {
             if (request.Price <= 0)
                 return BadRequest("Price must be greater than zero.");
 
-            var product = FakeWarehouseStore.Products
-                .FirstOrDefault(p => p.Id == id && !p.IsArchived);
+            var success = _service.UpdatePrice(id, request.Price);
 
-            if (product == null)
+            if (!success)
                 return NotFound();
 
-            // audit log
-            Console.WriteLine($"Price change for {product.Id}: {product.Price} → {request.Price}");
-
-            product.Price = request.Price;
-            product.LastUpdatedAt = DateTime.UtcNow;
+            Console.WriteLine($"Price change for {id} → {request.Price}");
 
             return NoContent();
         }
 
-        // 7️ POST /api/products/{id}/image
+        // 7 IMAGE UPLOAD ()
         [HttpPost("{id:guid}/image")]
         [Consumes("multipart/form-data")]
-        [ApiExplorerSettings(IgnoreApi = false)]
-        public IActionResult UploadImage(Guid id)
+        public IActionResult UploadImage(Guid id, [FromForm] IFormFile file)
         {
-            var file = Request.Form.Files.FirstOrDefault();
-
             var product = FakeWarehouseStore.Products
                 .FirstOrDefault(p => p.Id == id && !p.IsArchived);
 
@@ -184,7 +158,7 @@ namespace warehousemanagement.Controllers
             return Ok(new { FileName = fileName });
         }
 
-        // 8️ DELETE /api/products/{id}
+        // 8 DELETE
         [HttpDelete("{id:guid}")]
         public IActionResult Delete(Guid id)
         {
@@ -200,7 +174,7 @@ namespace warehousemanagement.Controllers
             return NoContent();
         }
 
-        // 9️ GET /api/products/server-time
+        // 9 SERVER TIME
         [HttpGet("server-time")]
         public IActionResult GetServerTime(
             [FromHeader(Name = "Accept-Language")] string language)
@@ -212,11 +186,12 @@ namespace warehousemanagement.Controllers
                 _ => new CultureInfo("en-US")
             };
 
-            var formattedDate = DateTime.Now.ToString("F", culture);
+            var formattedDate = DateTime.UtcNow.ToString("F", culture);
 
             return Ok(formattedDate);
         }
-        
+
+        // 10 ASSIGN SUPPLIER
         [HttpPost("{id}/assign-supplier/{supplierId}")]
         public IActionResult AssignSupplier(Guid id, Guid supplierId)
         {
@@ -235,7 +210,9 @@ namespace warehousemanagement.Controllers
             if (supplier == null || !supplier.IsActive)
                 return NotFound("Supplier not found or inactive");
 
-            product.Id = supplierId;
+            
+            product.SupplierName = supplier.Name;
+            product.LastUpdatedAt = DateTime.UtcNow;
 
             return NoContent();
         }

@@ -7,9 +7,9 @@ namespace warehousemanagement.Data
     public static class FakeWarehouseStore
     {
         public static List<Supplier> Suppliers = new();
-        public static List<products> Products { get; } = new()
+        public static List<Products> Products { get; } = new()
         {
-            new products
+            new Products
             {
                 Id = Guid.NewGuid(),
                 Name = "Laptop",
@@ -23,7 +23,7 @@ namespace warehousemanagement.Data
                 CreatedAt = DateTime.UtcNow,
                 LastUpdatedAt = DateTime.UtcNow
             },
-            new products
+            new Products
             {
                 Id = Guid.NewGuid(),
                 Name = "Mouse",
@@ -37,7 +37,7 @@ namespace warehousemanagement.Data
                 CreatedAt = DateTime.UtcNow,
                 LastUpdatedAt = DateTime.UtcNow
             },
-            new products
+            new Products
             {
                 Id = Guid.NewGuid(),
                 Name = "Keyboard",
@@ -51,7 +51,7 @@ namespace warehousemanagement.Data
                 CreatedAt = DateTime.UtcNow,
                 LastUpdatedAt = DateTime.UtcNow
             },
-            new products
+            new Products
             {
                 Id = Guid.NewGuid(),
                 Name = "Scanner",
@@ -65,7 +65,7 @@ namespace warehousemanagement.Data
                 CreatedAt = DateTime.UtcNow,
                 LastUpdatedAt = DateTime.UtcNow
             },
-            new products
+            new Products
             {
                 Id = Guid.NewGuid(),
                 Name = "Printer",
@@ -79,7 +79,7 @@ namespace warehousemanagement.Data
                 CreatedAt = DateTime.UtcNow,
                 LastUpdatedAt = DateTime.UtcNow
             },
-            new products
+            new Products
             {
                 Id = Guid.NewGuid(),
                 Name = "Monitor",
@@ -93,7 +93,7 @@ namespace warehousemanagement.Data
                 CreatedAt = DateTime.UtcNow,
                 LastUpdatedAt = DateTime.UtcNow
             },
-            new products
+            new Products
             {
                 Id = Guid.NewGuid(),
                 Name = "Webcam",
@@ -107,7 +107,7 @@ namespace warehousemanagement.Data
                 CreatedAt = DateTime.UtcNow,
                 LastUpdatedAt = DateTime.UtcNow
             },
-            new products
+            new Products
             {
                 Id = Guid.NewGuid(),
                 Name = "Headset",
@@ -121,7 +121,7 @@ namespace warehousemanagement.Data
                 CreatedAt = DateTime.UtcNow,
                 LastUpdatedAt = DateTime.UtcNow
             },
-            new products
+            new Products
             {
                 Id = Guid.NewGuid(),
                 Name = "USB Flash Drive",
@@ -135,7 +135,7 @@ namespace warehousemanagement.Data
                 CreatedAt = DateTime.UtcNow,
                 LastUpdatedAt = DateTime.UtcNow
             },
-            new products
+            new Products
             {
                 Id = Guid.NewGuid(),
                 Name = "External Hard Drive",
