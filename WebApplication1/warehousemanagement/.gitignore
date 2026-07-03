@@ -1,0 +1,11 @@
+﻿# IDE
+.idea/
+.vs/
+
+# Build outputs
+bin/
+obj/
+
+# OS
+.DS_Store
+Thumbs.db
