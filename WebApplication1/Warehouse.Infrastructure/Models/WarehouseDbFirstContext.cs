@@ -23,35 +23,29 @@ public partial class WarehouseDbFirstContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        if (!optionsBuilder.IsConfigured)
-        {
-            optionsBuilder.UseNpgsql();
-        }
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("products_pkey");
+            entity.HasKey(e => e.Productid).HasName("products_pkey");
 
             entity.ToTable("products");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
-            entity.Property(e => e.Description)
-                .HasMaxLength(500)
-                .HasColumnName("description");
+            entity.Property(e => e.Productid).HasColumnName("productid");
+            entity.Property(e => e.Createdat)
+                .HasDefaultValueSql("now()")
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("createdat");
+            entity.Property(e => e.Expirydate).HasColumnName("expirydate");
             entity.Property(e => e.Name)
                 .HasMaxLength(100)
                 .HasColumnName("name");
             entity.Property(e => e.Price)
                 .HasPrecision(10, 2)
                 .HasColumnName("price");
-            entity.Property(e => e.Quantityinstock)
-                .HasDefaultValue(0)
-                .HasColumnName("quantityinstock");
+            entity.Property(e => e.Quantity).HasColumnName("quantity");
             entity.Property(e => e.Supplierid).HasColumnName("supplierid");
 
             entity.HasOne(d => d.Supplier).WithMany(p => p.Products)
@@ -61,45 +55,43 @@ public partial class WarehouseDbFirstContext : DbContext
 
         modelBuilder.Entity<Productimage>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("productimages_pkey");
+            entity.HasKey(e => e.Productimageid).HasName("productimages_pkey");
 
             entity.ToTable("productimages");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
+            entity.Property(e => e.Productimageid).HasColumnName("productimageid");
             entity.Property(e => e.Imageurl)
-                .HasMaxLength(500)
+                .HasMaxLength(300)
                 .HasColumnName("imageurl");
             entity.Property(e => e.Productid).HasColumnName("productid");
 
             entity.HasOne(d => d.Product).WithMany(p => p.Productimages)
                 .HasForeignKey(d => d.Productid)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_product_image");
+                .HasConstraintName("fk_image_product");
         });
 
         modelBuilder.Entity<Supplier>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("suppliers_pkey");
+            entity.HasKey(e => e.Supplierid).HasName("suppliers_pkey");
 
             entity.ToTable("suppliers");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
-            entity.Property(e => e.Email)
+            entity.Property(e => e.Supplierid).HasColumnName("supplierid");
+            entity.Property(e => e.Contactemail)
                 .HasMaxLength(150)
-                .HasColumnName("email");
+                .HasColumnName("contactemail");
+            entity.Property(e => e.Country)
+                .HasMaxLength(100)
+                .HasColumnName("country");
             entity.Property(e => e.Isactive)
                 .HasDefaultValue(true)
                 .HasColumnName("isactive");
             entity.Property(e => e.Name)
                 .HasMaxLength(100)
                 .HasColumnName("name");
-            entity.Property(e => e.Phone)
+            entity.Property(e => e.Phonenumber)
                 .HasMaxLength(50)
-                .HasColumnName("phone");
+                .HasColumnName("phonenumber");
         });
 
         OnModelCreatingPartial(modelBuilder);

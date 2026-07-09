@@ -3,5 +3,5 @@
 namespace Warehouse.Application.Suppliers.Commands.DeactivateSupplier;
 
 public record DeactivateSupplierCommand(
-    Guid SupplierId
+    int SupplierId
 ) : IRequest<DeactivateSupplierResponse>;

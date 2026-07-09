@@ -3,6 +3,6 @@
 namespace Warehouse.Application.Products.Commands.UpdateProductQuantity;
 
 public record UpdateProductQuantityCommand(
-    Guid ProductId,
+    int ProductId,
     int QuantityInStock
 ) : IRequest<UpdateProductQuantityResponse>;

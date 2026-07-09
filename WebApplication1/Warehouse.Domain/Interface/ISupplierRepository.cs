@@ -6,7 +6,7 @@ public interface ISupplierRepository
 {
     Task Add(Supplier supplier);
 
-    Task<Supplier?> GetById(Guid id);
+    Task<Supplier?> GetById(int id);
 
     Task<IEnumerable<Supplier>> GetAll();
 

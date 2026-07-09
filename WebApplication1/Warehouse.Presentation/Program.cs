@@ -1,22 +1,39 @@
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
+
 using Warehouse.Domain.Interface;
-using Warehouse.Infrastructure.Models;
+
+using Warehouse.Infrastructure.Data;
 using Warehouse.Infrastructure.Repositories;
+
 using Warehouse.Application.Products.Commands.CreateProduct;
+using Warehouse.Infrastructure.Models;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+
+// Controllers 
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler =
+            ReferenceHandler.IgnoreCycles;
+    });
 
 
-//Database Connection
+
+// PostgreSQL Database Connection (DB First)
 builder.Services.AddDbContext<WarehouseDbFirstContext>(options =>
+{
     options.UseNpgsql(
         builder.Configuration.GetConnectionString("DefaultConnection")
-    ));
+    );
+});
 
 
-//MediatR
+
+// MediatR
 builder.Services.AddMediatR(cfg =>
 {
     cfg.RegisterServicesFromAssembly(
@@ -25,10 +42,12 @@ builder.Services.AddMediatR(cfg =>
 });
 
 
-// Repositories
+
+// Dependency Injection - Repositories
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
+
 
 
 // Swagger
@@ -37,15 +56,19 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
+
 var app = builder.Build();
 
 
-// Swagger Middleware
+
+// Swagger
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
+
     app.UseSwaggerUI();
 }
+
 
 
 app.UseHttpsRedirection();
@@ -53,5 +76,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
 
 app.Run();

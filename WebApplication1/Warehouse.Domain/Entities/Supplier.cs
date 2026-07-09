@@ -2,7 +2,7 @@
 
 public class Supplier
 {
-    public Guid Id { get; private set; }
+    public int Id { get; private set; }
 
     public string Name { get; private set; }
 
@@ -15,12 +15,8 @@ public class Supplier
         string name,
         string contactEmail)
     {
-        Id = Guid.NewGuid();
-
         Name = name;
-
         ContactEmail = contactEmail;
-
         IsActive = true;
     }
 
@@ -28,5 +24,11 @@ public class Supplier
     public void Deactivate()
     {
         IsActive = false;
+    }
+
+
+    public void Activate()
+    {
+        IsActive = true;
     }
 }

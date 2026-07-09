@@ -5,17 +5,19 @@ namespace Warehouse.Infrastructure.Models;
 
 public partial class Product
 {
-    public Guid Id { get; set; }
+    public int Productid { get; set; }
 
     public string Name { get; set; } = null!;
 
-    public string? Description { get; set; }
+    public decimal? Price { get; set; }
 
-    public decimal Price { get; set; }
+    public int? Quantity { get; set; }
 
-    public int Quantityinstock { get; set; }
+    public DateOnly? Expirydate { get; set; }
 
-    public Guid? Supplierid { get; set; }
+    public DateTime? Createdat { get; set; }
+
+    public int? Supplierid { get; set; }
 
     public virtual ICollection<Productimage> Productimages { get; set; } = new List<Productimage>();
 

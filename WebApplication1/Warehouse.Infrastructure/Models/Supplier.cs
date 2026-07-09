@@ -5,15 +5,17 @@ namespace Warehouse.Infrastructure.Models;
 
 public partial class Supplier
 {
-    public Guid Id { get; set; }
+    public int Supplierid { get; set; }
 
     public string Name { get; set; } = null!;
 
-    public string? Email { get; set; }
+    public string? Country { get; set; }
 
-    public string? Phone { get; set; }
+    public string? Contactemail { get; set; }
 
-    public bool Isactive { get; set; }
+    public string? Phonenumber { get; set; }
+
+    public bool? Isactive { get; set; }
 
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();
 }

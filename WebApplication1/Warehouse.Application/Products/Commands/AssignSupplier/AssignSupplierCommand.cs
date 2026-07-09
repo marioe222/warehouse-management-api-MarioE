@@ -3,6 +3,6 @@
 namespace Warehouse.Application.Products.Commands.AssignSupplier;
 
 public record AssignSupplierCommand(
-    Guid ProductId,
-    Guid SupplierId
+    int ProductId,
+    int SupplierId
 ) : IRequest<AssignSupplierResponse>;

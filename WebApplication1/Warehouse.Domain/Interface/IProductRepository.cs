@@ -6,7 +6,7 @@ public interface IProductRepository
 {
     Task Add(Product product);
 
-    Task<Product?> GetById(Guid id);
+    Task<Product?> GetById(int id);
 
     Task<IEnumerable<Product>> GetAll();
 

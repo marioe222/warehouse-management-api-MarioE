@@ -8,5 +8,6 @@ public class CreateProductRequest
     public decimal Price { get; set; }
     public int QuantityInStock { get; set; }
     public required string SupplierName { get; set; }
+    public required int SupplierId { get; set; }
     public DateTime ExpiryDate { get; set; }
 }

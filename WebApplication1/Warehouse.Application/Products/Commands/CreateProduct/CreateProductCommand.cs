@@ -8,6 +8,7 @@ public record CreateProductCommand(
     string Description,
     decimal Price,
     int QuantityInStock,
-    string? SupplierName,
+    string SupplierName,
+    int SupplierId,
     DateTime? ExpiryDate
 ) : IRequest<CreateProductResponse>;

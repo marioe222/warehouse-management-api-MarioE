@@ -4,6 +4,6 @@ using Microsoft.AspNetCore.Http;
 namespace Warehouse.Application.Products.Commands.UploadProductImage;
 
 public record UploadProductImageCommand(
-    Guid ProductId,
+    int ProductId,
     IFormFile File
 ) : IRequest<UploadProductImageResponse>;

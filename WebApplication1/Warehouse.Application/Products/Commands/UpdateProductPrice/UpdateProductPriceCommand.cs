@@ -3,6 +3,6 @@
 namespace Warehouse.Application.Products.Commands.UpdateProductPrice;
 
 public record UpdateProductPriceCommand(
-    Guid ProductId,
+    int ProductId,
     decimal Price
 ) : IRequest<UpdateProductPriceResponse>;

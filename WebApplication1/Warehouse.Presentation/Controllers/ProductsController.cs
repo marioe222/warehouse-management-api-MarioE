@@ -1,17 +1,22 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+
 using Warehouse.Application.Products.Commands.ArchiveProduct;
 using Warehouse.Application.Products.Commands.AssignSupplier;
 using Warehouse.Application.Products.Commands.CreateProduct;
 using Warehouse.Application.Products.Commands.UpdateProductPrice;
 using Warehouse.Application.Products.Commands.UpdateProductQuantity;
 using Warehouse.Application.Products.Commands.UploadProductImage;
+
 using Warehouse.Application.Products.Queries.GetProductById;
 using Warehouse.Application.Products.Queries.ListProducts;
 using Warehouse.Application.Products.Queries.SearchProducts;
+
 using Warehouse.Presentation.Contracts;
 
+
 namespace Warehouse.Presentation.Controllers;
+
 
 [ApiController]
 [Route("api/products")]
@@ -39,9 +44,10 @@ public class ProductsController : ControllerBase
     }
 
 
+
     // 2 GET /api/products/{id}
-    [HttpGet("{id:guid}")]
-    public async Task<IActionResult> GetById(Guid id)
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> GetById(int id)
     {
         var product = await _mediator.Send(
             new GetProductByIdQuery(id)
@@ -54,6 +60,7 @@ public class ProductsController : ControllerBase
 
         return Ok(product);
     }
+
 
 
     // 3 SEARCH
@@ -74,6 +81,7 @@ public class ProductsController : ControllerBase
     }
 
 
+
     // 4 CREATE
     [HttpPost]
     public async Task<IActionResult> Create(
@@ -87,6 +95,7 @@ public class ProductsController : ControllerBase
                 request.Price,
                 request.QuantityInStock,
                 request.SupplierName,
+                request.SupplierId,
                 request.ExpiryDate
             )
         );
@@ -100,10 +109,11 @@ public class ProductsController : ControllerBase
     }
 
 
+
     // 5 UPDATE QUANTITY
-    [HttpPost("{id:guid}/quantity")]
+    [HttpPost("{id:int}/quantity")]
     public async Task<IActionResult> UpdateQuantity(
-        Guid id,
+        int id,
         UpdateProductQuantityRequest request)
     {
         if (request.QuantityInStock < 0)
@@ -126,10 +136,11 @@ public class ProductsController : ControllerBase
     }
 
 
+
     // 6 UPDATE PRICE
-    [HttpPost("{id:guid}/price")]
+    [HttpPost("{id:int}/price")]
     public async Task<IActionResult> UpdatePrice(
-        Guid id,
+        int id,
         UpdateProductPriceRequest request)
     {
         if (request.Price <= 0)
@@ -152,11 +163,12 @@ public class ProductsController : ControllerBase
     }
 
 
+
     // 7 IMAGE UPLOAD
-    [HttpPost("{id:guid}/image")]
+    [HttpPost("{id:int}/image")]
     [Consumes("multipart/form-data")]
     public async Task<IActionResult> UploadImage(
-        Guid id,
+        int id,
         IFormFile file)
     {
         var result = await _mediator.Send(
@@ -175,9 +187,10 @@ public class ProductsController : ControllerBase
     }
 
 
+
     // 8 DELETE / ARCHIVE
-    [HttpDelete("{id:guid}")]
-    public async Task<IActionResult> Delete(Guid id)
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> Delete(int id)
     {
         var result = await _mediator.Send(
             new ArchiveProductCommand(id)
@@ -192,6 +205,7 @@ public class ProductsController : ControllerBase
     }
 
 
+
     // 9 SERVER TIME
     [HttpGet("server-time")]
     public IActionResult GetServerTime(
@@ -203,11 +217,12 @@ public class ProductsController : ControllerBase
     }
 
 
+
     // 10 ASSIGN SUPPLIER
-    [HttpPost("{id:guid}/assign-supplier/{supplierId:guid}")]
+    [HttpPost("{id:int}/assign-supplier/{supplierId:int}")]
     public async Task<IActionResult> AssignSupplier(
-        Guid id,
-        Guid supplierId)
+        int id,
+        int supplierId)
     {
         var result = await _mediator.Send(
             new AssignSupplierCommand(

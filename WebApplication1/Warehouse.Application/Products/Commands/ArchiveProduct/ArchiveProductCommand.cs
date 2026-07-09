@@ -3,5 +3,5 @@
 namespace Warehouse.Application.Products.Commands.ArchiveProduct;
 
 public record ArchiveProductCommand(
-    Guid ProductId
+    int ProductId
 ) : IRequest<ArchiveProductResponse>;

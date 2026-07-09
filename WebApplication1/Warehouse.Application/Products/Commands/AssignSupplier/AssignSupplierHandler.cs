@@ -41,8 +41,10 @@ public class AssignSupplierHandler
             return new AssignSupplierResponse(false);
 
 
-        // Add this method inside Product entity
-        product.AssignSupplier(supplier);
+        product.AssignSupplier(
+            supplier.Id,
+            supplier.Name
+        );
 
 
         await _productRepository.Update(product);

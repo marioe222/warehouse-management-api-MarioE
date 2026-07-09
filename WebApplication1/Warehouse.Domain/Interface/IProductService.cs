@@ -2,13 +2,23 @@
 
 namespace Warehouse.Domain.Interface;
 
-public interface IProductService
+public interface IProductService    
 {
-    List<Product> GetAll(bool onlyAvailable);
+    Task<IEnumerable<Product>> GetProductsBySupplier(
+        string supplierName,
+        string sort);
 
-    Product? GetById(Guid id);
 
-    bool UpdatePrice(Guid id, decimal price);
+    Task<object> GroupProductsByExpiryYear();
 
-    bool UpdateQuantity(Guid id, int quantity);
+
+    Task<object> GroupProductsByExpiryYearAndCountry();
+
+
+    Task<int> GetTotalProducts();
+
+
+    Task<IEnumerable<Product>> GetProductsPagination(
+        int pageNumber,
+        int pageSize);
 }

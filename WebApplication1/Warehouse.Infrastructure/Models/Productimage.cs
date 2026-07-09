@@ -5,11 +5,11 @@ namespace Warehouse.Infrastructure.Models;
 
 public partial class Productimage
 {
-    public Guid Id { get; set; }
+    public int Productimageid { get; set; }
 
-    public Guid Productid { get; set; }
+    public string? Imageurl { get; set; }
 
-    public string Imageurl { get; set; } = null!;
+    public int? Productid { get; set; }
 
-    public virtual Product Product { get; set; } = null!;
+    public virtual Product? Product { get; set; }
 }

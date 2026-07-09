@@ -4,7 +4,39 @@ namespace Warehouse.Infrastructure.Data;
 
 public static class FakeWarehouseStore
 {
-    public static List<Supplier> Suppliers { get; } = new();
+    public static List<Supplier> Suppliers { get; } = new()
+    {
+        new Supplier(
+            "TechSupplier",
+            "tech@supplier.com"
+        ),
+
+        new Supplier(
+            "AccessoryWorld",
+            "accessory@supplier.com"
+        ),
+
+        new Supplier(
+            "OfficePro",
+            "office@supplier.com"
+        ),
+
+        new Supplier(
+            "DisplayTech",
+            "display@supplier.com"
+        ),
+
+        new Supplier(
+            "SoundGear",
+            "sound@supplier.com"
+        ),
+
+        new Supplier(
+            "StoragePlus",
+            "storage@supplier.com"
+        )
+    };
+
 
     public static List<Product> Products { get; } = new()
     {
@@ -14,6 +46,7 @@ public static class FakeWarehouseStore
             "High performance laptop",
             1200m,
             15,
+            1,
             "TechSupplier",
             null
         ),
@@ -24,6 +57,7 @@ public static class FakeWarehouseStore
             "Wireless mouse",
             25m,
             100,
+            2,
             "AccessoryWorld",
             null
         ),
@@ -34,6 +68,7 @@ public static class FakeWarehouseStore
             "Mechanical keyboard",
             80m,
             60,
+            2,
             "AccessoryWorld",
             null
         ),
@@ -44,6 +79,7 @@ public static class FakeWarehouseStore
             "Office document scanner",
             300m,
             10,
+            3,
             "OfficePro",
             null
         ),
@@ -54,6 +90,7 @@ public static class FakeWarehouseStore
             "Laser printer",
             450m,
             8,
+            3,
             "OfficePro",
             null
         ),
@@ -64,6 +101,7 @@ public static class FakeWarehouseStore
             "24-inch LED monitor",
             220m,
             30,
+            4,
             "DisplayTech",
             null
         ),
@@ -74,6 +112,7 @@ public static class FakeWarehouseStore
             "HD webcam",
             70m,
             40,
+            2,
             "AccessoryWorld",
             null
         ),
@@ -84,6 +123,7 @@ public static class FakeWarehouseStore
             "Noise cancelling headset",
             95m,
             35,
+            5,
             "SoundGear",
             null
         ),
@@ -94,6 +134,7 @@ public static class FakeWarehouseStore
             "64GB USB 3.0 flash drive",
             18m,
             200,
+            6,
             "StoragePlus",
             null
         ),
@@ -104,6 +145,7 @@ public static class FakeWarehouseStore
             "1TB external hard drive",
             110m,
             25,
+            6,
             "StoragePlus",
             null
         )

@@ -3,5 +3,5 @@
 namespace Warehouse.Application.Suppliers.Queries.GetSupplierById;
 
 public record GetSupplierByIdQuery(
-    Guid Id
+    int Id
 ) : IRequest<GetSupplierByIdResponse?>;
