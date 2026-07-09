@@ -1,5 +1,7 @@
-﻿namespace Warehouse.Application.Products.Queries.SearchProducts;
+﻿using Warehouse.Domain.Entities;
+
+namespace Warehouse.Application.Products.Queries.SearchProducts;
 
 public record SearchProductsResponse(
-    IEnumerable<object> Products
+    IEnumerable<Product> Products
 );

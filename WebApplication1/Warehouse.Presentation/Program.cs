@@ -3,11 +3,12 @@ using Warehouse.Infrastructure.Repositories;
 using Warehouse.Application.Products.Commands.CreateProduct;
 using Microsoft.EntityFrameworkCore;
 using Warehouse.Infrastructure.Data;
+using Warehouse.Application.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddDbContext<WarehouseDbContext>(options =>
     options.UseNpgsql(
