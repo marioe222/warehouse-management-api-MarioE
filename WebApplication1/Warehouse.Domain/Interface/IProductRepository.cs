@@ -11,6 +11,4 @@ public interface IProductRepository
     Task<IEnumerable<Product>> GetAll();
 
     Task Update(Product product);
-
-    Task Delete(Product product);
 }

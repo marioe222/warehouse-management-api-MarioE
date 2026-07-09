@@ -1,67 +1,38 @@
 ﻿using Warehouse.Domain.Entities;
 using Warehouse.Domain.Interface;
+using Warehouse.Infrastructure.Data;
 
 namespace Warehouse.Infrastructure.Repositories;
 
 public class ProductRepository : IProductRepository
 {
-
-    private readonly List<Product> _products = new();
-
-
-
     public Task Add(Product product)
     {
-        _products.Add(product);
+        FakeWarehouseStore.Products.Add(product);
 
         return Task.CompletedTask;
     }
 
 
-
     public Task<Product?> GetById(Guid id)
     {
-        var product = _products
+        var product = FakeWarehouseStore.Products
             .FirstOrDefault(p => p.Id == id);
 
         return Task.FromResult(product);
     }
 
 
-
     public Task<IEnumerable<Product>> GetAll()
     {
-        return Task.FromResult(
-            _products.AsEnumerable()
+        return Task.FromResult<IEnumerable<Product>>(
+            FakeWarehouseStore.Products
         );
-    }
+    }  
 
 
-
-    public Task Update(Product product)
+    public async Task Update(Product product)
     {
-        var existing = _products
-            .FirstOrDefault(p => p.Id == product.Id);
-
-
-        if(existing != null)
-        {
-            var index = _products.IndexOf(existing);
-
-            _products[index] = product;
-        }
-
-
-        return Task.CompletedTask;
+        await Task.CompletedTask;
     }
-
-
-
-    public Task Delete(Product product)
-    {
-        _products.Remove(product);
-
-        return Task.CompletedTask;
-    }
-
 }

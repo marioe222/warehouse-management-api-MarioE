@@ -11,7 +11,6 @@ public class Supplier
     public bool IsActive { get; private set; }
 
 
-
     public Supplier(
         string name,
         string contactEmail)
@@ -24,7 +23,6 @@ public class Supplier
 
         IsActive = true;
     }
-
 
 
     public void Deactivate()

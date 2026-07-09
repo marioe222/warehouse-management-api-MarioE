@@ -1,220 +1,226 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Globalization;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Warehouse.Application.Products.Commands.ArchiveProduct;
+using Warehouse.Application.Products.Commands.AssignSupplier;
+using Warehouse.Application.Products.Commands.CreateProduct;
+using Warehouse.Application.Products.Commands.UpdateProductPrice;
+using Warehouse.Application.Products.Commands.UpdateProductQuantity;
+using Warehouse.Application.Products.Commands.UploadProductImage;
+using Warehouse.Application.Products.Queries.GetProductById;
+using Warehouse.Application.Products.Queries.ListProducts;
+using Warehouse.Application.Products.Queries.SearchProducts;
 using Warehouse.Presentation.Contracts;
-using Warehouse.Presentation.Data;
-using Warehouse.Presentation.modules;
-using Warehouse.Presentation.Services;
 
-namespace Warehouse.Presentation.Controllers
+namespace Warehouse.Presentation.Controllers;
+
+[ApiController]
+[Route("api/products")]
+public class ProductsController : ControllerBase
 {
-    [ApiController]
-    [Route("api/products")]
-    public class ProductsController : ControllerBase
+    private readonly IMediator _mediator;
+
+
+    public ProductsController(IMediator mediator)
     {
-        private readonly ProductService _service = new();
+        _mediator = mediator;
+    }
 
-        // 1 GET /api/products
-        [HttpGet]
-        public IActionResult GetAll([FromQuery] bool onlyAvailable = false)
-        {
-            return Ok(_service.GetAll(onlyAvailable));
-        }
 
-        // 2 GET /api/products/{id}
-        [HttpGet("{id:guid}")]
-        public IActionResult GetById([FromRoute] Guid id)
-        {
-            var product = _service.GetById(id);
+    // 1 GET /api/products
+    [HttpGet]
+    public async Task<IActionResult> GetAll(
+        [FromQuery] bool onlyAvailable = false)
+    {
+        var products = await _mediator.Send(
+            new ListProductsQuery(onlyAvailable)
+        );
 
-            if (product == null)
-                return NotFound();
+        return Ok(products);
+    }
 
-            return Ok(product);
-        }
 
-        // 3 SEARCH (k)
-        [HttpGet("search")]
-        public IActionResult Search(
-            [FromQuery] string? name,
-            [FromQuery] string? supplier)
-        {
-            if (string.IsNullOrWhiteSpace(name) &&
-                string.IsNullOrWhiteSpace(supplier))
-            {
-                return BadRequest("At least one search parameter is required.");
-            }
+    // 2 GET /api/products/{id}
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> GetById(Guid id)
+    {
+        var product = await _mediator.Send(
+            new GetProductByIdQuery(id)
+        );
 
-            var query = FakeWarehouseStore.Products
-                .Where(p => !p.IsArchived);
 
-            if (!string.IsNullOrWhiteSpace(name))
-            {
-                query = query.Where(p =>
-                    p.Name.Contains(name, StringComparison.OrdinalIgnoreCase));
-            }
+        if (product == null)
+            return NotFound();
 
-            if (!string.IsNullOrWhiteSpace(supplier))
-            {
-                query = query.Where(p =>
-                    p.SupplierName.Contains(supplier, StringComparison.OrdinalIgnoreCase));
-            }
 
-            return Ok(query.ToList());
-        }
+        return Ok(product);
+    }
 
-        // 4 CREATE ()
-        [HttpPost]
-        public IActionResult Create([FromBody] CreateProductRequest request)
-        {
-            var skuExists = FakeWarehouseStore.Products
-                .Any(p => p.Sku == request.Sku);
 
-            if (skuExists)
-                return BadRequest("SKU already exists.");
+    // 3 SEARCH
+    [HttpGet("search")]
+    public async Task<IActionResult> Search(
+        [FromQuery] string? name,
+        [FromQuery] string? supplier)
+    {
+        var products = await _mediator.Send(
+            new SearchProductsQuery(
+                name,
+                supplier
+            )
+        );
 
-            var product = new Products
-            {
-                Id = Guid.NewGuid(),
-                Name = request.Name,
-                Sku = request.Sku,
-                Description = request.Description,
-                Price = request.Price,
-                QuantityInStock = request.QuantityInStock,
-                SupplierName = request.SupplierName,
-                ExpiryDate = request.ExpiryDate,
-                IsArchived = false,
-                CreatedAt = DateTime.UtcNow,
-                LastUpdatedAt = DateTime.UtcNow
-            };
 
-            FakeWarehouseStore.Products.Add(product);
+        return Ok(products);
+    }
 
-            return CreatedAtAction(nameof(GetById),
-                new { id = product.Id }, product);
-        }
 
-        // 5 UPDATE QUANTITY ()
-        [HttpPost("{id:guid}/quantity")]
-        public IActionResult UpdateQuantity(Guid id, [FromBody] UpdateProductQuantityRequest request)
-        {
-            if (request.QuantityInStock < 0)
-                return BadRequest("Quantity cannot be negative.");
+    // 4 CREATE
+    [HttpPost]
+    public async Task<IActionResult> Create(
+        CreateProductRequest request)
+    {
+        var response = await _mediator.Send(
+            new CreateProductCommand(
+                request.Name,
+                request.Sku,
+                request.Description,
+                request.Price,
+                request.QuantityInStock,
+                request.SupplierName,
+                request.ExpiryDate
+            )
+        );
 
-            var success = _service.UpdateQuantity(id, request.QuantityInStock);
 
-            if (!success)
-                return NotFound();
+        return CreatedAtAction(
+            nameof(GetById),
+            new { id = response.Id },
+            response
+        );
+    }
 
-            return NoContent();
-        }
 
-        // 6 UPDATE PRICE ()
-        [HttpPost("{id:guid}/price")]
-        public IActionResult UpdatePrice(Guid id, [FromBody] UpdateProductPriceRequest request)
-        {
-            if (request.Price <= 0)
-                return BadRequest("Price must be greater than zero.");
+    // 5 UPDATE QUANTITY
+    [HttpPost("{id:guid}/quantity")]
+    public async Task<IActionResult> UpdateQuantity(
+        Guid id,
+        UpdateProductQuantityRequest request)
+    {
+        if (request.QuantityInStock < 0)
+            return BadRequest("Quantity cannot be negative.");
 
-            var success = _service.UpdatePrice(id, request.Price);
 
-            if (!success)
-                return NotFound();
+        var result = await _mediator.Send(
+            new UpdateProductQuantityCommand(
+                id,
+                request.QuantityInStock
+            )
+        );
 
-            Console.WriteLine($"Price change for {id} → {request.Price}");
 
-            return NoContent();
-        }
+        if (!result.Success)
+            return NotFound();
 
-        // 7 IMAGE UPLOAD ()
-        [HttpPost("{id:guid}/image")]
-        [Consumes("multipart/form-data")]
-        public IActionResult UploadImage(Guid id, IFormFile file)
-        {
-            var product = FakeWarehouseStore.Products
-                .FirstOrDefault(p => p.Id == id && !p.IsArchived);
 
-            if (product == null)
-                return NotFound();
+        return NoContent();
+    }
 
-            if (file == null || file.Length == 0)
-                return BadRequest("File is required.");
 
-            if (file.Length > 2 * 1024 * 1024)
-                return BadRequest("Max file size is 2MB.");
+    // 6 UPDATE PRICE
+    [HttpPost("{id:guid}/price")]
+    public async Task<IActionResult> UpdatePrice(
+        Guid id,
+        UpdateProductPriceRequest request)
+    {
+        if (request.Price <= 0)
+            return BadRequest("Price must be greater than zero.");
 
-            var extension = Path.GetExtension(file.FileName).ToLower();
-            if (extension != ".jpg" && extension != ".png")
-                return BadRequest("Only JPG and PNG allowed.");
 
-            var uploadsPath = Path.Combine("wwwroot", "uploads");
-            Directory.CreateDirectory(uploadsPath);
+        var result = await _mediator.Send(
+            new UpdateProductPriceCommand(
+                id,
+                request.Price
+            )
+        );
 
-            var fileName = $"{Guid.NewGuid()}{extension}";
-            var filePath = Path.Combine(uploadsPath, fileName);
 
-            using var stream = new FileStream(filePath, FileMode.Create);
-            file.CopyTo(stream);
+        if (!result.Success)
+            return NotFound();
 
-            return Ok(new { FileName = fileName });
-        }
 
-        // 8 DELETE
-        [HttpDelete("{id:guid}")]
-        public IActionResult Delete(Guid id)
-        {
-            var product = FakeWarehouseStore.Products
-                .FirstOrDefault(p => p.Id == id);
+        return NoContent();
+    }
 
-            if (product == null)
-                return NotFound();
 
-            product.IsArchived = true;
-            product.LastUpdatedAt = DateTime.UtcNow;
+    // 7 IMAGE UPLOAD
+    [HttpPost("{id:guid}/image")]
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> UploadImage(
+        Guid id,
+        IFormFile file)
+    {
+        var result = await _mediator.Send(
+            new UploadProductImageCommand(
+                id,
+                file
+            )
+        );
 
-            return NoContent();
-        }
 
-        // 9 SERVER TIME
-        [HttpGet("server-time")]
-        public IActionResult GetServerTime(
-            [FromHeader(Name = "Accept-Language")] string language)
-        {
-            var culture = language switch
-            {
-                "fr-FR" => new CultureInfo("fr-FR"),
-                "ar-LB" => new CultureInfo("ar-LB"),
-                _ => new CultureInfo("en-US")
-            };
+        if (!result.Success)
+            return NotFound();
 
-            var formattedDate = DateTime.UtcNow.ToString("F", culture);
 
-            return Ok(formattedDate);
-        }
+        return Ok();
+    }
 
-        // 10 ASSIGN SUPPLIER
-        [HttpPost("{id}/assign-supplier/{supplierId}")]
-        public IActionResult AssignSupplier(Guid id, Guid supplierId)
-        {
-            var product = FakeWarehouseStore.Products
-                .FirstOrDefault(p => p.Id == id);
 
-            if (product == null)
-                return NotFound("Product not found");
+    // 8 DELETE / ARCHIVE
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        var result = await _mediator.Send(
+            new ArchiveProductCommand(id)
+        );
 
-            if (product.IsArchived)
-                return BadRequest("Archived product cannot be assigned");
 
-            var supplier = FakeWarehouseStore.Suppliers
-                .FirstOrDefault(s => s.Id == supplierId);
+        if (!result.Success)
+            return NotFound();
 
-            if (supplier == null || !supplier.IsActive)
-                return NotFound("Supplier not found or inactive");
 
-            
-            product.SupplierName = supplier.Name;
-            product.LastUpdatedAt = DateTime.UtcNow;
+        return NoContent();
+    }
 
-            return NoContent();
-        }
+
+    // 9 SERVER TIME
+    [HttpGet("server-time")]
+    public IActionResult GetServerTime(
+        [FromHeader(Name = "Accept-Language")] string language)
+    {
+        var time = DateTime.UtcNow;
+
+        return Ok(time);
+    }
+
+
+    // 10 ASSIGN SUPPLIER
+    [HttpPost("{id:guid}/assign-supplier/{supplierId:guid}")]
+    public async Task<IActionResult> AssignSupplier(
+        Guid id,
+        Guid supplierId)
+    {
+        var result = await _mediator.Send(
+            new AssignSupplierCommand(
+                id,
+                supplierId
+            )
+        );
+
+
+        if (!result.Success)
+            return NotFound();
+
+
+        return NoContent();
     }
 }
