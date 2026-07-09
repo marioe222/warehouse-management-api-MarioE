@@ -11,10 +11,23 @@ public class Supplier
     public bool IsActive { get; private set; }
 
 
+    public ICollection<Product> Products { get; private set; }
+        = new List<Product>();
+
+
+    private Supplier()
+    {
+    }
+
+
     public Supplier(
         string name,
         string contactEmail)
     {
+        if (string.IsNullOrWhiteSpace(name))
+            throw new Exception("Supplier name required");
+
+
         Id = Guid.NewGuid();
 
         Name = name;
