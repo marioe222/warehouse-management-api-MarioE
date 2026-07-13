@@ -10,13 +10,11 @@ public class CreateSupplierHandler
 {
     private readonly ISupplierRepository _repository;
 
-
     public CreateSupplierHandler(
         ISupplierRepository repository)
     {
         _repository = repository;
     }
-
 
     public async Task<CreateSupplierResponse> Handle(
         CreateSupplierCommand request,
@@ -28,9 +26,9 @@ public class CreateSupplierHandler
                 request.ContactEmail
             );
 
-
-        await _repository.Add(supplier);
-
+        await _repository.Add(
+            supplier,
+            cancellationToken);
 
         return new CreateSupplierResponse(
             supplier.Id

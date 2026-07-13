@@ -1,8 +1,7 @@
-﻿using MediatR;
-using Warehouse.Application.Products.Queries;
-using Warehouse.Domain.Interface;
-using AutoMapper;
+﻿using AutoMapper;
+using MediatR;
 using Warehouse.Application.ViewModels;
+using Warehouse.Domain.Interface;
 
 namespace Warehouse.Application.Products.Queries.ListProducts;
 
@@ -12,7 +11,6 @@ public class ListProductsHandler
     private readonly IProductRepository _repository;
     private readonly IMapper _mapper;
 
-
     public ListProductsHandler(
         IProductRepository repository,
         IMapper mapper)
@@ -21,21 +19,19 @@ public class ListProductsHandler
         _mapper = mapper;
     }
 
-
     public async Task<ListProductsResponse> Handle(
         ListProductsQuery request,
         CancellationToken cancellationToken)
     {
         var products =
-            await _repository.GetAll();
-
+            await _repository.GetAll(cancellationToken);
 
         if (request.OnlyAvailable)
         {
             products = products
-                .Where(p => p.QuantityInStock > 0);
+                .Where(p => p.QuantityInStock > 0)
+                .ToList();
         }
-
 
         var productViewModels =
             _mapper.Map<List<ProductViewModel>>(products);

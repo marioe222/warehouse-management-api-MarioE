@@ -4,6 +4,7 @@ using Warehouse.Application.Products.Commands.CreateProduct;
 using Microsoft.EntityFrameworkCore;
 using Warehouse.Infrastructure.Data;
 using Warehouse.Application.Mapping;
+using IProductRepository = Warehouse.Domain.Interface.IProductRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +25,7 @@ builder.Services.AddMediatR(cfg =>
 });
 
 
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductRepository, IProductRepository>();
 
 builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
     

@@ -22,31 +22,29 @@ public class AssignSupplierHandler
         CancellationToken cancellationToken)
     {
         var product = await _productRepository.GetById(
-            request.ProductId
+            request.ProductId,
+            cancellationToken
         );
 
         if (product == null)
             return new AssignSupplierResponse(false);
 
-
         var supplier = await _supplierRepository.GetById(
-            request.SupplierId
+            request.SupplierId,
+            cancellationToken
         );
 
         if (supplier == null)
             return new AssignSupplierResponse(false);
 
-
         if (!supplier.IsActive)
             return new AssignSupplierResponse(false);
 
-
-        // Add this method inside Product entity
         product.AssignSupplier(supplier);
 
-
-        await _productRepository.Update(product);
-
+        await _productRepository.Update(
+            product,
+            cancellationToken);
 
         return new AssignSupplierResponse(true);
     }

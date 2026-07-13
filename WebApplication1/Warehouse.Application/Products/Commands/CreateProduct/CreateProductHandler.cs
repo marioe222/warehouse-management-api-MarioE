@@ -9,13 +9,11 @@ public class CreateProductHandler
 {
     private readonly IProductRepository _repository;
 
-
     public CreateProductHandler(
         IProductRepository repository)
     {
         _repository = repository;
     }
-
 
     public async Task<CreateProductResponse> Handle(
         CreateProductCommand request,
@@ -31,9 +29,9 @@ public class CreateProductHandler
             request.ExpiryDate
         );
 
-
-        await _repository.Add(product);
-
+        await _repository.Add(
+            product,
+            cancellationToken);
 
         return new CreateProductResponse(product.Id);
     }
