@@ -20,4 +20,8 @@
       <ProjectReference Include="..\Warehouse.Infrastructure\Warehouse.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Filters\" />
+    </ItemGroup>
+
 </Project>

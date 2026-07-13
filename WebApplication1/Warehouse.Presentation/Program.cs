@@ -27,7 +27,7 @@ builder.Services.AddMediatR(cfg =>
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
-
+    
 
 builder.Services.AddEndpointsApiExplorer();
 
@@ -35,6 +35,7 @@ builder.Services.AddSwaggerGen();
 
 
 var app = builder.Build();
+
 
 
 if (app.Environment.IsDevelopment())

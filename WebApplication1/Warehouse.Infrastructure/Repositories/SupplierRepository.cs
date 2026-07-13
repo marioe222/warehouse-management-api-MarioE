@@ -1,4 +1,5 @@
-﻿using Warehouse.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Warehouse.Domain.Entities;
 using Warehouse.Domain.Interface;
 using Warehouse.Infrastructure.Data;
 
@@ -6,34 +7,33 @@ namespace Warehouse.Infrastructure.Repositories;
 
 public class SupplierRepository : ISupplierRepository
 {
-    public Task Add(Supplier supplier)
-    {
-        FakeWarehouseStore.Suppliers.Add(supplier);
+    private readonly WarehouseDbContext _context;
 
-        return Task.CompletedTask;
+    public SupplierRepository(WarehouseDbContext context)
+    {
+        _context = context;
     }
 
-
-    public Task<Supplier?> GetById(Guid id)
+    public async Task Add(Supplier supplier)
     {
-        var supplier = FakeWarehouseStore.Suppliers
-            .FirstOrDefault(s => s.Id == id);
-
-        return Task.FromResult(supplier);
+        await _context.Suppliers.AddAsync(supplier);
+        await _context.SaveChangesAsync();
     }
 
-
-    public Task<IEnumerable<Supplier>> GetAll()
+    public async Task<Supplier?> GetById(Guid id)
     {
-        IEnumerable<Supplier> suppliers =
-            FakeWarehouseStore.Suppliers;
-
-        return Task.FromResult(suppliers);
+        return await _context.Suppliers
+            .FirstOrDefaultAsync(s => s.Id == id);
     }
 
-
-    public Task Update(Supplier supplier)
+    public async Task<IEnumerable<Supplier>> GetAll()
     {
-        return Task.CompletedTask;
+        return await _context.Suppliers.ToListAsync();
+    }
+
+    public async Task Update(Supplier supplier)
+    {
+        _context.Suppliers.Update(supplier);
+        await _context.SaveChangesAsync();
     }
 }

@@ -1,5 +1,7 @@
 ﻿using MediatR;
 using Warehouse.Domain.Interface;
+using AutoMapper;
+using Warehouse.Application.ViewModels;
 
 namespace Warehouse.Application.Products.Queries.SearchProducts;
 
@@ -7,12 +9,15 @@ public class SearchProductsHandler
     : IRequestHandler<SearchProductsQuery, SearchProductsResponse>
 {
     private readonly IProductRepository _repository;
+    private readonly IMapper _mapper;
 
 
     public SearchProductsHandler(
-        IProductRepository repository)
+        IProductRepository repository,
+        IMapper mapper)
     {
         _repository = repository;
+        _mapper = mapper;
     }
 
 
@@ -40,12 +45,19 @@ public class SearchProductsHandler
         if (!string.IsNullOrWhiteSpace(request.Supplier))
         {
             query = query.Where(p =>
-                p.SupplierId != null);
+                p.SupplierName != null &&
+                p.SupplierName.Contains(
+                    request.Supplier,
+                    StringComparison.OrdinalIgnoreCase
+                ));
         }
 
 
+        var productViewModels =
+            _mapper.Map<List<ProductViewModel>>(query.ToList());
+
         return new SearchProductsResponse(
-            query.ToList()
-        );
+            productViewModels
+        );  
     }
 }

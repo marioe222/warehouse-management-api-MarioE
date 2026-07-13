@@ -16,9 +16,17 @@ public class MappingProfile : Profile
 
         CreateMap<Product, ProductViewModel>()
             .ForMember(
+                destination => destination.Quantity,
+                option => option.MapFrom(
+                    source => source.QuantityInStock
+                )
+            )
+            .ForMember(
                 destination => destination.SupplierName,
                 option => option.MapFrom(
-                    source => source.Supplier.Name
+                    source => source.Supplier != null
+                        ? source.Supplier.Name
+                        : null
                 )
             );
 

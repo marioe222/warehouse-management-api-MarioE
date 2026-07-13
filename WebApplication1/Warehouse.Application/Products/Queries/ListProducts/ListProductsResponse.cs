@@ -1,7 +1,7 @@
-﻿using Warehouse.Domain.Entities;
+﻿using Warehouse.Application.ViewModels;
 
 namespace Warehouse.Application.Products.Queries.ListProducts;
 
 public record ListProductsResponse(
-    IEnumerable<Product> Products
+    List<ProductViewModel> Products
 );

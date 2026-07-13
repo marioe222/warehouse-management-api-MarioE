@@ -1,4 +1,5 @@
-﻿using Warehouse.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Warehouse.Domain.Entities;
 using Warehouse.Domain.Interface;
 using Warehouse.Infrastructure.Data;
 
@@ -6,33 +7,33 @@ namespace Warehouse.Infrastructure.Repositories;
 
 public class ProductRepository : IProductRepository
 {
-    public Task Add(Product product)
-    {
-        FakeWarehouseStore.Products.Add(product);
+    private readonly WarehouseDbContext _context;
 
-        return Task.CompletedTask;
+    public ProductRepository(WarehouseDbContext context)
+    {
+        _context = context;
     }
 
-
-    public Task<Product?> GetById(Guid id)
+    public async Task Add(Product product)
     {
-        var product = FakeWarehouseStore.Products
-            .FirstOrDefault(p => p.Id == id);
-
-        return Task.FromResult(product);
+        await _context.Products.AddAsync(product);
+        await _context.SaveChangesAsync();
     }
 
-
-    public Task<IEnumerable<Product>> GetAll()
+    public async Task<Product?> GetById(Guid id)
     {
-        return Task.FromResult<IEnumerable<Product>>(
-            FakeWarehouseStore.Products
-        );
-    }  
+        return await _context.Products
+            .FirstOrDefaultAsync(p => p.Id == id);
+    }
 
+    public async Task<IEnumerable<Product>> GetAll()
+    {
+        return await _context.Products.ToListAsync();
+    }
 
     public async Task Update(Product product)
     {
-        await Task.CompletedTask;
+        _context.Products.Update(product);
+        await _context.SaveChangesAsync();
     }
 }

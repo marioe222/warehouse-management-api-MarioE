@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Warehouse.Application.Products.Queries;
 using Warehouse.Domain.Interface;
+using AutoMapper;
+using Warehouse.Application.ViewModels;
 
 namespace Warehouse.Application.Products.Queries.ListProducts;
 
@@ -8,12 +10,15 @@ public class ListProductsHandler
     : IRequestHandler<ListProductsQuery, ListProductsResponse>
 {
     private readonly IProductRepository _repository;
+    private readonly IMapper _mapper;
 
 
     public ListProductsHandler(
-        IProductRepository repository)
+        IProductRepository repository,
+        IMapper mapper)
     {
         _repository = repository;
+        _mapper = mapper;
     }
 
 
@@ -32,6 +37,9 @@ public class ListProductsHandler
         }
 
 
-        return new ListProductsResponse(products);
+        var productViewModels =
+            _mapper.Map<List<ProductViewModel>>(products);
+
+        return new ListProductsResponse(productViewModels);
     }
 }
