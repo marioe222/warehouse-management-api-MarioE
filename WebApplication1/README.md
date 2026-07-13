@@ -231,3 +231,169 @@ The Warehouse Management API was successfully refactored using:
 - MediatR request handling
 
 The project now has a cleaner architecture with separated responsibilities between Domain, Application, Infrastructure, and Presentation layers.
+
+---
+
+# Session 05 Improvements
+
+This session focuses on improving API reliability by adding middleware, filters, validation handling, exception handling, and additional dashboard and metadata endpoints.
+
+---
+
+## Middleware vs Filters
+
+### Middleware
+
+Middleware handles HTTP-level concerns and runs in the ASP.NET Core request pipeline.
+
+Implemented middleware:
+
+- CorrelationIdMiddleware
+    - Adds a unique correlation ID to each request.
+
+- RequestTimingMiddleware
+    - Measures and logs request execution time.
+
+- ExceptionHandlingMiddleware
+    - Handles unexpected exceptions and returns a consistent error response.
+
+### Filters
+
+Filters are MVC/action-level components that execute around controller actions.
+
+Implemented filters:
+
+- ValidationFilter
+    - Handles validation errors and returns HTTP 400 Bad Request.
+
+- ActionLoggingFilter
+    - Logs controller action execution.
+
+## Metadata Endpoint
+
+Added reflection-based validation metadata inspection.
+
+Endpoint:
+
+GET /api/metadata/validation/{dtoName}
+
+Example:
+
+GET /api/metadata/validation/CreateProductRequest
+
+The endpoint returns DTO properties and validation attributes.
+
+
+## Inventory Dashboard
+
+Endpoint:
+
+GET /api/inventory/dashboard
+
+Returns:
+
+- Total products
+- Available products
+- Low stock products
+- Total suppliers
+- Active suppliers
+
+## Stock Adjustment
+
+Endpoint:
+
+POST /api/stock-adjustments
+
+Features:
+
+- Creates stock adjustment records.
+- Uses CQRS with MediatR.
+- Uses repository pattern.
+- Validates request using FluentValidation.
+
+# Test Results
+
+Successfully tested:
+
+✅ Create Product  
+✅ Get All Products  
+✅ Get Product By Id  
+✅ Search Products  
+✅ Update Product Quantity  
+✅ Update Product Price  
+✅ Archive Product  
+✅ Create Supplier  
+✅ Get Suppliers  
+✅ Assign Supplier To Product  
+✅ Create Stock Adjustment  
+✅ Inventory Dashboard  
+✅ Metadata Validation Endpoint
+
+
+Status codes tested:
+
+- 201 Created
+- 200 OK
+- 204 No Content
+- 400 Bad Request
+- 404 Not Found
+- 500 handled by exception middleware
+
+## Swagger Screenshots
+
+### Screenshot 3280
+
+![Screenshot 3280](screenshots/Screenshot%20(3280).png)
+
+### Screenshot 3281
+
+![Screenshot 3281](screenshots/Screenshot%20(3281).png)
+
+### Screenshot 3282
+
+![Screenshot 3282](screenshots/Screenshot%20(3282).png)
+
+### Screenshot 3283
+
+![Screenshot 3283](screenshots/Screenshot%20(3283).png)
+
+### Screenshot 3284
+
+![Screenshot 3284](screenshots/Screenshot%20(3284).png)
+
+### Screenshot 3285
+
+![Screenshot 3285](screenshots/Screenshot%20(3285).png)
+
+### Screenshot 3286
+
+![Screenshot 3286](screenshots/Screenshot%20(3286).png)
+
+### Screenshot 3288
+
+![Screenshot 3288](screenshots/Screenshot%20(3288).png)
+
+### Screenshot 3292
+
+![Screenshot 3292](screenshots/Screenshot%20(3292).png)
+
+### Screenshot 3293
+
+![Screenshot 3293](screenshots/Screenshot%20(3293).png)
+
+### Screenshot 3294
+
+![Screenshot 3294](screenshots/Screenshot%20(3294).png)
+
+### Screenshot 3295
+
+![Screenshot 3295](screenshots/Screenshot%20(3295).png)
+
+
+### Screenshot 3297
+
+![Screenshot 3297](screenshots/Screenshot%20(3297).png)
+
+### Screenshot 3299
+
+![Screenshot 3299](screenshots/Screenshot%20(3299).png)

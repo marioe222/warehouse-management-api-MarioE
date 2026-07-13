@@ -22,7 +22,7 @@ public class UpdateProductQuantityHandler
         CancellationToken cancellationToken)
     {
         var product = await _repository.GetById(
-            request.ProductId
+            request.ProductId,cancellationToken
         );
 
 
@@ -35,7 +35,7 @@ public class UpdateProductQuantityHandler
         );
 
 
-        await _repository.Update(product);
+        await _repository.Update(product,cancellationToken);
 
 
         return new UpdateProductQuantityResponse(true);

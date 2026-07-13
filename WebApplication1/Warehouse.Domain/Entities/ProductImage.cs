@@ -1,3 +1,5 @@
+using Warehouse.Domain.Exceptions;
+
 namespace Warehouse.Domain.Entities;
 
 public class ProductImage
@@ -19,7 +21,9 @@ public class ProductImage
     public ProductImage(string imageUrl, Guid productId)
     {
         if (string.IsNullOrWhiteSpace(imageUrl))
-            throw new Exception("Image URL required");
+            throw new BusinessRuleException(
+                "Image URL required"
+            );
 
 
         Id = Guid.NewGuid();

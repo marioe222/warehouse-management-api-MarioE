@@ -22,7 +22,7 @@ public class ArchiveProductHandler
         CancellationToken cancellationToken)
     {
         var product = await _repository.GetById(
-            request.ProductId
+            request.ProductId,cancellationToken
         );
 
 
@@ -33,7 +33,7 @@ public class ArchiveProductHandler
         product.Archive();
 
 
-        await _repository.Update(product);
+        await _repository.Update(product,cancellationToken);
 
 
         return new ArchiveProductResponse(true);

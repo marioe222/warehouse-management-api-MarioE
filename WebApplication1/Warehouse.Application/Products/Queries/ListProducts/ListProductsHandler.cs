@@ -27,7 +27,9 @@ public class ListProductsHandler
         CancellationToken cancellationToken)
     {
         var products =
-            await _repository.GetAll();
+            await _repository.GetAll(
+                cancellationToken
+            );
 
 
         if (request.OnlyAvailable)

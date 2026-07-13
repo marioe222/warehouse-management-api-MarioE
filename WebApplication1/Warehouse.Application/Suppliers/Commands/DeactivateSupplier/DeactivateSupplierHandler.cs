@@ -9,7 +9,6 @@ public class DeactivateSupplierHandler
 {
     private readonly ISupplierRepository _repository;
 
-
     public DeactivateSupplierHandler(
         ISupplierRepository repository)
     {
@@ -21,10 +20,10 @@ public class DeactivateSupplierHandler
         DeactivateSupplierCommand request,
         CancellationToken cancellationToken)
     {
-        var supplier =
-            await _repository.GetById(
-                request.SupplierId
-            );
+        var supplier = await _repository.GetById(
+            request.SupplierId,
+            cancellationToken
+        );
 
 
         if (supplier == null)
@@ -34,7 +33,10 @@ public class DeactivateSupplierHandler
         supplier.Deactivate();
 
 
-        await _repository.Update(supplier);
+        await _repository.Update(
+            supplier,
+            cancellationToken
+        );
 
 
         return new DeactivateSupplierResponse(true);

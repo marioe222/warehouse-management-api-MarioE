@@ -4,11 +4,22 @@ namespace Warehouse.Domain.Interface;
 
 public interface ISupplierRepository
 {
-    Task Add(Supplier supplier);
+    Task Add(
+        Supplier supplier,
+        CancellationToken cancellationToken
+    );
 
-    Task<Supplier?> GetById(Guid id);
+    Task<Supplier?> GetById(
+        Guid id,
+        CancellationToken cancellationToken
+    );
 
-    Task<IEnumerable<Supplier>> GetAll();
+    Task<IEnumerable<Supplier>> GetAll(
+        CancellationToken cancellationToken
+    );
 
-    Task Update(Supplier supplier);
+    Task Update(
+        Supplier supplier,
+        CancellationToken cancellationToken
+    );
 }

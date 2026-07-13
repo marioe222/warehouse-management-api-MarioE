@@ -22,7 +22,7 @@ public class GetProductByIdHandler
         CancellationToken cancellationToken)
     {
         var product =
-            await _repository.GetById(request.Id);
+            await _repository.GetById(request.Id,cancellationToken);
 
 
         if(product == null)

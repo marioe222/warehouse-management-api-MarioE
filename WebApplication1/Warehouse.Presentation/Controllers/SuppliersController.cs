@@ -34,10 +34,12 @@ public class SuppliersController : ControllerBase
 
     // GET /api/suppliers
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll(
+        CancellationToken cancellationToken = default)
     {
         var response = await _mediator.Send(
-            new ListSuppliersQuery()
+            new ListSuppliersQuery(),
+            cancellationToken
         );
 
 
@@ -54,10 +56,12 @@ public class SuppliersController : ControllerBase
     // GET /api/suppliers/{id}
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetById(
-        Guid id)
+        Guid id,
+        CancellationToken cancellationToken = default)
     {
         var supplier = await _mediator.Send(
-            new GetSupplierByIdQuery(id)
+            new GetSupplierByIdQuery(id),
+            cancellationToken
         );
 
 
@@ -78,9 +82,13 @@ public class SuppliersController : ControllerBase
     // POST /api/suppliers
     [HttpPost]
     public async Task<IActionResult> Create(
-        CreateSupplierCommand command)
+        CreateSupplierCommand command,
+        CancellationToken cancellationToken = default)
     {
-        var response = await _mediator.Send(command);
+        var response = await _mediator.Send(
+            command,
+            cancellationToken
+        );
 
 
         return CreatedAtAction(
@@ -95,10 +103,12 @@ public class SuppliersController : ControllerBase
     // DELETE /api/suppliers/{id}
     [HttpDelete("{id:guid}")]
     public async Task<IActionResult> Deactivate(
-        Guid id)
+        Guid id,
+        CancellationToken cancellationToken = default)
     {
         var result = await _mediator.Send(
-            new DeactivateSupplierCommand(id)
+            new DeactivateSupplierCommand(id),
+            cancellationToken
         );
 
 

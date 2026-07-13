@@ -1,4 +1,6 @@
-﻿namespace Warehouse.Domain.Entities;
+﻿using Warehouse.Domain.Exceptions;
+
+namespace Warehouse.Domain.Entities;
 
 public class Product
 {
@@ -54,16 +56,24 @@ public class Product
     )
     {
         if (string.IsNullOrWhiteSpace(name))
-            throw new Exception("Product name required");
+            throw new BusinessRuleException(
+                "Product name required"
+            );
 
         if (string.IsNullOrWhiteSpace(sku))
-            throw new Exception("SKU required");
+            throw new BusinessRuleException(
+                "SKU required"
+            );
 
         if (price <= 0)
-            throw new Exception("Price must be greater than zero");
+            throw new BusinessRuleException(
+                "Price must be greater than zero"
+            );
 
         if (quantityInStock < 0)
-            throw new Exception("Quantity cannot be negative");
+            throw new BusinessRuleException(
+                "Quantity cannot be negative"
+            );
 
 
         Id = Guid.NewGuid();
@@ -93,10 +103,14 @@ public class Product
     public void UpdatePrice(decimal price)
     {
         if (IsArchived)
-            throw new Exception("Archived product cannot update");
+            throw new BusinessRuleException(
+                "Archived product cannot update"
+            );
 
         if (price <= 0)
-            throw new Exception("Invalid price");
+            throw new BusinessRuleException(
+                "Invalid price"
+            );
 
 
         Price = price;
@@ -108,7 +122,9 @@ public class Product
     public void UpdateQuantity(int quantity)
     {
         if (quantity < 0)
-            throw new Exception("Invalid quantity");
+            throw new BusinessRuleException(
+               "Invalid  quantity"
+               );
 
 
         QuantityInStock = quantity;
@@ -120,11 +136,15 @@ public class Product
     public void AssignSupplier(Supplier supplier)
     {
         if (IsArchived)
-            throw new Exception("Archived product cannot be assigned");
+            throw new BusinessRuleException(
+                "Archived product cannot be assigned"
+            );
 
 
         if (!supplier.IsActive)
-            throw new Exception("Inactive supplier cannot be assigned");
+            throw new BusinessRuleException(
+                "Inactive supplier cannot be assigned"
+            );
 
 
         SupplierId = supplier.Id;

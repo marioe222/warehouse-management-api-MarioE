@@ -32,7 +32,10 @@ public class CreateProductHandler
         );
 
 
-        await _repository.Add(product);
+        await _repository.Add(
+            product,
+            cancellationToken
+        );
 
 
         return new CreateProductResponse(product.Id);

@@ -25,7 +25,9 @@ public class SearchProductsHandler
         SearchProductsQuery request,
         CancellationToken cancellationToken)
     {
-        var products = await _repository.GetAll();
+        var products = await _repository.GetAll(
+            cancellationToken
+        );
 
 
         var query = products

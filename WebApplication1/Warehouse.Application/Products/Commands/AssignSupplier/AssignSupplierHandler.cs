@@ -22,7 +22,7 @@ public class AssignSupplierHandler
         CancellationToken cancellationToken)
     {
         var product = await _productRepository.GetById(
-            request.ProductId
+            request.ProductId,cancellationToken
         );
 
         if (product == null)
@@ -30,7 +30,8 @@ public class AssignSupplierHandler
 
 
         var supplier = await _supplierRepository.GetById(
-            request.SupplierId
+            request.SupplierId,
+            cancellationToken
         );
 
         if (supplier == null)
@@ -45,7 +46,7 @@ public class AssignSupplierHandler
         product.AssignSupplier(supplier);
 
 
-        await _productRepository.Update(product);
+        await _productRepository.Update(product,cancellationToken);
 
 
         return new AssignSupplierResponse(true);
