@@ -24,7 +24,23 @@ public class Product
 
     public DateTime LastUpdatedAt { get; private set; }
 
+
+    // Foreign Key
     public Guid? SupplierId { get; private set; }
+
+
+    // Navigation Property
+    public Supplier? Supplier { get; private set; }
+
+
+    // Navigation Property
+    public ICollection<ProductImage> Images { get; private set; }
+        = new List<ProductImage>();
+
+
+    private Product()
+    {
+    }
 
 
     public Product(
@@ -49,16 +65,27 @@ public class Product
         if (quantityInStock < 0)
             throw new Exception("Quantity cannot be negative");
 
+
         Id = Guid.NewGuid();
+
         Name = name;
+
         Sku = sku;
+
         Description = description;
+
         Price = price;
+
         QuantityInStock = quantityInStock;
+
         SupplierName = supplierName;
+
         ExpiryDate = expiryDate;
+
         IsArchived = false;
+
         CreatedAt = DateTime.UtcNow;
+
         LastUpdatedAt = DateTime.UtcNow;
     }
 
@@ -71,7 +98,9 @@ public class Product
         if (price <= 0)
             throw new Exception("Invalid price");
 
+
         Price = price;
+
         LastUpdatedAt = DateTime.UtcNow;
     }
 
@@ -81,7 +110,9 @@ public class Product
         if (quantity < 0)
             throw new Exception("Invalid quantity");
 
+
         QuantityInStock = quantity;
+
         LastUpdatedAt = DateTime.UtcNow;
     }
 
@@ -91,11 +122,17 @@ public class Product
         if (IsArchived)
             throw new Exception("Archived product cannot be assigned");
 
+
         if (!supplier.IsActive)
             throw new Exception("Inactive supplier cannot be assigned");
 
+
         SupplierId = supplier.Id;
+
         SupplierName = supplier.Name;
+
+        Supplier = supplier;
+
         LastUpdatedAt = DateTime.UtcNow;
     }
 
@@ -103,6 +140,7 @@ public class Product
     public void Archive()
     {
         IsArchived = true;
+
         LastUpdatedAt = DateTime.UtcNow;
     }
 }

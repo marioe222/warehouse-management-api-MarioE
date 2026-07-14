@@ -1,92 +1,111 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Warehouse.Application.Suppliers.Commands;
+using AutoMapper;
+
 using Warehouse.Application.Suppliers.Commands.CreateSupplier;
 using Warehouse.Application.Suppliers.Commands.DeactivateSupplier;
-using Warehouse.Application.Suppliers.Queries;
+
 using Warehouse.Application.Suppliers.Queries.GetSupplierById;
 using Warehouse.Application.Suppliers.Queries.ListSuppliers;
 
-namespace Warehouse.Presentation.Controllers
+using Warehouse.Application.ViewModels;
+
+
+namespace Warehouse.Presentation.Controllers;
+
+
+[ApiController]
+[Route("api/suppliers")]
+public class SuppliersController : ControllerBase
 {
-    [ApiController]
-    [Route("api/suppliers")]
-    public class SuppliersController : ControllerBase
+    private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
+
+
+    public SuppliersController(
+        IMediator mediator,
+        IMapper mapper)
     {
-        private readonly IMediator _mediator;
+        _mediator = mediator;
+        _mapper = mapper;
+    }
 
 
-        public SuppliersController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
+
+    // GET /api/suppliers
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+        var response = await _mediator.Send(
+            new ListSuppliersQuery()
+        );
 
 
-        // GET /api/suppliers
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
-        {
-            var suppliers =
-                await _mediator.Send(
-                    new ListSuppliersQuery()
-                );
+        var result = _mapper.Map<List<SupplierViewModel>>(
+            response.Suppliers
+        );
 
 
-            return Ok(suppliers);
-        }
+        return Ok(result);
+    }
 
 
-        // GET /api/suppliers/{id}
-        [HttpGet("{id:guid}")]
-        public async Task<IActionResult> GetById(
-            Guid id)
-        {
-            var supplier =
-                await _mediator.Send(
-                    new GetSupplierByIdQuery(id)
-                );
+
+    // GET /api/suppliers/{id}
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> GetById(
+        Guid id)
+    {
+        var supplier = await _mediator.Send(
+            new GetSupplierByIdQuery(id)
+        );
 
 
-            if (supplier == null)
-                return NotFound();
+        if (supplier == null)
+            return NotFound();
 
 
-            return Ok(supplier);
-        }
+        var result = _mapper.Map<SupplierViewModel>(
+            supplier
+        );
 
 
-        // POST /api/suppliers
-        [HttpPost]
-        public async Task<IActionResult> Create(
-            CreateSupplierCommand command)
-        {
-            var response = await _mediator.Send(command);
+        return Ok(result);
+    }
 
 
-            return CreatedAtAction(
-                nameof(GetById),
-                new { id = response.Id },
-                response
-            );
-        }
+
+    // POST /api/suppliers
+    [HttpPost]
+    public async Task<IActionResult> Create(
+        CreateSupplierCommand command)
+    {
+        var response = await _mediator.Send(command);
 
 
-        // DELETE /api/suppliers/{id}
-        [HttpDelete("{id:guid}")]
-        public async Task<IActionResult> Deactivate(
-            Guid id)
-        {
-            var result =
-                await _mediator.Send(
-                    new DeactivateSupplierCommand(id)
-                );
+        return CreatedAtAction(
+            nameof(GetById),
+            new { id = response.Id },
+            _mapper.Map<SupplierViewModel>(response)
+        );
+    }
 
 
-            if (!result.Success)
-                return NotFound();
+
+    // DELETE /api/suppliers/{id}
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> Deactivate(
+        Guid id)
+    {
+        var result = await _mediator.Send(
+            new DeactivateSupplierCommand(id)
+        );
 
 
-            return NoContent();
-        }
+        if (!result.Success)
+            return NotFound();
+
+
+        return NoContent();
     }
 }

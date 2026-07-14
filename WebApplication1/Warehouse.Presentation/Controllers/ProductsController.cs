@@ -1,45 +1,63 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
+
 using Warehouse.Application.Products.Commands.ArchiveProduct;
 using Warehouse.Application.Products.Commands.AssignSupplier;
 using Warehouse.Application.Products.Commands.CreateProduct;
 using Warehouse.Application.Products.Commands.UpdateProductPrice;
 using Warehouse.Application.Products.Commands.UpdateProductQuantity;
 using Warehouse.Application.Products.Commands.UploadProductImage;
+
 using Warehouse.Application.Products.Queries.GetProductById;
 using Warehouse.Application.Products.Queries.ListProducts;
 using Warehouse.Application.Products.Queries.SearchProducts;
+
+using Warehouse.Application.ViewModels;
 using Warehouse.Presentation.Contracts;
 
+
 namespace Warehouse.Presentation.Controllers;
+
 
 [ApiController]
 [Route("api/products")]
 public class ProductsController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
 
 
-    public ProductsController(IMediator mediator)
+    public ProductsController(
+        IMediator mediator,
+        IMapper mapper)
     {
         _mediator = mediator;
+        _mapper = mapper;
     }
 
 
-    // 1 GET /api/products
+    // GET: api/products
     [HttpGet]
     public async Task<IActionResult> GetAll(
         [FromQuery] bool onlyAvailable = false)
     {
-        var products = await _mediator.Send(
+        var response = await _mediator.Send(
             new ListProductsQuery(onlyAvailable)
         );
 
-        return Ok(products);
+
+        var result = _mapper.Map<List<ProductViewModel>>(
+            response.Products
+        );
+
+
+        return Ok(result);
     }
 
 
-    // 2 GET /api/products/{id}
+
+    // GET: api/products/{id}
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetById(Guid id)
     {
@@ -52,11 +70,15 @@ public class ProductsController : ControllerBase
             return NotFound();
 
 
-        return Ok(product);
+        var result = _mapper.Map<ProductViewModel>(product);
+
+
+        return Ok(result);
     }
 
 
-    // 3 SEARCH
+
+    // GET: api/products/search
     [HttpGet("search")]
     public async Task<IActionResult> Search(
         [FromQuery] string? name,
@@ -70,11 +92,14 @@ public class ProductsController : ControllerBase
         );
 
 
-        return Ok(products);
+        return Ok(
+            _mapper.Map<List<ProductViewModel>>(products)
+        );
     }
 
 
-    // 4 CREATE
+
+    // POST: api/products
     [HttpPost]
     public async Task<IActionResult> Create(
         CreateProductRequest request)
@@ -95,19 +120,22 @@ public class ProductsController : ControllerBase
         return CreatedAtAction(
             nameof(GetById),
             new { id = response.Id },
-            response
+            _mapper.Map<ProductViewModel>(response)
         );
     }
 
 
-    // 5 UPDATE QUANTITY
+
+    // POST: api/products/{id}/quantity
     [HttpPost("{id:guid}/quantity")]
     public async Task<IActionResult> UpdateQuantity(
         Guid id,
         UpdateProductQuantityRequest request)
     {
         if (request.QuantityInStock < 0)
-            return BadRequest("Quantity cannot be negative.");
+            return BadRequest(
+                "Quantity cannot be negative."
+            );
 
 
         var result = await _mediator.Send(
@@ -126,14 +154,17 @@ public class ProductsController : ControllerBase
     }
 
 
-    // 6 UPDATE PRICE
+
+    // POST: api/products/{id}/price
     [HttpPost("{id:guid}/price")]
     public async Task<IActionResult> UpdatePrice(
         Guid id,
         UpdateProductPriceRequest request)
     {
         if (request.Price <= 0)
-            return BadRequest("Price must be greater than zero.");
+            return BadRequest(
+                "Price must be greater than zero."
+            );
 
 
         var result = await _mediator.Send(
@@ -152,7 +183,8 @@ public class ProductsController : ControllerBase
     }
 
 
-    // 7 IMAGE UPLOAD
+
+    // POST: api/products/{id}/image
     [HttpPost("{id:guid}/image")]
     [Consumes("multipart/form-data")]
     public async Task<IActionResult> UploadImage(
@@ -175,7 +207,8 @@ public class ProductsController : ControllerBase
     }
 
 
-    // 8 DELETE / ARCHIVE
+
+    // DELETE: api/products/{id}
     [HttpDelete("{id:guid}")]
     public async Task<IActionResult> Delete(Guid id)
     {
@@ -192,7 +225,8 @@ public class ProductsController : ControllerBase
     }
 
 
-    // 9 SERVER TIME
+
+    // GET: api/products/server-time
     [HttpGet("server-time")]
     public IActionResult GetServerTime(
         [FromHeader(Name = "Accept-Language")] string language)
@@ -203,7 +237,8 @@ public class ProductsController : ControllerBase
     }
 
 
-    // 10 ASSIGN SUPPLIER
+
+    // POST: api/products/{id}/assign-supplier/{supplierId}
     [HttpPost("{id:guid}/assign-supplier/{supplierId:guid}")]
     public async Task<IActionResult> AssignSupplier(
         Guid id,

@@ -8,26 +8,25 @@ public class UploadProductImageHandler
 {
     private readonly IProductRepository _repository;
 
-
     public UploadProductImageHandler(
         IProductRepository repository)
     {
         _repository = repository;
     }
 
-
     public async Task<UploadProductImageResponse> Handle(
         UploadProductImageCommand request,
         CancellationToken cancellationToken)
     {
-        var product = await _repository.GetById(request.ProductId);
-
+        var product =
+            await _repository.GetById(
+                request.ProductId,
+                cancellationToken);
 
         if (product == null)
         {
             return new UploadProductImageResponse(false);
         }
-
 
         return new UploadProductImageResponse(true);
     }

@@ -8,24 +8,23 @@ public class GetSupplierByIdHandler
 {
     private readonly ISupplierRepository _repository;
 
-
     public GetSupplierByIdHandler(
         ISupplierRepository repository)
     {
         _repository = repository;
     }
 
-
     public async Task<GetSupplierByIdResponse?> Handle(
         GetSupplierByIdQuery request,
         CancellationToken cancellationToken)
     {
-        var supplier = await _repository.GetById(request.Id);
-
+        var supplier =
+            await _repository.GetById(
+                request.Id,
+                cancellationToken);
 
         if (supplier == null)
             return null;
-
 
         return new GetSupplierByIdResponse(
             supplier

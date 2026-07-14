@@ -8,21 +8,19 @@ public class ListSuppliersHandler
 {
     private readonly ISupplierRepository _repository;
 
-
     public ListSuppliersHandler(
         ISupplierRepository repository)
     {
         _repository = repository;
     }
 
-
     public async Task<ListSuppliersResponse> Handle(
         ListSuppliersQuery request,
         CancellationToken cancellationToken)
     {
         var suppliers =
-            await _repository.GetAll();
-
+            await _repository.GetAll(
+                cancellationToken);
 
         return new ListSuppliersResponse(
             suppliers
