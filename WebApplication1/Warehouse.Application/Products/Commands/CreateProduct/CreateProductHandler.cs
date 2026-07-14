@@ -9,13 +9,11 @@ public class CreateProductHandler
 {
     private readonly IProductRepository _repository;
 
-
     public CreateProductHandler(
         IProductRepository repository)
     {
         _repository = repository;
     }
-
 
     public async Task<CreateProductResponse> Handle(
         CreateProductCommand request,

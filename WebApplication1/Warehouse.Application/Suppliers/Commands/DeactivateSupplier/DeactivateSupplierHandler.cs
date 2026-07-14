@@ -15,7 +15,6 @@ public class DeactivateSupplierHandler
         _repository = repository;
     }
 
-
     public async Task<DeactivateSupplierResponse> Handle(
         DeactivateSupplierCommand request,
         CancellationToken cancellationToken)
@@ -28,7 +27,6 @@ public class DeactivateSupplierHandler
 
         if (supplier == null)
             return new DeactivateSupplierResponse(false);
-
 
         supplier.Deactivate();
 

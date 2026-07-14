@@ -46,7 +46,7 @@ builder.Services.AddValidatorsFromAssembly(
 );
 
 
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductRepository, IProductRepository>();
 
 builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
     

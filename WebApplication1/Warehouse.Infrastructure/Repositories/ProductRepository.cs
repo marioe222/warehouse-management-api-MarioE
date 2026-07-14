@@ -1,18 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Warehouse.Domain.Entities;
-using Warehouse.Domain.Interface;
-using Warehouse.Infrastructure.Data;
+﻿using Warehouse.Domain.Entities;
 
 namespace Warehouse.Infrastructure.Repositories;
 
-public class ProductRepository : IProductRepository
+public interface IProductRepository
 {
-    private readonly WarehouseDbContext _context;
+    Task Add(
+        Product product,
+        CancellationToken cancellationToken = default);
 
-    public ProductRepository(WarehouseDbContext context)
-    {
-        _context = context;
-    }
+    Task<Product?> GetById(
+        Guid id,
+        CancellationToken cancellationToken = default);
 
 
     public async Task Add(

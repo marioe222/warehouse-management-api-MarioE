@@ -28,7 +28,6 @@ public class AssignSupplierHandler
         if (product == null)
             return new AssignSupplierResponse(false);
 
-
         var supplier = await _supplierRepository.GetById(
             request.SupplierId,
             cancellationToken
@@ -37,12 +36,9 @@ public class AssignSupplierHandler
         if (supplier == null)
             return new AssignSupplierResponse(false);
 
-
         if (!supplier.IsActive)
             return new AssignSupplierResponse(false);
 
-
-        // Add this method inside Product entity
         product.AssignSupplier(supplier);
 
 

@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Warehouse.Application.Products.Commands;
 using Warehouse.Domain.Interface;
 
 namespace Warehouse.Application.Products.Commands.UpdateProductQuantity;
@@ -9,13 +8,11 @@ public class UpdateProductQuantityHandler
 {
     private readonly IProductRepository _repository;
 
-
     public UpdateProductQuantityHandler(
         IProductRepository repository)
     {
         _repository = repository;
     }
-
 
     public async Task<UpdateProductQuantityResponse> Handle(
         UpdateProductQuantityCommand request,
@@ -28,7 +25,6 @@ public class UpdateProductQuantityHandler
 
         if (product == null)
             return new UpdateProductQuantityResponse(false);
-
 
         product.UpdateQuantity(
             request.QuantityInStock

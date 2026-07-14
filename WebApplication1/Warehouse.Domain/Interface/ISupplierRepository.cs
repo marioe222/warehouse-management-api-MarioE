@@ -6,20 +6,16 @@ public interface ISupplierRepository
 {
     Task Add(
         Supplier supplier,
-        CancellationToken cancellationToken
-    );
+        CancellationToken cancellationToken = default);
 
     Task<Supplier?> GetById(
         Guid id,
-        CancellationToken cancellationToken
-    );
+        CancellationToken cancellationToken = default);
 
-    Task<IEnumerable<Supplier>> GetAll(
-        CancellationToken cancellationToken
-    );
+    Task<List<Supplier>> GetAll(
+        CancellationToken cancellationToken = default);
 
     Task Update(
         Supplier supplier,
-        CancellationToken cancellationToken
-    );
+        CancellationToken cancellationToken = default);
 }

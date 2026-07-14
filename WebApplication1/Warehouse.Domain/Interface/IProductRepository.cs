@@ -16,7 +16,7 @@ public interface IProductRepository
     );
 
 
-    Task<IEnumerable<Product>> GetAll(
+    Task<List<Product>> GetAll(
         CancellationToken cancellationToken = default
     );
 

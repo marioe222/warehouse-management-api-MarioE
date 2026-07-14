@@ -8,13 +8,11 @@ public class GetSupplierByIdHandler
 {
     private readonly ISupplierRepository _repository;
 
-
     public GetSupplierByIdHandler(
         ISupplierRepository repository)
     {
         _repository = repository;
     }
-
 
     public async Task<GetSupplierByIdResponse?> Handle(
         GetSupplierByIdQuery request,
@@ -28,7 +26,6 @@ public class GetSupplierByIdHandler
 
         if (supplier == null)
             return null;
-
 
         return new GetSupplierByIdResponse(
             supplier

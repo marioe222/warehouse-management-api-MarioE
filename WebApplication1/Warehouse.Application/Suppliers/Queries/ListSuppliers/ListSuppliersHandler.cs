@@ -8,13 +8,11 @@ public class ListSuppliersHandler
 {
     private readonly ISupplierRepository _repository;
 
-
     public ListSuppliersHandler(
         ISupplierRepository repository)
     {
         _repository = repository;
     }
-
 
     public async Task<ListSuppliersResponse> Handle(
         ListSuppliersQuery request,
