@@ -41,7 +41,7 @@ public class SupplierRepository : ISupplierRepository
     }
 
 
-    public async Task<IEnumerable<Supplier>> GetAll(
+    public async Task<List<Supplier>> GetAll(
         CancellationToken cancellationToken)
     {
         return await _context.Suppliers

@@ -1,17 +1,18 @@
-﻿using Warehouse.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Warehouse.Domain.Entities;
+using Warehouse.Domain.Interface;
+using Warehouse.Infrastructure.Data;
 
 namespace Warehouse.Infrastructure.Repositories;
 
-public interface IProductRepository
+public class ProductRepository : IProductRepository
 {
-    Task Add(
-        Product product,
-        CancellationToken cancellationToken = default);
+    private readonly WarehouseDbContext _context;
 
-    Task<Product?> GetById(
-        Guid id,
-        CancellationToken cancellationToken = default);
-
+    public ProductRepository(WarehouseDbContext context)
+    {
+        _context = context;
+    }
 
     public async Task Add(
         Product product,
@@ -30,7 +31,7 @@ public interface IProductRepository
 
     public async Task<Product?> GetById(
         Guid id,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
         return await _context.Products
             .FirstOrDefaultAsync(
@@ -40,7 +41,7 @@ public interface IProductRepository
     }
 
 
-    public async Task<IEnumerable<Product>> GetAll(
+    public async Task<List<Product>> GetAll(
         CancellationToken cancellationToken)
     {
         return await _context.Products
