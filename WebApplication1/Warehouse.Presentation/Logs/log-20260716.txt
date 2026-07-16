@@ -1,0 +1,469 @@
+2026-07-16 14:43:04.352 +03:00 [INF] Now listening on: http://localhost:5076
+2026-07-16 14:43:04.423 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-07-16 14:43:04.428 +03:00 [INF] Hosting environment: Development
+2026-07-16 14:43:04.430 +03:00 [INF] Content root path: C:\Users\user\warehouse-management-api-MarioE\WebApplication1\Warehouse.Presentation
+2026-07-16 15:02:53.746 +03:00 [INF] Application is shutting down...
+2026-07-16 15:56:02.800 +03:00 [INF] Now listening on: http://localhost:5076
+2026-07-16 15:56:02.880 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-07-16 15:56:02.882 +03:00 [INF] Hosting environment: Development
+2026-07-16 15:56:02.883 +03:00 [INF] Content root path: C:\Users\user\warehouse-management-api-MarioE\WebApplication1\Warehouse.Presentation
+2026-07-16 15:56:59.816 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/api/products - application/json 282
+2026-07-16 15:56:59.884 +03:00 [INF] Request started with Correlation ID 67473e10-5c9e-4ea2-909e-d79edd217fc6
+2026-07-16 15:56:59.941 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-07-16 15:56:59.952 +03:00 [INF] Executing endpoint 'Warehouse.Presentation.Controllers.ProductsController.Create (Warehouse.Presentation)'
+2026-07-16 15:57:00.001 +03:00 [INF] Route matched with {action = "Create", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(Warehouse.Presentation.Contracts.CreateProductRequest, System.Threading.CancellationToken) on controller Warehouse.Presentation.Controllers.ProductsController (Warehouse.Presentation).
+2026-07-16 15:57:00.071 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-07-16 15:57:00.403 +03:00 [INF] Executing Warehouse.Presentation.Controllers.ProductsController.Create (Warehouse.Presentation)
+2026-07-16 15:57:02.854 +03:00 [INF] Executed DbCommand (126ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?' (DbType = Boolean), @p5='?' (DbType = DateTime), @p6='?', @p7='?' (DbType = Decimal), @p8='?' (DbType = Int32), @p9='?', @p10='?' (DbType = Guid), @p11='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Products" ("Id", "CreatedAt", "Description", "ExpiryDate", "IsArchived", "LastUpdatedAt", "Name", "Price", "QuantityInStock", "Sku", "SupplierId", "SupplierName")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);
+2026-07-16 15:57:02.924 +03:00 [INF] Finished Warehouse.Presentation.Controllers.ProductsController.Create (Warehouse.Presentation)
+2026-07-16 15:57:02.933 +03:00 [INF] Executed action Warehouse.Presentation.Controllers.ProductsController.Create (Warehouse.Presentation) in 2909.8736ms
+2026-07-16 15:57:02.937 +03:00 [INF] Executed endpoint 'Warehouse.Presentation.Controllers.ProductsController.Create (Warehouse.Presentation)'
+2026-07-16 15:57:02.942 +03:00 [ERR] Unhandled exception occurred while processing POST /api/products
+System.ArgumentNullException: Value cannot be null. (Parameter 'configuration')
+   at StackExchange.Redis.ConfigurationOptions.DoParse(String configuration, Boolean ignoreUnknown) in /_/src/StackExchange.Redis/ConfigurationOptions.cs:line 820
+   at StackExchange.Redis.ConfigurationOptions.Parse(String configuration, Boolean ignoreUnknown) in /_/src/StackExchange.Redis/ConfigurationOptions.cs:line 638
+   at StackExchange.Redis.ConfigurationOptions.Parse(String configuration) in /_/src/StackExchange.Redis/ConfigurationOptions.cs:line 628
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCacheOptions.GetConfiguredOptions(String libSuffix)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectSlowAsync(CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.RemoveAsync(String key, CancellationToken token)
+   at Warehouse.Application.Products.Commands.CreateProduct.CreateProductHandler.Handle(CreateProductCommand request, CancellationToken cancellationToken) in C:\Users\user\warehouse-management-api-MarioE\WebApplication1\Warehouse.Application\Products\Commands\CreateProduct\CreateProductHandler.cs:line 46
+   at Warehouse.Application.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\user\warehouse-management-api-MarioE\WebApplication1\Warehouse.Application\Behaviors\ValidationBehavior.cs:line 47
+   at Warehouse.Presentation.Controllers.ProductsController.Create(CreateProductRequest request, CancellationToken cancellationToken) in C:\Users\user\warehouse-management-api-MarioE\WebApplication1\Warehouse.Presentation\Controllers\ProductsController.cs:line 151
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Warehouse.Presentation.Middleware.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in C:\Users\user\warehouse-management-api-MarioE\WebApplication1\Warehouse.Presentation\Middleware\ExceptionHandlingMiddleware.cs:line 32
+2026-07-16 15:57:03.083 +03:00 [INF] HTTP POST /api/products responded 500 in 3196 ms
+2026-07-16 15:57:03.089 +03:00 [INF] Request completed with Correlation ID 67473e10-5c9e-4ea2-909e-d79edd217fc6
+2026-07-16 15:57:03.108 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/api/products - 500 null application/json 3295.7009ms
+2026-07-16 15:57:16.903 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/api/products - application/json 282
+2026-07-16 15:57:16.912 +03:00 [INF] Request started with Correlation ID 6b1636bd-2633-48e8-a8bd-c5721087d762
+2026-07-16 15:57:16.915 +03:00 [INF] Executing endpoint 'Warehouse.Presentation.Controllers.ProductsController.Create (Warehouse.Presentation)'
+2026-07-16 15:57:16.924 +03:00 [INF] Route matched with {action = "Create", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(Warehouse.Presentation.Contracts.CreateProductRequest, System.Threading.CancellationToken) on controller Warehouse.Presentation.Controllers.ProductsController (Warehouse.Presentation).
+2026-07-16 15:57:16.932 +03:00 [INF] Executing Warehouse.Presentation.Controllers.ProductsController.Create (Warehouse.Presentation)
+2026-07-16 15:57:17.046 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?' (DbType = Boolean), @p5='?' (DbType = DateTime), @p6='?', @p7='?' (DbType = Decimal), @p8='?' (DbType = Int32), @p9='?', @p10='?' (DbType = Guid), @p11='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Products" ("Id", "CreatedAt", "Description", "ExpiryDate", "IsArchived", "LastUpdatedAt", "Name", "Price", "QuantityInStock", "Sku", "SupplierId", "SupplierName")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);
+2026-07-16 15:57:17.054 +03:00 [INF] Finished Warehouse.Presentation.Controllers.ProductsController.Create (Warehouse.Presentation)
+2026-07-16 15:57:17.057 +03:00 [INF] Executed action Warehouse.Presentation.Controllers.ProductsController.Create (Warehouse.Presentation) in 127.6075ms
+2026-07-16 15:57:17.059 +03:00 [INF] Executed endpoint 'Warehouse.Presentation.Controllers.ProductsController.Create (Warehouse.Presentation)'
+2026-07-16 15:57:17.061 +03:00 [ERR] Unhandled exception occurred while processing POST /api/products
+System.ArgumentNullException: Value cannot be null. (Parameter 'configuration')
+   at StackExchange.Redis.ConfigurationOptions.DoParse(String configuration, Boolean ignoreUnknown) in /_/src/StackExchange.Redis/ConfigurationOptions.cs:line 820
+   at StackExchange.Redis.ConfigurationOptions.Parse(String configuration, Boolean ignoreUnknown) in /_/src/StackExchange.Redis/ConfigurationOptions.cs:line 638
+   at StackExchange.Redis.ConfigurationOptions.Parse(String configuration) in /_/src/StackExchange.Redis/ConfigurationOptions.cs:line 628
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCacheOptions.GetConfiguredOptions(String libSuffix)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectSlowAsync(CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.RemoveAsync(String key, CancellationToken token)
+   at Warehouse.Application.Products.Commands.CreateProduct.CreateProductHandler.Handle(CreateProductCommand request, CancellationToken cancellationToken) in C:\Users\user\warehouse-management-api-MarioE\WebApplication1\Warehouse.Application\Products\Commands\CreateProduct\CreateProductHandler.cs:line 46
+   at Warehouse.Application.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\user\warehouse-management-api-MarioE\WebApplication1\Warehouse.Application\Behaviors\ValidationBehavior.cs:line 47
+   at Warehouse.Presentation.Controllers.ProductsController.Create(CreateProductRequest request, CancellationToken cancellationToken) in C:\Users\user\warehouse-management-api-MarioE\WebApplication1\Warehouse.Presentation\Controllers\ProductsController.cs:line 151
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Warehouse.Presentation.Middleware.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in C:\Users\user\warehouse-management-api-MarioE\WebApplication1\Warehouse.Presentation\Middleware\ExceptionHandlingMiddleware.cs:line 32
+2026-07-16 15:57:17.091 +03:00 [INF] HTTP POST /api/products responded 500 in 177 ms
+2026-07-16 15:57:17.095 +03:00 [INF] Request completed with Correlation ID 6b1636bd-2633-48e8-a8bd-c5721087d762
+2026-07-16 15:57:17.098 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/api/products - 500 null application/json 195.7732ms
+2026-07-16 16:01:23.881 +03:00 [INF] Application is shutting down...
+2026-07-16 16:01:32.134 +03:00 [INF] Now listening on: http://localhost:5076
+2026-07-16 16:01:32.247 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-07-16 16:01:32.253 +03:00 [INF] Hosting environment: Development
+2026-07-16 16:01:32.256 +03:00 [INF] Content root path: C:\Users\user\warehouse-management-api-MarioE\WebApplication1\Warehouse.Presentation
+2026-07-16 16:02:01.735 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/swagger/index.html - null null
+2026-07-16 16:02:01.801 +03:00 [INF] Request started with Correlation ID 9e8170fb-d21a-47a0-bd07-2030f21e0e25
+2026-07-16 16:02:02.013 +03:00 [INF] HTTP GET /swagger/index.html responded 304 in 207 ms
+2026-07-16 16:02:02.018 +03:00 [INF] Request completed with Correlation ID 9e8170fb-d21a-47a0-bd07-2030f21e0e25
+2026-07-16 16:02:02.027 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/swagger/index.html - 304 null null 293.7782ms
+2026-07-16 16:02:02.067 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/swagger/swagger-ui-standalone-preset.js - null null
+2026-07-16 16:02:02.067 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/swagger/index.css - null null
+2026-07-16 16:02:02.067 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/swagger/swagger-ui-bundle.js - null null
+2026-07-16 16:02:02.088 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/swagger/swagger-ui.css - null null
+2026-07-16 16:02:02.092 +03:00 [INF] Request started with Correlation ID ff0de5af-95d7-48a7-a955-702aaebd1fd9
+2026-07-16 16:02:02.100 +03:00 [INF] Request started with Correlation ID f4efd739-2b86-47d6-841d-d25cfdad12de
+2026-07-16 16:02:02.104 +03:00 [INF] Request started with Correlation ID 8f615d63-69e1-46ff-b4ad-341f66142ce5
+2026-07-16 16:02:02.108 +03:00 [INF] Request started with Correlation ID 3e2ac12d-835f-4812-8389-6d6551cbe0f1
+2026-07-16 16:02:02.149 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js responded 304 in 28 ms
+2026-07-16 16:02:02.149 +03:00 [INF] HTTP GET /swagger/index.css responded 304 in 1 ms
+2026-07-16 16:02:02.183 +03:00 [INF] Request completed with Correlation ID f4efd739-2b86-47d6-841d-d25cfdad12de
+2026-07-16 16:02:02.173 +03:00 [INF] HTTP GET /swagger/swagger-ui.css responded 304 in 1 ms
+2026-07-16 16:02:02.188 +03:00 [INF] Request completed with Correlation ID 3e2ac12d-835f-4812-8389-6d6551cbe0f1
+2026-07-16 16:02:02.170 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js responded 304 in 15 ms
+2026-07-16 16:02:02.185 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/swagger/index.css - 304 null null 118.6471ms
+2026-07-16 16:02:02.180 +03:00 [INF] Request completed with Correlation ID ff0de5af-95d7-48a7-a955-702aaebd1fd9
+2026-07-16 16:02:02.190 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/swagger/swagger-ui.css - 304 null null 101.6332ms
+2026-07-16 16:02:02.192 +03:00 [INF] Request completed with Correlation ID 8f615d63-69e1-46ff-b4ad-341f66142ce5
+2026-07-16 16:02:02.205 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/swagger/swagger-ui-bundle.js - 304 null null 138.98ms
+2026-07-16 16:02:02.201 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/swagger/swagger-ui-standalone-preset.js - 304 null null 134.5873ms
+2026-07-16 16:02:02.199 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/swagger/index.js - null null
+2026-07-16 16:02:02.230 +03:00 [INF] Request started with Correlation ID 9f6c02c4-0db2-4ad2-89d3-6c6bb0a9d49d
+2026-07-16 16:02:02.236 +03:00 [INF] HTTP GET /swagger/index.js responded 304 in 2 ms
+2026-07-16 16:02:02.240 +03:00 [INF] Request completed with Correlation ID 9f6c02c4-0db2-4ad2-89d3-6c6bb0a9d49d
+2026-07-16 16:02:02.242 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/swagger/index.js - 304 null null 42.8175ms
+2026-07-16 16:02:02.399 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/swagger/v1/swagger.json - null null
+2026-07-16 16:02:02.408 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/swagger/favicon-32x32.png - null null
+2026-07-16 16:02:02.418 +03:00 [INF] Request started with Correlation ID ecc8e2a1-1d86-4cf1-9c0a-12b31e27d7a6
+2026-07-16 16:02:02.420 +03:00 [INF] Request started with Correlation ID 422c505d-4fc2-47bb-9cdd-b214d6a96f55
+2026-07-16 16:02:02.423 +03:00 [INF] HTTP GET /swagger/favicon-32x32.png responded 304 in 0 ms
+2026-07-16 16:02:02.425 +03:00 [INF] Request completed with Correlation ID 422c505d-4fc2-47bb-9cdd-b214d6a96f55
+2026-07-16 16:02:02.431 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/swagger/favicon-32x32.png - 304 null null 23.0903ms
+2026-07-16 16:02:02.698 +03:00 [INF] HTTP GET /swagger/v1/swagger.json responded 200 in 276 ms
+2026-07-16 16:02:02.711 +03:00 [INF] Request completed with Correlation ID ecc8e2a1-1d86-4cf1-9c0a-12b31e27d7a6
+2026-07-16 16:02:02.713 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 314.1205ms
+2026-07-16 16:02:12.568 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/api/products - application/json 282
+2026-07-16 16:02:12.576 +03:00 [INF] Request started with Correlation ID db1f46fa-2a19-4a75-9228-164a00b31013
+2026-07-16 16:02:12.583 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-07-16 16:02:12.587 +03:00 [INF] Executing endpoint 'Warehouse.Presentation.Controllers.ProductsController.Create (Warehouse.Presentation)'
+2026-07-16 16:02:12.628 +03:00 [INF] Route matched with {action = "Create", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(Warehouse.Presentation.Contracts.CreateProductRequest, System.Threading.CancellationToken) on controller Warehouse.Presentation.Controllers.ProductsController (Warehouse.Presentation).
+2026-07-16 16:02:12.647 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-07-16 16:02:12.869 +03:00 [INF] Executing Warehouse.Presentation.Controllers.ProductsController.Create (Warehouse.Presentation)
+2026-07-16 16:02:15.223 +03:00 [INF] Executed DbCommand (112ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?' (DbType = Boolean), @p5='?' (DbType = DateTime), @p6='?', @p7='?' (DbType = Decimal), @p8='?' (DbType = Int32), @p9='?', @p10='?' (DbType = Guid), @p11='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Products" ("Id", "CreatedAt", "Description", "ExpiryDate", "IsArchived", "LastUpdatedAt", "Name", "Price", "QuantityInStock", "Sku", "SupplierId", "SupplierName")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);
+2026-07-16 16:02:15.848 +03:00 [INF] Product "c79f3393-ac39-407d-9436-40fb355cfe15" created
+2026-07-16 16:02:15.864 +03:00 [INF] Finished Warehouse.Presentation.Controllers.ProductsController.Create (Warehouse.Presentation)
+2026-07-16 16:02:15.876 +03:00 [INF] Executing CreatedAtActionResult, writing value of type '<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[Warehouse.Application.ViewModels.ProductViewModel, Warehouse.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-07-16 16:02:15.959 +03:00 [INF] Executed action Warehouse.Presentation.Controllers.ProductsController.Create (Warehouse.Presentation) in 3322.5437ms
+2026-07-16 16:02:15.962 +03:00 [INF] Executed endpoint 'Warehouse.Presentation.Controllers.ProductsController.Create (Warehouse.Presentation)'
+2026-07-16 16:02:15.965 +03:00 [INF] HTTP POST /api/products responded 201 in 3386 ms
+2026-07-16 16:02:15.968 +03:00 [INF] Request completed with Correlation ID db1f46fa-2a19-4a75-9228-164a00b31013
+2026-07-16 16:02:15.983 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/api/products - 201 null application/json; charset=utf-8 3414.1069ms
+2026-07-16 16:10:13.212 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/api/products?onlyAvailable=false - null null
+2026-07-16 16:10:13.226 +03:00 [INF] Request started with Correlation ID 3ac39498-efd2-4c94-92d4-7fafb9321d9e
+2026-07-16 16:10:13.228 +03:00 [INF] Executing endpoint 'Warehouse.Presentation.Controllers.ProductsController.GetAll (Warehouse.Presentation)'
+2026-07-16 16:10:13.237 +03:00 [INF] Route matched with {action = "GetAll", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Boolean, System.Threading.CancellationToken) on controller Warehouse.Presentation.Controllers.ProductsController (Warehouse.Presentation).
+2026-07-16 16:10:13.244 +03:00 [INF] Executing Warehouse.Presentation.Controllers.ProductsController.GetAll (Warehouse.Presentation)
+2026-07-16 16:10:13.557 +03:00 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."CreatedAt", p."Description", p."ExpiryDate", p."IsArchived", p."LastUpdatedAt", p."Name", p."Price", p."QuantityInStock", p."Sku", p."SupplierId", p."SupplierName"
+FROM "Products" AS p
+2026-07-16 16:10:13.681 +03:00 [INF] Retrieved 24 products
+2026-07-16 16:10:13.687 +03:00 [INF] Finished Warehouse.Presentation.Controllers.ProductsController.GetAll (Warehouse.Presentation)
+2026-07-16 16:10:13.691 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Warehouse.Application.ViewModels.ProductViewModel, Warehouse.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-07-16 16:10:13.697 +03:00 [INF] Executed action Warehouse.Presentation.Controllers.ProductsController.GetAll (Warehouse.Presentation) in 456.2431ms
+2026-07-16 16:10:13.701 +03:00 [INF] Executed endpoint 'Warehouse.Presentation.Controllers.ProductsController.GetAll (Warehouse.Presentation)'
+2026-07-16 16:10:13.703 +03:00 [INF] HTTP GET /api/products responded 200 in 474 ms
+2026-07-16 16:10:13.707 +03:00 [INF] Request completed with Correlation ID 3ac39498-efd2-4c94-92d4-7fafb9321d9e
+2026-07-16 16:10:13.709 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/api/products?onlyAvailable=false - 200 null application/json; charset=utf-8 496.2115ms
+2026-07-16 16:14:55.622 +03:00 [INF] Application is shutting down...
+2026-07-16 16:25:12.390 +03:00 [INF] Initializing UI Database
+2026-07-16 16:25:13.059 +03:00 [INF] Saving healthchecks configuration to database
+2026-07-16 16:25:13.156 +03:00 [INF] Saved 1 entities to in-memory store.
+2026-07-16 16:25:13.215 +03:00 [INF] Now listening on: http://localhost:5076
+2026-07-16 16:25:14.052 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:25:14.057 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:25:14.099 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-07-16 16:25:14.102 +03:00 [INF] Hosting environment: Development
+2026-07-16 16:25:14.104 +03:00 [INF] Content root path: C:\Users\user\warehouse-management-api-MarioE\WebApplication1\Warehouse.Presentation
+2026-07-16 16:25:14.173 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:25:14.219 +03:00 [INF] Request started with Correlation ID ba8e3bf1-cfb2-45f0-b718-0983a8f2e8d7
+2026-07-16 16:25:14.273 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-07-16 16:25:14.278 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:25:14.652 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:25:14.655 +03:00 [INF] HTTP GET /health responded 200 in 432 ms
+2026-07-16 16:25:14.658 +03:00 [INF] Received HTTP response headers after 595.6583ms - 200
+2026-07-16 16:25:14.659 +03:00 [INF] Request completed with Correlation ID ba8e3bf1-cfb2-45f0-b718-0983a8f2e8d7
+2026-07-16 16:25:14.664 +03:00 [INF] End processing HTTP request after 620.8615ms - 200
+2026-07-16 16:25:14.667 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 497.1917ms
+2026-07-16 16:25:14.858 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:25:24.767 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:25:25.039 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:25:25.125 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:25:25.130 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:25:25.141 +03:00 [INF] Request started with Correlation ID 96f11322-272f-49f7-8ba2-ddb4ee5ec11d
+2026-07-16 16:25:25.409 +03:00 [INF] Request started with Correlation ID 6b77b425-0887-4b22-b375-392141f10564
+2026-07-16 16:25:25.419 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:25:25.417 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:25:25.431 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:25:25.432 +03:00 [INF] Received HTTP response headers after 305.7207ms - 200
+2026-07-16 16:25:25.437 +03:00 [INF] HTTP GET /health responded 200 in 17 ms
+2026-07-16 16:25:25.438 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:25:25.440 +03:00 [INF] End processing HTTP request after 400.4896ms - 200
+2026-07-16 16:25:25.447 +03:00 [INF] Request completed with Correlation ID 6b77b425-0887-4b22-b375-392141f10564
+2026-07-16 16:25:25.451 +03:00 [INF] HTTP GET /health responded 200 in 35 ms
+2026-07-16 16:25:25.489 +03:00 [INF] Request completed with Correlation ID 96f11322-272f-49f7-8ba2-ddb4ee5ec11d
+2026-07-16 16:25:25.490 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 723.3719ms
+2026-07-16 16:25:25.479 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 349.6508ms
+2026-07-16 16:25:25.524 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:25:25.557 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/favicon.ico - null null
+2026-07-16 16:25:25.560 +03:00 [INF] Request started with Correlation ID eb0aefb9-fcd0-40b4-854f-b9c76d25a396
+2026-07-16 16:25:25.564 +03:00 [INF] HTTP GET /favicon.ico responded 404 in 1 ms
+2026-07-16 16:25:25.566 +03:00 [INF] Request completed with Correlation ID eb0aefb9-fcd0-40b4-854f-b9c76d25a396
+2026-07-16 16:25:25.568 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/favicon.ico - 404 0 null 11.4546ms
+2026-07-16 16:25:25.576 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5076/favicon.ico, Response status code: 404
+2026-07-16 16:25:35.563 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:25:35.608 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:25:35.610 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:25:35.654 +03:00 [INF] Request started with Correlation ID b221f3ca-a8f9-4589-a33b-7f48aa7f877e
+2026-07-16 16:25:35.655 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:25:35.659 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:25:35.660 +03:00 [INF] Received HTTP response headers after 50.8977ms - 200
+2026-07-16 16:25:35.664 +03:00 [INF] HTTP GET /health responded 200 in 8 ms
+2026-07-16 16:25:35.685 +03:00 [INF] Request completed with Correlation ID b221f3ca-a8f9-4589-a33b-7f48aa7f877e
+2026-07-16 16:25:35.665 +03:00 [INF] End processing HTTP request after 102.3278ms - 200
+2026-07-16 16:25:35.705 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 95.5081ms
+2026-07-16 16:25:35.708 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:25:45.764 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:25:45.768 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:25:45.776 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:25:45.810 +03:00 [INF] Request started with Correlation ID 2bd9559b-6fa7-4155-96f9-cba9365f672d
+2026-07-16 16:25:45.826 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:25:45.871 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:25:45.872 +03:00 [INF] Received HTTP response headers after 95.8023ms - 200
+2026-07-16 16:25:45.901 +03:00 [INF] HTTP GET /health responded 200 in 75 ms
+2026-07-16 16:25:45.904 +03:00 [INF] End processing HTTP request after 139.8694ms - 200
+2026-07-16 16:25:45.907 +03:00 [INF] Request completed with Correlation ID 2bd9559b-6fa7-4155-96f9-cba9365f672d
+2026-07-16 16:25:45.912 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 135.4692ms
+2026-07-16 16:25:45.914 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:25:50.645 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:25:50.757 +03:00 [INF] Request started with Correlation ID 5d1f8fef-7c3f-48b6-82b7-076f7e8c84e5
+2026-07-16 16:25:50.759 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:25:50.809 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:25:50.837 +03:00 [INF] HTTP GET /health responded 200 in 78 ms
+2026-07-16 16:25:50.842 +03:00 [INF] Request completed with Correlation ID 5d1f8fef-7c3f-48b6-82b7-076f7e8c84e5
+2026-07-16 16:25:50.868 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 227.2445ms
+2026-07-16 16:25:55.933 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:25:55.941 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:25:55.952 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:25:55.969 +03:00 [INF] Request started with Correlation ID 647d8533-787e-44c0-b252-aacc689af565
+2026-07-16 16:25:55.970 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:25:55.975 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:25:55.975 +03:00 [INF] Received HTTP response headers after 26.0632ms - 200
+2026-07-16 16:25:55.984 +03:00 [INF] HTTP GET /health responded 200 in 14 ms
+2026-07-16 16:25:55.989 +03:00 [INF] End processing HTTP request after 54.2924ms - 200
+2026-07-16 16:25:56.002 +03:00 [INF] Request completed with Correlation ID 647d8533-787e-44c0-b252-aacc689af565
+2026-07-16 16:25:56.022 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 69.643ms
+2026-07-16 16:25:56.024 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:26:04.654 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:26:04.661 +03:00 [INF] Request started with Correlation ID 57df8ca3-88b8-4355-8fe7-9ead9446cef4
+2026-07-16 16:26:04.679 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:26:04.691 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:26:04.720 +03:00 [INF] HTTP GET /health responded 200 in 43 ms
+2026-07-16 16:26:04.723 +03:00 [INF] Request completed with Correlation ID 57df8ca3-88b8-4355-8fe7-9ead9446cef4
+2026-07-16 16:26:04.758 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 103.7788ms
+2026-07-16 16:26:04.784 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/favicon.ico - null null
+2026-07-16 16:26:04.787 +03:00 [INF] Request started with Correlation ID 15774df7-d495-4e16-899f-4c6026e108a5
+2026-07-16 16:26:04.791 +03:00 [INF] HTTP GET /favicon.ico responded 404 in 0 ms
+2026-07-16 16:26:04.795 +03:00 [INF] Request completed with Correlation ID 15774df7-d495-4e16-899f-4c6026e108a5
+2026-07-16 16:26:04.796 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/favicon.ico - 404 0 null 11.6211ms
+2026-07-16 16:26:04.800 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5076/favicon.ico, Response status code: 404
+2026-07-16 16:26:06.036 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:26:06.037 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:26:06.038 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:26:06.040 +03:00 [INF] Request started with Correlation ID cc337cec-4a85-4a43-aa58-d88ba6465b09
+2026-07-16 16:26:06.041 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:26:06.044 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:26:06.044 +03:00 [INF] Received HTTP response headers after 6.3466ms - 200
+2026-07-16 16:26:06.045 +03:00 [INF] HTTP GET /health responded 200 in 4 ms
+2026-07-16 16:26:06.046 +03:00 [INF] End processing HTTP request after 9.8679ms - 200
+2026-07-16 16:26:06.047 +03:00 [INF] Request completed with Correlation ID cc337cec-4a85-4a43-aa58-d88ba6465b09
+2026-07-16 16:26:06.050 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 12.4486ms
+2026-07-16 16:26:06.052 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:26:16.068 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:26:16.072 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:26:16.076 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:26:16.086 +03:00 [INF] Request started with Correlation ID 0963678d-cf2d-4329-af23-0b4f004a0edb
+2026-07-16 16:26:16.090 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:26:16.096 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:26:16.097 +03:00 [INF] Received HTTP response headers after 20.7453ms - 200
+2026-07-16 16:26:16.099 +03:00 [INF] HTTP GET /health responded 200 in 9 ms
+2026-07-16 16:26:16.102 +03:00 [INF] End processing HTTP request after 33.5748ms - 200
+2026-07-16 16:26:16.104 +03:00 [INF] Request completed with Correlation ID 0963678d-cf2d-4329-af23-0b4f004a0edb
+2026-07-16 16:26:16.108 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 31.6361ms
+2026-07-16 16:26:16.110 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:26:26.117 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:26:26.119 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:26:26.122 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:26:26.125 +03:00 [INF] Request started with Correlation ID af8e194a-212c-4e50-bc9b-894aa1eca996
+2026-07-16 16:26:26.127 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:26:26.133 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:26:26.133 +03:00 [INF] Received HTTP response headers after 11.1792ms - 200
+2026-07-16 16:26:26.135 +03:00 [INF] HTTP GET /health responded 200 in 7 ms
+2026-07-16 16:26:26.136 +03:00 [INF] End processing HTTP request after 19.0722ms - 200
+2026-07-16 16:26:26.138 +03:00 [INF] Request completed with Correlation ID af8e194a-212c-4e50-bc9b-894aa1eca996
+2026-07-16 16:26:26.143 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 21.3065ms
+2026-07-16 16:26:26.145 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:26:36.161 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:26:36.162 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:26:36.164 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:26:36.168 +03:00 [INF] Request started with Correlation ID af86d391-4278-4dcb-a3ff-db9ba19611f5
+2026-07-16 16:26:36.172 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:26:36.180 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:26:36.181 +03:00 [INF] Received HTTP response headers after 17.1065ms - 200
+2026-07-16 16:26:36.227 +03:00 [INF] HTTP GET /health responded 200 in 54 ms
+2026-07-16 16:26:36.230 +03:00 [INF] End processing HTTP request after 69.184ms - 200
+2026-07-16 16:26:36.246 +03:00 [INF] Request completed with Correlation ID af86d391-4278-4dcb-a3ff-db9ba19611f5
+2026-07-16 16:26:36.249 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 84.336ms
+2026-07-16 16:26:36.250 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:26:46.275 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:26:46.281 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:26:46.285 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:26:46.294 +03:00 [INF] Request started with Correlation ID 564c90b9-f0b1-4c53-ad95-0eaf89deb08e
+2026-07-16 16:26:46.296 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:26:46.304 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:26:46.304 +03:00 [INF] Received HTTP response headers after 20.1878ms - 200
+2026-07-16 16:26:46.308 +03:00 [INF] HTTP GET /health responded 200 in 11 ms
+2026-07-16 16:26:46.311 +03:00 [INF] End processing HTTP request after 36.6026ms - 200
+2026-07-16 16:26:46.316 +03:00 [INF] Request completed with Correlation ID 564c90b9-f0b1-4c53-ad95-0eaf89deb08e
+2026-07-16 16:26:46.320 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 35.1346ms
+2026-07-16 16:26:46.321 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:26:46.635 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health-ui - null null
+2026-07-16 16:26:46.644 +03:00 [INF] Request started with Correlation ID f1556cdf-dcbc-42d4-bde6-8bade2388e43
+2026-07-16 16:26:46.648 +03:00 [INF] Executing endpoint 'HTTP: GET /health-ui'
+2026-07-16 16:26:46.655 +03:00 [INF] Executed endpoint 'HTTP: GET /health-ui'
+2026-07-16 16:26:46.676 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/ui/resources/healthchecksui-min.css - null null
+2026-07-16 16:26:46.679 +03:00 [INF] HTTP GET /health-ui responded 200 in 33 ms
+2026-07-16 16:26:46.679 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/ui/resources/vendors-dll.js - null null
+2026-07-16 16:26:46.681 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/ui/resources/healthchecks-bundle.js - null null
+2026-07-16 16:26:46.685 +03:00 [INF] Request started with Correlation ID 54b92f02-7be7-4dd9-8b32-2b492ec729fa
+2026-07-16 16:26:46.687 +03:00 [INF] Request completed with Correlation ID f1556cdf-dcbc-42d4-bde6-8bade2388e43
+2026-07-16 16:26:46.691 +03:00 [INF] Request started with Correlation ID 99ae0249-d1bd-422e-8f45-2e91e0ff7975
+2026-07-16 16:26:46.694 +03:00 [INF] Request started with Correlation ID 0fe9392c-09ff-48ed-9d38-8b2b73f2f609
+2026-07-16 16:26:46.695 +03:00 [INF] Executing endpoint 'HTTP: GET /ui/resources/healthchecksui-min.css'
+2026-07-16 16:26:46.696 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health-ui - 200 null text/html 60.0682ms
+2026-07-16 16:26:46.697 +03:00 [INF] Executing endpoint 'HTTP: GET /ui/resources/vendors-dll.js'
+2026-07-16 16:26:46.698 +03:00 [INF] Executing endpoint 'HTTP: GET /ui/resources/healthchecks-bundle.js'
+2026-07-16 16:26:46.701 +03:00 [INF] Executed endpoint 'HTTP: GET /ui/resources/healthchecksui-min.css'
+2026-07-16 16:26:46.706 +03:00 [INF] HTTP GET /ui/resources/healthchecksui-min.css responded 200 in 11 ms
+2026-07-16 16:26:46.715 +03:00 [INF] Executed endpoint 'HTTP: GET /ui/resources/healthchecks-bundle.js'
+2026-07-16 16:26:46.715 +03:00 [INF] Executed endpoint 'HTTP: GET /ui/resources/vendors-dll.js'
+2026-07-16 16:26:46.733 +03:00 [INF] HTTP GET /ui/resources/vendors-dll.js responded 200 in 36 ms
+2026-07-16 16:26:46.736 +03:00 [INF] Request completed with Correlation ID 99ae0249-d1bd-422e-8f45-2e91e0ff7975
+2026-07-16 16:26:46.737 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/ui/resources/vendors-dll.js - 200 null text/javascript 58.0682ms
+2026-07-16 16:26:46.730 +03:00 [INF] HTTP GET /ui/resources/healthchecks-bundle.js responded 200 in 32 ms
+2026-07-16 16:26:46.746 +03:00 [INF] Request completed with Correlation ID 0fe9392c-09ff-48ed-9d38-8b2b73f2f609
+2026-07-16 16:26:46.728 +03:00 [INF] Request completed with Correlation ID 54b92f02-7be7-4dd9-8b32-2b492ec729fa
+2026-07-16 16:26:46.748 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/ui/resources/healthchecks-bundle.js - 200 null text/javascript 67.0681ms
+2026-07-16 16:26:46.749 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/ui/resources/healthchecksui-min.css - 200 null text/css 73.4774ms
+2026-07-16 16:26:46.820 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/healthchecks-api/ui-settings - null null
+2026-07-16 16:26:46.823 +03:00 [INF] Request started with Correlation ID b9ca66eb-c7a0-4b76-8edf-074a4b05d7a5
+2026-07-16 16:26:46.826 +03:00 [INF] Executing endpoint '/healthchecks-api/ui-settings'
+2026-07-16 16:26:46.837 +03:00 [INF] Executed endpoint '/healthchecks-api/ui-settings'
+2026-07-16 16:26:46.838 +03:00 [INF] HTTP GET /healthchecks-api/ui-settings responded 200 in 12 ms
+2026-07-16 16:26:46.840 +03:00 [INF] Request completed with Correlation ID b9ca66eb-c7a0-4b76-8edf-074a4b05d7a5
+2026-07-16 16:26:46.844 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/healthchecks-api/ui-settings - 200 null application/json; charset=utf-8 24.3601ms
+2026-07-16 16:26:46.863 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/healthchecks-api - null null
+2026-07-16 16:26:46.901 +03:00 [INF] Request started with Correlation ID 1aac1725-9074-4781-9545-cbd3b59040b3
+2026-07-16 16:26:46.904 +03:00 [INF] Executing endpoint 'HealthChecks UI Api'
+2026-07-16 16:26:46.951 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/ui/resources/1ae4e3706fe3f478fcc1.woff2 - null null
+2026-07-16 16:26:46.964 +03:00 [INF] Request started with Correlation ID 67165008-a288-4782-8f20-511fd2d2ea0b
+2026-07-16 16:26:46.966 +03:00 [INF] HTTP GET /ui/resources/1ae4e3706fe3f478fcc1.woff2 responded 404 in 0 ms
+2026-07-16 16:26:46.969 +03:00 [INF] Request completed with Correlation ID 67165008-a288-4782-8f20-511fd2d2ea0b
+2026-07-16 16:26:46.978 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/ui/resources/1ae4e3706fe3f478fcc1.woff2 - 404 0 null 27.0815ms
+2026-07-16 16:26:47.006 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5076/ui/resources/1ae4e3706fe3f478fcc1.woff2, Response status code: 404
+2026-07-16 16:26:47.039 +03:00 [INF] Executed endpoint 'HealthChecks UI Api'
+2026-07-16 16:26:47.047 +03:00 [INF] HTTP GET /healthchecks-api responded 200 in 142 ms
+2026-07-16 16:26:47.049 +03:00 [INF] Request completed with Correlation ID 1aac1725-9074-4781-9545-cbd3b59040b3
+2026-07-16 16:26:47.050 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/healthchecks-api - 200 null application/json; charset=utf-8 187.5435ms
+2026-07-16 16:26:56.332 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:26:56.337 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:26:56.343 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:26:56.350 +03:00 [INF] Request started with Correlation ID ef631c60-778a-42af-9cad-75286537ab27
+2026-07-16 16:26:56.352 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:26:56.358 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:26:56.359 +03:00 [INF] Received HTTP response headers after 16.296ms - 200
+2026-07-16 16:26:56.363 +03:00 [INF] HTTP GET /health responded 200 in 11 ms
+2026-07-16 16:26:56.365 +03:00 [INF] End processing HTTP request after 33.0199ms - 200
+2026-07-16 16:26:56.367 +03:00 [INF] Request completed with Correlation ID ef631c60-778a-42af-9cad-75286537ab27
+2026-07-16 16:26:56.370 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 26.8258ms
+2026-07-16 16:26:56.371 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:26:57.056 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/healthchecks-api - null null
+2026-07-16 16:26:57.063 +03:00 [INF] Request started with Correlation ID 31ce214b-ac1e-4f51-863a-3f1f0d773f32
+2026-07-16 16:26:57.064 +03:00 [INF] Executing endpoint 'HealthChecks UI Api'
+2026-07-16 16:26:57.067 +03:00 [INF] Executed endpoint 'HealthChecks UI Api'
+2026-07-16 16:26:57.071 +03:00 [INF] HTTP GET /healthchecks-api responded 200 in 6 ms
+2026-07-16 16:26:57.073 +03:00 [INF] Request completed with Correlation ID 31ce214b-ac1e-4f51-863a-3f1f0d773f32
+2026-07-16 16:26:57.075 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/healthchecks-api - 200 null application/json; charset=utf-8 18.8311ms
+2026-07-16 16:27:06.380 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:27:06.381 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:27:06.383 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:27:06.386 +03:00 [INF] Request started with Correlation ID 968523f0-5ac7-43b5-81a3-f4dd4f02f895
+2026-07-16 16:27:06.387 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:27:06.390 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:27:06.390 +03:00 [INF] Received HTTP response headers after 7.0449ms - 200
+2026-07-16 16:27:06.392 +03:00 [INF] HTTP GET /health responded 200 in 5 ms
+2026-07-16 16:27:06.394 +03:00 [INF] End processing HTTP request after 13.4637ms - 200
+2026-07-16 16:27:06.396 +03:00 [INF] Request completed with Correlation ID 968523f0-5ac7-43b5-81a3-f4dd4f02f895
+2026-07-16 16:27:06.399 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 15.6617ms
+2026-07-16 16:27:06.400 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:27:07.089 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/healthchecks-api - null null
+2026-07-16 16:27:07.094 +03:00 [INF] Request started with Correlation ID b26f9d3d-68a1-47b1-be58-ed2e1cbbd4a8
+2026-07-16 16:27:07.095 +03:00 [INF] Executing endpoint 'HealthChecks UI Api'
+2026-07-16 16:27:07.098 +03:00 [INF] Executed endpoint 'HealthChecks UI Api'
+2026-07-16 16:27:07.103 +03:00 [INF] HTTP GET /healthchecks-api responded 200 in 7 ms
+2026-07-16 16:27:07.109 +03:00 [INF] Request completed with Correlation ID b26f9d3d-68a1-47b1-be58-ed2e1cbbd4a8
+2026-07-16 16:27:07.110 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/healthchecks-api - 200 null application/json; charset=utf-8 21.1364ms
+2026-07-16 16:27:16.411 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:27:16.413 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:27:16.420 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:27:16.424 +03:00 [INF] Request started with Correlation ID 65fdc7c1-d55a-4fe3-8e06-d56562f9a452
+2026-07-16 16:27:16.425 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:27:16.428 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:27:16.428 +03:00 [INF] Received HTTP response headers after 13.0571ms - 200
+2026-07-16 16:27:16.429 +03:00 [INF] HTTP GET /health responded 200 in 4 ms
+2026-07-16 16:27:16.430 +03:00 [INF] End processing HTTP request after 18.7642ms - 200
+2026-07-16 16:27:16.432 +03:00 [INF] Request completed with Correlation ID 65fdc7c1-d55a-4fe3-8e06-d56562f9a452
+2026-07-16 16:27:16.435 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 15.1393ms
+2026-07-16 16:27:16.438 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:27:26.445 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:27:26.447 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:27:26.448 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:27:26.451 +03:00 [INF] Request started with Correlation ID 6f728f24-ffb4-403c-99d7-d76109830aa1
+2026-07-16 16:27:26.452 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:27:26.457 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:27:26.457 +03:00 [INF] Received HTTP response headers after 8.7714ms - 200
+2026-07-16 16:27:26.458 +03:00 [INF] HTTP GET /health responded 200 in 5 ms
+2026-07-16 16:27:26.459 +03:00 [INF] End processing HTTP request after 13.8161ms - 200
+2026-07-16 16:27:26.460 +03:00 [INF] Request completed with Correlation ID 6f728f24-ffb4-403c-99d7-d76109830aa1
+2026-07-16 16:27:26.462 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 13.954ms
+2026-07-16 16:27:26.464 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:27:27.737 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/healthchecks-api/ui-settings - null null
+2026-07-16 16:27:27.737 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/healthchecks-api - null null
+2026-07-16 16:27:27.743 +03:00 [INF] Request started with Correlation ID 1856944f-e088-47bf-af51-12ceeefb478f
+2026-07-16 16:27:27.745 +03:00 [INF] Request started with Correlation ID f6e3fbac-c95a-4675-9778-c6b3b93c2420
+2026-07-16 16:27:27.747 +03:00 [INF] Executing endpoint '/healthchecks-api/ui-settings'
+2026-07-16 16:27:27.748 +03:00 [INF] Executing endpoint 'HealthChecks UI Api'
+2026-07-16 16:27:27.749 +03:00 [INF] Executed endpoint '/healthchecks-api/ui-settings'
+2026-07-16 16:27:27.752 +03:00 [INF] Executed endpoint 'HealthChecks UI Api'
+2026-07-16 16:27:27.752 +03:00 [INF] HTTP GET /healthchecks-api/ui-settings responded 200 in 5 ms
+2026-07-16 16:27:27.754 +03:00 [INF] HTTP GET /healthchecks-api responded 200 in 6 ms
+2026-07-16 16:27:27.755 +03:00 [INF] Request completed with Correlation ID 1856944f-e088-47bf-af51-12ceeefb478f
+2026-07-16 16:27:27.760 +03:00 [INF] Request completed with Correlation ID f6e3fbac-c95a-4675-9778-c6b3b93c2420
+2026-07-16 16:27:27.761 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/healthchecks-api/ui-settings - 200 null application/json; charset=utf-8 24.3588ms
+2026-07-16 16:27:27.766 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/healthchecks-api - 200 null application/json; charset=utf-8 29.2774ms
+2026-07-16 16:27:30.083 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/healthchecks-api/ui-settings - null null
+2026-07-16 16:27:30.083 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/healthchecks-api - null null
+2026-07-16 16:27:30.089 +03:00 [INF] Request started with Correlation ID 2fa68538-25b5-4df6-98a8-9d82e811c0da
+2026-07-16 16:27:30.097 +03:00 [INF] Request started with Correlation ID bb4f7fbb-511e-42c8-98ab-ee15a5efee0d
+2026-07-16 16:27:30.098 +03:00 [INF] Executing endpoint '/healthchecks-api/ui-settings'
+2026-07-16 16:27:30.099 +03:00 [INF] Executing endpoint 'HealthChecks UI Api'
+2026-07-16 16:27:30.099 +03:00 [INF] Executed endpoint '/healthchecks-api/ui-settings'
+2026-07-16 16:27:30.102 +03:00 [INF] Executed endpoint 'HealthChecks UI Api'
+2026-07-16 16:27:30.102 +03:00 [INF] HTTP GET /healthchecks-api/ui-settings responded 200 in 4 ms
+2026-07-16 16:27:30.104 +03:00 [INF] HTTP GET /healthchecks-api responded 200 in 5 ms
+2026-07-16 16:27:30.106 +03:00 [INF] Request completed with Correlation ID 2fa68538-25b5-4df6-98a8-9d82e811c0da
+2026-07-16 16:27:30.109 +03:00 [INF] Request completed with Correlation ID bb4f7fbb-511e-42c8-98ab-ee15a5efee0d
+2026-07-16 16:27:30.113 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/healthchecks-api - 200 null application/json; charset=utf-8 29.5616ms
+2026-07-16 16:27:30.110 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/healthchecks-api/ui-settings - 200 null application/json; charset=utf-8 27.0111ms
+2026-07-16 16:27:32.200 +03:00 [INF] Application is shutting down...

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Logging;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
@@ -14,12 +15,15 @@ namespace Warehouse.Presentation.Controllers;
 public class MetadataController : ControllerBase
 {
     private readonly IStringLocalizer<SharedResources> _localizer;
+    private readonly ILogger<MetadataController> _logger;
 
 
     public MetadataController(
-        IStringLocalizer<SharedResources> localizer)
+        IStringLocalizer<SharedResources> localizer,
+        ILogger<MetadataController> logger)
     {
         _localizer = localizer;
+        _logger = logger;
     }
 
 
@@ -28,6 +32,11 @@ public class MetadataController : ControllerBase
     [HttpGet("validation/{dtoName}")]
     public IActionResult GetValidation(string dtoName)
     {
+        _logger.LogInformation(
+            "Validation metadata requested for DTO {DtoName}",
+            dtoName);
+
+
         var assembly = Assembly.GetExecutingAssembly();
 
 
@@ -39,9 +48,14 @@ public class MetadataController : ControllerBase
 
         if (dtoType == null)
         {
+            _logger.LogWarning(
+                "DTO {DtoName} was not found",
+                dtoName);
+
+
             return NotFound(new
             {
-                message = _localizer["DtoNotFound"],
+                message = _localizer["DtoNotFound"].Value,
                 dtoName
             });
         }
@@ -70,9 +84,15 @@ public class MetadataController : ControllerBase
 
 
 
+        _logger.LogInformation(
+            "Validation metadata retrieved successfully for DTO {DtoName}",
+            dtoName);
+
+
+
         return Ok(new
         {
-            message = _localizer["ValidationMetadataRetrieved"],
+            message = _localizer["ValidationMetadataRetrieved"].Value,
             DtoName = dtoName,
             Properties = properties
         });

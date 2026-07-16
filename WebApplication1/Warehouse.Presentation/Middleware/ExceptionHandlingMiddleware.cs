@@ -1,9 +1,11 @@
 using System.Net;
 using System.Text.Json;
 using FluentValidation;
+
 using Warehouse.Application.Common.Exceptions;
 using Warehouse.Domain.Exceptions;
 using Warehouse.Presentation.Contracts;
+
 
 namespace Warehouse.Presentation.Middleware;
 
@@ -22,6 +24,7 @@ public class ExceptionHandlingMiddleware
     }
 
 
+
     public async Task InvokeAsync(HttpContext context)
     {
         try
@@ -32,8 +35,11 @@ public class ExceptionHandlingMiddleware
         {
             _logger.LogError(
                 exception,
-                "Unhandled exception occurred"
+                "Unhandled exception occurred while processing {Method} {Path}",
+                context.Request.Method,
+                context.Request.Path
             );
+
 
             await HandleExceptionAsync(
                 context,
@@ -41,6 +47,7 @@ public class ExceptionHandlingMiddleware
             );
         }
     }
+
 
 
     private static async Task HandleExceptionAsync(
@@ -52,6 +59,7 @@ public class ExceptionHandlingMiddleware
         var message = "An unexpected error occurred.";
 
 
+
         switch (exception)
         {
             case NotFoundException:
@@ -61,6 +69,7 @@ public class ExceptionHandlingMiddleware
                 break;
 
 
+
             case BusinessRuleException:
                 statusCode = HttpStatusCode.BadRequest;
                 errorCode = "BUSINESS_RULE_ERROR";
@@ -68,20 +77,25 @@ public class ExceptionHandlingMiddleware
                 break;
 
 
+
             case ValidationException validationException:
                 statusCode = HttpStatusCode.BadRequest;
                 errorCode = "VALIDATION_ERROR";
+
                 message = string.Join(
                     ", ",
                     validationException.Errors
                         .Select(x => x.ErrorMessage)
                 );
+
                 break;
         }
 
 
+
         context.Response.StatusCode = (int)statusCode;
         context.Response.ContentType = "application/json";
+
 
 
         var response = new ApiErrorResponse(
@@ -89,6 +103,7 @@ public class ExceptionHandlingMiddleware
             message,
             context.TraceIdentifier
         );
+
 
 
         await context.Response.WriteAsync(

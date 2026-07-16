@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Caching.Distributed;
+using System.Text.Json;
 using Warehouse.Application.ViewModels;
 using Warehouse.Domain.Interface;
 
@@ -10,47 +12,77 @@ public class SearchProductsHandler
 {
     private readonly IProductRepository _repository;
     private readonly IMapper _mapper;
+    private readonly IDistributedCache _cache;
 
     public SearchProductsHandler(
         IProductRepository repository,
-        IMapper mapper)
+        IMapper mapper,
+        IDistributedCache cache)
     {
         _repository = repository;
         _mapper = mapper;
+        _cache = cache;
     }
 
     public async Task<SearchProductsResponse> Handle(
         SearchProductsQuery request,
         CancellationToken cancellationToken)
     {
-        var products = await _repository.GetAll(
-            cancellationToken
-        );
+        var cacheKey =
+            $"products:{request.Name}:{request.Supplier}";
 
+        var cacheValue = await _cache.GetStringAsync(
+            cacheKey,
+            cancellationToken);
 
-        var query = products
-            .Where(p => !p.IsArchived);
-
-        if (!string.IsNullOrWhiteSpace(request.Name))
+        if (cacheValue == null)
         {
-            query = query.Where(p =>
-                p.Name.Contains(
-                    request.Name,
-                    StringComparison.OrdinalIgnoreCase));
+            var products = await _repository.GetAll(
+                cancellationToken);
+
+            var query = products
+                .Where(p => !p.IsArchived);
+
+            if (!string.IsNullOrWhiteSpace(request.Name))
+            {
+                query = query.Where(p =>
+                    p.Name.Contains(
+                        request.Name,
+                        StringComparison.OrdinalIgnoreCase));
+            }
+
+            if (!string.IsNullOrWhiteSpace(request.Supplier))
+            {
+                query = query.Where(p =>
+                    p.SupplierName != null &&
+                    p.SupplierName.Contains(
+                        request.Supplier,
+                        StringComparison.OrdinalIgnoreCase));
+            }
+
+            var productViewModels =
+                _mapper.Map<List<ProductViewModel>>(query.ToList());
+
+            var response =
+                new SearchProductsResponse(productViewModels);
+
+            var serializedResponse =
+                JsonSerializer.Serialize(response);
+
+            await _cache.SetStringAsync(
+                cacheKey,
+                serializedResponse,
+                new DistributedCacheEntryOptions
+                {
+                    AbsoluteExpirationRelativeToNow =
+                        TimeSpan.FromMinutes(5)
+                },
+                cancellationToken);
+
+            return response;
         }
 
-        if (!string.IsNullOrWhiteSpace(request.Supplier))
-        {
-            query = query.Where(p =>
-                p.SupplierName != null &&
-                p.SupplierName.Contains(
-                    request.Supplier,
-                    StringComparison.OrdinalIgnoreCase));
-        }
-
-        var productViewModels =
-            _mapper.Map<List<ProductViewModel>>(query.ToList());
-
-        return new SearchProductsResponse(productViewModels);
+        return JsonSerializer.Deserialize<SearchProductsResponse>(
+            cacheValue)!;
     }
 }

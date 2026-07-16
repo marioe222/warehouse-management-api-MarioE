@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using Microsoft.Extensions.Caching.Distributed;
+using System.Text.Json;
 using Warehouse.Domain.Interface;
 
 namespace Warehouse.Application.Products.Queries.GetProductById;
@@ -7,41 +9,65 @@ public class GetProductByIdHandler
     : IRequestHandler<GetProductByIdQuery, GetProductByIdResponse?>
 {
     private readonly IProductRepository _repository;
-
+    private readonly IDistributedCache _cache;
 
     public GetProductByIdHandler(
-        IProductRepository repository)
+        IProductRepository repository,
+        IDistributedCache cache)
     {
         _repository = repository;
+        _cache = cache;
     }
-
 
     public async Task<GetProductByIdResponse?> Handle(
         GetProductByIdQuery request,
         CancellationToken cancellationToken)
     {
-        var product = await _repository.GetById(
-            request.Id,
-            cancellationToken
-        );
+        var cacheKey = $"product:{request.Id}";
 
+        var cacheValue = await _cache.GetStringAsync(
+            cacheKey,
+            cancellationToken);
 
-        if (product == null)
+        if (cacheValue == null)
         {
-            return null;
+            var product = await _repository.GetById(
+                request.Id,
+                cancellationToken);
+
+            if (product == null)
+            {
+                return null;
+            }
+
+            var response = new GetProductByIdResponse(
+                product.Id,
+                product.Name,
+                product.Price,
+                product.QuantityInStock,
+                product.IsArchived,
+                product.SupplierId,
+                product.Supplier != null
+                    ? product.Supplier.Name
+                    : product.SupplierName
+            );
+
+            var serializedProduct = JsonSerializer.Serialize(response);
+
+            await _cache.SetStringAsync(
+                cacheKey,
+                serializedProduct,
+                new DistributedCacheEntryOptions
+                {
+                    AbsoluteExpirationRelativeToNow =
+                        TimeSpan.FromMinutes(5)
+                },
+                cancellationToken);
+
+            return response;
         }
 
-
-        return new GetProductByIdResponse(
-            product.Id,
-            product.Name,
-            product.Price,
-            product.QuantityInStock,
-            product.IsArchived,
-            product.SupplierId,
-            product.Supplier != null 
-                ? product.Supplier.Name 
-                : product.SupplierName
-        );
+        return JsonSerializer.Deserialize<GetProductByIdResponse>(
+            cacheValue);
     }
 }

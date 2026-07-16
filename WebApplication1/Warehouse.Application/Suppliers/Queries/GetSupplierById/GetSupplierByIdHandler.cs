@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using Microsoft.Extensions.Caching.Distributed;
+using System.Text.Json;
 using Warehouse.Domain.Interface;
 
 namespace Warehouse.Application.Suppliers.Queries.GetSupplierById;
@@ -7,28 +9,57 @@ public class GetSupplierByIdHandler
     : IRequestHandler<GetSupplierByIdQuery, GetSupplierByIdResponse?>
 {
     private readonly ISupplierRepository _repository;
+    private readonly IDistributedCache _cache;
 
     public GetSupplierByIdHandler(
-        ISupplierRepository repository)
+        ISupplierRepository repository,
+        IDistributedCache cache)
     {
         _repository = repository;
+        _cache = cache;
     }
 
     public async Task<GetSupplierByIdResponse?> Handle(
         GetSupplierByIdQuery request,
         CancellationToken cancellationToken)
     {
-        var supplier = await _repository.GetById(
-            request.Id,
-            cancellationToken
-        );
+        var cacheKey = $"supplier:{request.Id}";
 
+        var cacheValue = await _cache.GetStringAsync(
+            cacheKey,
+            cancellationToken);
 
-        if (supplier == null)
-            return null;
+        if (cacheValue == null)
+        {
+            var supplier = await _repository.GetById(
+                request.Id,
+                cancellationToken);
 
-        return new GetSupplierByIdResponse(
-            supplier
-        );
+            if (supplier == null)
+            {
+                return null;
+            }
+
+            var response = new GetSupplierByIdResponse(
+                supplier);
+
+            var serializedSupplier =
+                JsonSerializer.Serialize(response);
+
+            await _cache.SetStringAsync(
+                cacheKey,
+                serializedSupplier,
+                new DistributedCacheEntryOptions
+                {
+                    AbsoluteExpirationRelativeToNow =
+                        TimeSpan.FromMinutes(5)
+                },
+                cancellationToken);
+
+            return response;
+        }
+
+        return JsonSerializer.Deserialize<GetSupplierByIdResponse>(
+            cacheValue);
     }
 }

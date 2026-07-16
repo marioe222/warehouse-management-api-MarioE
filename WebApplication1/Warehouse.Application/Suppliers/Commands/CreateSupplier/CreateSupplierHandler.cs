@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Warehouse.Application.Suppliers.Commands;
+using Microsoft.Extensions.Caching.Distributed;
 using Warehouse.Domain.Entities;
 using Warehouse.Domain.Interface;
 
@@ -9,11 +9,14 @@ public class CreateSupplierHandler
     : IRequestHandler<CreateSupplierCommand, CreateSupplierResponse>
 {
     private readonly ISupplierRepository _repository;
+    private readonly IDistributedCache _cache;
 
     public CreateSupplierHandler(
-        ISupplierRepository repository)
+        ISupplierRepository repository,
+        IDistributedCache cache)
     {
         _repository = repository;
+        _cache = cache;
     }
 
     public async Task<CreateSupplierResponse> Handle(
@@ -25,13 +28,22 @@ public class CreateSupplierHandler
             request.ContactEmail
         );
 
+
         await _repository.Add(
             supplier,
             cancellationToken
         );
 
+
+        await _cache.RemoveAsync(
+            "suppliers",
+            cancellationToken);
+
+
         return new CreateSupplierResponse(
-            supplier.Id
+            supplier.Id,
+            supplier.Name,
+            supplier.ContactEmail
         );
     }
 }

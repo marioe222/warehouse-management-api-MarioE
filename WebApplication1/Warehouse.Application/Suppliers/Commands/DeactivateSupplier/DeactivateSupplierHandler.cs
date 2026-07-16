@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Warehouse.Application.Suppliers.Commands;
+using Microsoft.Extensions.Caching.Distributed;
 using Warehouse.Domain.Interface;
 
 namespace Warehouse.Application.Suppliers.Commands.DeactivateSupplier;
@@ -8,11 +8,14 @@ public class DeactivateSupplierHandler
     : IRequestHandler<DeactivateSupplierCommand, DeactivateSupplierResponse>
 {
     private readonly ISupplierRepository _repository;
+    private readonly IDistributedCache _cache;
 
     public DeactivateSupplierHandler(
-        ISupplierRepository repository)
+        ISupplierRepository repository,
+        IDistributedCache cache)
     {
         _repository = repository;
+        _cache = cache;
     }
 
     public async Task<DeactivateSupplierResponse> Handle(
@@ -28,6 +31,7 @@ public class DeactivateSupplierHandler
         if (supplier == null)
             return new DeactivateSupplierResponse(false);
 
+
         supplier.Deactivate();
 
 
@@ -35,6 +39,16 @@ public class DeactivateSupplierHandler
             supplier,
             cancellationToken
         );
+
+
+        await _cache.RemoveAsync(
+            $"supplier:{request.SupplierId}",
+            cancellationToken);
+
+
+        await _cache.RemoveAsync(
+            "suppliers",
+            cancellationToken);
 
 
         return new DeactivateSupplierResponse(true);

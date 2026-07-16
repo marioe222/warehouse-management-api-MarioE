@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.Extensions.Caching.Distributed;
 using Warehouse.Domain.Entities;
 using Warehouse.Domain.Interface;
 
@@ -8,11 +9,14 @@ public class CreateProductHandler
     : IRequestHandler<CreateProductCommand, CreateProductResponse>
 {
     private readonly IProductRepository _repository;
+    private readonly IDistributedCache _cache;
 
     public CreateProductHandler(
-        IProductRepository repository)
+        IProductRepository repository,
+        IDistributedCache cache)
     {
         _repository = repository;
+        _cache = cache;
     }
 
     public async Task<CreateProductResponse> Handle(
@@ -34,12 +38,18 @@ public class CreateProductHandler
             expiryDateUtc
         );
 
-
         await _repository.Add(
             product,
             cancellationToken
         );
 
+        await _cache.RemoveAsync(
+            "products:True",
+            cancellationToken);
+
+        await _cache.RemoveAsync(
+            "products:False",
+            cancellationToken);
 
         return new CreateProductResponse(
             product.Id,

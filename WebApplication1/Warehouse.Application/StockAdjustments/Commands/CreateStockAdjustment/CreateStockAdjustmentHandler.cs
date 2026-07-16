@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.Extensions.Caching.Distributed;
 using Warehouse.Domain.Entities;
 using Warehouse.Domain.Interface;
 
@@ -8,12 +9,14 @@ public class CreateStockAdjustmentHandler
     : IRequestHandler<CreateStockAdjustmentCommand, CreateStockAdjustmentResponse>
 {
     private readonly IStockAdjustmentRepository _repository;
-
+    private readonly IDistributedCache _cache;
 
     public CreateStockAdjustmentHandler(
-        IStockAdjustmentRepository repository)
+        IStockAdjustmentRepository repository,
+        IDistributedCache cache)
     {
         _repository = repository;
+        _cache = cache;
     }
 
 
@@ -35,6 +38,22 @@ public class CreateStockAdjustmentHandler
             adjustment,
             cancellationToken
         );
+
+
+        // Remove Redis cache because product quantity changed
+        await _cache.RemoveAsync(
+            $"product:{request.ProductId}",
+            cancellationToken);
+
+
+        await _cache.RemoveAsync(
+            "products:True",
+            cancellationToken);
+
+
+        await _cache.RemoveAsync(
+            "products:False",
+            cancellationToken);
 
 
         return new CreateStockAdjustmentResponse

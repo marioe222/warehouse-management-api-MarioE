@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using AutoMapper;
+using Microsoft.Extensions.Logging;
 
 using Warehouse.Application.Products.Commands.ArchiveProduct;
 using Warehouse.Application.Products.Commands.AssignSupplier;
@@ -29,16 +30,19 @@ public class ProductsController : ControllerBase
     private readonly IMediator _mediator;
     private readonly IMapper _mapper;
     private readonly IStringLocalizer<SharedResources> _localizer;
+    private readonly ILogger<ProductsController> _logger;
 
 
     public ProductsController(
         IMediator mediator,
         IMapper mapper,
-        IStringLocalizer<SharedResources> localizer)
+        IStringLocalizer<SharedResources> localizer,
+        ILogger<ProductsController> logger)
     {
         _mediator = mediator;
         _mapper = mapper;
         _localizer = localizer;
+        _logger = logger;
     }
 
 
@@ -58,6 +62,11 @@ public class ProductsController : ControllerBase
         var result = _mapper.Map<List<ProductViewModel>>(
             response.Products
         );
+
+
+        _logger.LogInformation(
+            "Retrieved {ProductCount} products",
+            result.Count);
 
 
         return Ok(result);
@@ -80,11 +89,20 @@ public class ProductsController : ControllerBase
 
         if (response == null)
         {
+            _logger.LogWarning(
+                "Product {ProductId} not found",
+                id);
+
             return NotFound(new
             {
                 message = _localizer["ProductNotFound"].Value
             });
         }
+
+
+        _logger.LogInformation(
+            "Retrieved product {ProductId}",
+            id);
 
 
         return Ok(response);
@@ -107,6 +125,12 @@ public class ProductsController : ControllerBase
             ),
             cancellationToken
         );
+
+
+        _logger.LogInformation(
+            "Product search executed. Name: {Name}, Supplier: {Supplier}",
+            name,
+            supplier);
 
 
         return Ok(
@@ -136,6 +160,11 @@ public class ProductsController : ControllerBase
             ),
             cancellationToken
         );
+
+
+        _logger.LogInformation(
+            "Product {ProductId} created",
+            response.Id);
 
 
         return CreatedAtAction(
@@ -170,11 +199,20 @@ public class ProductsController : ControllerBase
 
         if (!result.Success)
         {
+            _logger.LogWarning(
+                "Failed updating quantity for product {ProductId}",
+                id);
+
             return NotFound(new
             {
                 message = _localizer["ProductNotFound"].Value
             });
         }
+
+
+        _logger.LogInformation(
+            "Product {ProductId} quantity updated",
+            id);
 
 
         return Ok(new
@@ -205,11 +243,20 @@ public class ProductsController : ControllerBase
 
         if (!result.Success)
         {
+            _logger.LogWarning(
+                "Failed updating price for product {ProductId}",
+                id);
+
             return NotFound(new
             {
                 message = _localizer["ProductNotFound"].Value
             });
         }
+
+
+        _logger.LogInformation(
+            "Product {ProductId} price updated",
+            id);
 
 
         return Ok(new
@@ -241,11 +288,20 @@ public class ProductsController : ControllerBase
 
         if (!result.Success)
         {
+            _logger.LogWarning(
+                "Failed uploading image for product {ProductId}",
+                id);
+
             return NotFound(new
             {
                 message = _localizer["ProductNotFound"].Value
             });
         }
+
+
+        _logger.LogInformation(
+            "Image uploaded for product {ProductId}",
+            id);
 
 
         return Ok(new
@@ -272,11 +328,20 @@ public class ProductsController : ControllerBase
 
         if (!result.Success)
         {
+            _logger.LogWarning(
+                "Failed deleting product {ProductId}",
+                id);
+
             return NotFound(new
             {
                 message = _localizer["ProductNotFound"].Value
             });
         }
+
+
+        _logger.LogInformation(
+            "Product {ProductId} deleted",
+            id);
 
 
         return Ok(new
@@ -294,6 +359,11 @@ public class ProductsController : ControllerBase
     public IActionResult GetServerTime(
         [FromHeader(Name = "Accept-Language")] string language)
     {
+        _logger.LogInformation(
+            "Server time requested with language {Language}",
+            language);
+
+
         return Ok(new
         {
             language,
@@ -323,11 +393,22 @@ public class ProductsController : ControllerBase
 
         if (!result.Success)
         {
+            _logger.LogWarning(
+                "Failed assigning supplier {SupplierId} to product {ProductId}",
+                supplierId,
+                id);
+
             return NotFound(new
             {
                 message = _localizer["ProductNotFound"].Value
             });
         }
+
+
+        _logger.LogInformation(
+            "Supplier {SupplierId} assigned to product {ProductId}",
+            supplierId,
+            id);
 
 
         return Ok(new

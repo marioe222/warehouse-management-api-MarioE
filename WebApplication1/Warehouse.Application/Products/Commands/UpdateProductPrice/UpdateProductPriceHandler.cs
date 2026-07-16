@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.Extensions.Caching.Distributed;
 using Warehouse.Domain.Interface;
 
 namespace Warehouse.Application.Products.Commands.UpdateProductPrice;
@@ -7,11 +8,14 @@ public class UpdateProductPriceHandler
     : IRequestHandler<UpdateProductPriceCommand, UpdateProductPriceResponse>
 {
     private readonly IProductRepository _repository;
+    private readonly IDistributedCache _cache;
 
     public UpdateProductPriceHandler(
-        IProductRepository repository)
+        IProductRepository repository,
+        IDistributedCache cache)
     {
         _repository = repository;
+        _cache = cache;
     }
 
     public async Task<UpdateProductPriceResponse> Handle(
@@ -27,12 +31,32 @@ public class UpdateProductPriceHandler
         if (product == null)
             return new UpdateProductPriceResponse(false);
 
+
         product.UpdatePrice(
             request.Price
         );
 
 
-        await _repository.Update(product,cancellationToken);
+        await _repository.Update(
+            product,
+            cancellationToken
+        );
+
+
+        // Remove Redis cache because product price changed
+        await _cache.RemoveAsync(
+            $"product:{request.ProductId}",
+            cancellationToken);
+
+
+        await _cache.RemoveAsync(
+            "products:True",
+            cancellationToken);
+
+
+        await _cache.RemoveAsync(
+            "products:False",
+            cancellationToken);
 
 
         return new UpdateProductPriceResponse(true);

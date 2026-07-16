@@ -30,9 +30,10 @@ public class RequestTimingMiddleware
 
 
         _logger.LogInformation(
-            "Request {Method} {Path} completed in {ElapsedMilliseconds} ms",
+            "HTTP {Method} {Path} responded {StatusCode} in {ElapsedMilliseconds} ms",
             context.Request.Method,
             context.Request.Path,
+            context.Response.StatusCode,
             stopwatch.ElapsedMilliseconds
         );
     }

@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Logging;
 using AutoMapper;
 
 using Warehouse.Application.Suppliers.Commands.CreateSupplier;
@@ -23,16 +24,19 @@ public class SuppliersController : ControllerBase
     private readonly IMediator _mediator;
     private readonly IMapper _mapper;
     private readonly IStringLocalizer<SharedResources> _localizer;
+    private readonly ILogger<SuppliersController> _logger;
 
 
     public SuppliersController(
         IMediator mediator,
         IMapper mapper,
-        IStringLocalizer<SharedResources> localizer)
+        IStringLocalizer<SharedResources> localizer,
+        ILogger<SuppliersController> logger)
     {
         _mediator = mediator;
         _mapper = mapper;
         _localizer = localizer;
+        _logger = logger;
     }
 
 
@@ -42,6 +46,10 @@ public class SuppliersController : ControllerBase
     public async Task<IActionResult> GetAll(
         CancellationToken cancellationToken = default)
     {
+        _logger.LogInformation(
+            "Retrieving all suppliers");
+
+
         var response = await _mediator.Send(
             new ListSuppliersQuery(),
             cancellationToken
@@ -53,9 +61,14 @@ public class SuppliersController : ControllerBase
         );
 
 
+        _logger.LogInformation(
+            "Retrieved {SupplierCount} suppliers",
+            result.Count);
+
+
         return Ok(new
         {
-            message = _localizer["SuppliersRetrieved"],
+            message = _localizer["SuppliersRetrieved"].Value,
             data = result
         });
     }
@@ -76,9 +89,14 @@ public class SuppliersController : ControllerBase
 
         if (supplier == null)
         {
+            _logger.LogWarning(
+                "Supplier {SupplierId} not found",
+                id);
+
+
             return NotFound(new
             {
-                message = _localizer["SupplierNotFound"]
+                message = _localizer["SupplierNotFound"].Value
             });
         }
 
@@ -88,9 +106,14 @@ public class SuppliersController : ControllerBase
         );
 
 
+        _logger.LogInformation(
+            "Supplier {SupplierId} retrieved",
+            id);
+
+
         return Ok(new
         {
-            message = _localizer["SupplierRetrieved"],
+            message = _localizer["SupplierRetrieved"].Value,
             data = result
         });
     }
@@ -109,12 +132,17 @@ public class SuppliersController : ControllerBase
         );
 
 
+        _logger.LogInformation(
+            "Supplier {SupplierId} created",
+            response.Id);
+
+
         return CreatedAtAction(
             nameof(GetById),
             new { id = response.Id },
             new
             {
-                message = _localizer["SupplierCreated"],
+                message = _localizer["SupplierCreated"].Value,
                 data = _mapper.Map<SupplierViewModel>(response)
             }
         );
@@ -136,16 +164,26 @@ public class SuppliersController : ControllerBase
 
         if (!result.Success)
         {
+            _logger.LogWarning(
+                "Failed deactivating supplier {SupplierId}",
+                id);
+
+
             return NotFound(new
             {
-                message = _localizer["SupplierNotFound"]
+                message = _localizer["SupplierNotFound"].Value
             });
         }
 
 
+        _logger.LogInformation(
+            "Supplier {SupplierId} deactivated",
+            id);
+
+
         return Ok(new
         {
-            message = _localizer["SupplierDeactivated"]
+            message = _localizer["SupplierDeactivated"].Value
         });
     }
 }
