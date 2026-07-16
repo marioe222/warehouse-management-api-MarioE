@@ -1,21 +1,30 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
+
 using Warehouse.Application.StockAdjustments.Commands.CreateStockAdjustment;
+using Warehouse.Presentation.Resources;
+
 
 namespace Warehouse.Presentation.Controllers;
+
 
 [ApiController]
 [Route("api/stock-adjustments")]
 public class StockAdjustmentsController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly IStringLocalizer<SharedResources> _localizer;
 
 
     public StockAdjustmentsController(
-        IMediator mediator)
+        IMediator mediator,
+        IStringLocalizer<SharedResources> localizer)
     {
         _mediator = mediator;
+        _localizer = localizer;
     }
+
 
 
     // POST: api/stock-adjustments
@@ -32,7 +41,11 @@ public class StockAdjustmentsController : ControllerBase
 
         return CreatedAtAction(
             nameof(Create),
-            result
+            new
+            {
+                message = _localizer["StockAdjustmentCreated"],
+                data = result
+            }
         );
     }
 }

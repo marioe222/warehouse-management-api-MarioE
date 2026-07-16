@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using AutoMapper;
 
-using Warehouse.Application.Common.Exceptions;
 using Warehouse.Application.Products.Commands.ArchiveProduct;
 using Warehouse.Application.Products.Commands.AssignSupplier;
 using Warehouse.Application.Products.Commands.CreateProduct;
@@ -16,6 +16,7 @@ using Warehouse.Application.Products.Queries.SearchProducts;
 
 using Warehouse.Application.ViewModels;
 using Warehouse.Presentation.Contracts;
+using Warehouse.Presentation.Resources;
 
 
 namespace Warehouse.Presentation.Controllers;
@@ -27,15 +28,19 @@ public class ProductsController : ControllerBase
 {
     private readonly IMediator _mediator;
     private readonly IMapper _mapper;
+    private readonly IStringLocalizer<SharedResources> _localizer;
 
 
     public ProductsController(
         IMediator mediator,
-        IMapper mapper)
+        IMapper mapper,
+        IStringLocalizer<SharedResources> localizer)
     {
         _mediator = mediator;
         _mapper = mapper;
+        _localizer = localizer;
     }
+
 
 
     // GET: api/products
@@ -60,29 +65,31 @@ public class ProductsController : ControllerBase
 
 
 
+
     // GET: api/products/{id}
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetById(
         Guid id,
         CancellationToken cancellationToken = default)
     {
-        var product = await _mediator.Send(
+        var response = await _mediator.Send(
             new GetProductByIdQuery(id),
             cancellationToken
         );
 
 
-        if (product == null)
-            return NotFound();
+        if (response == null)
+        {
+            return NotFound(new
+            {
+                message = _localizer["ProductNotFound"].Value
+            });
+        }
 
 
-        var result = _mapper.Map<ProductViewModel>(
-            product
-        );
-
-
-        return Ok(result);
+        return Ok(response);
     }
+
 
 
 
@@ -109,6 +116,8 @@ public class ProductsController : ControllerBase
 
 
 
+
+
     // POST: api/products
     [HttpPost]
     public async Task<IActionResult> Create(
@@ -132,9 +141,14 @@ public class ProductsController : ControllerBase
         return CreatedAtAction(
             nameof(GetById),
             new { id = response.Id },
-            _mapper.Map<ProductViewModel>(response)
+            new
+            {
+                message = _localizer["ProductCreated"].Value,
+                data = _mapper.Map<ProductViewModel>(response)
+            }
         );
     }
+
 
 
 
@@ -155,11 +169,21 @@ public class ProductsController : ControllerBase
 
 
         if (!result.Success)
-            return NotFound();
+        {
+            return NotFound(new
+            {
+                message = _localizer["ProductNotFound"].Value
+            });
+        }
 
 
-        return NoContent();
+        return Ok(new
+        {
+            message = _localizer["ProductUpdated"].Value
+        });
     }
+
+
 
 
 
@@ -180,11 +204,21 @@ public class ProductsController : ControllerBase
 
 
         if (!result.Success)
-            return NotFound();
+        {
+            return NotFound(new
+            {
+                message = _localizer["ProductNotFound"].Value
+            });
+        }
 
 
-        return NoContent();
+        return Ok(new
+        {
+            message = _localizer["ProductUpdated"].Value
+        });
     }
+
+
 
 
 
@@ -206,11 +240,21 @@ public class ProductsController : ControllerBase
 
 
         if (!result.Success)
-            return NotFound();
+        {
+            return NotFound(new
+            {
+                message = _localizer["ProductNotFound"].Value
+            });
+        }
 
 
-        return Ok();
+        return Ok(new
+        {
+            message = _localizer["ProductUpdated"].Value
+        });
     }
+
+
 
 
 
@@ -227,11 +271,21 @@ public class ProductsController : ControllerBase
 
 
         if (!result.Success)
-            return NotFound();
+        {
+            return NotFound(new
+            {
+                message = _localizer["ProductNotFound"].Value
+            });
+        }
 
 
-        return NoContent();
+        return Ok(new
+        {
+            message = _localizer["ProductDeleted"].Value
+        });
     }
+
+
 
 
 
@@ -240,10 +294,14 @@ public class ProductsController : ControllerBase
     public IActionResult GetServerTime(
         [FromHeader(Name = "Accept-Language")] string language)
     {
-        var time = DateTime.UtcNow;
-
-        return Ok(time);
+        return Ok(new
+        {
+            language,
+            time = DateTime.UtcNow
+        });
     }
+
+
 
 
 
@@ -264,9 +322,17 @@ public class ProductsController : ControllerBase
 
 
         if (!result.Success)
-            return NotFound();
+        {
+            return NotFound(new
+            {
+                message = _localizer["ProductNotFound"].Value
+            });
+        }
 
 
-        return NoContent();
+        return Ok(new
+        {
+            message = _localizer["ProductUpdated"].Value
+        });
     }
 }

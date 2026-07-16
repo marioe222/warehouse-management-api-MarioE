@@ -39,7 +39,6 @@ public class CreateProductCommandValidator
 
         RuleFor(x => x.ExpiryDate)
             .GreaterThan(DateTime.UtcNow)
-            .When(x => x.ExpiryDate.HasValue)
             .WithMessage("Expiry date must be in the future");
     }
 }

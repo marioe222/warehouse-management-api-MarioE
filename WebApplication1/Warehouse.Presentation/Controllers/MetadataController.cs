@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
+
+using Warehouse.Presentation.Resources;
+
 
 namespace Warehouse.Presentation.Controllers;
 
@@ -9,6 +13,18 @@ namespace Warehouse.Presentation.Controllers;
 [Route("api/metadata")]
 public class MetadataController : ControllerBase
 {
+    private readonly IStringLocalizer<SharedResources> _localizer;
+
+
+    public MetadataController(
+        IStringLocalizer<SharedResources> localizer)
+    {
+        _localizer = localizer;
+    }
+
+
+
+    // GET: api/metadata/validation/{dtoName}
     [HttpGet("validation/{dtoName}")]
     public IActionResult GetValidation(string dtoName)
     {
@@ -20,12 +36,16 @@ public class MetadataController : ControllerBase
             .FirstOrDefault(t => t.Name == dtoName);
 
 
+
         if (dtoType == null)
         {
-            return NotFound(
-                $"DTO '{dtoName}' was not found."
-            );
+            return NotFound(new
+            {
+                message = _localizer["DtoNotFound"],
+                dtoName
+            });
         }
+
 
 
         var properties = dtoType
@@ -49,8 +69,10 @@ public class MetadataController : ControllerBase
             });
 
 
+
         return Ok(new
         {
+            message = _localizer["ValidationMetadataRetrieved"],
             DtoName = dtoName,
             Properties = properties
         });

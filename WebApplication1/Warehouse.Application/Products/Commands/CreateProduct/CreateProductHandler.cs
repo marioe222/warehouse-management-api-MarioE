@@ -19,6 +19,11 @@ public class CreateProductHandler
         CreateProductCommand request,
         CancellationToken cancellationToken)
     {
+        var expiryDateUtc = DateTime.SpecifyKind(
+            request.ExpiryDate,
+            DateTimeKind.Utc
+        );
+
         var product = new Product(
             request.Name,
             request.Sku,
@@ -26,7 +31,7 @@ public class CreateProductHandler
             request.Price,
             request.QuantityInStock,
             request.SupplierName,
-            request.ExpiryDate
+            expiryDateUtc
         );
 
 
@@ -36,6 +41,14 @@ public class CreateProductHandler
         );
 
 
-        return new CreateProductResponse(product.Id);
+        return new CreateProductResponse(
+            product.Id,
+            product.Name,
+            product.Price,
+            product.QuantityInStock,
+            product.IsArchived,
+            product.SupplierId,
+            product.SupplierName
+        );
     }
 }

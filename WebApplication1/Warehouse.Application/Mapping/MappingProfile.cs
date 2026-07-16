@@ -1,16 +1,15 @@
 using AutoMapper;
 using Warehouse.Domain.Entities;
 using Warehouse.Application.ViewModels;
-
+using Warehouse.Application.Products.Commands.CreateProduct;
+using Warehouse.Application.Products.Queries.GetProductById;
 
 namespace Warehouse.Application.Mapping;
-
 
 public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-
         CreateMap<Supplier, SupplierViewModel>();
 
 
@@ -26,9 +25,16 @@ public class MappingProfile : Profile
                 option => option.MapFrom(
                     source => source.Supplier != null
                         ? source.Supplier.Name
-                        : null
+                        : source.SupplierName
                 )
             );
 
+
+        // POST /api/products
+        CreateMap<CreateProductResponse, ProductViewModel>();
+
+
+        // GET /api/products/{id}
+        CreateMap<GetProductByIdResponse, ProductViewModel>();
     }
 }

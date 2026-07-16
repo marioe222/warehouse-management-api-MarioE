@@ -1,7 +1,11 @@
-﻿using Warehouse.Domain.Entities;
-
-namespace Warehouse.Application.Products.Queries.GetProductById;
+﻿namespace Warehouse.Application.Products.Queries.GetProductById;
 
 public record GetProductByIdResponse(
-    Product? Product
+    Guid Id,
+    string Name,
+    decimal Price,
+    int Quantity,
+    bool IsArchived,
+    Guid? SupplierId,
+    string? SupplierName
 );

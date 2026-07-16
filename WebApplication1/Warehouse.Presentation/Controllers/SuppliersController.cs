@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using AutoMapper;
 
 using Warehouse.Application.Suppliers.Commands.CreateSupplier;
@@ -9,6 +10,7 @@ using Warehouse.Application.Suppliers.Queries.GetSupplierById;
 using Warehouse.Application.Suppliers.Queries.ListSuppliers;
 
 using Warehouse.Application.ViewModels;
+using Warehouse.Presentation.Resources;
 
 
 namespace Warehouse.Presentation.Controllers;
@@ -20,14 +22,17 @@ public class SuppliersController : ControllerBase
 {
     private readonly IMediator _mediator;
     private readonly IMapper _mapper;
+    private readonly IStringLocalizer<SharedResources> _localizer;
 
 
     public SuppliersController(
         IMediator mediator,
-        IMapper mapper)
+        IMapper mapper,
+        IStringLocalizer<SharedResources> localizer)
     {
         _mediator = mediator;
         _mapper = mapper;
+        _localizer = localizer;
     }
 
 
@@ -48,7 +53,11 @@ public class SuppliersController : ControllerBase
         );
 
 
-        return Ok(result);
+        return Ok(new
+        {
+            message = _localizer["SuppliersRetrieved"],
+            data = result
+        });
     }
 
 
@@ -66,7 +75,12 @@ public class SuppliersController : ControllerBase
 
 
         if (supplier == null)
-            return NotFound();
+        {
+            return NotFound(new
+            {
+                message = _localizer["SupplierNotFound"]
+            });
+        }
 
 
         var result = _mapper.Map<SupplierViewModel>(
@@ -74,7 +88,11 @@ public class SuppliersController : ControllerBase
         );
 
 
-        return Ok(result);
+        return Ok(new
+        {
+            message = _localizer["SupplierRetrieved"],
+            data = result
+        });
     }
 
 
@@ -94,7 +112,11 @@ public class SuppliersController : ControllerBase
         return CreatedAtAction(
             nameof(GetById),
             new { id = response.Id },
-            _mapper.Map<SupplierViewModel>(response)
+            new
+            {
+                message = _localizer["SupplierCreated"],
+                data = _mapper.Map<SupplierViewModel>(response)
+            }
         );
     }
 
@@ -113,9 +135,17 @@ public class SuppliersController : ControllerBase
 
 
         if (!result.Success)
-            return NotFound();
+        {
+            return NotFound(new
+            {
+                message = _localizer["SupplierNotFound"]
+            });
+        }
 
 
-        return NoContent();
+        return Ok(new
+        {
+            message = _localizer["SupplierDeactivated"]
+        });
     }
 }
