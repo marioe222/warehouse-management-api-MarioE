@@ -1,9 +1,13 @@
 using Serilog;
 using System.Globalization;
 using FluentValidation;
+using Hangfire;
+using Hangfire.MemoryStorage;
+
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
+
 using HealthChecks.UI.Client;
 
 using Warehouse.Application.Behaviors;
@@ -18,6 +22,8 @@ using Warehouse.Infrastructure.Repositories;
 using Warehouse.Presentation.Filters;
 using Warehouse.Presentation.Middleware;
 using Warehouse.Presentation.Swagger;
+using Warehouse.Presentation.Jobs;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,7 +31,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 // Serilog Configuration
-
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
@@ -41,7 +46,6 @@ builder.Host.UseSerilog();
 
 // PostgreSQL timestamp compatibility
 
-
 AppContext.SetSwitch(
     "Npgsql.EnableLegacyTimestampBehavior",
     true
@@ -50,7 +54,6 @@ AppContext.SetSwitch(
 
 
 // Controllers + Filters
-
 
 builder.Services.AddControllers(options =>
 {
@@ -67,13 +70,11 @@ builder.Services.AddScoped<ActionLoggingFilter>();
 
 // AutoMapper
 
-
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 
 
 // Database
-
 
 builder.Services.AddDbContext<WarehouseDbContext>(options =>
     options.UseNpgsql(
@@ -84,7 +85,6 @@ builder.Services.AddDbContext<WarehouseDbContext>(options =>
 
 
 // Redis Cache
-
 
 builder.Services.AddStackExchangeRedisCache(options =>
 {
@@ -99,7 +99,6 @@ builder.Services.AddStackExchangeRedisCache(options =>
 
 // Health Checks
 
-
 builder.Services
     .AddHealthChecks()
     .AddNpgSql(
@@ -113,7 +112,6 @@ builder.Services
 
 // Health Check UI
 
-
 builder.Services
     .AddHealthChecksUI(options =>
     {
@@ -126,7 +124,6 @@ builder.Services
 
 
 // MediatR
-
 
 builder.Services.AddMediatR(cfg =>
 {
@@ -144,7 +141,6 @@ builder.Services.AddMediatR(cfg =>
 
 // FluentValidation
 
-
 builder.Services.AddValidatorsFromAssembly(
     typeof(CreateProductCommand).Assembly
 );
@@ -152,7 +148,6 @@ builder.Services.AddValidatorsFromAssembly(
 
 
 // Localization
-
 
 builder.Services.AddLocalization();
 
@@ -184,7 +179,6 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 // Dependency Injection
 // Repositories
 
-
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
@@ -193,8 +187,26 @@ builder.Services.AddScoped<IStockAdjustmentRepository, StockAdjustmentRepository
 
 
 
-// Swagger
+// ===============================
+// Hangfire Configuration
+// ===============================
 
+builder.Services.AddHangfire(config =>
+{
+    config.UseMemoryStorage();
+});
+
+
+builder.Services.AddHangfireServer();
+
+
+// Register Hangfire Job
+
+builder.Services.AddScoped<ProductExpiryJob>();
+
+
+
+// Swagger
 
 builder.Services.AddEndpointsApiExplorer();
 
@@ -208,13 +220,11 @@ builder.Services.AddSwaggerGen(options =>
 
 // Build Application
 
-
 var app = builder.Build();
 
 
 
 // Localization Middleware
-
 
 app.UseRequestLocalization();
 
@@ -229,8 +239,8 @@ app.UseMiddleware<RequestTimingMiddleware>();
 app.UseExceptionHandling();
 
 
-// Swagger
 
+// Swagger
 
 app.UseSwagger();
 
@@ -242,14 +252,23 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
+
+// ===============================
+// Hangfire Dashboard
+// ===============================
+
+app.UseHangfireDashboard();
+
+
+
 app.UseAuthorization();
 
 
 
 // Controllers
 
-
 app.MapControllers();
+
 
 
 // Health Check Endpoint
@@ -263,13 +282,26 @@ app.MapHealthChecks(
     });
 
 
-// Health Dashboard
 
+// Health Dashboard
 
 app.MapHealthChecksUI(options =>
 {
     options.UIPath = "/health-ui";
 });
+
+
+
+// ===============================
+// Recurring Hangfire Job
+// ===============================
+
+RecurringJob.AddOrUpdate<ProductExpiryJob>(
+    "check-expired-products",
+    job => job.CheckProductsAsync(),
+    Cron.Daily
+);
+
 
 
 // Run

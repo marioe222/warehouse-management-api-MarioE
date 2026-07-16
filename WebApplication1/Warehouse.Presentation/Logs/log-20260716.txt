@@ -467,3 +467,669 @@ FROM "Products" AS p
 2026-07-16 16:27:30.113 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/healthchecks-api - 200 null application/json; charset=utf-8 29.5616ms
 2026-07-16 16:27:30.110 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/healthchecks-api/ui-settings - 200 null application/json; charset=utf-8 27.0111ms
 2026-07-16 16:27:32.200 +03:00 [INF] Application is shutting down...
+2026-07-16 16:43:33.068 +03:00 [INF] Initializing UI Database
+2026-07-16 16:43:33.871 +03:00 [INF] Saving healthchecks configuration to database
+2026-07-16 16:43:33.973 +03:00 [INF] Saved 1 entities to in-memory store.
+2026-07-16 16:43:34.044 +03:00 [INF] Now listening on: http://localhost:5076
+2026-07-16 16:43:34.051 +03:00 [INF] Starting Hangfire Server using job storage: 'Hangfire.MemoryStorage.MemoryStorage'
+2026-07-16 16:43:34.054 +03:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-07-16 16:43:34.091 +03:00 [INF] Server desktop-5bfa6au:26088:b85f5f89 successfully announced in 7.9527 ms
+2026-07-16 16:43:34.096 +03:00 [INF] Server desktop-5bfa6au:26088:b85f5f89 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-07-16 16:43:34.143 +03:00 [INF] Server desktop-5bfa6au:26088:b85f5f89 all the dispatchers started
+2026-07-16 16:43:34.178 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:43:34.183 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:43:34.229 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-07-16 16:43:34.231 +03:00 [INF] Hosting environment: Development
+2026-07-16 16:43:34.241 +03:00 [INF] Content root path: C:\Users\user\warehouse-management-api-MarioE\WebApplication1\Warehouse.Presentation
+2026-07-16 16:43:34.285 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:43:34.344 +03:00 [INF] Request started with Correlation ID 148e37d7-962e-4694-b645-1ad29a95e8c5
+2026-07-16 16:43:34.401 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-07-16 16:43:34.407 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:43:34.813 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:43:34.815 +03:00 [INF] HTTP GET /health responded 200 in 466 ms
+2026-07-16 16:43:34.818 +03:00 [INF] Request completed with Correlation ID 148e37d7-962e-4694-b645-1ad29a95e8c5
+2026-07-16 16:43:34.818 +03:00 [INF] Received HTTP response headers after 630.4563ms - 200
+2026-07-16 16:43:34.821 +03:00 [INF] End processing HTTP request after 649.7965ms - 200
+2026-07-16 16:43:34.823 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 537.9576ms
+2026-07-16 16:43:35.066 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:43:45.129 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:43:45.130 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:43:45.134 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:43:45.139 +03:00 [INF] Request started with Correlation ID a0385c60-5965-4144-8bb5-452547a2fbb8
+2026-07-16 16:43:45.141 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:43:45.153 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:43:45.153 +03:00 [INF] Received HTTP response headers after 21.3187ms - 200
+2026-07-16 16:43:45.155 +03:00 [INF] HTTP GET /health responded 200 in 14 ms
+2026-07-16 16:43:45.156 +03:00 [INF] End processing HTTP request after 27.8018ms - 200
+2026-07-16 16:43:45.158 +03:00 [INF] Request completed with Correlation ID a0385c60-5965-4144-8bb5-452547a2fbb8
+2026-07-16 16:43:45.161 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 26.9521ms
+2026-07-16 16:43:45.183 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:43:55.304 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:43:55.370 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:43:55.386 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:43:55.400 +03:00 [INF] Request started with Correlation ID 94481c80-fe17-4052-b78a-60ccee83770d
+2026-07-16 16:43:55.402 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:43:55.408 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:43:55.410 +03:00 [INF] Received HTTP response headers after 24.2356ms - 200
+2026-07-16 16:43:55.412 +03:00 [INF] HTTP GET /health responded 200 in 11 ms
+2026-07-16 16:43:55.415 +03:00 [INF] Request completed with Correlation ID 94481c80-fe17-4052-b78a-60ccee83770d
+2026-07-16 16:43:55.413 +03:00 [INF] End processing HTTP request after 109.8358ms - 200
+2026-07-16 16:43:55.417 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 30.7078ms
+2026-07-16 16:43:55.421 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:44:04.785 +03:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."CreatedAt", p."Description", p."ExpiryDate", p."IsArchived", p."LastUpdatedAt", p."Name", p."Price", p."QuantityInStock", p."Sku", p."SupplierId", p."SupplierName"
+FROM "Products" AS p
+2026-07-16 16:44:04.851 +03:00 [INF] Expired products count: 0
+2026-07-16 16:44:04.854 +03:00 [INF] Soon-to-expire products count: 0
+2026-07-16 16:44:05.442 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:44:05.443 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:44:05.445 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:44:05.448 +03:00 [INF] Request started with Correlation ID 7a1a730b-38a0-48de-a1a5-03107a42f632
+2026-07-16 16:44:05.449 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:44:05.452 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:44:05.453 +03:00 [INF] Received HTTP response headers after 7.8097ms - 200
+2026-07-16 16:44:05.454 +03:00 [INF] HTTP GET /health responded 200 in 4 ms
+2026-07-16 16:44:05.455 +03:00 [INF] End processing HTTP request after 13.4031ms - 200
+2026-07-16 16:44:05.457 +03:00 [INF] Request completed with Correlation ID 7a1a730b-38a0-48de-a1a5-03107a42f632
+2026-07-16 16:44:05.460 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 14.4268ms
+2026-07-16 16:44:05.462 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:44:15.475 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:44:15.479 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:44:15.481 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:44:15.483 +03:00 [INF] Request started with Correlation ID cf2cb22f-34ea-46c1-8c40-5752361e8036
+2026-07-16 16:44:15.485 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:44:15.488 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:44:15.488 +03:00 [INF] Received HTTP response headers after 7.6734ms - 200
+2026-07-16 16:44:15.489 +03:00 [INF] HTTP GET /health responded 200 in 4 ms
+2026-07-16 16:44:15.491 +03:00 [INF] End processing HTTP request after 15.7857ms - 200
+2026-07-16 16:44:15.493 +03:00 [INF] Request completed with Correlation ID cf2cb22f-34ea-46c1-8c40-5752361e8036
+2026-07-16 16:44:15.495 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 14.708ms
+2026-07-16 16:44:15.498 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:44:25.514 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:44:25.515 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:44:25.517 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:44:25.522 +03:00 [INF] Request started with Correlation ID 50c1e452-72c4-4e1e-9635-ba218f0c4b06
+2026-07-16 16:44:25.523 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:44:25.529 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:44:25.530 +03:00 [INF] Received HTTP response headers after 13.1671ms - 200
+2026-07-16 16:44:25.532 +03:00 [INF] HTTP GET /health responded 200 in 9 ms
+2026-07-16 16:44:25.534 +03:00 [INF] End processing HTTP request after 19.7587ms - 200
+2026-07-16 16:44:25.538 +03:00 [INF] Request completed with Correlation ID 50c1e452-72c4-4e1e-9635-ba218f0c4b06
+2026-07-16 16:44:25.541 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 23.9499ms
+2026-07-16 16:44:25.545 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:44:35.564 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:44:35.570 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:44:35.576 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:44:35.588 +03:00 [INF] Request started with Correlation ID 616ed875-8942-4979-8183-6c6049279f19
+2026-07-16 16:44:35.589 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:44:35.594 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:44:35.594 +03:00 [INF] Received HTTP response headers after 18.8251ms - 200
+2026-07-16 16:44:35.595 +03:00 [INF] HTTP GET /health responded 200 in 6 ms
+2026-07-16 16:44:35.597 +03:00 [INF] End processing HTTP request after 33.3504ms - 200
+2026-07-16 16:44:35.599 +03:00 [INF] Request completed with Correlation ID 616ed875-8942-4979-8183-6c6049279f19
+2026-07-16 16:44:35.602 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 26.0467ms
+2026-07-16 16:44:35.603 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:44:45.621 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:44:45.624 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:44:45.632 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:44:45.638 +03:00 [INF] Request started with Correlation ID 064d0ea8-4f35-433d-a5a9-1774cc9f95f0
+2026-07-16 16:44:45.640 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:44:45.648 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:44:45.648 +03:00 [INF] Received HTTP response headers after 17.28ms - 200
+2026-07-16 16:44:45.657 +03:00 [INF] HTTP GET /health responded 200 in 17 ms
+2026-07-16 16:44:45.663 +03:00 [INF] End processing HTTP request after 41.8601ms - 200
+2026-07-16 16:44:45.674 +03:00 [INF] Request completed with Correlation ID 064d0ea8-4f35-433d-a5a9-1774cc9f95f0
+2026-07-16 16:44:45.680 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 47.9316ms
+2026-07-16 16:44:45.681 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:44:55.702 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:44:55.704 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:44:55.707 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:44:55.711 +03:00 [INF] Request started with Correlation ID 343ce35c-07a6-4af1-84f3-25c3718767cc
+2026-07-16 16:44:55.717 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:44:55.727 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:44:55.727 +03:00 [INF] Received HTTP response headers after 20.8732ms - 200
+2026-07-16 16:44:55.730 +03:00 [INF] HTTP GET /health responded 200 in 12 ms
+2026-07-16 16:44:55.731 +03:00 [INF] End processing HTTP request after 29.7813ms - 200
+2026-07-16 16:44:55.734 +03:00 [INF] Request completed with Correlation ID 343ce35c-07a6-4af1-84f3-25c3718767cc
+2026-07-16 16:44:55.739 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 32.0703ms
+2026-07-16 16:44:55.744 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:45:04.332 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."CreatedAt", p."Description", p."ExpiryDate", p."IsArchived", p."LastUpdatedAt", p."Name", p."Price", p."QuantityInStock", p."Sku", p."SupplierId", p."SupplierName"
+FROM "Products" AS p
+2026-07-16 16:45:04.337 +03:00 [INF] Expired products count: 0
+2026-07-16 16:45:04.338 +03:00 [INF] Soon-to-expire products count: 0
+2026-07-16 16:45:05.764 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:45:05.765 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:45:05.766 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:45:05.770 +03:00 [INF] Request started with Correlation ID 934edb70-e1a3-4790-a347-a92276c16f7b
+2026-07-16 16:45:05.772 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:45:05.777 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:45:05.778 +03:00 [INF] Received HTTP response headers after 11.4844ms - 200
+2026-07-16 16:45:05.781 +03:00 [INF] HTTP GET /health responded 200 in 9 ms
+2026-07-16 16:45:05.782 +03:00 [INF] End processing HTTP request after 17.8636ms - 200
+2026-07-16 16:45:05.786 +03:00 [INF] Request completed with Correlation ID 934edb70-e1a3-4790-a347-a92276c16f7b
+2026-07-16 16:45:05.789 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 22.778ms
+2026-07-16 16:45:05.793 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:45:15.803 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:45:15.806 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:45:15.814 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:45:15.821 +03:00 [INF] Request started with Correlation ID bca1907e-592f-4d68-9d4c-e35b09893c40
+2026-07-16 16:45:15.823 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:45:15.871 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:45:15.871 +03:00 [INF] Received HTTP response headers after 57.6212ms - 200
+2026-07-16 16:45:15.873 +03:00 [INF] HTTP GET /health responded 200 in 50 ms
+2026-07-16 16:45:15.879 +03:00 [INF] End processing HTTP request after 76.291ms - 200
+2026-07-16 16:45:15.882 +03:00 [INF] Request completed with Correlation ID bca1907e-592f-4d68-9d4c-e35b09893c40
+2026-07-16 16:45:15.886 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 72.8622ms
+2026-07-16 16:45:15.888 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:45:25.909 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:45:25.912 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:45:25.913 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:45:25.917 +03:00 [INF] Request started with Correlation ID fcfb4c8e-5d36-4b22-ba3e-3ac6271cb209
+2026-07-16 16:45:25.918 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:45:25.922 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:45:25.922 +03:00 [INF] Received HTTP response headers after 8.8637ms - 200
+2026-07-16 16:45:25.937 +03:00 [INF] HTTP GET /health responded 200 in 18 ms
+2026-07-16 16:45:25.940 +03:00 [INF] End processing HTTP request after 31.0386ms - 200
+2026-07-16 16:45:25.944 +03:00 [INF] Request completed with Correlation ID fcfb4c8e-5d36-4b22-ba3e-3ac6271cb209
+2026-07-16 16:45:25.948 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 35.0221ms
+2026-07-16 16:45:25.953 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:45:35.978 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:45:35.993 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:45:36.003 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:45:36.008 +03:00 [INF] Request started with Correlation ID 46e80b25-b672-400d-ad19-07f9da5c47cb
+2026-07-16 16:45:36.010 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:45:36.014 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:45:36.014 +03:00 [INF] Received HTTP response headers after 17.8355ms - 200
+2026-07-16 16:45:36.015 +03:00 [INF] HTTP GET /health responded 200 in 5 ms
+2026-07-16 16:45:36.017 +03:00 [INF] End processing HTTP request after 39.0157ms - 200
+2026-07-16 16:45:36.019 +03:00 [INF] Request completed with Correlation ID 46e80b25-b672-400d-ad19-07f9da5c47cb
+2026-07-16 16:45:36.022 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 18.5756ms
+2026-07-16 16:45:36.024 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:45:46.036 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:45:46.040 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:45:46.043 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:45:46.049 +03:00 [INF] Request started with Correlation ID 50ed4cb8-b6ca-4f1b-b0d2-065b0cbbc391
+2026-07-16 16:45:46.051 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:45:46.057 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:45:46.057 +03:00 [INF] Received HTTP response headers after 14.9216ms - 200
+2026-07-16 16:45:46.067 +03:00 [INF] HTTP GET /health responded 200 in 16 ms
+2026-07-16 16:45:46.070 +03:00 [INF] End processing HTTP request after 33.8644ms - 200
+2026-07-16 16:45:46.076 +03:00 [INF] Request completed with Correlation ID 50ed4cb8-b6ca-4f1b-b0d2-065b0cbbc391
+2026-07-16 16:45:46.082 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 39.3152ms
+2026-07-16 16:45:46.083 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:45:52.233 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/hangfire - null null
+2026-07-16 16:45:52.325 +03:00 [INF] Request started with Correlation ID 7fff587b-fb11-4f63-b1da-132778fa5c78
+2026-07-16 16:45:52.465 +03:00 [INF] HTTP GET /hangfire responded 200 in 137 ms
+2026-07-16 16:45:52.532 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/hangfire/css-dark182401198446913 - null null
+2026-07-16 16:45:52.594 +03:00 [INF] Request started with Correlation ID 2249edcd-7f2a-4b4b-8f85-4a7d649932e1
+2026-07-16 16:45:52.543 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/hangfire/js182401967913280 - null null
+2026-07-16 16:45:52.616 +03:00 [INF] Request started with Correlation ID 2a8c63de-dd3e-4d27-ad89-02b13acb5bba
+2026-07-16 16:45:52.532 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/hangfire/css18240609259714 - null null
+2026-07-16 16:45:52.611 +03:00 [INF] HTTP GET /hangfire/css-dark182401198446913 responded 200 in 13 ms
+2026-07-16 16:45:52.576 +03:00 [INF] Request completed with Correlation ID 7fff587b-fb11-4f63-b1da-132778fa5c78
+2026-07-16 16:45:52.646 +03:00 [INF] HTTP GET /hangfire/js182401967913280 responded 200 in 18 ms
+2026-07-16 16:45:52.676 +03:00 [INF] Request started with Correlation ID d5dcdcf1-c0d5-46cb-8ffb-15c6a3547614
+2026-07-16 16:45:52.701 +03:00 [INF] Request completed with Correlation ID 2249edcd-7f2a-4b4b-8f85-4a7d649932e1
+2026-07-16 16:45:52.712 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/hangfire - 200 null text/html 478.8424ms
+2026-07-16 16:45:52.718 +03:00 [INF] Request completed with Correlation ID 2a8c63de-dd3e-4d27-ad89-02b13acb5bba
+2026-07-16 16:45:52.722 +03:00 [INF] HTTP GET /hangfire/css18240609259714 responded 200 in 2 ms
+2026-07-16 16:45:52.724 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/hangfire/css-dark182401198446913 - 200 null text/css 192.133ms
+2026-07-16 16:45:52.763 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/hangfire/js182401967913280 - 200 null application/javascript 220.5135ms
+2026-07-16 16:45:52.776 +03:00 [INF] Request completed with Correlation ID d5dcdcf1-c0d5-46cb-8ffb-15c6a3547614
+2026-07-16 16:45:52.789 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/hangfire/css18240609259714 - 200 null text/css 256.9016ms
+2026-07-16 16:45:52.926 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/hangfire/fonts/glyphicons-halflings-regular/woff2 - null null
+2026-07-16 16:45:53.169 +03:00 [INF] Request started with Correlation ID d6c908c1-3b5a-4991-9a50-57763c9efb41
+2026-07-16 16:45:53.178 +03:00 [INF] HTTP GET /hangfire/fonts/glyphicons-halflings-regular/woff2 responded 200 in 1 ms
+2026-07-16 16:45:53.212 +03:00 [INF] Request completed with Correlation ID d6c908c1-3b5a-4991-9a50-57763c9efb41
+2026-07-16 16:45:53.231 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/hangfire/fonts/glyphicons-halflings-regular/woff2 - 200 null font/woff2 305.4145ms
+2026-07-16 16:45:55.098 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 258
+2026-07-16 16:45:55.107 +03:00 [INF] Request started with Correlation ID f6afabd6-a6e0-4259-902f-1386bce67b95
+2026-07-16 16:45:55.130 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 21 ms
+2026-07-16 16:45:55.133 +03:00 [INF] Request completed with Correlation ID f6afabd6-a6e0-4259-902f-1386bce67b95
+2026-07-16 16:45:55.134 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 36.6452ms
+2026-07-16 16:45:56.112 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:45:56.114 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:45:56.117 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:45:56.127 +03:00 [INF] Request started with Correlation ID 0ce06982-5fc7-4ebd-9aa6-8b9b1281569a
+2026-07-16 16:45:56.130 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:45:56.134 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:45:56.134 +03:00 [INF] Received HTTP response headers after 17.773ms - 200
+2026-07-16 16:45:56.136 +03:00 [INF] HTTP GET /health responded 200 in 5 ms
+2026-07-16 16:45:56.138 +03:00 [INF] End processing HTTP request after 25.96ms - 200
+2026-07-16 16:45:56.140 +03:00 [INF] Request completed with Correlation ID 0ce06982-5fc7-4ebd-9aa6-8b9b1281569a
+2026-07-16 16:45:56.143 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 26.4789ms
+2026-07-16 16:45:56.145 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:45:57.158 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 258
+2026-07-16 16:45:57.174 +03:00 [INF] Request started with Correlation ID cc9ccfcb-8289-4f9d-b9a6-7b0735acdd4d
+2026-07-16 16:45:57.181 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 1 ms
+2026-07-16 16:45:57.184 +03:00 [INF] Request completed with Correlation ID cc9ccfcb-8289-4f9d-b9a6-7b0735acdd4d
+2026-07-16 16:45:57.186 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 27.2339ms
+2026-07-16 16:45:59.193 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 258
+2026-07-16 16:45:59.199 +03:00 [INF] Request started with Correlation ID 18466241-dc04-4456-b491-8789eb39ccff
+2026-07-16 16:45:59.206 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 2 ms
+2026-07-16 16:45:59.215 +03:00 [INF] Request completed with Correlation ID 18466241-dc04-4456-b491-8789eb39ccff
+2026-07-16 16:45:59.216 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 22.4273ms
+2026-07-16 16:46:01.229 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 258
+2026-07-16 16:46:01.430 +03:00 [INF] Request started with Correlation ID 4095d44c-7fbf-4aad-9014-6b2d8c7f55a7
+2026-07-16 16:46:01.432 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:46:01.459 +03:00 [INF] Request completed with Correlation ID 4095d44c-7fbf-4aad-9014-6b2d8c7f55a7
+2026-07-16 16:46:01.463 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 233.571ms
+2026-07-16 16:46:04.011 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 258
+2026-07-16 16:46:04.018 +03:00 [INF] Request started with Correlation ID 47d9071e-9387-41a8-be11-0bdc7de0b81b
+2026-07-16 16:46:04.023 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 1 ms
+2026-07-16 16:46:04.029 +03:00 [INF] Request completed with Correlation ID 47d9071e-9387-41a8-be11-0bdc7de0b81b
+2026-07-16 16:46:04.033 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 21.3257ms
+2026-07-16 16:46:04.454 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."CreatedAt", p."Description", p."ExpiryDate", p."IsArchived", p."LastUpdatedAt", p."Name", p."Price", p."QuantityInStock", p."Sku", p."SupplierId", p."SupplierName"
+FROM "Products" AS p
+2026-07-16 16:46:04.458 +03:00 [INF] Expired products count: 0
+2026-07-16 16:46:04.459 +03:00 [INF] Soon-to-expire products count: 0
+2026-07-16 16:46:06.159 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:46:06.160 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:46:06.162 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:46:06.165 +03:00 [INF] Request started with Correlation ID dbec95ed-554e-4e6e-ae38-1b593685af15
+2026-07-16 16:46:06.166 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:46:06.169 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:46:06.169 +03:00 [INF] Received HTTP response headers after 7.8297ms - 200
+2026-07-16 16:46:06.171 +03:00 [INF] HTTP GET /health responded 200 in 4 ms
+2026-07-16 16:46:06.172 +03:00 [INF] End processing HTTP request after 12.7768ms - 200
+2026-07-16 16:46:06.174 +03:00 [INF] Request completed with Correlation ID dbec95ed-554e-4e6e-ae38-1b593685af15
+2026-07-16 16:46:06.177 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 15.4287ms
+2026-07-16 16:46:06.179 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:46:06.331 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 258
+2026-07-16 16:46:06.495 +03:00 [INF] Request started with Correlation ID e9a185ae-1760-49fc-b681-dd35486d2173
+2026-07-16 16:46:06.497 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 1 ms
+2026-07-16 16:46:06.499 +03:00 [INF] Request completed with Correlation ID e9a185ae-1760-49fc-b681-dd35486d2173
+2026-07-16 16:46:06.500 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 168.2011ms
+2026-07-16 16:46:09.011 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 258
+2026-07-16 16:46:09.014 +03:00 [INF] Request started with Correlation ID 96752295-03ea-4df9-bc98-e5717fd109bf
+2026-07-16 16:46:09.016 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:46:09.018 +03:00 [INF] Request completed with Correlation ID 96752295-03ea-4df9-bc98-e5717fd109bf
+2026-07-16 16:46:09.019 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 8.0984ms
+2026-07-16 16:46:11.042 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 258
+2026-07-16 16:46:11.049 +03:00 [INF] Request started with Correlation ID 97a337b6-d831-4db1-8c78-c01e4b3daa83
+2026-07-16 16:46:11.051 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:46:11.053 +03:00 [INF] Request completed with Correlation ID 97a337b6-d831-4db1-8c78-c01e4b3daa83
+2026-07-16 16:46:11.054 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 12.7547ms
+2026-07-16 16:46:13.074 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 258
+2026-07-16 16:46:13.079 +03:00 [INF] Request started with Correlation ID 0980084d-25f5-4a89-a6dc-8d33f28a5e3b
+2026-07-16 16:46:13.082 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 1 ms
+2026-07-16 16:46:13.086 +03:00 [INF] Request completed with Correlation ID 0980084d-25f5-4a89-a6dc-8d33f28a5e3b
+2026-07-16 16:46:13.100 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 25.6954ms
+2026-07-16 16:46:15.106 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 258
+2026-07-16 16:46:15.110 +03:00 [INF] Request started with Correlation ID cb2437b9-3c6d-4ec4-9460-a6edcbc09937
+2026-07-16 16:46:15.112 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 1 ms
+2026-07-16 16:46:15.116 +03:00 [INF] Request completed with Correlation ID cb2437b9-3c6d-4ec4-9460-a6edcbc09937
+2026-07-16 16:46:15.117 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 10.4891ms
+2026-07-16 16:46:16.196 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:46:16.198 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:46:16.203 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:46:16.207 +03:00 [INF] Request started with Correlation ID 9739a751-4adc-46ad-8032-d57bf21d00b4
+2026-07-16 16:46:16.208 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:46:16.212 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:46:16.212 +03:00 [INF] Received HTTP response headers after 10.1393ms - 200
+2026-07-16 16:46:16.215 +03:00 [INF] HTTP GET /health responded 200 in 6 ms
+2026-07-16 16:46:16.245 +03:00 [INF] End processing HTTP request after 48.9876ms - 200
+2026-07-16 16:46:16.248 +03:00 [INF] Request completed with Correlation ID 9739a751-4adc-46ad-8032-d57bf21d00b4
+2026-07-16 16:46:16.250 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 47.7044ms
+2026-07-16 16:46:16.255 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:46:17.125 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 258
+2026-07-16 16:46:17.129 +03:00 [INF] Request started with Correlation ID 2f97e86f-6bc9-4b36-83b5-586c2189753c
+2026-07-16 16:46:17.131 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:46:17.134 +03:00 [INF] Request completed with Correlation ID 2f97e86f-6bc9-4b36-83b5-586c2189753c
+2026-07-16 16:46:17.135 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 9.7039ms
+2026-07-16 16:46:20.022 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 258
+2026-07-16 16:46:20.025 +03:00 [INF] Request started with Correlation ID 62f37f7f-5e93-4342-8007-3a5ff6aea863
+2026-07-16 16:46:20.027 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:46:20.029 +03:00 [INF] Request completed with Correlation ID 62f37f7f-5e93-4342-8007-3a5ff6aea863
+2026-07-16 16:46:20.031 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 8.4752ms
+2026-07-16 16:46:23.034 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 258
+2026-07-16 16:46:23.210 +03:00 [INF] Request started with Correlation ID ac7affaa-5edc-4674-a20e-a6dee674af37
+2026-07-16 16:46:23.213 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:46:23.220 +03:00 [INF] Request completed with Correlation ID ac7affaa-5edc-4674-a20e-a6dee674af37
+2026-07-16 16:46:23.222 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 188.473ms
+2026-07-16 16:46:25.230 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 258
+2026-07-16 16:46:25.235 +03:00 [INF] Request started with Correlation ID f49b2adc-2d70-4548-853b-073b6462e178
+2026-07-16 16:46:25.238 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 1 ms
+2026-07-16 16:46:25.241 +03:00 [INF] Request completed with Correlation ID f49b2adc-2d70-4548-853b-073b6462e178
+2026-07-16 16:46:25.243 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 13.0254ms
+2026-07-16 16:46:25.914 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/hangfire/recurring - null null
+2026-07-16 16:46:25.919 +03:00 [INF] Request started with Correlation ID 14feb621-98b6-475f-967b-e7192e1f587c
+2026-07-16 16:46:25.946 +03:00 [INF] HTTP GET /hangfire/recurring responded 200 in 22 ms
+2026-07-16 16:46:25.950 +03:00 [INF] Request completed with Correlation ID 14feb621-98b6-475f-967b-e7192e1f587c
+2026-07-16 16:46:25.950 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/hangfire/recurring - 200 null text/html 36.2798ms
+2026-07-16 16:46:26.265 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:46:26.270 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:46:26.276 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:46:26.282 +03:00 [INF] Request started with Correlation ID 113f202d-fb7e-49b7-b28b-33d0a381196a
+2026-07-16 16:46:26.283 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:46:26.287 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:46:26.289 +03:00 [INF] Received HTTP response headers after 13.3013ms - 200
+2026-07-16 16:46:26.290 +03:00 [INF] HTTP GET /health responded 200 in 6 ms
+2026-07-16 16:46:26.292 +03:00 [INF] End processing HTTP request after 26.3838ms - 200
+2026-07-16 16:46:26.293 +03:00 [INF] Request completed with Correlation ID 113f202d-fb7e-49b7-b28b-33d0a381196a
+2026-07-16 16:46:26.295 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 18.9825ms
+2026-07-16 16:46:26.296 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:46:28.059 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 167
+2026-07-16 16:46:28.078 +03:00 [INF] Request started with Correlation ID f0f7e208-8c23-4067-b722-51bca46dc82b
+2026-07-16 16:46:28.082 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 1 ms
+2026-07-16 16:46:28.088 +03:00 [INF] Request completed with Correlation ID f0f7e208-8c23-4067-b722-51bca46dc82b
+2026-07-16 16:46:28.089 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 29.4251ms
+2026-07-16 16:46:30.097 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 167
+2026-07-16 16:46:30.106 +03:00 [INF] Request started with Correlation ID 69d44313-ebb7-42b5-8ce2-f4b3de01ea2b
+2026-07-16 16:46:30.108 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:46:30.110 +03:00 [INF] Request completed with Correlation ID 69d44313-ebb7-42b5-8ce2-f4b3de01ea2b
+2026-07-16 16:46:30.113 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 15.9111ms
+2026-07-16 16:46:32.120 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 167
+2026-07-16 16:46:32.133 +03:00 [INF] Request started with Correlation ID 5db3eeee-d7c1-4e4e-8833-9b36769e0746
+2026-07-16 16:46:32.142 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 1 ms
+2026-07-16 16:46:32.154 +03:00 [INF] Request completed with Correlation ID 5db3eeee-d7c1-4e4e-8833-9b36769e0746
+2026-07-16 16:46:32.158 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 38.3939ms
+2026-07-16 16:46:34.168 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 167
+2026-07-16 16:46:34.184 +03:00 [INF] Request started with Correlation ID 65e73485-0e5d-42eb-9c55-9199b2581c00
+2026-07-16 16:46:34.188 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 2 ms
+2026-07-16 16:46:34.194 +03:00 [INF] Request completed with Correlation ID 65e73485-0e5d-42eb-9c55-9199b2581c00
+2026-07-16 16:46:34.195 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 26.9492ms
+2026-07-16 16:46:36.199 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 167
+2026-07-16 16:46:36.202 +03:00 [INF] Request started with Correlation ID 682d5791-694c-4a92-85c7-491f80e84573
+2026-07-16 16:46:36.213 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:46:36.224 +03:00 [INF] Request completed with Correlation ID 682d5791-694c-4a92-85c7-491f80e84573
+2026-07-16 16:46:36.225 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 26.7438ms
+2026-07-16 16:46:36.300 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:46:36.302 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:46:36.307 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:46:36.310 +03:00 [INF] Request started with Correlation ID 0af324ac-7f33-4fb9-8724-2f47fb4d719d
+2026-07-16 16:46:36.311 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:46:36.314 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:46:36.314 +03:00 [INF] Received HTTP response headers after 7.5697ms - 200
+2026-07-16 16:46:36.315 +03:00 [INF] HTTP GET /health responded 200 in 4 ms
+2026-07-16 16:46:36.316 +03:00 [INF] End processing HTTP request after 16.1249ms - 200
+2026-07-16 16:46:36.318 +03:00 [INF] Request completed with Correlation ID 0af324ac-7f33-4fb9-8724-2f47fb4d719d
+2026-07-16 16:46:36.320 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 13.3039ms
+2026-07-16 16:46:36.321 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:46:39.014 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 167
+2026-07-16 16:46:39.017 +03:00 [INF] Request started with Correlation ID b4eec6a5-4151-4e4d-92d8-ecf53451f147
+2026-07-16 16:46:39.018 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:46:39.021 +03:00 [INF] Request completed with Correlation ID b4eec6a5-4151-4e4d-92d8-ecf53451f147
+2026-07-16 16:46:39.022 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 8.382ms
+2026-07-16 16:46:42.017 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 167
+2026-07-16 16:46:42.022 +03:00 [INF] Request started with Correlation ID d3791900-387a-45af-9662-75c6c72d334a
+2026-07-16 16:46:42.024 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 1 ms
+2026-07-16 16:46:42.028 +03:00 [INF] Request completed with Correlation ID d3791900-387a-45af-9662-75c6c72d334a
+2026-07-16 16:46:42.030 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 12.3594ms
+2026-07-16 16:46:45.019 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 167
+2026-07-16 16:46:45.023 +03:00 [INF] Request started with Correlation ID 1b30ad75-317c-42e0-8a8b-bbbaea52a9fa
+2026-07-16 16:46:45.025 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:46:45.039 +03:00 [INF] Request completed with Correlation ID 1b30ad75-317c-42e0-8a8b-bbbaea52a9fa
+2026-07-16 16:46:45.041 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 22.2713ms
+2026-07-16 16:46:46.328 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:46:46.334 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:46:46.339 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:46:46.347 +03:00 [INF] Request started with Correlation ID b04f70a1-806b-44af-8f71-b29a85605031
+2026-07-16 16:46:46.349 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:46:46.355 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:46:46.356 +03:00 [INF] Received HTTP response headers after 17.7609ms - 200
+2026-07-16 16:46:46.359 +03:00 [INF] HTTP GET /health responded 200 in 9 ms
+2026-07-16 16:46:46.361 +03:00 [INF] End processing HTTP request after 33.0165ms - 200
+2026-07-16 16:46:46.363 +03:00 [INF] Request completed with Correlation ID b04f70a1-806b-44af-8f71-b29a85605031
+2026-07-16 16:46:46.366 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 27.4558ms
+2026-07-16 16:46:46.367 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:46:48.024 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 167
+2026-07-16 16:46:48.028 +03:00 [INF] Request started with Correlation ID 292f8f03-fc33-4c67-a08b-537133099b8f
+2026-07-16 16:46:48.030 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:46:48.033 +03:00 [INF] Request completed with Correlation ID 292f8f03-fc33-4c67-a08b-537133099b8f
+2026-07-16 16:46:48.033 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 9.9606ms
+2026-07-16 16:46:51.012 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 167
+2026-07-16 16:46:51.015 +03:00 [INF] Request started with Correlation ID 0dace0c6-75e2-4d5c-b6b8-8bfbbee8ff5a
+2026-07-16 16:46:51.016 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:46:51.020 +03:00 [INF] Request completed with Correlation ID 0dace0c6-75e2-4d5c-b6b8-8bfbbee8ff5a
+2026-07-16 16:46:51.021 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 9.0871ms
+2026-07-16 16:46:54.018 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 167
+2026-07-16 16:46:54.023 +03:00 [INF] Request started with Correlation ID 89a6080b-6c6a-42e1-97e1-6aa12f0140a9
+2026-07-16 16:46:54.025 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:46:54.027 +03:00 [INF] Request completed with Correlation ID 89a6080b-6c6a-42e1-97e1-6aa12f0140a9
+2026-07-16 16:46:54.028 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 9.834ms
+2026-07-16 16:46:56.372 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:46:56.376 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:46:56.378 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:46:56.383 +03:00 [INF] Request started with Correlation ID d4671829-f09b-4f52-9b66-4a2996abbcc1
+2026-07-16 16:46:56.386 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:46:56.390 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:46:56.390 +03:00 [INF] Received HTTP response headers after 12.2449ms - 200
+2026-07-16 16:46:56.392 +03:00 [INF] HTTP GET /health responded 200 in 6 ms
+2026-07-16 16:46:56.394 +03:00 [INF] End processing HTTP request after 22.825ms - 200
+2026-07-16 16:46:56.398 +03:00 [INF] Request completed with Correlation ID d4671829-f09b-4f52-9b66-4a2996abbcc1
+2026-07-16 16:46:56.401 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 22.8579ms
+2026-07-16 16:46:56.408 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:46:57.022 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 167
+2026-07-16 16:46:57.034 +03:00 [INF] Request started with Correlation ID e4c467f2-3417-4d10-a7fe-763b16c00db5
+2026-07-16 16:46:57.039 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 1 ms
+2026-07-16 16:46:57.052 +03:00 [INF] Request completed with Correlation ID e4c467f2-3417-4d10-a7fe-763b16c00db5
+2026-07-16 16:46:57.055 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 33.9446ms
+2026-07-16 16:47:00.033 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 167
+2026-07-16 16:47:00.037 +03:00 [INF] Request started with Correlation ID 658dcca6-0f70-41f7-a65d-0cfcd4b494de
+2026-07-16 16:47:00.041 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 1 ms
+2026-07-16 16:47:00.046 +03:00 [INF] Request completed with Correlation ID 658dcca6-0f70-41f7-a65d-0cfcd4b494de
+2026-07-16 16:47:00.048 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 14.5482ms
+2026-07-16 16:47:03.023 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 167
+2026-07-16 16:47:03.027 +03:00 [INF] Request started with Correlation ID b42d08d7-6037-4388-b8d2-1590a6635021
+2026-07-16 16:47:03.029 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:47:03.032 +03:00 [INF] Request completed with Correlation ID b42d08d7-6037-4388-b8d2-1590a6635021
+2026-07-16 16:47:03.034 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 11.0004ms
+2026-07-16 16:47:04.469 +03:00 [INF] Executed DbCommand (29ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."CreatedAt", p."Description", p."ExpiryDate", p."IsArchived", p."LastUpdatedAt", p."Name", p."Price", p."QuantityInStock", p."Sku", p."SupplierId", p."SupplierName"
+FROM "Products" AS p
+2026-07-16 16:47:04.520 +03:00 [INF] Expired products count: 0
+2026-07-16 16:47:04.537 +03:00 [INF] Soon-to-expire products count: 0
+2026-07-16 16:47:06.020 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 167
+2026-07-16 16:47:06.040 +03:00 [INF] Request started with Correlation ID 1f4f159e-035a-4365-aa4c-fec6bdcbf18d
+2026-07-16 16:47:06.111 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 10 ms
+2026-07-16 16:47:06.148 +03:00 [INF] Request completed with Correlation ID 1f4f159e-035a-4365-aa4c-fec6bdcbf18d
+2026-07-16 16:47:06.150 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 130.2293ms
+2026-07-16 16:47:06.426 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:47:06.430 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:47:06.434 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:47:06.446 +03:00 [INF] Request started with Correlation ID f20cfd72-9a73-4fde-9f5c-56fd45c5b4a1
+2026-07-16 16:47:06.454 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:47:06.463 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:47:06.464 +03:00 [INF] Received HTTP response headers after 30.0935ms - 200
+2026-07-16 16:47:06.468 +03:00 [INF] HTTP GET /health responded 200 in 14 ms
+2026-07-16 16:47:06.470 +03:00 [INF] End processing HTTP request after 43.9359ms - 200
+2026-07-16 16:47:06.478 +03:00 [INF] Request completed with Correlation ID f20cfd72-9a73-4fde-9f5c-56fd45c5b4a1
+2026-07-16 16:47:06.485 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 50.8603ms
+2026-07-16 16:47:06.489 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:47:09.023 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 167
+2026-07-16 16:47:09.026 +03:00 [INF] Request started with Correlation ID ce65037f-c000-457e-9449-a3b92f4eafdd
+2026-07-16 16:47:09.028 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 1 ms
+2026-07-16 16:47:09.033 +03:00 [INF] Request completed with Correlation ID ce65037f-c000-457e-9449-a3b92f4eafdd
+2026-07-16 16:47:09.054 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 31.015ms
+2026-07-16 16:47:11.085 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 167
+2026-07-16 16:47:11.091 +03:00 [INF] Request started with Correlation ID de496ab0-1822-48e5-958d-db2dd89cdf1f
+2026-07-16 16:47:11.093 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:47:11.096 +03:00 [INF] Request completed with Correlation ID de496ab0-1822-48e5-958d-db2dd89cdf1f
+2026-07-16 16:47:11.097 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 12.4561ms
+2026-07-16 16:47:13.100 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 167
+2026-07-16 16:47:13.105 +03:00 [INF] Request started with Correlation ID c456a378-b911-48a5-88e0-1fa64895b446
+2026-07-16 16:47:13.107 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:47:13.109 +03:00 [INF] Request completed with Correlation ID c456a378-b911-48a5-88e0-1fa64895b446
+2026-07-16 16:47:13.110 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 9.7969ms
+2026-07-16 16:47:15.117 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 167
+2026-07-16 16:47:15.120 +03:00 [INF] Request started with Correlation ID bfb08c5b-ddcf-421d-9817-2f93d376f12f
+2026-07-16 16:47:15.121 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:47:15.123 +03:00 [INF] Request completed with Correlation ID bfb08c5b-ddcf-421d-9817-2f93d376f12f
+2026-07-16 16:47:15.124 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 7.6364ms
+2026-07-16 16:47:16.507 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:47:16.512 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:47:16.514 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:47:16.516 +03:00 [INF] Request started with Correlation ID c886ed47-6bc9-4d25-8d72-4019f5a30afe
+2026-07-16 16:47:16.518 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:47:16.522 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:47:16.522 +03:00 [INF] Received HTTP response headers after 8.2386ms - 200
+2026-07-16 16:47:16.523 +03:00 [INF] HTTP GET /health responded 200 in 5 ms
+2026-07-16 16:47:16.524 +03:00 [INF] End processing HTTP request after 16.8323ms - 200
+2026-07-16 16:47:16.526 +03:00 [INF] Request completed with Correlation ID c886ed47-6bc9-4d25-8d72-4019f5a30afe
+2026-07-16 16:47:16.527 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 13.7904ms
+2026-07-16 16:47:16.528 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:47:17.140 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 167
+2026-07-16 16:47:17.148 +03:00 [INF] Request started with Correlation ID 849b09ca-2b00-437b-a859-8bfef42552e5
+2026-07-16 16:47:17.149 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:47:17.152 +03:00 [INF] Request completed with Correlation ID 849b09ca-2b00-437b-a859-8bfef42552e5
+2026-07-16 16:47:17.153 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 12.9834ms
+2026-07-16 16:47:17.250 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/hangfire/ - null null
+2026-07-16 16:47:17.254 +03:00 [INF] Request started with Correlation ID 3a87efcf-fe1c-4b12-9062-38841d77d9a2
+2026-07-16 16:47:17.257 +03:00 [INF] HTTP GET /hangfire/ responded 200 in 1 ms
+2026-07-16 16:47:17.299 +03:00 [INF] Request completed with Correlation ID 3a87efcf-fe1c-4b12-9062-38841d77d9a2
+2026-07-16 16:47:17.305 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/hangfire/ - 200 null text/html 55.5992ms
+2026-07-16 16:47:19.350 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 258
+2026-07-16 16:47:19.373 +03:00 [INF] Request started with Correlation ID 131d3b11-7972-42e2-a28e-e74b3a2cdf2a
+2026-07-16 16:47:19.377 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 1 ms
+2026-07-16 16:47:19.381 +03:00 [INF] Request completed with Correlation ID 131d3b11-7972-42e2-a28e-e74b3a2cdf2a
+2026-07-16 16:47:19.383 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 33.4242ms
+2026-07-16 16:47:21.397 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 258
+2026-07-16 16:47:21.412 +03:00 [INF] Request started with Correlation ID e8b38516-77bc-46f9-8da9-a46ae12dfea4
+2026-07-16 16:47:21.417 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:47:21.425 +03:00 [INF] Request completed with Correlation ID e8b38516-77bc-46f9-8da9-a46ae12dfea4
+2026-07-16 16:47:21.428 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 30.3326ms
+2026-07-16 16:47:23.437 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 258
+2026-07-16 16:47:23.442 +03:00 [INF] Request started with Correlation ID eb69ff77-95fe-4e02-97ad-f9f32bcb9970
+2026-07-16 16:47:23.444 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:47:23.447 +03:00 [INF] Request completed with Correlation ID eb69ff77-95fe-4e02-97ad-f9f32bcb9970
+2026-07-16 16:47:23.448 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 11.8996ms
+2026-07-16 16:47:25.456 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 258
+2026-07-16 16:47:25.463 +03:00 [INF] Request started with Correlation ID f0257f2e-e7d9-413e-a722-e7a19ca4670a
+2026-07-16 16:47:25.465 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:47:25.468 +03:00 [INF] Request completed with Correlation ID f0257f2e-e7d9-413e-a722-e7a19ca4670a
+2026-07-16 16:47:25.470 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 13.1384ms
+2026-07-16 16:47:26.541 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:47:26.544 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:47:26.548 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:47:26.553 +03:00 [INF] Request started with Correlation ID 41171d5a-75b0-41d2-a58e-38cadf73384f
+2026-07-16 16:47:26.561 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:47:26.569 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:47:26.569 +03:00 [INF] Received HTTP response headers after 21.8616ms - 200
+2026-07-16 16:47:26.576 +03:00 [INF] HTTP GET /health responded 200 in 15 ms
+2026-07-16 16:47:26.577 +03:00 [INF] End processing HTTP request after 36.6167ms - 200
+2026-07-16 16:47:26.580 +03:00 [INF] Request completed with Correlation ID 41171d5a-75b0-41d2-a58e-38cadf73384f
+2026-07-16 16:47:26.583 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 35.3664ms
+2026-07-16 16:47:26.585 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:47:27.478 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 258
+2026-07-16 16:47:27.516 +03:00 [INF] Request started with Correlation ID 3037d541-6f1a-43e8-9da0-f4fd4d8970c6
+2026-07-16 16:47:27.521 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 1 ms
+2026-07-16 16:47:27.528 +03:00 [INF] Request completed with Correlation ID 3037d541-6f1a-43e8-9da0-f4fd4d8970c6
+2026-07-16 16:47:27.530 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 52.3281ms
+2026-07-16 16:47:29.555 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 258
+2026-07-16 16:47:29.565 +03:00 [INF] Request started with Correlation ID 8c103dd2-fe19-44fa-b5a5-55fb75d88679
+2026-07-16 16:47:29.578 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 1 ms
+2026-07-16 16:47:29.595 +03:00 [INF] Request completed with Correlation ID 8c103dd2-fe19-44fa-b5a5-55fb75d88679
+2026-07-16 16:47:29.599 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 43.73ms
+2026-07-16 16:47:31.610 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 258
+2026-07-16 16:47:31.623 +03:00 [INF] Request started with Correlation ID fb45590f-00a1-48c5-99d6-9f61ae508e6a
+2026-07-16 16:47:31.625 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:47:31.628 +03:00 [INF] Request completed with Correlation ID fb45590f-00a1-48c5-99d6-9f61ae508e6a
+2026-07-16 16:47:31.629 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 18.4793ms
+2026-07-16 16:47:33.636 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 258
+2026-07-16 16:47:33.641 +03:00 [INF] Request started with Correlation ID d8d91b91-9db4-4f83-8818-d06dab3b9e11
+2026-07-16 16:47:33.643 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:47:33.646 +03:00 [INF] Request completed with Correlation ID d8d91b91-9db4-4f83-8818-d06dab3b9e11
+2026-07-16 16:47:33.647 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 10.943ms
+2026-07-16 16:47:35.655 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 258
+2026-07-16 16:47:35.662 +03:00 [INF] Request started with Correlation ID 680df41d-6112-436e-849e-22a799813e19
+2026-07-16 16:47:35.665 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:47:35.670 +03:00 [INF] Request completed with Correlation ID 680df41d-6112-436e-849e-22a799813e19
+2026-07-16 16:47:35.672 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 16.7004ms
+2026-07-16 16:47:36.625 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:47:36.627 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:47:36.631 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:47:36.633 +03:00 [INF] Request started with Correlation ID 6201f682-a730-4710-8cd2-8380e339d9e7
+2026-07-16 16:47:36.638 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:47:36.642 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:47:36.642 +03:00 [INF] Received HTTP response headers after 14.0104ms - 200
+2026-07-16 16:47:36.645 +03:00 [INF] End processing HTTP request after 20.3893ms - 200
+2026-07-16 16:47:36.644 +03:00 [INF] HTTP GET /health responded 200 in 6 ms
+2026-07-16 16:47:36.650 +03:00 [INF] Request completed with Correlation ID 6201f682-a730-4710-8cd2-8380e339d9e7
+2026-07-16 16:47:36.659 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 27.6231ms
+2026-07-16 16:47:36.665 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:47:37.688 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 258
+2026-07-16 16:47:37.694 +03:00 [INF] Request started with Correlation ID 721126e1-2d06-42ea-bb41-fd00f8d14188
+2026-07-16 16:47:37.695 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:47:37.697 +03:00 [INF] Request completed with Correlation ID 721126e1-2d06-42ea-bb41-fd00f8d14188
+2026-07-16 16:47:37.698 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 10.1859ms
+2026-07-16 16:47:38.935 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/hangfire/servers - null null
+2026-07-16 16:47:38.940 +03:00 [INF] Request started with Correlation ID e5481900-9a1c-4727-997a-97db92b970bd
+2026-07-16 16:47:38.966 +03:00 [INF] HTTP GET /hangfire/servers responded 200 in 24 ms
+2026-07-16 16:47:38.973 +03:00 [INF] Request completed with Correlation ID e5481900-9a1c-4727-997a-97db92b970bd
+2026-07-16 16:47:38.999 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/hangfire/servers - 200 null text/html 63.7458ms
+2026-07-16 16:47:41.041 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 167
+2026-07-16 16:47:41.049 +03:00 [INF] Request started with Correlation ID fbd108cc-2e31-439b-b44e-9221467f3e87
+2026-07-16 16:47:41.055 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 2 ms
+2026-07-16 16:47:41.060 +03:00 [INF] Request completed with Correlation ID fbd108cc-2e31-439b-b44e-9221467f3e87
+2026-07-16 16:47:41.062 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 21.0982ms
+2026-07-16 16:47:43.069 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 167
+2026-07-16 16:47:43.157 +03:00 [INF] Request started with Correlation ID db532648-8e53-4f08-bdbb-004f75250ceb
+2026-07-16 16:47:43.159 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:47:43.162 +03:00 [INF] Request completed with Correlation ID db532648-8e53-4f08-bdbb-004f75250ceb
+2026-07-16 16:47:43.163 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 94.2133ms
+2026-07-16 16:47:43.946 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/hangfire/ - null null
+2026-07-16 16:47:43.950 +03:00 [INF] Request started with Correlation ID 0cc1c331-aa82-4750-a950-9b57265002ce
+2026-07-16 16:47:43.953 +03:00 [INF] HTTP GET /hangfire/ responded 200 in 0 ms
+2026-07-16 16:47:43.957 +03:00 [INF] Request completed with Correlation ID 0cc1c331-aa82-4750-a950-9b57265002ce
+2026-07-16 16:47:43.966 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/hangfire/ - 200 null text/html 19.6192ms
+2026-07-16 16:47:46.034 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 258
+2026-07-16 16:47:46.041 +03:00 [INF] Request started with Correlation ID 9a8dccbe-37c0-4a0b-91d4-e6b286541b64
+2026-07-16 16:47:46.043 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:47:46.047 +03:00 [INF] Request completed with Correlation ID 9a8dccbe-37c0-4a0b-91d4-e6b286541b64
+2026-07-16 16:47:46.047 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 12.9234ms
+2026-07-16 16:47:46.671 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:47:46.672 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:47:46.674 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:47:46.678 +03:00 [INF] Request started with Correlation ID ddcdddda-9a59-4698-ae39-81c2d945bb77
+2026-07-16 16:47:46.679 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:47:46.683 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:47:46.684 +03:00 [INF] Received HTTP response headers after 10.5697ms - 200
+2026-07-16 16:47:46.695 +03:00 [INF] HTTP GET /health responded 200 in 16 ms
+2026-07-16 16:47:46.698 +03:00 [INF] End processing HTTP request after 27.2768ms - 200
+2026-07-16 16:47:46.701 +03:00 [INF] Request completed with Correlation ID ddcdddda-9a59-4698-ae39-81c2d945bb77
+2026-07-16 16:47:46.707 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 32.6798ms
+2026-07-16 16:47:46.708 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:47:49.017 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 258
+2026-07-16 16:47:49.021 +03:00 [INF] Request started with Correlation ID 845315d0-6e1a-4535-b258-a85b4f943385
+2026-07-16 16:47:49.023 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:47:49.025 +03:00 [INF] Request completed with Correlation ID 845315d0-6e1a-4535-b258-a85b4f943385
+2026-07-16 16:47:49.026 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 8.9717ms
+2026-07-16 16:47:52.011 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 258
+2026-07-16 16:47:52.028 +03:00 [INF] Request started with Correlation ID abadd2ec-57a5-4220-a141-0677a8e31af1
+2026-07-16 16:47:52.030 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:47:52.042 +03:00 [INF] Request completed with Correlation ID abadd2ec-57a5-4220-a141-0677a8e31af1
+2026-07-16 16:47:52.043 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 32.1047ms
+2026-07-16 16:47:55.068 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 258
+2026-07-16 16:47:55.072 +03:00 [INF] Request started with Correlation ID 28bb871e-aced-4e8f-a87b-ff69257769d1
+2026-07-16 16:47:55.077 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 1 ms
+2026-07-16 16:47:55.143 +03:00 [INF] Request completed with Correlation ID 28bb871e-aced-4e8f-a87b-ff69257769d1
+2026-07-16 16:47:55.160 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 92.0203ms
+2026-07-16 16:47:56.727 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-16 16:47:57.066 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-16 16:47:57.270 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-16 16:47:57.303 +03:00 [INF] Request started with Correlation ID 6712ed64-27fd-4e13-bd9e-8917fc6fc91c
+2026-07-16 16:47:57.309 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-16 16:47:57.316 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-16 16:47:57.316 +03:00 [INF] Received HTTP response headers after 46.7084ms - 200
+2026-07-16 16:47:57.325 +03:00 [INF] HTTP GET /health responded 200 in 16 ms
+2026-07-16 16:47:57.325 +03:00 [INF] End processing HTTP request after 598.2479ms - 200
+2026-07-16 16:47:57.330 +03:00 [INF] Request completed with Correlation ID 6712ed64-27fd-4e13-bd9e-8917fc6fc91c
+2026-07-16 16:47:57.332 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 62.4544ms
+2026-07-16 16:47:57.338 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-16 16:47:58.056 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/hangfire/stats - application/x-www-form-urlencoded; charset=UTF-8 258
+2026-07-16 16:47:58.094 +03:00 [INF] Server desktop-5bfa6au:26088:b85f5f89 caught stopping signal...
+2026-07-16 16:47:58.160 +03:00 [INF] Request started with Correlation ID 763520d9-6a6d-422f-bb8c-6d27495224f0
+2026-07-16 16:47:58.161 +03:00 [INF] Application is shutting down...
+2026-07-16 16:47:58.169 +03:00 [INF] HTTP POST /hangfire/stats responded 200 in 0 ms
+2026-07-16 16:47:58.170 +03:00 [INF] Server desktop-5bfa6au:26088:b85f5f89 All dispatchers stopped
+2026-07-16 16:47:58.183 +03:00 [INF] Request completed with Correlation ID 763520d9-6a6d-422f-bb8c-6d27495224f0
+2026-07-16 16:47:58.188 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/hangfire/stats - 200 null application/json 131.663ms
+2026-07-16 16:47:58.188 +03:00 [INF] Server desktop-5bfa6au:26088:b85f5f89 successfully reported itself as stopped in 0.4586 ms
+2026-07-16 16:47:58.205 +03:00 [INF] Server desktop-5bfa6au:26088:b85f5f89 has been stopped in total 43.7094 ms
