@@ -1,7 +1,68 @@
-﻿namespace Warehouse.Domain.Entities;
+﻿using Warehouse.Domain.Exceptions;
+
+namespace Warehouse.Domain.Entities;
 
 public class Product
 {
+    private Product()
+    {
+    }
+
+
+    public Product(
+        string name,
+        string sku,
+        string description,
+        decimal price,
+        int quantityInStock,
+        string? supplierName,
+        DateTime? expiryDate
+    )
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            throw new BusinessRuleException(
+                "Product name required"
+            );
+
+        if (string.IsNullOrWhiteSpace(sku))
+            throw new BusinessRuleException(
+                "SKU required"
+            );
+
+        if (price <= 0)
+            throw new BusinessRuleException(
+                "Price must be greater than zero"
+            );
+
+        if (quantityInStock < 0)
+            throw new BusinessRuleException(
+                "Quantity cannot be negative"
+            );
+
+
+        Id = Guid.NewGuid();
+
+        Name = name;
+
+        Sku = sku;
+
+        Description = description;
+
+        Price = price;
+
+        QuantityInStock = quantityInStock;
+
+        SupplierName = supplierName;
+
+        ExpiryDate = expiryDate;
+
+        IsArchived = false;
+
+        CreatedAt = DateTime.UtcNow;
+
+        LastUpdatedAt = DateTime.UtcNow;
+    }
+
     public Guid Id { get; private set; }
 
     public string Name { get; private set; }
@@ -38,65 +99,17 @@ public class Product
         = new List<ProductImage>();
 
 
-    private Product()
-    {
-    }
-
-
-    public Product(
-        string name,
-        string sku,
-        string description,
-        decimal price,
-        int quantityInStock,
-        string? supplierName,
-        DateTime? expiryDate
-    )
-    {
-        if (string.IsNullOrWhiteSpace(name))
-            throw new Exception("Product name required");
-
-        if (string.IsNullOrWhiteSpace(sku))
-            throw new Exception("SKU required");
-
-        if (price <= 0)
-            throw new Exception("Price must be greater than zero");
-
-        if (quantityInStock < 0)
-            throw new Exception("Quantity cannot be negative");
-
-
-        Id = Guid.NewGuid();
-
-        Name = name;
-
-        Sku = sku;
-
-        Description = description;
-
-        Price = price;
-
-        QuantityInStock = quantityInStock;
-
-        SupplierName = supplierName;
-
-        ExpiryDate = expiryDate;
-
-        IsArchived = false;
-
-        CreatedAt = DateTime.UtcNow;
-
-        LastUpdatedAt = DateTime.UtcNow;
-    }
-
-
     public void UpdatePrice(decimal price)
     {
         if (IsArchived)
-            throw new Exception("Archived product cannot update");
+            throw new BusinessRuleException(
+                "Archived product cannot update"
+            );
 
         if (price <= 0)
-            throw new Exception("Invalid price");
+            throw new BusinessRuleException(
+                "Invalid price"
+            );
 
 
         Price = price;
@@ -108,7 +121,9 @@ public class Product
     public void UpdateQuantity(int quantity)
     {
         if (quantity < 0)
-            throw new Exception("Invalid quantity");
+            throw new BusinessRuleException(
+                "Invalid  quantity"
+            );
 
 
         QuantityInStock = quantity;
@@ -120,11 +135,15 @@ public class Product
     public void AssignSupplier(Supplier supplier)
     {
         if (IsArchived)
-            throw new Exception("Archived product cannot be assigned");
+            throw new BusinessRuleException(
+                "Archived product cannot be assigned"
+            );
 
 
         if (!supplier.IsActive)
-            throw new Exception("Inactive supplier cannot be assigned");
+            throw new BusinessRuleException(
+                "Inactive supplier cannot be assigned"
+            );
 
 
         SupplierId = supplier.Id;

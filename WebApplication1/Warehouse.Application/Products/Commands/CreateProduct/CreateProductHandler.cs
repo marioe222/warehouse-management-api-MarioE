@@ -29,9 +29,12 @@ public class CreateProductHandler
             request.ExpiryDate
         );
 
+
         await _repository.Add(
             product,
-            cancellationToken);
+            cancellationToken
+        );
+
 
         return new CreateProductResponse(product.Id);
     }

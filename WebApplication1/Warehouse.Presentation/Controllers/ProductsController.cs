@@ -1,31 +1,26 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using AutoMapper;
-
 using Warehouse.Application.Products.Commands.ArchiveProduct;
 using Warehouse.Application.Products.Commands.AssignSupplier;
 using Warehouse.Application.Products.Commands.CreateProduct;
 using Warehouse.Application.Products.Commands.UpdateProductPrice;
 using Warehouse.Application.Products.Commands.UpdateProductQuantity;
 using Warehouse.Application.Products.Commands.UploadProductImage;
-
 using Warehouse.Application.Products.Queries.GetProductById;
 using Warehouse.Application.Products.Queries.ListProducts;
 using Warehouse.Application.Products.Queries.SearchProducts;
-
 using Warehouse.Application.ViewModels;
 using Warehouse.Presentation.Contracts;
 
-
 namespace Warehouse.Presentation.Controllers;
-
 
 [ApiController]
 [Route("api/products")]
 public class ProductsController : ControllerBase
 {
-    private readonly IMediator _mediator;
     private readonly IMapper _mapper;
+    private readonly IMediator _mediator;
 
 
     public ProductsController(
@@ -40,10 +35,12 @@ public class ProductsController : ControllerBase
     // GET: api/products
     [HttpGet]
     public async Task<IActionResult> GetAll(
-        [FromQuery] bool onlyAvailable = false)
+        [FromQuery] bool onlyAvailable = false,
+        CancellationToken cancellationToken = default)
     {
         var response = await _mediator.Send(
-            new ListProductsQuery(onlyAvailable)
+            new ListProductsQuery(onlyAvailable),
+            cancellationToken
         );
 
 
@@ -56,13 +53,15 @@ public class ProductsController : ControllerBase
     }
 
 
-
     // GET: api/products/{id}
     [HttpGet("{id:guid}")]
-    public async Task<IActionResult> GetById(Guid id)
+    public async Task<IActionResult> GetById(
+        Guid id,
+        CancellationToken cancellationToken = default)
     {
         var product = await _mediator.Send(
-            new GetProductByIdQuery(id)
+            new GetProductByIdQuery(id),
+            cancellationToken
         );
 
 
@@ -70,25 +69,28 @@ public class ProductsController : ControllerBase
             return NotFound();
 
 
-        var result = _mapper.Map<ProductViewModel>(product);
+        var result = _mapper.Map<ProductViewModel>(
+            product
+        );
 
 
         return Ok(result);
     }
 
 
-
     // GET: api/products/search
     [HttpGet("search")]
     public async Task<IActionResult> Search(
         [FromQuery] string? name,
-        [FromQuery] string? supplier)
+        [FromQuery] string? supplier,
+        CancellationToken cancellationToken = default)
     {
         var products = await _mediator.Send(
             new SearchProductsQuery(
                 name,
                 supplier
-            )
+            ),
+            cancellationToken
         );
 
 
@@ -98,11 +100,11 @@ public class ProductsController : ControllerBase
     }
 
 
-
     // POST: api/products
     [HttpPost]
     public async Task<IActionResult> Create(
-        CreateProductRequest request)
+        CreateProductRequest request,
+        CancellationToken cancellationToken = default)
     {
         var response = await _mediator.Send(
             new CreateProductCommand(
@@ -113,7 +115,8 @@ public class ProductsController : ControllerBase
                 request.QuantityInStock,
                 request.SupplierName,
                 request.ExpiryDate
-            )
+            ),
+            cancellationToken
         );
 
 
@@ -125,24 +128,19 @@ public class ProductsController : ControllerBase
     }
 
 
-
     // POST: api/products/{id}/quantity
     [HttpPost("{id:guid}/quantity")]
     public async Task<IActionResult> UpdateQuantity(
         Guid id,
-        UpdateProductQuantityRequest request)
+        UpdateProductQuantityRequest request,
+        CancellationToken cancellationToken = default)
     {
-        if (request.QuantityInStock < 0)
-            return BadRequest(
-                "Quantity cannot be negative."
-            );
-
-
         var result = await _mediator.Send(
             new UpdateProductQuantityCommand(
                 id,
                 request.QuantityInStock
-            )
+            ),
+            cancellationToken
         );
 
 
@@ -152,26 +150,21 @@ public class ProductsController : ControllerBase
 
         return NoContent();
     }
-
 
 
     // POST: api/products/{id}/price
     [HttpPost("{id:guid}/price")]
     public async Task<IActionResult> UpdatePrice(
         Guid id,
-        UpdateProductPriceRequest request)
+        UpdateProductPriceRequest request,
+        CancellationToken cancellationToken = default)
     {
-        if (request.Price <= 0)
-            return BadRequest(
-                "Price must be greater than zero."
-            );
-
-
         var result = await _mediator.Send(
             new UpdateProductPriceCommand(
                 id,
                 request.Price
-            )
+            ),
+            cancellationToken
         );
 
 
@@ -181,7 +174,6 @@ public class ProductsController : ControllerBase
 
         return NoContent();
     }
-
 
 
     // POST: api/products/{id}/image
@@ -189,13 +181,15 @@ public class ProductsController : ControllerBase
     [Consumes("multipart/form-data")]
     public async Task<IActionResult> UploadImage(
         Guid id,
-        IFormFile file)
+        IFormFile file,
+        CancellationToken cancellationToken = default)
     {
         var result = await _mediator.Send(
             new UploadProductImageCommand(
                 id,
                 file
-            )
+            ),
+            cancellationToken
         );
 
 
@@ -207,13 +201,15 @@ public class ProductsController : ControllerBase
     }
 
 
-
     // DELETE: api/products/{id}
     [HttpDelete("{id:guid}")]
-    public async Task<IActionResult> Delete(Guid id)
+    public async Task<IActionResult> Delete(
+        Guid id,
+        CancellationToken cancellationToken = default)
     {
         var result = await _mediator.Send(
-            new ArchiveProductCommand(id)
+            new ArchiveProductCommand(id),
+            cancellationToken
         );
 
 
@@ -223,7 +219,6 @@ public class ProductsController : ControllerBase
 
         return NoContent();
     }
-
 
 
     // GET: api/products/server-time
@@ -237,18 +232,19 @@ public class ProductsController : ControllerBase
     }
 
 
-
     // POST: api/products/{id}/assign-supplier/{supplierId}
     [HttpPost("{id:guid}/assign-supplier/{supplierId:guid}")]
     public async Task<IActionResult> AssignSupplier(
         Guid id,
-        Guid supplierId)
+        Guid supplierId,
+        CancellationToken cancellationToken = default)
     {
         var result = await _mediator.Send(
             new AssignSupplierCommand(
                 id,
                 supplierId
-            )
+            ),
+            cancellationToken
         );
 
 

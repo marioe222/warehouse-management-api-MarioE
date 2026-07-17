@@ -18,9 +18,10 @@ public class ListSuppliersHandler
         ListSuppliersQuery request,
         CancellationToken cancellationToken)
     {
-        var suppliers =
-            await _repository.GetAll(
-                cancellationToken);
+        var suppliers = await _repository.GetAll(
+            cancellationToken
+        );
+
 
         return new ListSuppliersResponse(
             suppliers

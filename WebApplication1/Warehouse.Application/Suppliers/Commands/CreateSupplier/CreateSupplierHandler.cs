@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Warehouse.Application.Suppliers.Commands;
 using Warehouse.Domain.Entities;
 using Warehouse.Domain.Interface;
 
@@ -20,15 +19,15 @@ public class CreateSupplierHandler
         CreateSupplierCommand request,
         CancellationToken cancellationToken)
     {
-        var supplier =
-            new Supplier(
-                request.Name,
-                request.ContactEmail
-            );
+        var supplier = new Supplier(
+            request.Name,
+            request.ContactEmail
+        );
 
         await _repository.Add(
             supplier,
-            cancellationToken);
+            cancellationToken
+        );
 
         return new CreateSupplierResponse(
             supplier.Id

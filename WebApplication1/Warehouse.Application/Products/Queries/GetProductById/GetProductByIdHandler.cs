@@ -19,14 +19,10 @@ public class GetProductByIdHandler
         CancellationToken cancellationToken)
     {
         var product =
-            await _repository.GetById(
-                request.Id,
-                cancellationToken);
+            await _repository.GetById(request.Id, cancellationToken);
 
-        if (product == null)
-        {
-            return null;
-        }
+
+        if (product == null) return null;
 
         return new GetProductByIdResponse(product);
     }

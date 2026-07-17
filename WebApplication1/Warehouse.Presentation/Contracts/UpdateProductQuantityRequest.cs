@@ -1,6 +1,8 @@
-﻿namespace Warehouse.Presentation.Contracts;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Warehouse.Presentation.Contracts;
 
 public class UpdateProductQuantityRequest
 {
-    public int QuantityInStock { get; set; }
+    [Required] [Range(0, int.MaxValue)] public int QuantityInStock { get; set; }
 }

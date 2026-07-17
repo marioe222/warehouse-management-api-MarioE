@@ -18,10 +18,11 @@ public class GetSupplierByIdHandler
         GetSupplierByIdQuery request,
         CancellationToken cancellationToken)
     {
-        var supplier =
-            await _repository.GetById(
-                request.Id,
-                cancellationToken);
+        var supplier = await _repository.GetById(
+            request.Id,
+            cancellationToken
+        );
+
 
         if (supplier == null)
             return null;

@@ -18,10 +18,11 @@ public class UpdateProductPriceHandler
         UpdateProductPriceCommand request,
         CancellationToken cancellationToken)
     {
-        var product =
-            await _repository.GetById(
-                request.ProductId,
-                cancellationToken);
+        var product = await _repository.GetById(
+            request.ProductId,
+            cancellationToken
+        );
+
 
         if (product == null)
             return new UpdateProductPriceResponse(false);
@@ -30,9 +31,9 @@ public class UpdateProductPriceHandler
             request.Price
         );
 
-        await _repository.Update(
-            product,
-            cancellationToken);
+
+        await _repository.Update(product, cancellationToken);
+
 
         return new UpdateProductPriceResponse(true);
     }

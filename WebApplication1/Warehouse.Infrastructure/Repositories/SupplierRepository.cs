@@ -16,34 +16,47 @@ public class SupplierRepository : ISupplierRepository
 
     public async Task Add(
         Supplier supplier,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
-        await _context.Suppliers.AddAsync(supplier, cancellationToken);
-        await _context.SaveChangesAsync(cancellationToken);
+        await _context.Suppliers.AddAsync(
+            supplier,
+            cancellationToken
+        );
+
+        await _context.SaveChangesAsync(
+            cancellationToken
+        );
     }
+
 
     public async Task<Supplier?> GetById(
         Guid id,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
         return await _context.Suppliers
             .FirstOrDefaultAsync(
                 s => s.Id == id,
-                cancellationToken);
+                cancellationToken
+            );
     }
 
+
     public async Task<List<Supplier>> GetAll(
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
         return await _context.Suppliers
             .ToListAsync(cancellationToken);
     }
 
+
     public async Task Update(
         Supplier supplier,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
         _context.Suppliers.Update(supplier);
-        await _context.SaveChangesAsync(cancellationToken);
+
+        await _context.SaveChangesAsync(
+            cancellationToken
+        );
     }
 }

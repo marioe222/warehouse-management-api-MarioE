@@ -18,19 +18,19 @@ public class ArchiveProductHandler
         ArchiveProductCommand request,
         CancellationToken cancellationToken)
     {
-        var product =
-            await _repository.GetById(
-                request.ProductId,
-                cancellationToken);
+        var product = await _repository.GetById(
+            request.ProductId, cancellationToken
+        );
+
 
         if (product == null)
             return new ArchiveProductResponse(false);
 
         product.Archive();
 
-        await _repository.Update(
-            product,
-            cancellationToken);
+
+        await _repository.Update(product, cancellationToken);
+
 
         return new ArchiveProductResponse(true);
     }
