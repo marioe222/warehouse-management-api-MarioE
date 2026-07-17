@@ -1,7 +1,7 @@
-﻿using AutoMapper;
+﻿using System.Text.Json;
+using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
-using System.Text.Json;
 using Warehouse.Application.ViewModels;
 using Warehouse.Domain.Interface;
 
@@ -10,9 +10,9 @@ namespace Warehouse.Application.Products.Queries.ListProducts;
 public class ListProductsHandler
     : IRequestHandler<ListProductsQuery, ListProductsResponse>
 {
-    private readonly IProductRepository _repository;
-    private readonly IMapper _mapper;
     private readonly IDistributedCache _cache;
+    private readonly IMapper _mapper;
+    private readonly IProductRepository _repository;
 
     public ListProductsHandler(
         IProductRepository repository,
@@ -40,11 +40,9 @@ public class ListProductsHandler
                 cancellationToken);
 
             if (request.OnlyAvailable)
-            {
                 products = products
                     .Where(p => p.QuantityInStock > 0)
                     .ToList();
-            }
 
             var productViewModels =
                 _mapper.Map<List<ProductViewModel>>(products);

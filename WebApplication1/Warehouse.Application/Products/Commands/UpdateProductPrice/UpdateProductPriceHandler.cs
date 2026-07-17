@@ -7,8 +7,8 @@ namespace Warehouse.Application.Products.Commands.UpdateProductPrice;
 public class UpdateProductPriceHandler
     : IRequestHandler<UpdateProductPriceCommand, UpdateProductPriceResponse>
 {
-    private readonly IProductRepository _repository;
     private readonly IDistributedCache _cache;
+    private readonly IProductRepository _repository;
 
     public UpdateProductPriceHandler(
         IProductRepository repository,

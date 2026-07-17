@@ -7,9 +7,9 @@ namespace Warehouse.Application.Products.Commands.AssignSupplier;
 public class AssignSupplierHandler
     : IRequestHandler<AssignSupplierCommand, AssignSupplierResponse>
 {
+    private readonly IDistributedCache _cache;
     private readonly IProductRepository _productRepository;
     private readonly ISupplierRepository _supplierRepository;
-    private readonly IDistributedCache _cache;
 
     public AssignSupplierHandler(
         IProductRepository productRepository,

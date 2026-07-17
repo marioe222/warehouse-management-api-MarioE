@@ -1,6 +1,6 @@
-﻿using MediatR;
+﻿using System.Text.Json;
+using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
-using System.Text.Json;
 using Warehouse.Domain.Interface;
 
 namespace Warehouse.Application.Suppliers.Queries.ListSuppliers;
@@ -8,8 +8,8 @@ namespace Warehouse.Application.Suppliers.Queries.ListSuppliers;
 public class ListSuppliersHandler
     : IRequestHandler<ListSuppliersQuery, ListSuppliersResponse>
 {
-    private readonly ISupplierRepository _repository;
     private readonly IDistributedCache _cache;
+    private readonly ISupplierRepository _repository;
 
     public ListSuppliersHandler(
         ISupplierRepository repository,

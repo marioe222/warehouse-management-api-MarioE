@@ -7,8 +7,8 @@ namespace Warehouse.Application.Suppliers.Commands.DeactivateSupplier;
 public class DeactivateSupplierHandler
     : IRequestHandler<DeactivateSupplierCommand, DeactivateSupplierResponse>
 {
-    private readonly ISupplierRepository _repository;
     private readonly IDistributedCache _cache;
+    private readonly ISupplierRepository _repository;
 
     public DeactivateSupplierHandler(
         ISupplierRepository repository,

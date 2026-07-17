@@ -1,36 +1,30 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
-using AutoMapper;
-using Microsoft.Extensions.Logging;
-
 using Warehouse.Application.Products.Commands.ArchiveProduct;
 using Warehouse.Application.Products.Commands.AssignSupplier;
 using Warehouse.Application.Products.Commands.CreateProduct;
 using Warehouse.Application.Products.Commands.UpdateProductPrice;
 using Warehouse.Application.Products.Commands.UpdateProductQuantity;
 using Warehouse.Application.Products.Commands.UploadProductImage;
-
 using Warehouse.Application.Products.Queries.GetProductById;
 using Warehouse.Application.Products.Queries.ListProducts;
 using Warehouse.Application.Products.Queries.SearchProducts;
-
 using Warehouse.Application.ViewModels;
 using Warehouse.Presentation.Contracts;
 using Warehouse.Presentation.Resources;
 
-
 namespace Warehouse.Presentation.Controllers;
-
 
 [ApiController]
 [Route("api/products")]
 public class ProductsController : ControllerBase
 {
-    private readonly IMediator _mediator;
-    private readonly IMapper _mapper;
     private readonly IStringLocalizer<SharedResources> _localizer;
     private readonly ILogger<ProductsController> _logger;
+    private readonly IMapper _mapper;
+    private readonly IMediator _mediator;
 
 
     public ProductsController(
@@ -44,7 +38,6 @@ public class ProductsController : ControllerBase
         _localizer = localizer;
         _logger = logger;
     }
-
 
 
     // GET: api/products
@@ -71,8 +64,6 @@ public class ProductsController : ControllerBase
 
         return Ok(result);
     }
-
-
 
 
     // GET: api/products/{id}
@@ -109,8 +100,6 @@ public class ProductsController : ControllerBase
     }
 
 
-
-
     // GET: api/products/search
     [HttpGet("search")]
     public async Task<IActionResult> Search(
@@ -137,9 +126,6 @@ public class ProductsController : ControllerBase
             _mapper.Map<List<ProductViewModel>>(products)
         );
     }
-
-
-
 
 
     // POST: api/products
@@ -177,8 +163,6 @@ public class ProductsController : ControllerBase
             }
         );
     }
-
-
 
 
     // POST: api/products/{id}/quantity
@@ -222,9 +206,6 @@ public class ProductsController : ControllerBase
     }
 
 
-
-
-
     // POST: api/products/{id}/price
     [HttpPost("{id:guid}/price")]
     public async Task<IActionResult> UpdatePrice(
@@ -264,9 +245,6 @@ public class ProductsController : ControllerBase
             message = _localizer["ProductUpdated"].Value
         });
     }
-
-
-
 
 
     // POST: api/products/{id}/image
@@ -311,9 +289,6 @@ public class ProductsController : ControllerBase
     }
 
 
-
-
-
     // DELETE: api/products/{id}
     [HttpDelete("{id:guid}")]
     public async Task<IActionResult> Delete(
@@ -351,9 +326,6 @@ public class ProductsController : ControllerBase
     }
 
 
-
-
-
     // GET: api/products/server-time
     [HttpGet("server-time")]
     public IActionResult GetServerTime(
@@ -370,9 +342,6 @@ public class ProductsController : ControllerBase
             time = DateTime.UtcNow
         });
     }
-
-
-
 
 
     // POST: api/products/{id}/assign-supplier/{supplierId}

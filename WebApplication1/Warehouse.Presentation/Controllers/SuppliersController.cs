@@ -1,30 +1,24 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
-using Microsoft.Extensions.Logging;
-using AutoMapper;
-
 using Warehouse.Application.Suppliers.Commands.CreateSupplier;
 using Warehouse.Application.Suppliers.Commands.DeactivateSupplier;
-
 using Warehouse.Application.Suppliers.Queries.GetSupplierById;
 using Warehouse.Application.Suppliers.Queries.ListSuppliers;
-
 using Warehouse.Application.ViewModels;
 using Warehouse.Presentation.Resources;
 
-
 namespace Warehouse.Presentation.Controllers;
-
 
 [ApiController]
 [Route("api/suppliers")]
 public class SuppliersController : ControllerBase
 {
-    private readonly IMediator _mediator;
-    private readonly IMapper _mapper;
     private readonly IStringLocalizer<SharedResources> _localizer;
     private readonly ILogger<SuppliersController> _logger;
+    private readonly IMapper _mapper;
+    private readonly IMediator _mediator;
 
 
     public SuppliersController(
@@ -38,7 +32,6 @@ public class SuppliersController : ControllerBase
         _localizer = localizer;
         _logger = logger;
     }
-
 
 
     // GET /api/suppliers
@@ -72,7 +65,6 @@ public class SuppliersController : ControllerBase
             data = result
         });
     }
-
 
 
     // GET /api/suppliers/{id}
@@ -119,7 +111,6 @@ public class SuppliersController : ControllerBase
     }
 
 
-
     // POST /api/suppliers
     [HttpPost]
     public async Task<IActionResult> Create(
@@ -147,7 +138,6 @@ public class SuppliersController : ControllerBase
             }
         );
     }
-
 
 
     // DELETE /api/suppliers/{id}

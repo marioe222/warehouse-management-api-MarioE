@@ -7,8 +7,8 @@ namespace Warehouse.Application.Products.Commands.ArchiveProduct;
 public class ArchiveProductHandler
     : IRequestHandler<ArchiveProductCommand, ArchiveProductResponse>
 {
-    private readonly IProductRepository _repository;
     private readonly IDistributedCache _cache;
+    private readonly IProductRepository _repository;
 
     public ArchiveProductHandler(
         IProductRepository repository,

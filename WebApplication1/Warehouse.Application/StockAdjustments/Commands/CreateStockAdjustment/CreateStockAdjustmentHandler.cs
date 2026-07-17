@@ -8,8 +8,8 @@ namespace Warehouse.Application.StockAdjustments.Commands.CreateStockAdjustment;
 public class CreateStockAdjustmentHandler
     : IRequestHandler<CreateStockAdjustmentCommand, CreateStockAdjustmentResponse>
 {
-    private readonly IStockAdjustmentRepository _repository;
     private readonly IDistributedCache _cache;
+    private readonly IStockAdjustmentRepository _repository;
 
     public CreateStockAdjustmentHandler(
         IStockAdjustmentRepository repository,

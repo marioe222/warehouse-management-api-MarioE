@@ -2,7 +2,7 @@ using FluentValidation;
 
 namespace Warehouse.Application.StockAdjustments.Commands.CreateStockAdjustment;
 
-public class CreateStockAdjustmentValidator 
+public class CreateStockAdjustmentValidator
     : AbstractValidator<CreateStockAdjustmentCommand>
 {
     public CreateStockAdjustmentValidator()

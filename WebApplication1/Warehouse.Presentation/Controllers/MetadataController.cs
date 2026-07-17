@@ -1,14 +1,10 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Localization;
-using Microsoft.Extensions.Logging;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
-
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using Warehouse.Presentation.Resources;
 
-
 namespace Warehouse.Presentation.Controllers;
-
 
 [ApiController]
 [Route("api/metadata")]
@@ -25,7 +21,6 @@ public class MetadataController : ControllerBase
         _localizer = localizer;
         _logger = logger;
     }
-
 
 
     // GET: api/metadata/validation/{dtoName}
@@ -45,7 +40,6 @@ public class MetadataController : ControllerBase
             .FirstOrDefault(t => t.Name == dtoName);
 
 
-
         if (dtoType == null)
         {
             _logger.LogWarning(
@@ -61,12 +55,11 @@ public class MetadataController : ControllerBase
         }
 
 
-
         var properties = dtoType
             .GetProperties()
             .Select(property => new
             {
-                Name = property.Name,
+                property.Name,
 
                 Type = property.PropertyType.Name,
 
@@ -83,11 +76,9 @@ public class MetadataController : ControllerBase
             });
 
 
-
         _logger.LogInformation(
             "Validation metadata retrieved successfully for DTO {DtoName}",
             dtoName);
-
 
 
         return Ok(new

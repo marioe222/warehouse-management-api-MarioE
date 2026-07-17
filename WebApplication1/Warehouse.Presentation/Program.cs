@@ -1,33 +1,24 @@
-using Serilog;
 using System.Globalization;
 using FluentValidation;
 using Hangfire;
 using Hangfire.MemoryStorage;
-
-using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.EntityFrameworkCore;
-
 using HealthChecks.UI.Client;
-
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.EntityFrameworkCore;
+using Serilog;
 using Warehouse.Application.Behaviors;
 using Warehouse.Application.Mapping;
 using Warehouse.Application.Products.Commands.CreateProduct;
-
 using Warehouse.Domain.Interface;
-
 using Warehouse.Infrastructure.Data;
 using Warehouse.Infrastructure.Repositories;
-
 using Warehouse.Presentation.Filters;
+using Warehouse.Presentation.Jobs;
 using Warehouse.Presentation.Middleware;
 using Warehouse.Presentation.Swagger;
-using Warehouse.Presentation.Jobs;
-
-
 
 var builder = WebApplication.CreateBuilder(args);
-
 
 
 // Serilog Configuration
@@ -43,7 +34,6 @@ Log.Logger = new LoggerConfiguration()
 builder.Host.UseSerilog();
 
 
-
 // PostgreSQL timestamp compatibility
 
 AppContext.SetSwitch(
@@ -52,26 +42,23 @@ AppContext.SetSwitch(
 );
 
 
-
 // Controllers + Filters
 
 builder.Services.AddControllers(options =>
-{
-    options.Filters.Add<ValidationFilter>();
-    options.Filters.Add<ActionLoggingFilter>();
-})
-.AddDataAnnotationsLocalization();
+    {
+        options.Filters.Add<ValidationFilter>();
+        options.Filters.Add<ActionLoggingFilter>();
+    })
+    .AddDataAnnotationsLocalization();
 
 
 builder.Services.AddScoped<ValidationFilter>();
 builder.Services.AddScoped<ActionLoggingFilter>();
 
 
-
 // AutoMapper
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
-
 
 
 // Database
@@ -81,7 +68,6 @@ builder.Services.AddDbContext<WarehouseDbContext>(options =>
         builder.Configuration
             .GetConnectionString("DefaultConnection")
     ));
-
 
 
 // Redis Cache
@@ -96,7 +82,6 @@ builder.Services.AddStackExchangeRedisCache(options =>
 });
 
 
-
 // Health Checks
 
 builder.Services
@@ -109,7 +94,6 @@ builder.Services
             .GetConnectionString("Redis")!);
 
 
-
 // Health Check UI
 
 builder.Services
@@ -120,7 +104,6 @@ builder.Services
             "/health");
     })
     .AddInMemoryStorage();
-
 
 
 // MediatR
@@ -138,13 +121,11 @@ builder.Services.AddMediatR(cfg =>
 });
 
 
-
 // FluentValidation
 
 builder.Services.AddValidatorsFromAssembly(
     typeof(CreateProductCommand).Assembly
 );
-
 
 
 // Localization
@@ -175,7 +156,6 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 });
 
 
-
 // Dependency Injection
 // Repositories
 
@@ -186,15 +166,9 @@ builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
 builder.Services.AddScoped<IStockAdjustmentRepository, StockAdjustmentRepository>();
 
 
-
-// ===============================
 // Hangfire Configuration
-// ===============================
 
-builder.Services.AddHangfire(config =>
-{
-    config.UseMemoryStorage();
-});
+builder.Services.AddHangfire(config => { config.UseMemoryStorage(); });
 
 
 builder.Services.AddHangfireServer();
@@ -205,17 +179,12 @@ builder.Services.AddHangfireServer();
 builder.Services.AddScoped<ProductExpiryJob>();
 
 
-
 // Swagger
 
 builder.Services.AddEndpointsApiExplorer();
 
 
-builder.Services.AddSwaggerGen(options =>
-{
-    options.OperationFilter<LocalizationHeaderOperationFilter>();
-});
-
+builder.Services.AddSwaggerGen(options => { options.OperationFilter<LocalizationHeaderOperationFilter>(); });
 
 
 // Build Application
@@ -223,11 +192,9 @@ builder.Services.AddSwaggerGen(options =>
 var app = builder.Build();
 
 
-
 // Localization Middleware
 
 app.UseRequestLocalization();
-
 
 
 // Custom Middleware
@@ -239,7 +206,6 @@ app.UseMiddleware<RequestTimingMiddleware>();
 app.UseExceptionHandling();
 
 
-
 // Swagger
 
 app.UseSwagger();
@@ -247,28 +213,23 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 
-
 // HTTPS + Authorization
 
 app.UseHttpsRedirection();
 
 
-// ===============================
 // Hangfire Dashboard
-// ===============================
+
 
 app.UseHangfireDashboard();
-
 
 
 app.UseAuthorization();
 
 
-
 // Controllers
 
 app.MapControllers();
-
 
 
 // Health Check Endpoint
@@ -282,26 +243,19 @@ app.MapHealthChecks(
     });
 
 
-
 // Health Dashboard
 
-app.MapHealthChecksUI(options =>
-{
-    options.UIPath = "/health-ui";
-});
+app.MapHealthChecksUI(options => { options.UIPath = "/health-ui"; });
 
 
-
-// ===============================
 // Recurring Hangfire Job
-// ===============================
+
 
 RecurringJob.AddOrUpdate<ProductExpiryJob>(
     "check-expired-products",
     job => job.CheckProductsAsync(),
     Cron.Daily
 );
-
 
 
 // Run

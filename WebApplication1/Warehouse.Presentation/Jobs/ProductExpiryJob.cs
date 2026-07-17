@@ -25,13 +25,11 @@ public class ProductExpiryJob
         var today = DateOnly.FromDateTime(DateTime.Today);
 
 
-
         var expiredProducts = products
             .Where(p =>
                 p.ExpiryDate.HasValue &&
                 DateOnly.FromDateTime(p.ExpiryDate.Value) < today)
             .ToList();
-
 
 
         var soonToExpireProducts = products
@@ -42,20 +40,15 @@ public class ProductExpiryJob
             .ToList();
 
 
-
         _logger.LogInformation(
             "Expired products count: {Count}",
             expiredProducts.Count);
 
 
-
         foreach (var product in expiredProducts)
-        {
             _logger.LogWarning(
                 "Expired product: {Name}",
                 product.Name);
-        }
-
 
 
         _logger.LogInformation(
@@ -63,12 +56,9 @@ public class ProductExpiryJob
             soonToExpireProducts.Count);
 
 
-
         foreach (var product in soonToExpireProducts)
-        {
             _logger.LogInformation(
                 "Soon to expire product: {Name}",
                 product.Name);
-        }
     }
 }

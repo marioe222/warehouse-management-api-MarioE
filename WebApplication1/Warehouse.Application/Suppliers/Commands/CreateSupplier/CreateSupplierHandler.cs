@@ -8,8 +8,8 @@ namespace Warehouse.Application.Suppliers.Commands.CreateSupplier;
 public class CreateSupplierHandler
     : IRequestHandler<CreateSupplierCommand, CreateSupplierResponse>
 {
-    private readonly ISupplierRepository _repository;
     private readonly IDistributedCache _cache;
+    private readonly ISupplierRepository _repository;
 
     public CreateSupplierHandler(
         ISupplierRepository repository,

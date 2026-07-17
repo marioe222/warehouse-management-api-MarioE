@@ -7,8 +7,8 @@ namespace Warehouse.Application.Products.Commands.UpdateProductQuantity;
 public class UpdateProductQuantityHandler
     : IRequestHandler<UpdateProductQuantityCommand, UpdateProductQuantityResponse>
 {
-    private readonly IProductRepository _repository;
     private readonly IDistributedCache _cache;
+    private readonly IProductRepository _repository;
 
     public UpdateProductQuantityHandler(
         IProductRepository repository,

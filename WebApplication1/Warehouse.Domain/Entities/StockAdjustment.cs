@@ -11,5 +11,4 @@ public class StockAdjustment
     public string Reason { get; set; } = string.Empty;
 
     public DateTime CreatedAt { get; set; }
-    
 }

@@ -1,22 +1,18 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
-using Microsoft.Extensions.Logging;
-
 using Warehouse.Application.Dashboard.Queries.GetInventoryDashboard;
 using Warehouse.Presentation.Resources;
 
-
 namespace Warehouse.Presentation.Controllers;
-
 
 [ApiController]
 [Route("api/inventory")]
 public class DashboardController : ControllerBase
 {
-    private readonly IMediator _mediator;
     private readonly IStringLocalizer<SharedResources> _localizer;
     private readonly ILogger<DashboardController> _logger;
+    private readonly IMediator _mediator;
 
 
     public DashboardController(
@@ -28,7 +24,6 @@ public class DashboardController : ControllerBase
         _localizer = localizer;
         _logger = logger;
     }
-
 
 
     // GET: api/inventory/dashboard

@@ -1,18 +1,16 @@
 using System.Net;
 using System.Text.Json;
 using FluentValidation;
-
 using Warehouse.Application.Common.Exceptions;
 using Warehouse.Domain.Exceptions;
 using Warehouse.Presentation.Contracts;
-
 
 namespace Warehouse.Presentation.Middleware;
 
 public class ExceptionHandlingMiddleware
 {
-    private readonly RequestDelegate _next;
     private readonly ILogger<ExceptionHandlingMiddleware> _logger;
+    private readonly RequestDelegate _next;
 
 
     public ExceptionHandlingMiddleware(
@@ -22,7 +20,6 @@ public class ExceptionHandlingMiddleware
         _next = next;
         _logger = logger;
     }
-
 
 
     public async Task InvokeAsync(HttpContext context)
@@ -49,7 +46,6 @@ public class ExceptionHandlingMiddleware
     }
 
 
-
     private static async Task HandleExceptionAsync(
         HttpContext context,
         Exception exception)
@@ -57,7 +53,6 @@ public class ExceptionHandlingMiddleware
         var statusCode = HttpStatusCode.InternalServerError;
         var errorCode = "INTERNAL_ERROR";
         var message = "An unexpected error occurred.";
-
 
 
         switch (exception)
@@ -69,13 +64,11 @@ public class ExceptionHandlingMiddleware
                 break;
 
 
-
             case BusinessRuleException:
                 statusCode = HttpStatusCode.BadRequest;
                 errorCode = "BUSINESS_RULE_ERROR";
                 message = exception.Message;
                 break;
-
 
 
             case ValidationException validationException:
@@ -92,10 +85,8 @@ public class ExceptionHandlingMiddleware
         }
 
 
-
         context.Response.StatusCode = (int)statusCode;
         context.Response.ContentType = "application/json";
-
 
 
         var response = new ApiErrorResponse(
@@ -103,7 +94,6 @@ public class ExceptionHandlingMiddleware
             message,
             context.TraceIdentifier
         );
-
 
 
         await context.Response.WriteAsync(

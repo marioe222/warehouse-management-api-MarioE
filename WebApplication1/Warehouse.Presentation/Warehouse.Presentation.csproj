@@ -8,37 +8,37 @@
 
 
     <ItemGroup>
-        <PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="8.0.0" />
-        <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="8.0.0" />
-        <PackageReference Include="AspNetCore.HealthChecks.UI" Version="8.0.0" />
-        <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="8.0.0" />
-        <PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="8.0.0" />
-        <PackageReference Include="Hangfire.AspNetCore" Version="1.8.24" />
-        <PackageReference Include="Hangfire.MemoryStorage" Version="1.8.1.2" />
-        <PackageReference Include="MediatR" Version="14.2.0" />
+        <PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="8.0.0"/>
+        <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="8.0.0"/>
+        <PackageReference Include="AspNetCore.HealthChecks.UI" Version="8.0.0"/>
+        <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="8.0.0"/>
+        <PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="8.0.0"/>
+        <PackageReference Include="Hangfire.AspNetCore" Version="1.8.24"/>
+        <PackageReference Include="Hangfire.MemoryStorage" Version="1.8.1.2"/>
+        <PackageReference Include="MediatR" Version="14.2.0"/>
 
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
 
-        <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.0"/>
 
-        <PackageReference Include="Microsoft.Extensions.Localization" Version="10.0.10" />
+        <PackageReference Include="Microsoft.Extensions.Localization" Version="10.0.10"/>
 
-        <PackageReference Include="Serilog.AspNetCore" Version="10.0.0" />
+        <PackageReference Include="Serilog.AspNetCore" Version="10.0.0"/>
 
-        <PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
+        <PackageReference Include="Serilog.Sinks.Console" Version="6.1.1"/>
 
-        <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+        <PackageReference Include="Serilog.Sinks.File" Version="7.0.0"/>
 
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3"/>
     </ItemGroup>
 
 
     <ItemGroup>
-        <ProjectReference Include="..\Warehouse.Application\Warehouse.Application.csproj" />
-        <ProjectReference Include="..\Warehouse.Infrastructure\Warehouse.Infrastructure.csproj" />
+        <ProjectReference Include="..\Warehouse.Application\Warehouse.Application.csproj"/>
+        <ProjectReference Include="..\Warehouse.Infrastructure\Warehouse.Infrastructure.csproj"/>
     </ItemGroup>
 
 

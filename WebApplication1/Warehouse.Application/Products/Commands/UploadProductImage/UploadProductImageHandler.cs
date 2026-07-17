@@ -7,8 +7,8 @@ namespace Warehouse.Application.Products.Commands.UploadProductImage;
 public class UploadProductImageHandler
     : IRequestHandler<UploadProductImageCommand, UploadProductImageResponse>
 {
-    private readonly IProductRepository _repository;
     private readonly IDistributedCache _cache;
+    private readonly IProductRepository _repository;
 
     public UploadProductImageHandler(
         IProductRepository repository,
@@ -28,10 +28,7 @@ public class UploadProductImageHandler
         );
 
 
-        if (product == null)
-        {
-            return new UploadProductImageResponse(false);
-        }
+        if (product == null) return new UploadProductImageResponse(false);
 
 
         // TODO:

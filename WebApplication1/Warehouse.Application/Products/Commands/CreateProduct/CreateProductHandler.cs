@@ -8,8 +8,8 @@ namespace Warehouse.Application.Products.Commands.CreateProduct;
 public class CreateProductHandler
     : IRequestHandler<CreateProductCommand, CreateProductResponse>
 {
-    private readonly IProductRepository _repository;
     private readonly IDistributedCache _cache;
+    private readonly IProductRepository _repository;
 
     public CreateProductHandler(
         IProductRepository repository,

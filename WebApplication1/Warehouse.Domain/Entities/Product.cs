@@ -4,42 +4,6 @@ namespace Warehouse.Domain.Entities;
 
 public class Product
 {
-    public Guid Id { get; private set; }
-
-    public string Name { get; private set; }
-
-    public string Sku { get; private set; }
-
-    public string Description { get; private set; }
-
-    public decimal Price { get; private set; }
-
-    public int QuantityInStock { get; private set; }
-
-    public string? SupplierName { get; private set; }
-
-    public DateTime? ExpiryDate { get; private set; }
-
-    public bool IsArchived { get; private set; }
-
-    public DateTime CreatedAt { get; private set; }
-
-    public DateTime LastUpdatedAt { get; private set; }
-
-
-    // Foreign Key
-    public Guid? SupplierId { get; private set; }
-
-
-    // Navigation Property
-    public Supplier? Supplier { get; private set; }
-
-
-    // Navigation Property
-    public ICollection<ProductImage> Images { get; private set; }
-        = new List<ProductImage>();
-
-
     private Product()
     {
     }
@@ -99,6 +63,41 @@ public class Product
         LastUpdatedAt = DateTime.UtcNow;
     }
 
+    public Guid Id { get; private set; }
+
+    public string Name { get; private set; }
+
+    public string Sku { get; private set; }
+
+    public string Description { get; private set; }
+
+    public decimal Price { get; private set; }
+
+    public int QuantityInStock { get; private set; }
+
+    public string? SupplierName { get; private set; }
+
+    public DateTime? ExpiryDate { get; private set; }
+
+    public bool IsArchived { get; private set; }
+
+    public DateTime CreatedAt { get; private set; }
+
+    public DateTime LastUpdatedAt { get; private set; }
+
+
+    // Foreign Key
+    public Guid? SupplierId { get; private set; }
+
+
+    // Navigation Property
+    public Supplier? Supplier { get; private set; }
+
+
+    // Navigation Property
+    public ICollection<ProductImage> Images { get; private set; }
+        = new List<ProductImage>();
+
 
     public void UpdatePrice(decimal price)
     {
@@ -123,8 +122,8 @@ public class Product
     {
         if (quantity < 0)
             throw new BusinessRuleException(
-               "Invalid  quantity"
-               );
+                "Invalid  quantity"
+            );
 
 
         QuantityInStock = quantity;

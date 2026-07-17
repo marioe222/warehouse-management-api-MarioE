@@ -1,6 +1,6 @@
-﻿using MediatR;
+﻿using System.Text.Json;
+using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
-using System.Text.Json;
 using Warehouse.Domain.Interface;
 
 namespace Warehouse.Application.Suppliers.Queries.GetSupplierById;
@@ -8,8 +8,8 @@ namespace Warehouse.Application.Suppliers.Queries.GetSupplierById;
 public class GetSupplierByIdHandler
     : IRequestHandler<GetSupplierByIdQuery, GetSupplierByIdResponse?>
 {
-    private readonly ISupplierRepository _repository;
     private readonly IDistributedCache _cache;
+    private readonly ISupplierRepository _repository;
 
     public GetSupplierByIdHandler(
         ISupplierRepository repository,
@@ -35,10 +35,7 @@ public class GetSupplierByIdHandler
                 request.Id,
                 cancellationToken);
 
-            if (supplier == null)
-            {
-                return null;
-            }
+            if (supplier == null) return null;
 
             var response = new GetSupplierByIdResponse(
                 supplier);

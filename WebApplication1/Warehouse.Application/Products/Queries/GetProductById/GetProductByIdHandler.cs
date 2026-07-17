@@ -1,6 +1,6 @@
-﻿using MediatR;
+﻿using System.Text.Json;
+using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
-using System.Text.Json;
 using Warehouse.Domain.Interface;
 
 namespace Warehouse.Application.Products.Queries.GetProductById;
@@ -8,8 +8,8 @@ namespace Warehouse.Application.Products.Queries.GetProductById;
 public class GetProductByIdHandler
     : IRequestHandler<GetProductByIdQuery, GetProductByIdResponse?>
 {
-    private readonly IProductRepository _repository;
     private readonly IDistributedCache _cache;
+    private readonly IProductRepository _repository;
 
     public GetProductByIdHandler(
         IProductRepository repository,
@@ -35,10 +35,7 @@ public class GetProductByIdHandler
                 request.Id,
                 cancellationToken);
 
-            if (product == null)
-            {
-                return null;
-            }
+            if (product == null) return null;
 
             var response = new GetProductByIdResponse(
                 product.Id,

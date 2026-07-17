@@ -17,6 +17,6 @@ public class WarehouseDbContext : DbContext
     public DbSet<Supplier> Suppliers { get; set; }
 
     public DbSet<ProductImage> ProductImages { get; set; }
-    
+
     public DbSet<StockAdjustment> StockAdjustments { get; set; }
 }

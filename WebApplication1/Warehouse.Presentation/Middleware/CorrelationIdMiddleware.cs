@@ -2,10 +2,9 @@ namespace Warehouse.Presentation.Middleware;
 
 public class CorrelationIdMiddleware
 {
-    private readonly RequestDelegate _next;
-    private readonly ILogger<CorrelationIdMiddleware> _logger;
-
     private const string HeaderName = "X-Correlation-ID";
+    private readonly ILogger<CorrelationIdMiddleware> _logger;
+    private readonly RequestDelegate _next;
 
 
     public CorrelationIdMiddleware(
@@ -17,7 +16,6 @@ public class CorrelationIdMiddleware
     }
 
 
-
     public async Task InvokeAsync(
         HttpContext context)
     {
@@ -27,14 +25,12 @@ public class CorrelationIdMiddleware
                 : Guid.NewGuid().ToString();
 
 
-
         context.Response.Headers[HeaderName] =
             correlationId;
 
 
         context.Items[HeaderName] =
             correlationId;
-
 
 
         using (_logger.BeginScope(

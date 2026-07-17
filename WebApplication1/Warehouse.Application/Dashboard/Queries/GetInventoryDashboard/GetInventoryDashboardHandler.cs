@@ -39,17 +39,13 @@ public class GetInventoryDashboardHandler
 
 
         return new GetInventoryDashboardResponse(
-            TotalProducts: products.Count(),
-
-            AvailableProducts: products.Count(p =>
+            products.Count(),
+            products.Count(p =>
                 p.QuantityInStock > 0),
-
-            LowStockProducts: products.Count(p =>
+            products.Count(p =>
                 p.QuantityInStock < 5),
-
-            TotalSuppliers: suppliers.Count(),
-
-            ActiveSuppliers: suppliers.Count(s =>
+            suppliers.Count(),
+            suppliers.Count(s =>
                 s.IsActive)
         );
     }
