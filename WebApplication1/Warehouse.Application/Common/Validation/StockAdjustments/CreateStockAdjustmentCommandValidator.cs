@@ -1,6 +1,7 @@
 using FluentValidation;
+using Warehouse.Application.StockAdjustments.Commands.CreateStockAdjustment;
 
-namespace Warehouse.Application.StockAdjustments.Commands.CreateStockAdjustment;
+namespace Warehouse.Application.Common.Validation.StockAdjustments;
 
 public class CreateStockAdjustmentValidator
     : AbstractValidator<CreateStockAdjustmentCommand>
