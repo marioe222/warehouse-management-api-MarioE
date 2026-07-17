@@ -2,9 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Warehouse.Application.Dashboard.Queries.GetInventoryDashboard;
 
-
 namespace Warehouse.Presentation.Controllers;
-
 
 [ApiController]
 [Route("api/inventory")]

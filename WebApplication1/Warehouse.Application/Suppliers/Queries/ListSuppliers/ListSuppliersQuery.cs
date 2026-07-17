@@ -2,5 +2,4 @@
 
 namespace Warehouse.Application.Suppliers.Queries.ListSuppliers;
 
-public record ListSuppliersQuery()
-    : IRequest<ListSuppliersResponse>;
+public record ListSuppliersQuery : IRequest<ListSuppliersResponse>;

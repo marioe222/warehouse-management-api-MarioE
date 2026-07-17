@@ -7,20 +7,20 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Warehouse.Domain\Warehouse.Domain.csproj" />
+        <ProjectReference Include="..\Warehouse.Domain\Warehouse.Domain.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Common\Results\" />
-      <Folder Include="DTOs\" />
+        <Folder Include="Common\Results\"/>
+        <Folder Include="DTOs\"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
-      <PackageReference Include="FluentValidation" Version="12.1.1" />
-      <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
-      <PackageReference Include="MediatR" Version="14.2.0" />
-      <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.11" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1"/>
+        <PackageReference Include="FluentValidation" Version="12.1.1"/>
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1"/>
+        <PackageReference Include="MediatR" Version="14.2.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.11"/>
     </ItemGroup>
 
 </Project>

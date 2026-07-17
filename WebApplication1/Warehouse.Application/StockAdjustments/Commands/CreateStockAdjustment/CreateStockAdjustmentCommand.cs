@@ -2,7 +2,7 @@ using MediatR;
 
 namespace Warehouse.Application.StockAdjustments.Commands.CreateStockAdjustment;
 
-public class CreateStockAdjustmentCommand 
+public class CreateStockAdjustmentCommand
     : IRequest<CreateStockAdjustmentResponse>
 {
     public Guid ProductId { get; set; }

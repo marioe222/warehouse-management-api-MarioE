@@ -4,19 +4,6 @@ namespace Warehouse.Domain.Entities;
 
 public class Supplier
 {
-    public Guid Id { get; private set; }
-
-    public string Name { get; private set; }
-
-    public string ContactEmail { get; private set; }
-
-    public bool IsActive { get; private set; }
-
-
-    public ICollection<Product> Products { get; private set; }
-        = new List<Product>();
-
-
     private Supplier()
     {
     }
@@ -39,6 +26,18 @@ public class Supplier
 
         IsActive = true;
     }
+
+    public Guid Id { get; private set; }
+
+    public string Name { get; private set; }
+
+    public string ContactEmail { get; private set; }
+
+    public bool IsActive { get; private set; }
+
+
+    public ICollection<Product> Products { get; private set; }
+        = new List<Product>();
 
 
     public void Deactivate()

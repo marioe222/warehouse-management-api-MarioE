@@ -2,9 +2,8 @@ namespace Warehouse.Presentation.Middleware;
 
 public class CorrelationIdMiddleware
 {
-    private readonly RequestDelegate _next;
-
     private const string HeaderName = "X-Correlation-ID";
+    private readonly RequestDelegate _next;
 
 
     public CorrelationIdMiddleware(

@@ -4,8 +4,8 @@ namespace Warehouse.Presentation.Middleware;
 
 public class RequestTimingMiddleware
 {
-    private readonly RequestDelegate _next;
     private readonly ILogger<RequestTimingMiddleware> _logger;
+    private readonly RequestDelegate _next;
 
 
     public RequestTimingMiddleware(

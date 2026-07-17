@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Warehouse.Application.Suppliers.Commands;
 using Warehouse.Domain.Interface;
 
 namespace Warehouse.Application.Suppliers.Commands.DeactivateSupplier;

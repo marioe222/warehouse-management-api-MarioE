@@ -1,13 +1,13 @@
 using FluentValidation;
-using Warehouse.Domain.Interface;
-using Warehouse.Infrastructure.Repositories;
-using Warehouse.Application.Products.Commands.CreateProduct;
 using Microsoft.EntityFrameworkCore;
-using Warehouse.Infrastructure.Data;
-using Warehouse.Application.Mapping;
 using Warehouse.Application.Behaviors;
-using Warehouse.Presentation.Middleware;
+using Warehouse.Application.Mapping;
+using Warehouse.Application.Products.Commands.CreateProduct;
+using Warehouse.Domain.Interface;
+using Warehouse.Infrastructure.Data;
+using Warehouse.Infrastructure.Repositories;
 using Warehouse.Presentation.Filters;
+using Warehouse.Presentation.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,7 +49,7 @@ builder.Services.AddValidatorsFromAssembly(
 builder.Services.AddScoped<IProductRepository, IProductRepository>();
 
 builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
-    
+
 builder.Services.AddScoped<IStockAdjustmentRepository, StockAdjustmentRepository>();
 
 

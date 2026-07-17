@@ -1,25 +1,20 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using AutoMapper;
-
 using Warehouse.Application.Suppliers.Commands.CreateSupplier;
 using Warehouse.Application.Suppliers.Commands.DeactivateSupplier;
-
 using Warehouse.Application.Suppliers.Queries.GetSupplierById;
 using Warehouse.Application.Suppliers.Queries.ListSuppliers;
-
 using Warehouse.Application.ViewModels;
 
-
 namespace Warehouse.Presentation.Controllers;
-
 
 [ApiController]
 [Route("api/suppliers")]
 public class SuppliersController : ControllerBase
 {
-    private readonly IMediator _mediator;
     private readonly IMapper _mapper;
+    private readonly IMediator _mediator;
 
 
     public SuppliersController(
@@ -29,7 +24,6 @@ public class SuppliersController : ControllerBase
         _mediator = mediator;
         _mapper = mapper;
     }
-
 
 
     // GET /api/suppliers
@@ -50,7 +44,6 @@ public class SuppliersController : ControllerBase
 
         return Ok(result);
     }
-
 
 
     // GET /api/suppliers/{id}
@@ -78,7 +71,6 @@ public class SuppliersController : ControllerBase
     }
 
 
-
     // POST /api/suppliers
     [HttpPost]
     public async Task<IActionResult> Create(
@@ -97,7 +89,6 @@ public class SuppliersController : ControllerBase
             _mapper.Map<SupplierViewModel>(response)
         );
     }
-
 
 
     // DELETE /api/suppliers/{id}

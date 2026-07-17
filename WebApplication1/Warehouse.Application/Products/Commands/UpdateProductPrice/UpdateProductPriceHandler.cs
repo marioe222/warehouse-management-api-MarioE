@@ -32,7 +32,7 @@ public class UpdateProductPriceHandler
         );
 
 
-        await _repository.Update(product,cancellationToken);
+        await _repository.Update(product, cancellationToken);
 
 
         return new UpdateProductPriceResponse(true);

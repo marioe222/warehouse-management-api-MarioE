@@ -18,13 +18,10 @@ public class UploadProductImageHandler
         UploadProductImageCommand request,
         CancellationToken cancellationToken)
     {
-        var product = await _repository.GetById(request.ProductId,cancellationToken);
+        var product = await _repository.GetById(request.ProductId, cancellationToken);
 
 
-        if (product == null)
-        {
-            return new UploadProductImageResponse(false);
-        }
+        if (product == null) return new UploadProductImageResponse(false);
 
         return new UploadProductImageResponse(true);
     }

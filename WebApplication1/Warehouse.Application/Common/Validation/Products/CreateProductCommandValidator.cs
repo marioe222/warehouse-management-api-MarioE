@@ -3,7 +3,7 @@ using Warehouse.Application.Products.Commands.CreateProduct;
 
 namespace Warehouse.Application.Common.Validation.Products;
 
-public class CreateProductCommandValidator 
+public class CreateProductCommandValidator
     : AbstractValidator<CreateProductCommand>
 {
     public CreateProductCommandValidator()
