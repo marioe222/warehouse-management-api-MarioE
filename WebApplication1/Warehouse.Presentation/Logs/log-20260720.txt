@@ -3182,3 +3182,666 @@ RolesAuthorizationRequirement:User.IsInRole must be true for one of the followin
 2026-07-20 21:49:35.890 +03:00 [INF] Server desktop-5bfa6au:28880:26ea8a9a All dispatchers stopped
 2026-07-20 21:49:35.893 +03:00 [INF] Server desktop-5bfa6au:28880:26ea8a9a successfully reported itself as stopped in 0.4244 ms
 2026-07-20 21:49:35.894 +03:00 [INF] Server desktop-5bfa6au:28880:26ea8a9a has been stopped in total 8.4856 ms
+2026-07-20 21:49:54.104 +03:00 [INF] User profile is available. Using 'C:\Users\user\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-07-20 21:49:54.201 +03:00 [INF] Initializing UI Database
+2026-07-20 21:49:55.151 +03:00 [INF] Saving healthchecks configuration to database
+2026-07-20 21:49:55.253 +03:00 [INF] Saved 1 entities to in-memory store.
+2026-07-20 21:49:55.388 +03:00 [INF] Now listening on: http://localhost:5076
+2026-07-20 21:49:55.418 +03:00 [INF] Starting Hangfire Server using job storage: 'Hangfire.MemoryStorage.MemoryStorage'
+2026-07-20 21:49:55.422 +03:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-07-20 21:49:55.452 +03:00 [INF] Server desktop-5bfa6au:28324:c794d8c6 successfully announced in 6.6298 ms
+2026-07-20 21:49:55.458 +03:00 [INF] Server desktop-5bfa6au:28324:c794d8c6 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-07-20 21:49:55.491 +03:00 [INF] Server desktop-5bfa6au:28324:c794d8c6 all the dispatchers started
+2026-07-20 21:49:55.558 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:49:55.580 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:49:55.653 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-07-20 21:49:55.666 +03:00 [INF] Hosting environment: Development
+2026-07-20 21:49:55.668 +03:00 [INF] Content root path: C:\Users\user\warehouse-management-api-MarioE\WebApplication1\Warehouse.Presentation
+2026-07-20 21:49:55.715 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:49:55.747 +03:00 [INF] Request started with Correlation ID 55b828e2-cd47-48a6-a3ee-0208792262dd
+2026-07-20 21:49:55.797 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-07-20 21:49:55.831 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:49:56.297 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:49:56.301 +03:00 [INF] HTTP GET /health responded 200 in 549 ms
+2026-07-20 21:49:56.303 +03:00 [INF] Received HTTP response headers after 717.8777ms - 200
+2026-07-20 21:49:56.304 +03:00 [INF] Request completed with Correlation ID 55b828e2-cd47-48a6-a3ee-0208792262dd
+2026-07-20 21:49:56.305 +03:00 [INF] End processing HTTP request after 756.2427ms - 200
+2026-07-20 21:49:56.309 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 593.8565ms
+2026-07-20 21:49:56.514 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:50:06.591 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:50:06.593 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:50:06.599 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:50:06.607 +03:00 [INF] Request started with Correlation ID 45605619-5b80-40bf-b9cf-47c036acef2f
+2026-07-20 21:50:06.614 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:50:06.638 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:50:06.650 +03:00 [INF] Received HTTP response headers after 54.8628ms - 200
+2026-07-20 21:50:06.710 +03:00 [INF] HTTP GET /health responded 200 in 99 ms
+2026-07-20 21:50:06.733 +03:00 [INF] Request completed with Correlation ID 45605619-5b80-40bf-b9cf-47c036acef2f
+2026-07-20 21:50:06.713 +03:00 [INF] End processing HTTP request after 122.6966ms - 200
+2026-07-20 21:50:06.736 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 136.7751ms
+2026-07-20 21:50:06.773 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:50:16.871 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:50:16.873 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:50:16.875 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:50:16.884 +03:00 [INF] Request started with Correlation ID 3867b7a6-e424-4d24-88a9-2c719de443aa
+2026-07-20 21:50:16.892 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:50:16.896 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:50:16.897 +03:00 [INF] Received HTTP response headers after 21.7893ms - 200
+2026-07-20 21:50:16.897 +03:00 [INF] HTTP GET /health responded 200 in 12 ms
+2026-07-20 21:50:16.899 +03:00 [INF] End processing HTTP request after 28.1853ms - 200
+2026-07-20 21:50:16.905 +03:00 [INF] Request completed with Correlation ID 3867b7a6-e424-4d24-88a9-2c719de443aa
+2026-07-20 21:50:16.908 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 32.2185ms
+2026-07-20 21:50:16.915 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:50:26.934 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:50:26.936 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:50:26.937 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:50:26.940 +03:00 [INF] Request started with Correlation ID ba182893-493b-4a66-893c-cf5fb18ca812
+2026-07-20 21:50:26.941 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:50:26.945 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:50:26.946 +03:00 [INF] Received HTTP response headers after 8.8483ms - 200
+2026-07-20 21:50:26.948 +03:00 [INF] HTTP GET /health responded 200 in 7 ms
+2026-07-20 21:50:26.950 +03:00 [INF] End processing HTTP request after 15.2472ms - 200
+2026-07-20 21:50:26.951 +03:00 [INF] Request completed with Correlation ID ba182893-493b-4a66-893c-cf5fb18ca812
+2026-07-20 21:50:26.954 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 16.2621ms
+2026-07-20 21:50:26.956 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:50:36.973 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:50:36.975 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:50:36.977 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:50:36.981 +03:00 [INF] Request started with Correlation ID da086f1b-d2f3-494f-abbe-2310b13a6bba
+2026-07-20 21:50:36.983 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:50:36.986 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:50:36.986 +03:00 [INF] Received HTTP response headers after 10.2372ms - 200
+2026-07-20 21:50:36.988 +03:00 [INF] HTTP GET /health responded 200 in 5 ms
+2026-07-20 21:50:36.989 +03:00 [INF] End processing HTTP request after 16.5605ms - 200
+2026-07-20 21:50:36.991 +03:00 [INF] Request completed with Correlation ID da086f1b-d2f3-494f-abbe-2310b13a6bba
+2026-07-20 21:50:36.993 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 16.4296ms
+2026-07-20 21:50:36.996 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:50:47.006 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:50:47.008 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:50:47.010 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:50:47.014 +03:00 [INF] Request started with Correlation ID 1d495d5c-b7ea-4984-bc2e-0aeaa6544761
+2026-07-20 21:50:47.015 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:50:47.019 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:50:47.020 +03:00 [INF] Received HTTP response headers after 10.2431ms - 200
+2026-07-20 21:50:47.021 +03:00 [INF] HTTP GET /health responded 200 in 6 ms
+2026-07-20 21:50:47.023 +03:00 [INF] End processing HTTP request after 16.2551ms - 200
+2026-07-20 21:50:47.025 +03:00 [INF] Request completed with Correlation ID 1d495d5c-b7ea-4984-bc2e-0aeaa6544761
+2026-07-20 21:50:47.027 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 17.4037ms
+2026-07-20 21:50:47.029 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:50:57.037 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:50:57.039 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:50:57.041 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:50:57.045 +03:00 [INF] Request started with Correlation ID 15acc749-dc59-46c4-804e-2b7a0a08c001
+2026-07-20 21:50:57.046 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:50:57.050 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:50:57.050 +03:00 [INF] Received HTTP response headers after 9.3767ms - 200
+2026-07-20 21:50:57.053 +03:00 [INF] HTTP GET /health responded 200 in 6 ms
+2026-07-20 21:50:57.054 +03:00 [INF] End processing HTTP request after 17.407ms - 200
+2026-07-20 21:50:57.057 +03:00 [INF] Request completed with Correlation ID 15acc749-dc59-46c4-804e-2b7a0a08c001
+2026-07-20 21:50:57.060 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 18.1634ms
+2026-07-20 21:50:57.061 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:51:07.075 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:51:07.079 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:51:07.085 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:51:07.094 +03:00 [INF] Request started with Correlation ID d0e72ab5-ee03-4129-bfff-5507aa50e6fd
+2026-07-20 21:51:07.097 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:51:07.102 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:51:07.102 +03:00 [INF] Received HTTP response headers after 17.3977ms - 200
+2026-07-20 21:51:07.103 +03:00 [INF] HTTP GET /health responded 200 in 6 ms
+2026-07-20 21:51:07.104 +03:00 [INF] End processing HTTP request after 29.0913ms - 200
+2026-07-20 21:51:07.106 +03:00 [INF] Request completed with Correlation ID d0e72ab5-ee03-4129-bfff-5507aa50e6fd
+2026-07-20 21:51:07.108 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 22.8171ms
+2026-07-20 21:51:07.111 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:51:17.120 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:51:17.122 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:51:17.124 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:51:17.131 +03:00 [INF] Request started with Correlation ID c70ff3f8-ca2e-4e0d-8a1f-43c57d69454d
+2026-07-20 21:51:17.132 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:51:17.135 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:51:17.135 +03:00 [INF] Received HTTP response headers after 11.4127ms - 200
+2026-07-20 21:51:17.136 +03:00 [INF] HTTP GET /health responded 200 in 4 ms
+2026-07-20 21:51:17.137 +03:00 [INF] End processing HTTP request after 16.9373ms - 200
+2026-07-20 21:51:17.139 +03:00 [INF] Request completed with Correlation ID c70ff3f8-ca2e-4e0d-8a1f-43c57d69454d
+2026-07-20 21:51:17.141 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 17.3271ms
+2026-07-20 21:51:17.143 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:51:27.163 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:51:27.164 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:51:27.165 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:51:27.168 +03:00 [INF] Request started with Correlation ID f5260a51-9db4-4b40-91f9-3ad8a28b34f8
+2026-07-20 21:51:27.169 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:51:27.181 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:51:27.182 +03:00 [INF] Received HTTP response headers after 16.7039ms - 200
+2026-07-20 21:51:27.187 +03:00 [INF] HTTP GET /health responded 200 in 18 ms
+2026-07-20 21:51:27.189 +03:00 [INF] End processing HTTP request after 26.5577ms - 200
+2026-07-20 21:51:27.191 +03:00 [INF] Request completed with Correlation ID f5260a51-9db4-4b40-91f9-3ad8a28b34f8
+2026-07-20 21:51:27.195 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 29.4743ms
+2026-07-20 21:51:27.196 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:51:37.243 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:51:37.969 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:51:37.971 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:51:37.982 +03:00 [INF] Request started with Correlation ID ca8220a2-1179-4eab-a832-8e996eba0bf7
+2026-07-20 21:51:37.995 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:51:38.049 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:51:38.049 +03:00 [INF] Received HTTP response headers after 78.4443ms - 200
+2026-07-20 21:51:38.122 +03:00 [INF] End processing HTTP request after 879.3594ms - 200
+2026-07-20 21:51:38.120 +03:00 [INF] HTTP GET /health responded 200 in 125 ms
+2026-07-20 21:51:38.127 +03:00 [INF] Request completed with Correlation ID ca8220a2-1179-4eab-a832-8e996eba0bf7
+2026-07-20 21:51:38.129 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 157.637ms
+2026-07-20 21:51:38.134 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:51:48.176 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:51:48.227 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:51:48.229 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:51:48.237 +03:00 [INF] Request started with Correlation ID a267d43f-6007-4a38-a615-b7ed98a3265f
+2026-07-20 21:51:48.238 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:51:48.262 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:51:48.262 +03:00 [INF] Received HTTP response headers after 33.3068ms - 200
+2026-07-20 21:51:48.289 +03:00 [INF] HTTP GET /health responded 200 in 50 ms
+2026-07-20 21:51:48.290 +03:00 [INF] End processing HTTP request after 113.3532ms - 200
+2026-07-20 21:51:48.292 +03:00 [INF] Request completed with Correlation ID a267d43f-6007-4a38-a615-b7ed98a3265f
+2026-07-20 21:51:48.295 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 66.2974ms
+2026-07-20 21:51:48.297 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:51:50.279 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/swagger/index.html - null null
+2026-07-20 21:51:50.292 +03:00 [INF] Request started with Correlation ID 3e1ed2bd-f15d-46a2-99ec-d34ba9edb54b
+2026-07-20 21:51:50.374 +03:00 [INF] HTTP GET /swagger/index.html responded 304 in 80 ms
+2026-07-20 21:51:50.377 +03:00 [INF] Request completed with Correlation ID 3e1ed2bd-f15d-46a2-99ec-d34ba9edb54b
+2026-07-20 21:51:50.378 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/swagger/index.html - 304 null null 99.4966ms
+2026-07-20 21:51:50.428 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/swagger/swagger-ui.css - null null
+2026-07-20 21:51:50.429 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/swagger/index.css - null null
+2026-07-20 21:51:50.431 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/swagger/index.js - null null
+2026-07-20 21:51:50.431 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/swagger/swagger-ui-bundle.js - null null
+2026-07-20 21:51:50.431 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/swagger/swagger-ui-standalone-preset.js - null null
+2026-07-20 21:51:50.440 +03:00 [INF] Request started with Correlation ID 7115cc80-8a9c-409d-8702-5fd32f748b2e
+2026-07-20 21:51:50.447 +03:00 [INF] Request started with Correlation ID 72457937-89fb-40ec-b74e-326081f873ea
+2026-07-20 21:51:50.454 +03:00 [INF] Request started with Correlation ID 4bbcd283-efa7-4735-892e-68e24373ca13
+2026-07-20 21:51:50.457 +03:00 [INF] Request started with Correlation ID df8b7ba7-7e80-4c06-8948-dc25105dd1d1
+2026-07-20 21:51:50.461 +03:00 [INF] Request started with Correlation ID 1fc9c059-5c11-44df-a486-e0d4323a4d01
+2026-07-20 21:51:50.465 +03:00 [INF] HTTP GET /swagger/index.js responded 304 in 0 ms
+2026-07-20 21:51:50.469 +03:00 [INF] Request completed with Correlation ID 4bbcd283-efa7-4735-892e-68e24373ca13
+2026-07-20 21:51:50.470 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/swagger/index.js - 304 null null 39.5442ms
+2026-07-20 21:51:50.476 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js responded 304 in 9 ms
+2026-07-20 21:51:50.476 +03:00 [INF] HTTP GET /swagger/swagger-ui.css responded 304 in 14 ms
+2026-07-20 21:51:50.477 +03:00 [INF] HTTP GET /swagger/index.css responded 304 in 13 ms
+2026-07-20 21:51:50.480 +03:00 [INF] Request completed with Correlation ID 1fc9c059-5c11-44df-a486-e0d4323a4d01
+2026-07-20 21:51:50.481 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js responded 304 in 15 ms
+2026-07-20 21:51:50.482 +03:00 [INF] Request completed with Correlation ID 7115cc80-8a9c-409d-8702-5fd32f748b2e
+2026-07-20 21:51:50.484 +03:00 [INF] Request completed with Correlation ID 72457937-89fb-40ec-b74e-326081f873ea
+2026-07-20 21:51:50.485 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/swagger/swagger-ui-standalone-preset.js - 304 null null 54.2925ms
+2026-07-20 21:51:50.488 +03:00 [INF] Request completed with Correlation ID df8b7ba7-7e80-4c06-8948-dc25105dd1d1
+2026-07-20 21:51:50.499 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/swagger/swagger-ui-bundle.js - 304 null null 67.9329ms
+2026-07-20 21:51:50.490 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/swagger/index.css - 304 null null 61.4629ms
+2026-07-20 21:51:50.489 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/swagger/swagger-ui.css - 304 null null 61.122ms
+2026-07-20 21:51:50.681 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/swagger/v1/swagger.json - null null
+2026-07-20 21:51:50.684 +03:00 [INF] Request started with Correlation ID 1b71cdbb-b0a4-4d49-af45-6aee8422b06a
+2026-07-20 21:51:50.699 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/swagger/favicon-32x32.png - null null
+2026-07-20 21:51:50.706 +03:00 [INF] Request started with Correlation ID a2e6862d-7980-4f3a-9ce4-679b6a1eff28
+2026-07-20 21:51:50.707 +03:00 [INF] HTTP GET /swagger/favicon-32x32.png responded 304 in 0 ms
+2026-07-20 21:51:50.717 +03:00 [INF] Request completed with Correlation ID a2e6862d-7980-4f3a-9ce4-679b6a1eff28
+2026-07-20 21:51:50.719 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/swagger/favicon-32x32.png - 304 null null 19.1481ms
+2026-07-20 21:51:50.933 +03:00 [INF] HTTP GET /swagger/v1/swagger.json responded 200 in 247 ms
+2026-07-20 21:51:50.935 +03:00 [INF] Request completed with Correlation ID 1b71cdbb-b0a4-4d49-af45-6aee8422b06a
+2026-07-20 21:51:50.937 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 255.848ms
+2026-07-20 21:51:58.313 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:51:58.321 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:51:58.352 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:51:58.384 +03:00 [INF] Request started with Correlation ID 433d9edb-13d1-42b5-9632-8be856201be8
+2026-07-20 21:51:58.390 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:51:58.402 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:51:58.403 +03:00 [INF] Received HTTP response headers after 75.3935ms - 200
+2026-07-20 21:51:58.411 +03:00 [INF] HTTP GET /health responded 200 in 21 ms
+2026-07-20 21:51:58.415 +03:00 [INF] End processing HTTP request after 101.7903ms - 200
+2026-07-20 21:51:58.421 +03:00 [INF] Request completed with Correlation ID 433d9edb-13d1-42b5-9632-8be856201be8
+2026-07-20 21:51:58.427 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 74.6057ms
+2026-07-20 21:51:58.432 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:52:05.697 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5076/api/firebase/set-admin-role - null 0
+2026-07-20 21:52:05.713 +03:00 [INF] Request started with Correlation ID 23ec3107-2061-4724-9bcf-60f2a16905bb
+2026-07-20 21:52:05.714 +03:00 [INF] Executing endpoint 'Warehouse.Presentation.Controllers.FirebaseController.SetAdminRole (Warehouse.Presentation)'
+2026-07-20 21:52:05.735 +03:00 [INF] Route matched with {action = "SetAdminRole", controller = "Firebase"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SetAdminRole() on controller Warehouse.Presentation.Controllers.FirebaseController (Warehouse.Presentation).
+2026-07-20 21:52:05.739 +03:00 [INF] Executing Warehouse.Presentation.Controllers.FirebaseController.SetAdminRole (Warehouse.Presentation)
+2026-07-20 21:52:06.692 +03:00 [INF] Finished Warehouse.Presentation.Controllers.FirebaseController.SetAdminRole (Warehouse.Presentation)
+2026-07-20 21:52:06.699 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2026-07-20 21:52:06.710 +03:00 [INF] Executed action Warehouse.Presentation.Controllers.FirebaseController.SetAdminRole (Warehouse.Presentation) in 965.1142ms
+2026-07-20 21:52:06.712 +03:00 [INF] Executed endpoint 'Warehouse.Presentation.Controllers.FirebaseController.SetAdminRole (Warehouse.Presentation)'
+2026-07-20 21:52:06.713 +03:00 [INF] HTTP POST /api/firebase/set-admin-role responded 200 in 998 ms
+2026-07-20 21:52:06.715 +03:00 [INF] Request completed with Correlation ID 23ec3107-2061-4724-9bcf-60f2a16905bb
+2026-07-20 21:52:06.717 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5076/api/firebase/set-admin-role - 200 null text/plain; charset=utf-8 1019.7768ms
+2026-07-20 21:52:08.448 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:52:08.452 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:52:08.456 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:52:08.471 +03:00 [INF] Request started with Correlation ID 183bde24-cc2a-4c08-a10f-6605240bd23c
+2026-07-20 21:52:08.477 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:52:08.492 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:52:08.492 +03:00 [INF] Received HTTP response headers after 36.7329ms - 200
+2026-07-20 21:52:08.496 +03:00 [INF] HTTP GET /health responded 200 in 18 ms
+2026-07-20 21:52:08.500 +03:00 [INF] End processing HTTP request after 51.5992ms - 200
+2026-07-20 21:52:08.503 +03:00 [INF] Request completed with Correlation ID 183bde24-cc2a-4c08-a10f-6605240bd23c
+2026-07-20 21:52:08.519 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 62.474ms
+2026-07-20 21:52:08.526 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:52:18.579 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:52:18.582 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:52:18.585 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:52:18.591 +03:00 [INF] Request started with Correlation ID 47e1b906-0bfe-458b-b269-75904fd898f5
+2026-07-20 21:52:18.593 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:52:18.620 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:52:18.620 +03:00 [INF] Received HTTP response headers after 36.2029ms - 200
+2026-07-20 21:52:18.663 +03:00 [INF] End processing HTTP request after 83.9031ms - 200
+2026-07-20 21:52:18.656 +03:00 [INF] HTTP GET /health responded 200 in 63 ms
+2026-07-20 21:52:18.667 +03:00 [INF] Request completed with Correlation ID 47e1b906-0bfe-458b-b269-75904fd898f5
+2026-07-20 21:52:18.668 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 83.7662ms
+2026-07-20 21:52:18.671 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:52:28.692 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:52:28.695 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:52:28.699 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:52:28.705 +03:00 [INF] Request started with Correlation ID bdf8d386-6b40-4b9f-bc75-958c709ce923
+2026-07-20 21:52:28.710 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:52:28.717 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:52:28.717 +03:00 [INF] Received HTTP response headers after 20.1904ms - 200
+2026-07-20 21:52:28.720 +03:00 [INF] HTTP GET /health responded 200 in 9 ms
+2026-07-20 21:52:28.722 +03:00 [INF] End processing HTTP request after 29.8026ms - 200
+2026-07-20 21:52:28.727 +03:00 [INF] Request completed with Correlation ID bdf8d386-6b40-4b9f-bc75-958c709ce923
+2026-07-20 21:52:28.732 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 33.0688ms
+2026-07-20 21:52:28.733 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:52:38.745 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:52:38.753 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:52:38.763 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:52:38.778 +03:00 [INF] Request started with Correlation ID 1b001d75-79ff-401f-8d59-64ebe414c2ba
+2026-07-20 21:52:38.782 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:52:38.788 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:52:38.788 +03:00 [INF] Received HTTP response headers after 25.9004ms - 200
+2026-07-20 21:52:38.794 +03:00 [INF] HTTP GET /health responded 200 in 12 ms
+2026-07-20 21:52:38.796 +03:00 [INF] End processing HTTP request after 51.1362ms - 200
+2026-07-20 21:52:38.799 +03:00 [INF] Request completed with Correlation ID 1b001d75-79ff-401f-8d59-64ebe414c2ba
+2026-07-20 21:52:38.803 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 39.6836ms
+2026-07-20 21:52:38.807 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:52:48.816 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:52:48.820 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:52:48.859 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:52:48.865 +03:00 [INF] Request started with Correlation ID 0d4ed376-4ce6-469b-9e82-d79a571a2d5d
+2026-07-20 21:52:48.868 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:52:48.873 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:52:48.873 +03:00 [INF] Received HTTP response headers after 14.9566ms - 200
+2026-07-20 21:52:48.875 +03:00 [INF] HTTP GET /health responded 200 in 7 ms
+2026-07-20 21:52:48.876 +03:00 [INF] End processing HTTP request after 59.5932ms - 200
+2026-07-20 21:52:48.880 +03:00 [INF] Request completed with Correlation ID 0d4ed376-4ce6-469b-9e82-d79a571a2d5d
+2026-07-20 21:52:48.883 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 24.1606ms
+2026-07-20 21:52:48.884 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:52:58.891 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:52:58.899 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:52:58.907 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:52:58.920 +03:00 [INF] Request started with Correlation ID 0d03bf6b-859c-4b7c-bf62-921eac5b2c06
+2026-07-20 21:52:58.921 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:52:58.924 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:52:58.924 +03:00 [INF] Received HTTP response headers after 17.3482ms - 200
+2026-07-20 21:52:58.925 +03:00 [INF] HTTP GET /health responded 200 in 4 ms
+2026-07-20 21:52:58.927 +03:00 [INF] End processing HTTP request after 35.5115ms - 200
+2026-07-20 21:52:58.929 +03:00 [INF] Request completed with Correlation ID 0d03bf6b-859c-4b7c-bf62-921eac5b2c06
+2026-07-20 21:52:58.931 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 23.8085ms
+2026-07-20 21:52:58.934 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:53:08.948 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:53:08.950 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:53:08.960 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:53:08.970 +03:00 [INF] Request started with Correlation ID aaaa2842-4c7a-413d-a7ce-b8b24f02a855
+2026-07-20 21:53:08.975 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:53:08.982 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:53:08.982 +03:00 [INF] Received HTTP response headers after 24.1793ms - 200
+2026-07-20 21:53:08.985 +03:00 [INF] HTTP GET /health responded 200 in 10 ms
+2026-07-20 21:53:08.993 +03:00 [INF] Request completed with Correlation ID aaaa2842-4c7a-413d-a7ce-b8b24f02a855
+2026-07-20 21:53:08.989 +03:00 [INF] End processing HTTP request after 40.8641ms - 200
+2026-07-20 21:53:08.996 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 36.353ms
+2026-07-20 21:53:09.001 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:53:19.015 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:53:19.016 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:53:19.018 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:53:19.022 +03:00 [INF] Request started with Correlation ID 761ea858-eaa1-4a18-a901-c856fc2e62c5
+2026-07-20 21:53:19.024 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:53:19.027 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:53:19.028 +03:00 [INF] Received HTTP response headers after 9.8292ms - 200
+2026-07-20 21:53:19.029 +03:00 [INF] HTTP GET /health responded 200 in 5 ms
+2026-07-20 21:53:19.031 +03:00 [INF] End processing HTTP request after 15.9854ms - 200
+2026-07-20 21:53:19.034 +03:00 [INF] Request completed with Correlation ID 761ea858-eaa1-4a18-a901-c856fc2e62c5
+2026-07-20 21:53:19.036 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 17.5656ms
+2026-07-20 21:53:19.037 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:53:29.081 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:53:29.392 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:53:29.395 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:53:29.802 +03:00 [INF] Request started with Correlation ID e5d2aa24-0ada-4657-92e7-b59dde6a818e
+2026-07-20 21:53:29.803 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:53:29.832 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:53:29.838 +03:00 [INF] Received HTTP response headers after 442.4981ms - 200
+2026-07-20 21:53:29.842 +03:00 [INF] HTTP GET /health responded 200 in 39 ms
+2026-07-20 21:53:29.844 +03:00 [INF] End processing HTTP request after 763.2364ms - 200
+2026-07-20 21:53:29.846 +03:00 [INF] Request completed with Correlation ID e5d2aa24-0ada-4657-92e7-b59dde6a818e
+2026-07-20 21:53:29.868 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 472.7031ms
+2026-07-20 21:53:29.872 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:53:39.905 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:53:39.907 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:53:39.909 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:53:39.912 +03:00 [INF] Request started with Correlation ID 979c9786-d3f9-45c4-baef-6ccfa052d8e4
+2026-07-20 21:53:39.913 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:53:39.917 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:53:39.917 +03:00 [INF] Received HTTP response headers after 8.1264ms - 200
+2026-07-20 21:53:39.918 +03:00 [INF] HTTP GET /health responded 200 in 4 ms
+2026-07-20 21:53:39.920 +03:00 [INF] End processing HTTP request after 14.7272ms - 200
+2026-07-20 21:53:39.922 +03:00 [INF] Request completed with Correlation ID 979c9786-d3f9-45c4-baef-6ccfa052d8e4
+2026-07-20 21:53:39.924 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 15.4635ms
+2026-07-20 21:53:39.925 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:53:49.956 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:53:50.015 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:53:50.018 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:53:50.107 +03:00 [INF] Request started with Correlation ID c3e2aeb0-2aa2-4150-b6f0-f84685151e81
+2026-07-20 21:53:50.123 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:53:50.200 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:53:50.200 +03:00 [INF] Received HTTP response headers after 182.7614ms - 200
+2026-07-20 21:53:50.217 +03:00 [INF] HTTP GET /health responded 200 in 93 ms
+2026-07-20 21:53:50.218 +03:00 [INF] End processing HTTP request after 262.2967ms - 200
+2026-07-20 21:53:50.221 +03:00 [INF] Request completed with Correlation ID c3e2aeb0-2aa2-4150-b6f0-f84685151e81
+2026-07-20 21:53:50.223 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 205.5712ms
+2026-07-20 21:53:50.224 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:54:00.236 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:54:00.241 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:54:00.253 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:54:00.256 +03:00 [INF] Request started with Correlation ID f2ee16da-8dde-42e7-9f9f-4c90f44e56e2
+2026-07-20 21:54:00.264 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:54:00.288 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:54:00.288 +03:00 [INF] Received HTTP response headers after 39.6385ms - 200
+2026-07-20 21:54:00.291 +03:00 [INF] HTTP GET /health responded 200 in 33 ms
+2026-07-20 21:54:00.294 +03:00 [INF] End processing HTTP request after 58.536ms - 200
+2026-07-20 21:54:00.297 +03:00 [INF] Request completed with Correlation ID f2ee16da-8dde-42e7-9f9f-4c90f44e56e2
+2026-07-20 21:54:00.301 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 48.3096ms
+2026-07-20 21:54:00.305 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:54:10.379 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:54:10.382 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:54:10.385 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:54:10.417 +03:00 [INF] Request started with Correlation ID 214f3e2a-d7bf-4e64-98eb-2f7d60048087
+2026-07-20 21:54:10.419 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:54:10.428 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:54:10.428 +03:00 [INF] Received HTTP response headers after 43.6304ms - 200
+2026-07-20 21:54:10.432 +03:00 [INF] HTTP GET /health responded 200 in 13 ms
+2026-07-20 21:54:10.433 +03:00 [INF] End processing HTTP request after 54.1639ms - 200
+2026-07-20 21:54:10.436 +03:00 [INF] Request completed with Correlation ID 214f3e2a-d7bf-4e64-98eb-2f7d60048087
+2026-07-20 21:54:10.439 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 54.2179ms
+2026-07-20 21:54:10.440 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:54:20.472 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:54:20.478 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:54:20.486 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:54:20.498 +03:00 [INF] Request started with Correlation ID c8c20ae2-c65f-4fd9-88bc-133091004f27
+2026-07-20 21:54:20.503 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:54:20.517 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:54:20.518 +03:00 [INF] Received HTTP response headers after 32.417ms - 200
+2026-07-20 21:54:20.525 +03:00 [INF] HTTP GET /health responded 200 in 22 ms
+2026-07-20 21:54:20.529 +03:00 [INF] End processing HTTP request after 57.1418ms - 200
+2026-07-20 21:54:20.536 +03:00 [INF] Request completed with Correlation ID c8c20ae2-c65f-4fd9-88bc-133091004f27
+2026-07-20 21:54:20.542 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 55.6594ms
+2026-07-20 21:54:20.543 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:54:30.566 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:54:30.569 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:54:30.572 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:54:30.585 +03:00 [INF] Request started with Correlation ID 1957ad68-b303-41f8-865a-4ed81a71a51d
+2026-07-20 21:54:30.587 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:54:30.593 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:54:30.593 +03:00 [INF] Received HTTP response headers after 21.3104ms - 200
+2026-07-20 21:54:30.595 +03:00 [INF] HTTP GET /health responded 200 in 7 ms
+2026-07-20 21:54:30.601 +03:00 [INF] Request completed with Correlation ID 1957ad68-b303-41f8-865a-4ed81a71a51d
+2026-07-20 21:54:30.597 +03:00 [INF] End processing HTTP request after 31.27ms - 200
+2026-07-20 21:54:30.604 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 31.8471ms
+2026-07-20 21:54:30.606 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:54:40.618 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:54:40.622 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:54:40.627 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:54:40.632 +03:00 [INF] Request started with Correlation ID 82da7652-4f44-4bcd-b730-73a2d9ebe7a2
+2026-07-20 21:54:40.637 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:54:40.644 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:54:40.644 +03:00 [INF] Received HTTP response headers after 18.1153ms - 200
+2026-07-20 21:54:40.647 +03:00 [INF] HTTP GET /health responded 200 in 10 ms
+2026-07-20 21:54:40.653 +03:00 [INF] End processing HTTP request after 34.9108ms - 200
+2026-07-20 21:54:40.663 +03:00 [INF] Request completed with Correlation ID 82da7652-4f44-4bcd-b730-73a2d9ebe7a2
+2026-07-20 21:54:40.686 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 59.7719ms
+2026-07-20 21:54:40.688 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:54:50.713 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:54:50.715 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:54:50.718 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:54:50.722 +03:00 [INF] Request started with Correlation ID 84813c2c-87c4-41fd-87ec-bbb895d66cab
+2026-07-20 21:54:50.723 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:54:50.727 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:54:50.727 +03:00 [INF] Received HTTP response headers after 9.4141ms - 200
+2026-07-20 21:54:50.729 +03:00 [INF] HTTP GET /health responded 200 in 6 ms
+2026-07-20 21:54:50.732 +03:00 [INF] End processing HTTP request after 18.7829ms - 200
+2026-07-20 21:54:50.736 +03:00 [INF] Request completed with Correlation ID 84813c2c-87c4-41fd-87ec-bbb895d66cab
+2026-07-20 21:54:50.740 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 21.4179ms
+2026-07-20 21:54:50.743 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:55:00.759 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:55:00.764 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:55:00.772 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:55:00.781 +03:00 [INF] Request started with Correlation ID 29246060-1de9-49af-bad2-a1a597e8c670
+2026-07-20 21:55:00.785 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:55:00.893 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:55:00.893 +03:00 [INF] Received HTTP response headers after 120.8606ms - 200
+2026-07-20 21:55:00.894 +03:00 [INF] HTTP GET /health responded 200 in 109 ms
+2026-07-20 21:55:00.896 +03:00 [INF] End processing HTTP request after 136.4225ms - 200
+2026-07-20 21:55:00.898 +03:00 [INF] Request completed with Correlation ID 29246060-1de9-49af-bad2-a1a597e8c670
+2026-07-20 21:55:00.900 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 127.9819ms
+2026-07-20 21:55:00.901 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:55:10.911 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:55:10.913 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:55:10.914 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:55:10.922 +03:00 [INF] Request started with Correlation ID 186a22fe-4060-4158-b5a4-10757f3cde28
+2026-07-20 21:55:10.924 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:55:10.928 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:55:10.930 +03:00 [INF] Received HTTP response headers after 15.5937ms - 200
+2026-07-20 21:55:10.941 +03:00 [INF] HTTP GET /health responded 200 in 16 ms
+2026-07-20 21:55:10.942 +03:00 [INF] End processing HTTP request after 31.2999ms - 200
+2026-07-20 21:55:10.945 +03:00 [INF] Request completed with Correlation ID 186a22fe-4060-4158-b5a4-10757f3cde28
+2026-07-20 21:55:10.948 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 33.4545ms
+2026-07-20 21:55:10.951 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:55:20.961 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:55:20.963 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:55:20.966 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:55:20.969 +03:00 [INF] Request started with Correlation ID a6ec31d4-a193-4c30-aad9-d7d2c88cc03a
+2026-07-20 21:55:20.971 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:55:20.975 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:55:20.975 +03:00 [INF] Received HTTP response headers after 9.1028ms - 200
+2026-07-20 21:55:20.976 +03:00 [INF] HTTP GET /health responded 200 in 5 ms
+2026-07-20 21:55:20.978 +03:00 [INF] End processing HTTP request after 17.2756ms - 200
+2026-07-20 21:55:20.981 +03:00 [INF] Request completed with Correlation ID a6ec31d4-a193-4c30-aad9-d7d2c88cc03a
+2026-07-20 21:55:20.984 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 18.3261ms
+2026-07-20 21:55:20.985 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:55:30.998 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:55:31.001 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:55:31.003 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:55:31.006 +03:00 [INF] Request started with Correlation ID 0417b973-c6d9-42cc-a61e-117212518055
+2026-07-20 21:55:31.007 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:55:31.011 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:55:31.011 +03:00 [INF] Received HTTP response headers after 7.8167ms - 200
+2026-07-20 21:55:31.012 +03:00 [INF] HTTP GET /health responded 200 in 5 ms
+2026-07-20 21:55:31.013 +03:00 [INF] End processing HTTP request after 14.853ms - 200
+2026-07-20 21:55:31.015 +03:00 [INF] Request completed with Correlation ID 0417b973-c6d9-42cc-a61e-117212518055
+2026-07-20 21:55:31.017 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 14.0897ms
+2026-07-20 21:55:31.018 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:55:41.027 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:55:41.039 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:55:41.044 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:55:41.051 +03:00 [INF] Request started with Correlation ID 3edbd882-5d63-427e-9954-514ff5fa30e9
+2026-07-20 21:55:41.053 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:55:41.061 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:55:41.062 +03:00 [INF] Received HTTP response headers after 18.1956ms - 200
+2026-07-20 21:55:41.065 +03:00 [INF] HTTP GET /health responded 200 in 12 ms
+2026-07-20 21:55:41.068 +03:00 [INF] End processing HTTP request after 41.0558ms - 200
+2026-07-20 21:55:41.076 +03:00 [INF] Request completed with Correlation ID 3edbd882-5d63-427e-9954-514ff5fa30e9
+2026-07-20 21:55:41.093 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 48.6235ms
+2026-07-20 21:55:41.094 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:55:51.106 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:55:51.108 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:55:51.120 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:55:51.124 +03:00 [INF] Request started with Correlation ID 77657a3b-003f-497e-a783-82d9c338b002
+2026-07-20 21:55:51.125 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:55:51.130 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:55:51.130 +03:00 [INF] Received HTTP response headers after 10.4505ms - 200
+2026-07-20 21:55:51.134 +03:00 [INF] HTTP GET /health responded 200 in 8 ms
+2026-07-20 21:55:51.135 +03:00 [INF] End processing HTTP request after 29.5019ms - 200
+2026-07-20 21:55:51.138 +03:00 [INF] Request completed with Correlation ID 77657a3b-003f-497e-a783-82d9c338b002
+2026-07-20 21:55:51.141 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 20.9935ms
+2026-07-20 21:55:51.142 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:56:01.158 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:56:01.164 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:56:01.175 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:56:01.184 +03:00 [INF] Request started with Correlation ID 87b19e72-de4b-4299-931f-cc04b434bf2e
+2026-07-20 21:56:01.188 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:56:01.197 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:56:01.198 +03:00 [INF] Received HTTP response headers after 27.8036ms - 200
+2026-07-20 21:56:01.200 +03:00 [INF] HTTP GET /health responded 200 in 12 ms
+2026-07-20 21:56:01.202 +03:00 [INF] End processing HTTP request after 43.783ms - 200
+2026-07-20 21:56:01.205 +03:00 [INF] Request completed with Correlation ID 87b19e72-de4b-4299-931f-cc04b434bf2e
+2026-07-20 21:56:01.212 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 37.6937ms
+2026-07-20 21:56:01.215 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:56:11.233 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:56:11.237 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:56:11.241 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:56:11.250 +03:00 [INF] Request started with Correlation ID 6b704e6c-3c73-4ee4-9feb-ba17f0dcc9da
+2026-07-20 21:56:11.253 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:56:11.262 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:56:11.262 +03:00 [INF] Received HTTP response headers after 21.1737ms - 200
+2026-07-20 21:56:11.269 +03:00 [INF] HTTP GET /health responded 200 in 16 ms
+2026-07-20 21:56:11.280 +03:00 [INF] Request completed with Correlation ID 6b704e6c-3c73-4ee4-9feb-ba17f0dcc9da
+2026-07-20 21:56:11.274 +03:00 [INF] End processing HTTP request after 40.5327ms - 200
+2026-07-20 21:56:11.285 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 43.8604ms
+2026-07-20 21:56:11.291 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:56:21.318 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:56:21.322 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:56:21.326 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:56:21.335 +03:00 [INF] Request started with Correlation ID 544c3e2a-ea44-4c63-8ba7-baa552b924ee
+2026-07-20 21:56:21.337 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:56:21.343 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:56:21.344 +03:00 [INF] Received HTTP response headers after 17.7104ms - 200
+2026-07-20 21:56:21.350 +03:00 [INF] HTTP GET /health responded 200 in 13 ms
+2026-07-20 21:56:21.352 +03:00 [INF] End processing HTTP request after 33.6985ms - 200
+2026-07-20 21:56:21.354 +03:00 [INF] Request completed with Correlation ID 544c3e2a-ea44-4c63-8ba7-baa552b924ee
+2026-07-20 21:56:21.358 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 31.4077ms
+2026-07-20 21:56:21.359 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:56:31.379 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:56:31.409 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:56:31.414 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:56:31.419 +03:00 [INF] Request started with Correlation ID 672de734-c5f5-448c-ab20-f88568d4a75d
+2026-07-20 21:56:31.432 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:56:31.438 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:56:31.438 +03:00 [INF] Received HTTP response headers after 23.5581ms - 200
+2026-07-20 21:56:31.474 +03:00 [INF] End processing HTTP request after 94.455ms - 200
+2026-07-20 21:56:31.460 +03:00 [INF] HTTP GET /health responded 200 in 27 ms
+2026-07-20 21:56:31.480 +03:00 [INF] Request completed with Correlation ID 672de734-c5f5-448c-ab20-f88568d4a75d
+2026-07-20 21:56:31.500 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 86.1228ms
+2026-07-20 21:56:31.505 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:56:41.517 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:56:41.519 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:56:41.521 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:56:41.524 +03:00 [INF] Request started with Correlation ID 7291fc20-bd12-4774-b2e5-cb3d80f14cf1
+2026-07-20 21:56:41.526 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:56:41.528 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:56:41.529 +03:00 [INF] Received HTTP response headers after 8.1636ms - 200
+2026-07-20 21:56:41.529 +03:00 [INF] HTTP GET /health responded 200 in 3 ms
+2026-07-20 21:56:41.531 +03:00 [INF] End processing HTTP request after 13.7869ms - 200
+2026-07-20 21:56:41.534 +03:00 [INF] Request completed with Correlation ID 7291fc20-bd12-4774-b2e5-cb3d80f14cf1
+2026-07-20 21:56:41.536 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 15.5486ms
+2026-07-20 21:56:41.537 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:56:51.554 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:56:51.561 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:56:51.567 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:56:51.579 +03:00 [INF] Request started with Correlation ID ce874503-f848-4d37-86ea-aff688086c46
+2026-07-20 21:56:51.583 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:56:51.651 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:56:51.652 +03:00 [INF] Received HTTP response headers after 85.0352ms - 200
+2026-07-20 21:56:51.683 +03:00 [INF] HTTP GET /health responded 200 in 99 ms
+2026-07-20 21:56:51.684 +03:00 [INF] End processing HTTP request after 129.8639ms - 200
+2026-07-20 21:56:51.686 +03:00 [INF] Request completed with Correlation ID ce874503-f848-4d37-86ea-aff688086c46
+2026-07-20 21:56:51.688 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 121.2161ms
+2026-07-20 21:56:51.689 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:57:01.707 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:57:01.772 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:57:01.774 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:57:01.779 +03:00 [INF] Request started with Correlation ID 96e411bf-1e90-4f11-88a3-99cdf611b067
+2026-07-20 21:57:01.781 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:57:01.796 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:57:01.798 +03:00 [INF] Received HTTP response headers after 23.6414ms - 200
+2026-07-20 21:57:01.810 +03:00 [INF] End processing HTTP request after 103.0048ms - 200
+2026-07-20 21:57:01.808 +03:00 [INF] HTTP GET /health responded 200 in 27 ms
+2026-07-20 21:57:01.857 +03:00 [INF] Request completed with Correlation ID 96e411bf-1e90-4f11-88a3-99cdf611b067
+2026-07-20 21:57:01.884 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 109.9803ms
+2026-07-20 21:57:01.905 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:57:11.968 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:57:11.970 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:57:11.972 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:57:11.987 +03:00 [INF] Request started with Correlation ID f030bc7e-36f1-4cbb-bff0-81de49aaa309
+2026-07-20 21:57:11.988 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:57:11.992 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:57:11.992 +03:00 [INF] Received HTTP response headers after 20.4566ms - 200
+2026-07-20 21:57:12.000 +03:00 [INF] HTTP GET /health responded 200 in 12 ms
+2026-07-20 21:57:12.004 +03:00 [INF] Request completed with Correlation ID f030bc7e-36f1-4cbb-bff0-81de49aaa309
+2026-07-20 21:57:12.002 +03:00 [INF] End processing HTTP request after 33.9584ms - 200
+2026-07-20 21:57:12.005 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 33.2708ms
+2026-07-20 21:57:12.007 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:57:22.015 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:57:22.018 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:57:22.020 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:57:22.025 +03:00 [INF] Request started with Correlation ID 481ae894-6308-4594-b278-10d94df4c506
+2026-07-20 21:57:22.027 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:57:22.031 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:57:22.031 +03:00 [INF] Received HTTP response headers after 10.5934ms - 200
+2026-07-20 21:57:22.032 +03:00 [INF] HTTP GET /health responded 200 in 5 ms
+2026-07-20 21:57:22.034 +03:00 [INF] End processing HTTP request after 18.1853ms - 200
+2026-07-20 21:57:22.036 +03:00 [INF] Request completed with Correlation ID 481ae894-6308-4594-b278-10d94df4c506
+2026-07-20 21:57:22.038 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 18.0495ms
+2026-07-20 21:57:22.039 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:57:32.044 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:57:32.047 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:57:32.050 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:57:32.056 +03:00 [INF] Request started with Correlation ID 89c0b1bb-d71a-4189-808d-b0d053b83b0e
+2026-07-20 21:57:32.058 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:57:32.066 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:57:32.067 +03:00 [INF] Received HTTP response headers after 16.4994ms - 200
+2026-07-20 21:57:32.068 +03:00 [INF] HTTP GET /health responded 200 in 9 ms
+2026-07-20 21:57:32.069 +03:00 [INF] End processing HTTP request after 24.9606ms - 200
+2026-07-20 21:57:32.071 +03:00 [INF] Request completed with Correlation ID 89c0b1bb-d71a-4189-808d-b0d053b83b0e
+2026-07-20 21:57:32.076 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 25.7507ms
+2026-07-20 21:57:32.077 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:57:42.105 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:57:42.953 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:57:42.962 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:57:42.979 +03:00 [INF] Request started with Correlation ID e2a99add-15b6-4cdf-a8de-625e8fcf99d9
+2026-07-20 21:57:42.981 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:57:42.984 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:57:42.984 +03:00 [INF] Received HTTP response headers after 22.039ms - 200
+2026-07-20 21:57:42.985 +03:00 [INF] HTTP GET /health responded 200 in 3 ms
+2026-07-20 21:57:42.986 +03:00 [INF] End processing HTTP request after 881.1512ms - 200
+2026-07-20 21:57:42.988 +03:00 [INF] Request completed with Correlation ID e2a99add-15b6-4cdf-a8de-625e8fcf99d9
+2026-07-20 21:57:42.990 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 27.8438ms
+2026-07-20 21:57:42.993 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:57:53.011 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:57:53.013 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:57:53.015 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:57:53.018 +03:00 [INF] Request started with Correlation ID 4375386b-374f-4073-b18c-0d8306aa5d86
+2026-07-20 21:57:53.019 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:57:53.022 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:57:53.022 +03:00 [INF] Received HTTP response headers after 7.6441ms - 200
+2026-07-20 21:57:53.026 +03:00 [INF] End processing HTTP request after 14.8357ms - 200
+2026-07-20 21:57:53.023 +03:00 [INF] HTTP GET /health responded 200 in 4 ms
+2026-07-20 21:57:53.029 +03:00 [INF] Request completed with Correlation ID 4375386b-374f-4073-b18c-0d8306aa5d86
+2026-07-20 21:57:53.030 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 15.0584ms
+2026-07-20 21:57:53.031 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:58:03.045 +03:00 [INF] Start processing HTTP request GET http://localhost:5076/health
+2026-07-20 21:58:03.047 +03:00 [INF] Sending HTTP request GET http://localhost:5076/health
+2026-07-20 21:58:03.051 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5076/health - null null
+2026-07-20 21:58:03.056 +03:00 [INF] Request started with Correlation ID 2d445941-9edc-4f3c-921d-70efb97389c8
+2026-07-20 21:58:03.058 +03:00 [INF] Executing endpoint 'Health checks'
+2026-07-20 21:58:03.061 +03:00 [INF] Executed endpoint 'Health checks'
+2026-07-20 21:58:03.061 +03:00 [INF] Received HTTP response headers after 12.6888ms - 200
+2026-07-20 21:58:03.062 +03:00 [INF] HTTP GET /health responded 200 in 4 ms
+2026-07-20 21:58:03.063 +03:00 [INF] End processing HTTP request after 18.5415ms - 200
+2026-07-20 21:58:03.065 +03:00 [INF] Request completed with Correlation ID 2d445941-9edc-4f3c-921d-70efb97389c8
+2026-07-20 21:58:03.067 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5076/health - 200 null application/json 16.4205ms
+2026-07-20 21:58:03.068 +03:00 [INF] Saved 3 entities to in-memory store.
+2026-07-20 21:58:10.308 +03:00 [INF] Server desktop-5bfa6au:28324:c794d8c6 caught stopping signal...
+2026-07-20 21:58:10.310 +03:00 [INF] Application is shutting down...
+2026-07-20 21:58:10.314 +03:00 [INF] Server desktop-5bfa6au:28324:c794d8c6 All dispatchers stopped
+2026-07-20 21:58:10.318 +03:00 [INF] Server desktop-5bfa6au:28324:c794d8c6 successfully reported itself as stopped in 0.586 ms
+2026-07-20 21:58:10.319 +03:00 [INF] Server desktop-5bfa6au:28324:c794d8c6 has been stopped in total 8.6105 ms
