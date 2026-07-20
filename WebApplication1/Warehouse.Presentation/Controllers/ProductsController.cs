@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Warehouse.Application.Products.Commands.ArchiveProduct;
@@ -14,6 +15,7 @@ using Warehouse.Application.Products.Queries.SearchProducts;
 using Warehouse.Application.ViewModels;
 using Warehouse.Presentation.Contracts;
 using Warehouse.Presentation.Resources;
+using Warehouse.Application.Interfaces;
 
 namespace Warehouse.Presentation.Controllers;
 
@@ -25,23 +27,27 @@ public class ProductsController : ControllerBase
     private readonly ILogger<ProductsController> _logger;
     private readonly IMapper _mapper;
     private readonly IMediator _mediator;
+    private readonly IStorageService _storageService;
 
 
     public ProductsController(
         IMediator mediator,
         IMapper mapper,
         IStringLocalizer<SharedResources> localizer,
-        ILogger<ProductsController> logger)
+        ILogger<ProductsController> logger,
+        IStorageService storageService)
     {
         _mediator = mediator;
         _mapper = mapper;
         _localizer = localizer;
         _logger = logger;
+        _storageService = storageService;
     }
 
 
     // GET: api/products
     [HttpGet]
+    [Authorize(Policy = "UserPolicy")]
     public async Task<IActionResult> GetAll(
         [FromQuery] bool onlyAvailable = false,
         CancellationToken cancellationToken = default)
@@ -68,6 +74,7 @@ public class ProductsController : ControllerBase
 
     // GET: api/products/{id}
     [HttpGet("{id:guid}")]
+    [Authorize(Policy = "UserPolicy")]
     public async Task<IActionResult> GetById(
         Guid id,
         CancellationToken cancellationToken = default)
@@ -102,6 +109,7 @@ public class ProductsController : ControllerBase
 
     // GET: api/products/search
     [HttpGet("search")]
+    [Authorize(Policy = "UserPolicy")]
     public async Task<IActionResult> Search(
         [FromQuery] string? name,
         [FromQuery] string? supplier,
@@ -130,6 +138,7 @@ public class ProductsController : ControllerBase
 
     // POST: api/products
     [HttpPost]
+    [Authorize(Policy = "AdminPolicy")]
     public async Task<IActionResult> Create(
         CreateProductRequest request,
         CancellationToken cancellationToken = default)
@@ -167,6 +176,7 @@ public class ProductsController : ControllerBase
 
     // POST: api/products/{id}/quantity
     [HttpPost("{id:guid}/quantity")]
+    [Authorize(Policy = "AdminPolicy")]
     public async Task<IActionResult> UpdateQuantity(
         Guid id,
         UpdateProductQuantityRequest request,
@@ -183,20 +193,11 @@ public class ProductsController : ControllerBase
 
         if (!result.Success)
         {
-            _logger.LogWarning(
-                "Failed updating quantity for product {ProductId}",
-                id);
-
             return NotFound(new
             {
                 message = _localizer["ProductNotFound"].Value
             });
         }
-
-
-        _logger.LogInformation(
-            "Product {ProductId} quantity updated",
-            id);
 
 
         return Ok(new
@@ -208,6 +209,7 @@ public class ProductsController : ControllerBase
 
     // POST: api/products/{id}/price
     [HttpPost("{id:guid}/price")]
+    [Authorize(Policy = "AdminPolicy")]
     public async Task<IActionResult> UpdatePrice(
         Guid id,
         UpdateProductPriceRequest request,
@@ -224,20 +226,11 @@ public class ProductsController : ControllerBase
 
         if (!result.Success)
         {
-            _logger.LogWarning(
-                "Failed updating price for product {ProductId}",
-                id);
-
             return NotFound(new
             {
                 message = _localizer["ProductNotFound"].Value
             });
         }
-
-
-        _logger.LogInformation(
-            "Product {ProductId} price updated",
-            id);
 
 
         return Ok(new
@@ -249,6 +242,7 @@ public class ProductsController : ControllerBase
 
     // POST: api/products/{id}/image
     [HttpPost("{id:guid}/image")]
+    [Authorize(Policy = "AdminPolicy")]
     [Consumes("multipart/form-data")]
     public async Task<IActionResult> UploadImage(
         Guid id,
@@ -266,20 +260,11 @@ public class ProductsController : ControllerBase
 
         if (!result.Success)
         {
-            _logger.LogWarning(
-                "Failed uploading image for product {ProductId}",
-                id);
-
             return NotFound(new
             {
                 message = _localizer["ProductNotFound"].Value
             });
         }
-
-
-        _logger.LogInformation(
-            "Image uploaded for product {ProductId}",
-            id);
 
 
         return Ok(new
@@ -291,6 +276,7 @@ public class ProductsController : ControllerBase
 
     // DELETE: api/products/{id}
     [HttpDelete("{id:guid}")]
+    [Authorize(Policy = "AdminPolicy")]
     public async Task<IActionResult> Delete(
         Guid id,
         CancellationToken cancellationToken = default)
@@ -303,20 +289,11 @@ public class ProductsController : ControllerBase
 
         if (!result.Success)
         {
-            _logger.LogWarning(
-                "Failed deleting product {ProductId}",
-                id);
-
             return NotFound(new
             {
                 message = _localizer["ProductNotFound"].Value
             });
         }
-
-
-        _logger.LogInformation(
-            "Product {ProductId} deleted",
-            id);
 
 
         return Ok(new
@@ -328,14 +305,10 @@ public class ProductsController : ControllerBase
 
     // GET: api/products/server-time
     [HttpGet("server-time")]
+    [Authorize(Policy = "UserPolicy")]
     public IActionResult GetServerTime(
         [FromHeader(Name = "Accept-Language")] string language)
     {
-        _logger.LogInformation(
-            "Server time requested with language {Language}",
-            language);
-
-
         return Ok(new
         {
             language,
@@ -346,6 +319,7 @@ public class ProductsController : ControllerBase
 
     // POST: api/products/{id}/assign-supplier/{supplierId}
     [HttpPost("{id:guid}/assign-supplier/{supplierId:guid}")]
+    [Authorize(Policy = "AdminPolicy")]
     public async Task<IActionResult> AssignSupplier(
         Guid id,
         Guid supplierId,
@@ -362,11 +336,6 @@ public class ProductsController : ControllerBase
 
         if (!result.Success)
         {
-            _logger.LogWarning(
-                "Failed assigning supplier {SupplierId} to product {ProductId}",
-                supplierId,
-                id);
-
             return NotFound(new
             {
                 message = _localizer["ProductNotFound"].Value
@@ -374,15 +343,29 @@ public class ProductsController : ControllerBase
         }
 
 
-        _logger.LogInformation(
-            "Supplier {SupplierId} assigned to product {ProductId}",
-            supplierId,
-            id);
-
-
         return Ok(new
         {
             message = _localizer["ProductUpdated"].Value
         });
+    }
+    // GET: api/products/files/{objectKey}
+    
+    [HttpGet("files/{objectKey}")]
+    [Authorize(Policy = "UserPolicy")]
+    public async Task<IActionResult> DownloadFile(
+        string objectKey,
+        CancellationToken cancellationToken = default)
+    {
+        var stream = await _storageService.DownloadAsync(
+            objectKey,
+            cancellationToken
+        );
+    
+    
+        return File(
+            stream,
+            "application/octet-stream",
+            objectKey
+        );
     }
 }

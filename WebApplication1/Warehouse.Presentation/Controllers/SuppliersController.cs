@@ -1,13 +1,16 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Warehouse.Application.Suppliers.Commands.CreateSupplier;
 using Warehouse.Application.Suppliers.Commands.DeactivateSupplier;
+using Warehouse.Application.Suppliers.Commands.UploadSupplierDocument;
 using Warehouse.Application.Suppliers.Queries.GetSupplierById;
 using Warehouse.Application.Suppliers.Queries.ListSuppliers;
 using Warehouse.Application.ViewModels;
 using Warehouse.Presentation.Resources;
+using Warehouse.Application.Interfaces;
 
 namespace Warehouse.Presentation.Controllers;
 
@@ -19,23 +22,28 @@ public class SuppliersController : ControllerBase
     private readonly ILogger<SuppliersController> _logger;
     private readonly IMapper _mapper;
     private readonly IMediator _mediator;
+    private readonly IStorageService _storageService;
 
 
     public SuppliersController(
         IMediator mediator,
         IMapper mapper,
         IStringLocalizer<SharedResources> localizer,
-        ILogger<SuppliersController> logger)
+        ILogger<SuppliersController> logger,
+        IStorageService storageService)
     {
         _mediator = mediator;
         _mapper = mapper;
         _localizer = localizer;
         _logger = logger;
+        _storageService = storageService;
     }
+
 
 
     // GET /api/suppliers
     [HttpGet]
+    [Authorize(Policy = "UserPolicy")]
     public async Task<IActionResult> GetAll(
         CancellationToken cancellationToken = default)
     {
@@ -67,8 +75,11 @@ public class SuppliersController : ControllerBase
     }
 
 
+
+
     // GET /api/suppliers/{id}
     [HttpGet("{id:guid}")]
+    [Authorize(Policy = "UserPolicy")]
     public async Task<IActionResult> GetById(
         Guid id,
         CancellationToken cancellationToken = default)
@@ -111,8 +122,11 @@ public class SuppliersController : ControllerBase
     }
 
 
+
+
     // POST /api/suppliers
     [HttpPost]
+    [Authorize(Policy = "AdminPolicy")]
     public async Task<IActionResult> Create(
         CreateSupplierCommand command,
         CancellationToken cancellationToken = default)
@@ -140,8 +154,11 @@ public class SuppliersController : ControllerBase
     }
 
 
+
+
     // DELETE /api/suppliers/{id}
     [HttpDelete("{id:guid}")]
+    [Authorize(Policy = "AdminPolicy")]
     public async Task<IActionResult> Deactivate(
         Guid id,
         CancellationToken cancellationToken = default)
@@ -175,5 +192,73 @@ public class SuppliersController : ControllerBase
         {
             message = _localizer["SupplierDeactivated"].Value
         });
+    }
+
+
+
+
+    // POST /api/suppliers/{id}/document
+    [HttpPost("{id:guid}/document")]
+    [Authorize(Policy = "AdminPolicy")]
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> UploadDocument(
+        Guid id,
+        IFormFile file,
+        CancellationToken cancellationToken = default)
+    {
+
+        var result = await _mediator.Send(
+            new UploadSupplierDocumentCommand(
+                id,
+                file
+            ),
+            cancellationToken
+        );
+
+
+        if (!result.Success)
+        {
+            _logger.LogWarning(
+                "Failed uploading document for supplier {SupplierId}",
+                id);
+
+
+            return NotFound(new
+            {
+                message = _localizer["SupplierNotFound"].Value
+            });
+        }
+
+
+        _logger.LogInformation(
+            "Document uploaded successfully for supplier {SupplierId}",
+            id);
+
+
+        return Ok(new
+        {
+            message = "Supplier document uploaded successfully"
+        });
+    }
+    
+    // GET /api/suppliers/files/{objectKey}
+    
+    [HttpGet("files/{objectKey}")]
+    [Authorize(Policy = "UserPolicy")]
+    public async Task<IActionResult> DownloadDocument(
+        string objectKey,
+        CancellationToken cancellationToken = default)
+    {
+        var stream = await _storageService.DownloadAsync(
+            objectKey,
+            cancellationToken
+        );
+    
+    
+        return File(
+            stream,
+            "application/octet-stream",
+            objectKey
+        );
     }
 }

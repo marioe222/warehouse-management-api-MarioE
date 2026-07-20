@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Warehouse.Application.Dashboard.Queries.GetInventoryDashboard;
@@ -8,6 +9,7 @@ namespace Warehouse.Presentation.Controllers;
 
 [ApiController]
 [Route("api/inventory")]
+[Authorize(Policy = "UserPolicy")]
 public class DashboardController : ControllerBase
 {
     private readonly IStringLocalizer<SharedResources> _localizer;

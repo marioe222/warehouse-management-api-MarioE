@@ -3,20 +3,20 @@ using FluentValidation;
 using Hangfire;
 using Hangfire.MemoryStorage;
 using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Localization;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Warehouse.Application.Behaviors;
 using Warehouse.Application.Mapping;
 using Warehouse.Application.Products.Commands.CreateProduct;
-using Warehouse.Domain.Interface;
-using Warehouse.Infrastructure.Data;
-using Warehouse.Infrastructure.Repositories;
+using Warehouse.Infrastructure;
 using Warehouse.Presentation.Filters;
 using Warehouse.Presentation.Jobs;
 using Warehouse.Presentation.Middleware;
 using Warehouse.Presentation.Swagger;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,11 +45,11 @@ AppContext.SetSwitch(
 // Controllers + Filters
 
 builder.Services.AddControllers(options =>
-    {
-        options.Filters.Add<ValidationFilter>();
-        options.Filters.Add<ActionLoggingFilter>();
-    })
-    .AddDataAnnotationsLocalization();
+{
+    options.Filters.Add<ValidationFilter>();
+    options.Filters.Add<ActionLoggingFilter>();
+})
+.AddDataAnnotationsLocalization();
 
 
 builder.Services.AddScoped<ValidationFilter>();
@@ -61,13 +61,11 @@ builder.Services.AddScoped<ActionLoggingFilter>();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 
-// Database
+// Infrastructure
+// Database + Firebase + Repositories
 
-builder.Services.AddDbContext<WarehouseDbContext>(options =>
-    options.UseNpgsql(
-        builder.Configuration
-            .GetConnectionString("DefaultConnection")
-    ));
+builder.Services.AddInfrastructure(
+    builder.Configuration);
 
 
 // Redis Cache
@@ -146,29 +144,80 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.DefaultRequestCulture =
         new RequestCulture("en");
 
-
     options.SupportedCultures =
         supportedCultures;
-
 
     options.SupportedUICultures =
         supportedCultures;
 });
 
 
-// Dependency Injection
-// Repositories
+// Firebase JWT Authentication
 
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        var projectId =
+            builder.Configuration["Firebase:ProjectId"];
 
-builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
 
-builder.Services.AddScoped<IStockAdjustmentRepository, StockAdjustmentRepository>();
+        options.Authority =
+            $"https://securetoken.google.com/{projectId}";
+
+
+        options.Audience = projectId;
+
+
+        options.TokenValidationParameters =
+            new TokenValidationParameters
+            {
+                RoleClaimType = "role"
+            };
+});
+
+
+// Authorization Policies
+
+builder.Services.AddAuthorization(options =>
+{
+    // Admin users:
+    // Create products
+    // Update products
+    // Delete products
+    // Upload files
+
+    options.AddPolicy(
+        "AdminPolicy",
+        policy =>
+        {
+            policy.RequireRole("admin");
+        });
+
+
+    // Normal users + admins:
+    // Read products
+    // Read suppliers
+    // Read dashboard
+    // Read stock data
+
+    options.AddPolicy(
+        "UserPolicy",
+        policy =>
+        {
+            policy.RequireRole(
+                "admin",
+                "user");
+        });
+});
 
 
 // Hangfire Configuration
 
-builder.Services.AddHangfire(config => { config.UseMemoryStorage(); });
+builder.Services.AddHangfire(config =>
+{
+    config.UseMemoryStorage();
+});
 
 
 builder.Services.AddHangfireServer();
@@ -184,7 +233,10 @@ builder.Services.AddScoped<ProductExpiryJob>();
 builder.Services.AddEndpointsApiExplorer();
 
 
-builder.Services.AddSwaggerGen(options => { options.OperationFilter<LocalizationHeaderOperationFilter>(); });
+builder.Services.AddSwaggerGen(options =>
+{
+    options.OperationFilter<LocalizationHeaderOperationFilter>();
+});
 
 
 // Build Application
@@ -213,16 +265,19 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 
-// HTTPS + Authorization
+// HTTPS + Authentication + Authorization
 
 app.UseHttpsRedirection();
 
-
-// Hangfire Dashboard
-
-
 app.UseHangfireDashboard();
 
+
+// Firebase Token Validation
+
+app.UseAuthentication();
+
+
+// Authorization Policy Check
 
 app.UseAuthorization();
 
@@ -245,17 +300,18 @@ app.MapHealthChecks(
 
 // Health Dashboard
 
-app.MapHealthChecksUI(options => { options.UIPath = "/health-ui"; });
+app.MapHealthChecksUI(options =>
+{
+    options.UIPath = "/health-ui";
+});
 
 
 // Recurring Hangfire Job
 
-
 RecurringJob.AddOrUpdate<ProductExpiryJob>(
     "check-expired-products",
     job => job.CheckProductsAsync(),
-    Cron.Daily
-);
+    Cron.Daily);
 
 
 // Run
