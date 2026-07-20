@@ -14,6 +14,7 @@ public class ProductRepository : IProductRepository
         _context = context;
     }
 
+
     public async Task Add(
         Product product,
         CancellationToken cancellationToken)
@@ -45,6 +46,18 @@ public class ProductRepository : IProductRepository
         CancellationToken cancellationToken)
     {
         return await _context.Products
+            .ToListAsync(cancellationToken);
+    }
+
+
+    public async Task<List<Product>> GetExpiringProducts(
+        DateOnly date,
+        CancellationToken cancellationToken)
+    {
+        return await _context.Products
+            .Where(p =>
+                p.ExpiryDate.HasValue &&
+                DateOnly.FromDateTime(p.ExpiryDate.Value) <= date.AddDays(30))
             .ToListAsync(cancellationToken);
     }
 

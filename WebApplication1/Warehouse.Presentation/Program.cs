@@ -18,20 +18,21 @@ using Warehouse.Presentation.Jobs;
 using Warehouse.Presentation.Middleware;
 using Warehouse.Presentation.Swagger;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 
 // Serilog Configuration
 
-Log.Logger = new LoggerConfiguration()
-    .WriteTo.Console()
-    .WriteTo.File(
-        "Logs/log-.txt",
-        rollingInterval: RollingInterval.Day)
-    .CreateLogger();
-
-
-builder.Host.UseSerilog();
+builder.Host.UseSerilog(
+    (context, services, configuration) =>
+    {
+        configuration
+            .WriteTo.Console()
+            .WriteTo.File(
+                "Logs/log-.txt",
+                rollingInterval: RollingInterval.Day);
+    });
 
 
 // PostgreSQL timestamp compatibility
@@ -168,7 +169,10 @@ builder.Services.AddScoped<IStockAdjustmentRepository, StockAdjustmentRepository
 
 // Hangfire Configuration
 
-builder.Services.AddHangfire(config => { config.UseMemoryStorage(); });
+builder.Services.AddHangfire(config =>
+{
+    config.UseMemoryStorage();
+});
 
 
 builder.Services.AddHangfireServer();
@@ -184,7 +188,10 @@ builder.Services.AddScoped<ProductExpiryJob>();
 builder.Services.AddEndpointsApiExplorer();
 
 
-builder.Services.AddSwaggerGen(options => { options.OperationFilter<LocalizationHeaderOperationFilter>(); });
+builder.Services.AddSwaggerGen(options =>
+{
+    options.OperationFilter<LocalizationHeaderOperationFilter>();
+});
 
 
 // Build Application
@@ -220,7 +227,6 @@ app.UseHttpsRedirection();
 
 // Hangfire Dashboard
 
-
 app.UseHangfireDashboard();
 
 
@@ -245,15 +251,18 @@ app.MapHealthChecks(
 
 // Health Dashboard
 
-app.MapHealthChecksUI(options => { options.UIPath = "/health-ui"; });
+app.MapHealthChecksUI(options =>
+{
+    options.UIPath = "/health-ui";
+});
 
 
 // Recurring Hangfire Job
-
+// Hangfire injects the real CancellationToken automatically
 
 RecurringJob.AddOrUpdate<ProductExpiryJob>(
     "check-expired-products",
-    job => job.CheckProductsAsync(),
+    job => job.CheckProductsAsync(CancellationToken.None),
     Cron.Daily
 );
 

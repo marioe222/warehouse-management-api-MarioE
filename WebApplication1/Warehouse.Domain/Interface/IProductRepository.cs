@@ -6,23 +6,29 @@ public interface IProductRepository
 {
     Task Add(
         Product product,
-        CancellationToken cancellationToken = default
+        CancellationToken cancellationToken
     );
 
 
     Task<Product?> GetById(
         Guid id,
-        CancellationToken cancellationToken = default
+        CancellationToken cancellationToken
     );
 
 
     Task<List<Product>> GetAll(
-        CancellationToken cancellationToken = default
+        CancellationToken cancellationToken
+    );
+
+
+    Task<List<Product>> GetExpiringProducts(
+        DateOnly date,
+        CancellationToken cancellationToken
     );
 
 
     Task Update(
         Product product,
-        CancellationToken cancellationToken = default
+        CancellationToken cancellationToken
     );
 }

@@ -17,12 +17,16 @@ public class ProductExpiryJob
     }
 
 
-    public async Task CheckProductsAsync()
+    public async Task CheckProductsAsync(
+        CancellationToken cancellationToken)
     {
-        var products = await _repository.GetAll();
+        var today = DateOnly.FromDateTime(
+            DateTime.Today);
 
 
-        var today = DateOnly.FromDateTime(DateTime.Today);
+        var products = await _repository.GetExpiringProducts(
+            today,
+            cancellationToken);
 
 
         var expiredProducts = products
@@ -46,9 +50,11 @@ public class ProductExpiryJob
 
 
         foreach (var product in expiredProducts)
+        {
             _logger.LogWarning(
                 "Expired product: {Name}",
                 product.Name);
+        }
 
 
         _logger.LogInformation(
@@ -57,8 +63,10 @@ public class ProductExpiryJob
 
 
         foreach (var product in soonToExpireProducts)
+        {
             _logger.LogInformation(
                 "Soon to expire product: {Name}",
                 product.Name);
+        }
     }
 }

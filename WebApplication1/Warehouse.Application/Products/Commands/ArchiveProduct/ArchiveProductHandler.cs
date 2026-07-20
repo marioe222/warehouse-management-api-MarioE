@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
+using Warehouse.Application.Common;
 using Warehouse.Domain.Interface;
 
 namespace Warehouse.Application.Products.Commands.ArchiveProduct;
@@ -43,7 +44,7 @@ public class ArchiveProductHandler
 
         // Remove Redis cache because product data changed
         await _cache.RemoveAsync(
-            $"product:{request.ProductId}",
+            CacheKeys.Product(request.ProductId),
             cancellationToken);
 
 
