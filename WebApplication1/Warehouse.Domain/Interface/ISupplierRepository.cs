@@ -10,12 +10,12 @@ public interface ISupplierRepository
 
     Task<Supplier?> GetById(
         Guid id,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken);
 
     Task<List<Supplier>> GetAll(
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken);
 
     Task Update(
         Supplier supplier,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken);
 }

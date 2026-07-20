@@ -7,7 +7,6 @@ public class ProductExpiryJob
     private readonly ILogger<ProductExpiryJob> _logger;
     private readonly IProductRepository _repository;
 
-
     public ProductExpiryJob(
         ILogger<ProductExpiryJob> logger,
         IProductRepository repository)
@@ -16,21 +15,19 @@ public class ProductExpiryJob
         _repository = repository;
     }
 
-
-    public async Task CheckProductsAsync()
+    public async Task CheckProductsAsync(
+        CancellationToken cancellationToken)
     {
-        var products = await _repository.GetAll();
-
+        // This should be replaced with a filtered repository method
+        var products = await _repository.GetAll(cancellationToken);
 
         var today = DateOnly.FromDateTime(DateTime.Today);
-
 
         var expiredProducts = products
             .Where(p =>
                 p.ExpiryDate.HasValue &&
                 DateOnly.FromDateTime(p.ExpiryDate.Value) < today)
             .ToList();
-
 
         var soonToExpireProducts = products
             .Where(p =>
@@ -39,26 +36,26 @@ public class ProductExpiryJob
                 DateOnly.FromDateTime(p.ExpiryDate.Value) <= today.AddDays(30))
             .ToList();
 
-
         _logger.LogInformation(
             "Expired products count: {Count}",
             expiredProducts.Count);
 
-
         foreach (var product in expiredProducts)
+        {
             _logger.LogWarning(
                 "Expired product: {Name}",
                 product.Name);
-
+        }
 
         _logger.LogInformation(
             "Soon-to-expire products count: {Count}",
             soonToExpireProducts.Count);
 
-
         foreach (var product in soonToExpireProducts)
+        {
             _logger.LogInformation(
                 "Soon to expire product: {Name}",
                 product.Name);
+        }
     }
 }

@@ -23,16 +23,18 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Serilog Configuration
 
-Log.Logger = new LoggerConfiguration()
-    .WriteTo.Console()
-    .WriteTo.File(
-        "Logs/log-.txt",
-        rollingInterval: RollingInterval.Day)
-    .CreateLogger();
 
-
-builder.Host.UseSerilog();
-
+builder.Host.UseSerilog((context, services, configuration) =>
+{
+    configuration
+        .ReadFrom.Configuration(context.Configuration)
+        .ReadFrom.Services(services)
+        .Enrich.FromLogContext()
+        .WriteTo.Console()
+        .WriteTo.File(
+            "Logs/log-.txt",
+            rollingInterval: RollingInterval.Day);
+});
 
 // PostgreSQL timestamp compatibility
 
@@ -310,7 +312,7 @@ app.MapHealthChecksUI(options =>
 
 RecurringJob.AddOrUpdate<ProductExpiryJob>(
     "check-expired-products",
-    job => job.CheckProductsAsync(),
+    job => job.CheckProductsAsync(CancellationToken.None),
     Cron.Daily);
 
 
