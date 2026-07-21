@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
 using Warehouse.Domain.Interface;
+using Warehouse.Application.Common.Cache;
 
 namespace Warehouse.Application.Suppliers.Queries.ListSuppliers;
 
@@ -23,7 +24,7 @@ public class ListSuppliersHandler
         ListSuppliersQuery request,
         CancellationToken cancellationToken)
     {
-        var cacheKey = "suppliers";
+        var cacheKey = CacheKeys.Suppliers;
 
         var cacheValue = await _cache.GetStringAsync(
             cacheKey,

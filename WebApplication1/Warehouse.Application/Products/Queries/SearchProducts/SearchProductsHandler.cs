@@ -4,6 +4,7 @@ using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
 using Warehouse.Application.ViewModels;
 using Warehouse.Domain.Interface;
+using Warehouse.Application.Common.Cache;
 
 namespace Warehouse.Application.Products.Queries.SearchProducts;
 
@@ -28,8 +29,9 @@ public class SearchProductsHandler
         SearchProductsQuery request,
         CancellationToken cancellationToken)
     {
-        var cacheKey =
-            $"products:{request.Name}:{request.Supplier}";
+        var cacheKey = CacheKeys.SearchProducts(
+            request.Name,
+            request.Supplier);
 
         var cacheValue = await _cache.GetStringAsync(
             cacheKey,
