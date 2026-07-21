@@ -1,399 +1,261 @@
-# Warehouse Management API - Session 03 Refactor
+# Session 7 - Firebase Authentication, Authorization and MinIO Storage
 
 ## Overview
 
-This session focuses on refactoring the Warehouse Management API using DDD architecture, Repository Pattern, Dependency Injection, and CQRS-style use cases.
+This session extends the existing Warehouse Management API by adding:
 
-The goal was to improve the project structure by separating business logic, application logic, data access, and API responsibilities while keeping the existing API behavior.
+- Firebase Authentication
+- Role-based Authorization (Admin/User)
+- MinIO Object Storage
+- File metadata persistence in PostgreSQL
 
----
-
-# Architecture
-
-The project is divided into four layers:
-
-- Warehouse.Domain
-- Warehouse.Application
-- Warehouse.Infrastructure
-- Warehouse.Presentation
+The project continues using the existing layered architecture (Presentation, Application, Domain, Infrastructure).
 
 ---
 
-# Layer Responsibilities
+## Firebase Setup
 
-## Warehouse.Domain
+1. Create a Firebase project from the Firebase Console.
+2. Enable **Email/Password** authentication.
+3. Create at least two users:
+  - Admin user
+  - Normal user
+4. Generate a Firebase Service Account key:
+  - Firebase Console → Project Settings → Service Accounts → Generate new private key
+5. Place the downloaded `serviceAccount.json` file in:
 
-Responsible for core business logic.
+```
+Warehouse.Infrastructure/Firebase/
+```
 
-Contains:
-
-- Entities
-- Business rules
-- Repository interfaces
-
-Examples:
-
-- Product
-- Supplier
-- StockMovement
-- WarehouseItem
-- ProductImage
-
-
-Business rules:
-
-- Product name is required
-- SKU is required
-- Price must be greater than zero
-- Quantity cannot be negative
-- Archived products cannot be updated
-- Inactive suppliers cannot be assigned
-
+> **Important:** Do not commit the service account file to Git.
 
 ---
 
-## Warehouse.Application
+## Firebase Configuration
 
-Responsible for application use cases.
-
-Contains:
-
-- Commands
-- Queries
-- Handlers
-
-Implemented use cases:
-
-### Product Commands
-
-- CreateProduct
-- UpdateProductQuantity
-- UpdateProductPrice
-- ArchiveProduct
-- AssignSupplierToProduct
-
-
-### Product Queries
-
-- GetProductById
-- ListProducts
-- SearchProducts
-
-
-### Supplier Commands
-
-- CreateSupplier
-- DeactivateSupplier
-
-
-### Supplier Queries
-
-- GetSupplierById
-- ListSuppliers
-
-
-MediatR is used to separate requests and handlers.
-
----
-
-## Warehouse.Infrastructure
-
-Responsible for technical implementation.
-
-Contains:
-
-- Repository implementations
-- Data access logic
-
-Repositories:
-
-- ProductRepository
-- SupplierRepository
-
-
-The Application and Domain layers do not know how data is stored.
-
----
-
-## Warehouse.Presentation
-
-Responsible for HTTP communication.
-
-Contains:
-
-- Controllers
-- API endpoints
-
-Controllers only:
-
-- Receive HTTP requests
-- Call application use cases
-- Return HTTP responses
-
-Business rules and storage access were removed from controllers.
-
----
-
-# Refactored Endpoints
-
-## Products
-
-| Method | Endpoint |
-|---|---|
-| GET | `/api/products` |
-| GET | `/api/products/{id}` |
-| GET | `/api/products/search` |
-| POST | `/api/products` |
-| POST | `/api/products/{id}/quantity` |
-| POST | `/api/products/{id}/price` |
-| POST | `/api/products/{id}/image` |
-| DELETE | `/api/products/{id}` |
-| GET | `/api/products/server-time` |
-| POST | `/api/products/{id}/assign-supplier/{supplierId}` |
-
-
-## Suppliers
-
-| Method | Endpoint |
-|---|---|
-| GET | `/api/suppliers` |
-| GET | `/api/suppliers/{id}` |
-| POST | `/api/suppliers` |
-| DELETE | `/api/suppliers/{id}` |
-
----
-
-# Swagger Screenshots
-
-The API endpoints were tested successfully using Swagger UI.
-
-## Swagger API Documentation
-
-![Swagger API](screenshots/Swagger-Api.png)
-
-
-## Get Products Endpoint
-
-![Get Products](screenshots/Swagger-GetProducts.png)
-
-
-## Get Products Response
-
-![Get Products Response](screenshots/Swagger-GetProductsResponse.png)
-
-
-## Create Product Endpoint
-
-![Create Product](screenshots/Swagger-PostProducts.png)
-
-
-## Create Product Response
-
-![Create Product Response](screenshots/Swagger-PostProductsResponse.png)
-
----
-
-# Test Results
-
-Successfully tested:
-
-✅ Create Product  
-✅ Get All Products  
-✅ Get Product By Id  
-✅ Search Products  
-✅ Update Product Quantity  
-✅ Update Product Price  
-✅ Archive Product  
-✅ Create Supplier  
-✅ Get Suppliers  
-✅ Get Supplier By Id  
-✅ Assign Supplier To Product
-
-
-Status codes tested:
-
-- 201 Created
-- 200 OK
-- 204 No Content
-- 400 Bad Request
-- 404 Not Found
-
----
-
-# Session 03 Result
-
-The Warehouse Management API was successfully refactored using:
-
-- Domain-Driven Design (DDD)
-- Repository Pattern
-- Dependency Injection
-- CQRS-style separation
-- MediatR request handling
-
-The project now has a cleaner architecture with separated responsibilities between Domain, Application, Infrastructure, and Presentation layers.
-
----
-
-# Session 05 Improvements
-
-This session focuses on improving API reliability by adding middleware, filters, validation handling, exception handling, and additional dashboard and metadata endpoints.
-
----
-
-## Middleware vs Filters
-
-### Middleware
-
-Middleware handles HTTP-level concerns and runs in the ASP.NET Core request pipeline.
-
-Implemented middleware:
-
-- CorrelationIdMiddleware
-    - Adds a unique correlation ID to each request.
-
-- RequestTimingMiddleware
-    - Measures and logs request execution time.
-
-- ExceptionHandlingMiddleware
-    - Handles unexpected exceptions and returns a consistent error response.
-
-### Filters
-
-Filters are MVC/action-level components that execute around controller actions.
-
-Implemented filters:
-
-- ValidationFilter
-    - Handles validation errors and returns HTTP 400 Bad Request.
-
-- ActionLoggingFilter
-    - Logs controller action execution.
-
-## Metadata Endpoint
-
-Added reflection-based validation metadata inspection.
-
-Endpoint:
-
-GET /api/metadata/validation/{dtoName}
+Add the Firebase Project ID to your configuration.
 
 Example:
 
-GET /api/metadata/validation/CreateProductRequest
+```json
+"Firebase": {
+  "ProjectId": "warehouse-api-5f159"
+}
+```
 
-The endpoint returns DTO properties and validation attributes.
+The API validates Firebase ID tokens using:
 
+- Issuer: `https://securetoken.google.com/{ProjectId}`
+- Audience: `{ProjectId}`
 
-## Inventory Dashboard
+---
 
-Endpoint:
+## Authorization
 
-GET /api/inventory/dashboard
+The API uses Firebase Custom Claims for authorization.
 
-Returns:
+Supported roles:
 
-- Total products
-- Available products
-- Low stock products
-- Total suppliers
-- Active suppliers
+- admin
+- user
 
-## Stock Adjustment
+### Admin Permissions
 
-Endpoint:
+- Create products
+- Update products
+- Delete products
+- Upload files
+- Manage warehouse resources
 
-POST /api/stock-adjustments
+### User Permissions
 
-Features:
+- View products
+- View suppliers
+- View stock information
+- View dashboard
 
-- Creates stock adjustment records.
-- Uses CQRS with MediatR.
-- Uses repository pattern.
-- Validates request using FluentValidation.
+Requests without a valid token return:
 
-# Test Results
+```
+401 Unauthorized
+```
 
-Successfully tested:
+Authenticated users without sufficient permissions receive:
 
-✅ Create Product  
-✅ Get All Products  
-✅ Get Product By Id  
-✅ Search Products  
-✅ Update Product Quantity  
-✅ Update Product Price  
-✅ Archive Product  
-✅ Create Supplier  
-✅ Get Suppliers  
-✅ Assign Supplier To Product  
-✅ Create Stock Adjustment  
-✅ Inventory Dashboard  
-✅ Metadata Validation Endpoint
+```
+403 Forbidden
+```
 
+---
 
-Status codes tested:
+## MinIO Setup
 
-- 201 Created
-- 200 OK
-- 204 No Content
-- 400 Bad Request
-- 404 Not Found
-- 500 handled by exception middleware
+MinIO is used as the object storage provider for warehouse files.
 
-## Swagger Screenshots
+Run MinIO using Docker Compose from the solution root:
 
-### Screenshot 3280
+```bash
+docker compose up -d
+```
 
-![Screenshot 3280](screenshots/Screenshot%20(3280).png)
+MinIO API:
 
-### Screenshot 3281
+```
+http://localhost:9000
+```
 
-![Screenshot 3281](screenshots/Screenshot%20(3281).png)
+MinIO Console:
 
-### Screenshot 3282
+```
+http://localhost:9001
+```
 
-![Screenshot 3282](screenshots/Screenshot%20(3282).png)
+Login credentials:
 
-### Screenshot 3283
+```
+Username: admin
+Password: password123
+```
 
-![Screenshot 3283](screenshots/Screenshot%20(3283).png)
+Create the following bucket:
 
-### Screenshot 3284
+```
+warehouse-assets
+```
 
-![Screenshot 3284](screenshots/Screenshot%20(3284).png)
+---
 
-### Screenshot 3285
+## MinIO Configuration
 
-![Screenshot 3285](screenshots/Screenshot%20(3285).png)
+Configure MinIO in `appsettings.json`:
 
-### Screenshot 3286
+```json
+"Minio": {
+  "Endpoint": "localhost:9000",
+  "AccessKey": "admin",
+  "SecretKey": "password123",
+  "BucketName": "warehouse-assets",
+  "UseSSL": false
+}
+```
 
-![Screenshot 3286](screenshots/Screenshot%20(3286).png)
+---
 
-### Screenshot 3288
+## File Storage
 
-![Screenshot 3288](screenshots/Screenshot%20(3288).png)
+Warehouse files are stored in MinIO.
 
-### Screenshot 3292
+The SQL database stores only metadata:
 
-![Screenshot 3292](screenshots/Screenshot%20(3292).png)
+- File Name
+- Object Key
+- Content Type
+- File Size
+- Related Entity ID
+- Upload Date
 
-### Screenshot 3293
+File bytes are **not** stored in PostgreSQL.
 
-![Screenshot 3293](screenshots/Screenshot%20(3293).png)
+---
 
-### Screenshot 3294
+## Test Accounts
 
-![Screenshot 3294](screenshots/Screenshot%20(3294).png)
+Example accounts used during testing:
 
-### Screenshot 3295
+| Role | Email |
+|------|-------|
+| Admin | admin@test.com |
+| User | user@test.com |
 
-![Screenshot 3295](screenshots/Screenshot%20(3295).png)
+Passwords are omitted.
 
+---
 
-### Screenshot 3297
+## Obtaining a Firebase ID Token
 
-![Screenshot 3297](screenshots/Screenshot%20(3297).png)
+1. Sign in using Firebase Authentication.
+2. Copy the generated Firebase ID token.
+3. Use the token in API requests.
 
-### Screenshot 3299
+Postman:
 
-![Screenshot 3299](screenshots/Screenshot%20(3299).png)
+```
+Authorization
+→ Bearer Token
+→ Paste Firebase ID Token
+```
+
+If custom claims (roles) are changed, sign in again to obtain a new token containing the updated role.
+
+---
+
+## API Testing
+
+### No Token
+
+Expected response:
+
+```
+401 Unauthorized
+```
+
+### User Token
+
+Allowed:
+
+- GET Products
+- GET Suppliers
+- GET Dashboard
+- GET Stock Information
+
+Restricted:
+
+- POST
+- PUT
+- DELETE
+- File Upload
+
+Expected response:
+
+```
+403 Forbidden
+```
+
+### Admin Token
+
+Allowed:
+
+- Create Products
+- Update Products
+- Delete Products
+- Upload Product Images
+- Upload Supplier Documents
+
+---
+
+## File Upload
+
+Example endpoint:
+
+```
+POST /api/products/{id}/image
+```
+
+Request type:
+
+```
+multipart/form-data
+```
+
+Required field:
+
+```
+file
+```
+
+After a successful upload:
+
+- The file is stored in the `warehouse-assets` bucket.
+- Only file metadata is saved in PostgreSQL.
+- A unique object key is generated to prevent overwriting existing files.
