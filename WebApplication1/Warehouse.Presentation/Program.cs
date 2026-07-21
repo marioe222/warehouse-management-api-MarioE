@@ -9,12 +9,14 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Warehouse.Application.Behaviors;
+using Warehouse.Application.Interfaces;
 using Warehouse.Application.Mapping;
 using Warehouse.Application.Products.Commands.CreateProduct;
 using Warehouse.Infrastructure;
 using Warehouse.Presentation.Filters;
 using Warehouse.Presentation.Jobs;
 using Warehouse.Presentation.Middleware;
+using Warehouse.Presentation.Services;
 using Warehouse.Presentation.Swagger;
 
 
@@ -154,30 +156,53 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 });
 
 
+// Localization Service (used by Application-layer validators via ILocalizationService)
+
+builder.Services.AddScoped<ILocalizationService, LocalizationService>();
+
+
 // Firebase JWT Authentication
 
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        var projectId =
-            builder.Configuration["Firebase:ProjectId"];
-
-
         options.Authority =
-            $"https://securetoken.google.com/{projectId}";
-
-
-        options.Audience = projectId;
-
+            "https://securetoken.google.com/warehouse-api-5f159";
 
         options.TokenValidationParameters =
             new TokenValidationParameters
             {
-                RoleClaimType = "role"
-            };
-});
+                ValidateIssuer = true,
+                ValidIssuer =
+                    "https://securetoken.google.com/warehouse-api-5f159",
 
+                ValidateAudience = true,
+                ValidAudience =
+                    "warehouse-api-5f159",
+
+                ValidateLifetime = true
+            };
+
+        options.Events = new JwtBearerEvents
+        {
+            OnAuthenticationFailed = context =>
+            {
+                Console.WriteLine("JWT ERROR: " + context.Exception.GetType().Name + " - " + context.Exception.Message);
+                return Task.CompletedTask;
+            },
+            OnChallenge = context =>
+            {
+                Console.WriteLine("JWT CHALLENGE: " + context.Error + " - " + context.ErrorDescription);
+                return Task.CompletedTask;
+            },
+            OnTokenValidated = context =>
+            {
+                Console.WriteLine("JWT OK for user: " + context.Principal?.Identity?.Name);
+                return Task.CompletedTask;
+            }
+        };
+    });
 
 // Authorization Policies
 

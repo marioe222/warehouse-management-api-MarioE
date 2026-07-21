@@ -54,4 +54,58 @@
     <data name="SupplierDeactivated" xml:space="preserve">
         <value>تم تعطيل المورد بنجاح</value>
     </data>
+    <data name="ProductNameRequired" xml:space="preserve">
+        <value>اسم المنتج مطلوب</value>
+    </data>
+    <data name="ProductDescriptionRequired" xml:space="preserve">
+        <value>الوصف مطلوب</value>
+    </data>
+    <data name="ProductPriceMustBePositive" xml:space="preserve">
+        <value>يجب أن يكون السعر أكبر من صفر</value>
+    </data>
+    <data name="ProductExpiryDateMustBeFuture" xml:space="preserve">
+        <value>يجب أن يكون تاريخ انتهاء الصلاحية في المستقبل</value>
+    </data>
+    <data name="ProductNameMaxLength" xml:space="preserve">
+        <value>يجب ألا يتجاوز اسم المنتج {MaxLength} حرفًا</value>
+    </data>
+    <data name="ProductQuantityCannotBeNegative" xml:space="preserve">
+        <value>لا يمكن أن تكون الكمية سالبة</value>
+    </data>
+    <data name="SkuMaxLength" xml:space="preserve">
+        <value>يجب ألا يتجاوز رمز المنتج (SKU) {MaxLength} حرفًا</value>
+    </data>
+    <data name="SkuRequired" xml:space="preserve">
+        <value>رمز المنتج (SKU) مطلوب</value>
+    </data>
+    <data name="QuantityChangeCannotBeZero" xml:space="preserve">
+        <value>لا يمكن أن يكون تغيير الكمية صفرًا</value>
+    </data>
+    <data name="ReasonRequired" xml:space="preserve">
+        <value>السبب مطلوب</value>
+    </data>
+    <data name="SupplierCountryMaxLength" xml:space="preserve">
+        <value>يجب ألا يتجاوز بلد المورد {MaxLength} حرفًا</value>
+    </data>
+    <data name="SupplierCountryRequired" xml:space="preserve">
+        <value>بلد المورد مطلوب</value>
+    </data>
+    <data name="SupplierEmailInvalid" xml:space="preserve">
+        <value>صيغة البريد الإلكتروني للمورد غير صحيحة</value>
+    </data>
+    <data name="SupplierEmailRequired" xml:space="preserve">
+        <value>البريد الإلكتروني للمورد مطلوب</value>
+    </data>
+    <data name="SupplierNameMaxLength" xml:space="preserve">
+        <value>يجب ألا يتجاوز اسم المورد {MaxLength} حرفًا</value>
+    </data>
+    <data name="SupplierNameRequired" xml:space="preserve">
+        <value>اسم المورد مطلوب</value>
+    </data>
+    <data name="SupplierPhoneMaxLength" xml:space="preserve">
+        <value>يجب ألا يتجاوز رقم هاتف المورد {MaxLength} حرفًا</value>
+    </data>
+    <data name="SupplierPhoneRequired" xml:space="preserve">
+        <value>رقم هاتف المورد مطلوب</value>
+    </data>
 </root>
