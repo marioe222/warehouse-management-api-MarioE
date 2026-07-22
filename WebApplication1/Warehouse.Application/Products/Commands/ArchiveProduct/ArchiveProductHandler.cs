@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
+using Warehouse.Application.Common;
 using Warehouse.Domain.Interface;
 using Warehouse.Application.Common.Cache;
 

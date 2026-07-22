@@ -6,7 +6,7 @@ public interface ISupplierRepository
 {
     Task Add(
         Supplier supplier,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken );
 
     Task<Supplier?> GetById(
         Guid id,

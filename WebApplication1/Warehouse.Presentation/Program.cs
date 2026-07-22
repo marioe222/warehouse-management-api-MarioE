@@ -21,12 +21,22 @@ using Warehouse.Presentation.Swagger;
 using Microsoft.IdentityModel.Logging;
 
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 IdentityModelEventSource.ShowPII = true;
 
 // Serilog Configuration
 
+builder.Host.UseSerilog(
+    (context, services, configuration) =>
+    {
+        configuration
+            .WriteTo.Console()
+            .WriteTo.File(
+                "Logs/log-.txt",
+                rollingInterval: RollingInterval.Day);
+    });
 
 builder.Host.UseSerilog((context, services, configuration) =>
 {
@@ -359,11 +369,13 @@ app.MapHealthChecksUI(options =>
 
 
 // Recurring Hangfire Job
+// Hangfire injects the real CancellationToken automatically
 
 RecurringJob.AddOrUpdate<ProductExpiryJob>(
     "check-expired-products",
     job => job.CheckProductsAsync(CancellationToken.None),
-    Cron.Daily);
+    Cron.Daily
+);
 
 
 // Run

@@ -15,13 +15,17 @@ public class ProductExpiryJob
         _repository = repository;
     }
 
+
     public async Task CheckProductsAsync(
         CancellationToken cancellationToken)
     {
-        // This should be replaced with a filtered repository method
-        var products = await _repository.GetAll(cancellationToken);
+        var today = DateOnly.FromDateTime(
+            DateTime.Today);
 
-        var today = DateOnly.FromDateTime(DateTime.Today);
+
+        var products = await _repository.GetExpiringProducts(
+            today,
+            cancellationToken);
 
         var expiredProducts = products
             .Where(p =>
@@ -46,6 +50,7 @@ public class ProductExpiryJob
                 "Expired product: {Name}",
                 product.Name);
         }
+
 
         _logger.LogInformation(
             "Soon-to-expire products count: {Count}",

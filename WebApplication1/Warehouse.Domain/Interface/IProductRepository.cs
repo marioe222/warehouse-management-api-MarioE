@@ -23,6 +23,6 @@ public interface IProductRepository
 
     Task Update(
         Product product,
-        CancellationToken cancellationToken 
+        CancellationToken cancellationToken
     );
 }
