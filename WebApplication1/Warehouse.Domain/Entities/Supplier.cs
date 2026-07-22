@@ -1,7 +1,32 @@
-﻿namespace Warehouse.Domain.Entities;
+﻿using Warehouse.Domain.Exceptions;
+
+namespace Warehouse.Domain.Entities;
 
 public class Supplier
 {
+    private Supplier()
+    {
+    }
+
+
+    public Supplier(
+        string name,
+        string contactEmail)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            throw new BusinessRuleException(
+                "Supplier name required"
+            );
+
+        Id = Guid.NewGuid();
+
+        Name = name;
+
+        ContactEmail = contactEmail;
+
+        IsActive = true;
+    }
+
     public Guid Id { get; private set; }
 
     public string Name { get; private set; }
@@ -11,18 +36,8 @@ public class Supplier
     public bool IsActive { get; private set; }
 
 
-    public Supplier(
-        string name,
-        string contactEmail)
-    {
-        Id = Guid.NewGuid();
-
-        Name = name;
-
-        ContactEmail = contactEmail;
-
-        IsActive = true;
-    }
+    public ICollection<Product> Products { get; private set; }
+        = new List<Product>();
 
 
     public void Deactivate()

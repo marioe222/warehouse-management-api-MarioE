@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.Extensions.Caching.Distributed;
 using Warehouse.Domain.Interface;
 
 namespace Warehouse.Application.Products.Commands.AssignSupplier;
@@ -6,15 +7,18 @@ namespace Warehouse.Application.Products.Commands.AssignSupplier;
 public class AssignSupplierHandler
     : IRequestHandler<AssignSupplierCommand, AssignSupplierResponse>
 {
+    private readonly IDistributedCache _cache;
     private readonly IProductRepository _productRepository;
     private readonly ISupplierRepository _supplierRepository;
 
     public AssignSupplierHandler(
         IProductRepository productRepository,
-        ISupplierRepository supplierRepository)
+        ISupplierRepository supplierRepository,
+        IDistributedCache cache)
     {
         _productRepository = productRepository;
         _supplierRepository = supplierRepository;
+        _cache = cache;
     }
 
     public async Task<AssignSupplierResponse> Handle(
@@ -22,7 +26,8 @@ public class AssignSupplierHandler
         CancellationToken cancellationToken)
     {
         var product = await _productRepository.GetById(
-            request.ProductId
+            request.ProductId,
+            cancellationToken
         );
 
         if (product == null)
@@ -30,7 +35,8 @@ public class AssignSupplierHandler
 
 
         var supplier = await _supplierRepository.GetById(
-            request.SupplierId
+            request.SupplierId,
+            cancellationToken
         );
 
         if (supplier == null)
@@ -41,11 +47,29 @@ public class AssignSupplierHandler
             return new AssignSupplierResponse(false);
 
 
-        // Add this method inside Product entity
         product.AssignSupplier(supplier);
 
 
-        await _productRepository.Update(product);
+        await _productRepository.Update(
+            product,
+            cancellationToken
+        );
+
+
+        // Remove Redis cache because product changed
+        await _cache.RemoveAsync(
+            $"product:{request.ProductId}",
+            cancellationToken);
+
+
+        await _cache.RemoveAsync(
+            "products:True",
+            cancellationToken);
+
+
+        await _cache.RemoveAsync(
+            "products:False",
+            cancellationToken);
 
 
         return new AssignSupplierResponse(true);

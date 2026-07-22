@@ -1,5 +1,7 @@
-﻿namespace Warehouse.Application.Products.Queries.SearchProducts;
+﻿using Warehouse.Application.ViewModels;
+
+namespace Warehouse.Application.Products.Queries.SearchProducts;
 
 public record SearchProductsResponse(
-    IEnumerable<object> Products
+    List<ProductViewModel> Products
 );

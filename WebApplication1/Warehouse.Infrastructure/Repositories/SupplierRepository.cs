@@ -1,4 +1,5 @@
-﻿using Warehouse.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Warehouse.Domain.Entities;
 using Warehouse.Domain.Interface;
 using Warehouse.Infrastructure.Data;
 
@@ -6,34 +7,56 @@ namespace Warehouse.Infrastructure.Repositories;
 
 public class SupplierRepository : ISupplierRepository
 {
-    public Task Add(Supplier supplier)
-    {
-        FakeWarehouseStore.Suppliers.Add(supplier);
+    private readonly WarehouseDbContext _context;
 
-        return Task.CompletedTask;
+    public SupplierRepository(WarehouseDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task Add(
+        Supplier supplier,
+        CancellationToken cancellationToken)
+    {
+        await _context.Suppliers.AddAsync(
+            supplier,
+            cancellationToken
+        );
+
+        await _context.SaveChangesAsync(
+            cancellationToken
+        );
     }
 
 
-    public Task<Supplier?> GetById(Guid id)
+    public async Task<Supplier?> GetById(
+        Guid id,
+        CancellationToken cancellationToken)
     {
-        var supplier = FakeWarehouseStore.Suppliers
-            .FirstOrDefault(s => s.Id == id);
-
-        return Task.FromResult(supplier);
+        return await _context.Suppliers
+            .FirstOrDefaultAsync(
+                s => s.Id == id,
+                cancellationToken
+            );
     }
 
 
-    public Task<IEnumerable<Supplier>> GetAll()
+    public async Task<List<Supplier>> GetAll(
+        CancellationToken cancellationToken)
     {
-        IEnumerable<Supplier> suppliers =
-            FakeWarehouseStore.Suppliers;
-
-        return Task.FromResult(suppliers);
+        return await _context.Suppliers
+            .ToListAsync(cancellationToken);
     }
 
 
-    public Task Update(Supplier supplier)
+    public async Task Update(
+        Supplier supplier,
+        CancellationToken cancellationToken)
     {
-        return Task.CompletedTask;
+        _context.Suppliers.Update(supplier);
+
+        await _context.SaveChangesAsync(
+            cancellationToken
+        );
     }
 }

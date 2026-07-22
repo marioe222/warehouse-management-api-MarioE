@@ -4,11 +4,31 @@ namespace Warehouse.Domain.Interface;
 
 public interface IProductRepository
 {
-    Task Add(Product product);
+    Task Add(
+        Product product,
+        CancellationToken cancellationToken
+    );
 
-    Task<Product?> GetById(Guid id);
 
-    Task<IEnumerable<Product>> GetAll();
+    Task<Product?> GetById(
+        Guid id,
+        CancellationToken cancellationToken
+    );
 
-    Task Update(Product product);
+
+    Task<List<Product>> GetAll(
+        CancellationToken cancellationToken
+    );
+
+
+    Task<List<Product>> GetExpiringProducts(
+        DateOnly date,
+        CancellationToken cancellationToken
+    );
+
+
+    Task Update(
+        Product product,
+        CancellationToken cancellationToken
+    );
 }

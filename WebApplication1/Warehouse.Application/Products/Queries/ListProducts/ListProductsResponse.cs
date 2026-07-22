@@ -1,5 +1,7 @@
-﻿namespace Warehouse.Application.Products.Queries.ListProducts;
+﻿using Warehouse.Application.ViewModels;
+
+namespace Warehouse.Application.Products.Queries.ListProducts;
 
 public record ListProductsResponse(
-    IEnumerable<object> Products
+    List<ProductViewModel> Products
 );

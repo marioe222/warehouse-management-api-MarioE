@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
+                id="root"
+                xmlns="">
+        <xsd:element name="root" msdata:IsDataSet="true">
+
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <data name="ProductNotFound" xml:space="preserve">
+        <value>المنتج غير موجود</value>
+    </data>
+    <data name="ProductCreated" xml:space="preserve">
+        <value>تم إنشاء المنتج</value>
+    </data>
+    <data name="SupplierNotFound" xml:space="preserve">
+        <value>المورد غير موجود</value>
+    </data>
+    <data name="SupplierCreated" xml:space="preserve">
+        <value>تم إنشاء المورد</value>
+    </data>
+    <data name="StockAdjustmentCreated" xml:space="preserve">
+        <value>تم إنشاء تعديل المخزون بنجاح</value>
+    </data>
+    <data name="DtoNotFound" xml:space="preserve">
+        <value>لم يتم العثور على DTO</value>
+    </data>
+    <data name="ValidationMetadataRetrieved" xml:space="preserve">
+        <value>تم جلب معلومات التحقق بنجاح</value>
+    </data>
+    <data name="DashboardRetrieved" xml:space="preserve">
+        <value>تم جلب بيانات لوحة التحكم بنجاح</value>
+    </data>
+    <data name="SuppliersRetrieved" xml:space="preserve">
+        <value>تم جلب الموردين بنجاح</value>
+    </data>
+    <data name="SupplierDeactivated" xml:space="preserve">
+        <value>تم تعطيل المورد بنجاح</value>
+    </data>
+</root>

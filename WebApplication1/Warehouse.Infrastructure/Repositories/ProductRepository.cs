@@ -1,4 +1,5 @@
-﻿using Warehouse.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Warehouse.Domain.Entities;
 using Warehouse.Domain.Interface;
 using Warehouse.Infrastructure.Data;
 
@@ -6,33 +7,69 @@ namespace Warehouse.Infrastructure.Repositories;
 
 public class ProductRepository : IProductRepository
 {
-    public Task Add(Product product)
-    {
-        FakeWarehouseStore.Products.Add(product);
+    private readonly WarehouseDbContext _context;
 
-        return Task.CompletedTask;
+    public ProductRepository(WarehouseDbContext context)
+    {
+        _context = context;
     }
 
 
-    public Task<Product?> GetById(Guid id)
+    public async Task Add(
+        Product product,
+        CancellationToken cancellationToken)
     {
-        var product = FakeWarehouseStore.Products
-            .FirstOrDefault(p => p.Id == id);
-
-        return Task.FromResult(product);
-    }
-
-
-    public Task<IEnumerable<Product>> GetAll()
-    {
-        return Task.FromResult<IEnumerable<Product>>(
-            FakeWarehouseStore.Products
+        await _context.Products.AddAsync(
+            product,
+            cancellationToken
         );
-    }  
+
+        await _context.SaveChangesAsync(
+            cancellationToken
+        );
+    }
 
 
-    public async Task Update(Product product)
+    public async Task<Product?> GetById(
+        Guid id,
+        CancellationToken cancellationToken)
     {
-        await Task.CompletedTask;
+        return await _context.Products
+            .FirstOrDefaultAsync(
+                p => p.Id == id,
+                cancellationToken
+            );
+    }
+
+
+    public async Task<List<Product>> GetAll(
+        CancellationToken cancellationToken)
+    {
+        return await _context.Products
+            .ToListAsync(cancellationToken);
+    }
+
+
+    public async Task<List<Product>> GetExpiringProducts(
+        DateOnly date,
+        CancellationToken cancellationToken)
+    {
+        return await _context.Products
+            .Where(p =>
+                p.ExpiryDate.HasValue &&
+                DateOnly.FromDateTime(p.ExpiryDate.Value) <= date.AddDays(30))
+            .ToListAsync(cancellationToken);
+    }
+
+
+    public async Task Update(
+        Product product,
+        CancellationToken cancellationToken)
+    {
+        _context.Products.Update(product);
+
+        await _context.SaveChangesAsync(
+            cancellationToken
+        );
     }
 }

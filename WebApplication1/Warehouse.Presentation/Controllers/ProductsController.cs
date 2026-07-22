@@ -1,5 +1,7 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using Warehouse.Application.Products.Commands.ArchiveProduct;
 using Warehouse.Application.Products.Commands.AssignSupplier;
 using Warehouse.Application.Products.Commands.CreateProduct;
@@ -9,7 +11,9 @@ using Warehouse.Application.Products.Commands.UploadProductImage;
 using Warehouse.Application.Products.Queries.GetProductById;
 using Warehouse.Application.Products.Queries.ListProducts;
 using Warehouse.Application.Products.Queries.SearchProducts;
+using Warehouse.Application.ViewModels;
 using Warehouse.Presentation.Contracts;
+using Warehouse.Presentation.Resources;
 
 namespace Warehouse.Presentation.Controllers;
 
@@ -17,67 +21,118 @@ namespace Warehouse.Presentation.Controllers;
 [Route("api/products")]
 public class ProductsController : ControllerBase
 {
+    private readonly IStringLocalizer<SharedResources> _localizer;
+    private readonly ILogger<ProductsController> _logger;
+    private readonly IMapper _mapper;
     private readonly IMediator _mediator;
 
 
-    public ProductsController(IMediator mediator)
+    public ProductsController(
+        IMediator mediator,
+        IMapper mapper,
+        IStringLocalizer<SharedResources> localizer,
+        ILogger<ProductsController> logger)
     {
         _mediator = mediator;
+        _mapper = mapper;
+        _localizer = localizer;
+        _logger = logger;
     }
 
 
-    // 1 GET /api/products
+    // GET: api/products
     [HttpGet]
     public async Task<IActionResult> GetAll(
-        [FromQuery] bool onlyAvailable = false)
+        [FromQuery] bool onlyAvailable = false,
+        CancellationToken cancellationToken = default)
     {
-        var products = await _mediator.Send(
-            new ListProductsQuery(onlyAvailable)
+        var response = await _mediator.Send(
+            new ListProductsQuery(onlyAvailable),
+            cancellationToken
         );
 
-        return Ok(products);
+
+        var result = _mapper.Map<List<ProductViewModel>>(
+            response.Products
+        );
+
+
+        _logger.LogInformation(
+            "Retrieved {ProductCount} products",
+            result.Count);
+
+
+        return Ok(result);
     }
 
 
-    // 2 GET /api/products/{id}
+    // GET: api/products/{id}
     [HttpGet("{id:guid}")]
-    public async Task<IActionResult> GetById(Guid id)
+    public async Task<IActionResult> GetById(
+        Guid id,
+        CancellationToken cancellationToken = default)
     {
-        var product = await _mediator.Send(
-            new GetProductByIdQuery(id)
+        var response = await _mediator.Send(
+            new GetProductByIdQuery(id),
+            cancellationToken
         );
 
 
-        if (product == null)
-            return NotFound();
+        if (response == null)
+        {
+            _logger.LogWarning(
+                "Product {ProductId} not found",
+                id);
+
+            return NotFound(new
+            {
+                message = _localizer["ProductNotFound"].Value
+            });
+        }
 
 
-        return Ok(product);
+        _logger.LogInformation(
+            "Retrieved product {ProductId}",
+            id);
+
+
+        return Ok(response);
     }
 
 
-    // 3 SEARCH
+    // GET: api/products/search
     [HttpGet("search")]
     public async Task<IActionResult> Search(
         [FromQuery] string? name,
-        [FromQuery] string? supplier)
+        [FromQuery] string? supplier,
+        CancellationToken cancellationToken = default)
     {
         var products = await _mediator.Send(
             new SearchProductsQuery(
                 name,
                 supplier
-            )
+            ),
+            cancellationToken
         );
 
 
-        return Ok(products);
+        _logger.LogInformation(
+            "Product search executed. Name: {Name}, Supplier: {Supplier}",
+            name,
+            supplier);
+
+
+        return Ok(
+            _mapper.Map<List<ProductViewModel>>(products)
+        );
     }
 
 
-    // 4 CREATE
+    // POST: api/products
     [HttpPost]
     public async Task<IActionResult> Create(
-        CreateProductRequest request)
+        CreateProductRequest request,
+        CancellationToken cancellationToken = default)
     {
         var response = await _mediator.Send(
             new CreateProductCommand(
@@ -88,139 +143,246 @@ public class ProductsController : ControllerBase
                 request.QuantityInStock,
                 request.SupplierName,
                 request.ExpiryDate
-            )
+            ),
+            cancellationToken
         );
+
+
+        _logger.LogInformation(
+            "Product {ProductId} created",
+            response.Id);
 
 
         return CreatedAtAction(
             nameof(GetById),
             new { id = response.Id },
-            response
+            new
+            {
+                message = _localizer["ProductCreated"].Value,
+                data = _mapper.Map<ProductViewModel>(response)
+            }
         );
     }
 
 
-    // 5 UPDATE QUANTITY
+    // POST: api/products/{id}/quantity
     [HttpPost("{id:guid}/quantity")]
     public async Task<IActionResult> UpdateQuantity(
         Guid id,
-        UpdateProductQuantityRequest request)
+        UpdateProductQuantityRequest request,
+        CancellationToken cancellationToken = default)
     {
-        if (request.QuantityInStock < 0)
-            return BadRequest("Quantity cannot be negative.");
-
-
         var result = await _mediator.Send(
             new UpdateProductQuantityCommand(
                 id,
                 request.QuantityInStock
-            )
+            ),
+            cancellationToken
         );
 
 
         if (!result.Success)
-            return NotFound();
+        {
+            _logger.LogWarning(
+                "Failed updating quantity for product {ProductId}",
+                id);
+
+            return NotFound(new
+            {
+                message = _localizer["ProductNotFound"].Value
+            });
+        }
 
 
-        return NoContent();
+        _logger.LogInformation(
+            "Product {ProductId} quantity updated",
+            id);
+
+
+        return Ok(new
+        {
+            message = _localizer["ProductUpdated"].Value
+        });
     }
 
 
-    // 6 UPDATE PRICE
+    // POST: api/products/{id}/price
     [HttpPost("{id:guid}/price")]
     public async Task<IActionResult> UpdatePrice(
         Guid id,
-        UpdateProductPriceRequest request)
+        UpdateProductPriceRequest request,
+        CancellationToken cancellationToken = default)
     {
-        if (request.Price <= 0)
-            return BadRequest("Price must be greater than zero.");
-
-
         var result = await _mediator.Send(
             new UpdateProductPriceCommand(
                 id,
                 request.Price
-            )
+            ),
+            cancellationToken
         );
 
 
         if (!result.Success)
-            return NotFound();
+        {
+            _logger.LogWarning(
+                "Failed updating price for product {ProductId}",
+                id);
+
+            return NotFound(new
+            {
+                message = _localizer["ProductNotFound"].Value
+            });
+        }
 
 
-        return NoContent();
+        _logger.LogInformation(
+            "Product {ProductId} price updated",
+            id);
+
+
+        return Ok(new
+        {
+            message = _localizer["ProductUpdated"].Value
+        });
     }
 
 
-    // 7 IMAGE UPLOAD
+    // POST: api/products/{id}/image
     [HttpPost("{id:guid}/image")]
     [Consumes("multipart/form-data")]
     public async Task<IActionResult> UploadImage(
         Guid id,
-        IFormFile file)
+        IFormFile file,
+        CancellationToken cancellationToken = default)
     {
         var result = await _mediator.Send(
             new UploadProductImageCommand(
                 id,
                 file
-            )
+            ),
+            cancellationToken
         );
 
 
         if (!result.Success)
-            return NotFound();
+        {
+            _logger.LogWarning(
+                "Failed uploading image for product {ProductId}",
+                id);
+
+            return NotFound(new
+            {
+                message = _localizer["ProductNotFound"].Value
+            });
+        }
 
 
-        return Ok();
+        _logger.LogInformation(
+            "Image uploaded for product {ProductId}",
+            id);
+
+
+        return Ok(new
+        {
+            message = _localizer["ProductUpdated"].Value
+        });
     }
 
 
-    // 8 DELETE / ARCHIVE
+    // DELETE: api/products/{id}
     [HttpDelete("{id:guid}")]
-    public async Task<IActionResult> Delete(Guid id)
+    public async Task<IActionResult> Delete(
+        Guid id,
+        CancellationToken cancellationToken = default)
     {
         var result = await _mediator.Send(
-            new ArchiveProductCommand(id)
+            new ArchiveProductCommand(id),
+            cancellationToken
         );
 
 
         if (!result.Success)
-            return NotFound();
+        {
+            _logger.LogWarning(
+                "Failed deleting product {ProductId}",
+                id);
+
+            return NotFound(new
+            {
+                message = _localizer["ProductNotFound"].Value
+            });
+        }
 
 
-        return NoContent();
+        _logger.LogInformation(
+            "Product {ProductId} deleted",
+            id);
+
+
+        return Ok(new
+        {
+            message = _localizer["ProductDeleted"].Value
+        });
     }
 
 
-    // 9 SERVER TIME
+    // GET: api/products/server-time
     [HttpGet("server-time")]
     public IActionResult GetServerTime(
         [FromHeader(Name = "Accept-Language")] string language)
     {
-        var time = DateTime.UtcNow;
+        _logger.LogInformation(
+            "Server time requested with language {Language}",
+            language);
 
-        return Ok(time);
+
+        return Ok(new
+        {
+            language,
+            time = DateTime.UtcNow
+        });
     }
 
 
-    // 10 ASSIGN SUPPLIER
+    // POST: api/products/{id}/assign-supplier/{supplierId}
     [HttpPost("{id:guid}/assign-supplier/{supplierId:guid}")]
     public async Task<IActionResult> AssignSupplier(
         Guid id,
-        Guid supplierId)
+        Guid supplierId,
+        CancellationToken cancellationToken = default)
     {
         var result = await _mediator.Send(
             new AssignSupplierCommand(
                 id,
                 supplierId
-            )
+            ),
+            cancellationToken
         );
 
 
         if (!result.Success)
-            return NotFound();
+        {
+            _logger.LogWarning(
+                "Failed assigning supplier {SupplierId} to product {ProductId}",
+                supplierId,
+                id);
+
+            return NotFound(new
+            {
+                message = _localizer["ProductNotFound"].Value
+            });
+        }
 
 
-        return NoContent();
+        _logger.LogInformation(
+            "Supplier {SupplierId} assigned to product {ProductId}",
+            supplierId,
+            id);
+
+
+        return Ok(new
+        {
+            message = _localizer["ProductUpdated"].Value
+        });
     }
 }

@@ -1,5 +1,6 @@
 ﻿using MediatR;
-using Warehouse.Application.Products.Commands;
+using Microsoft.Extensions.Caching.Distributed;
+using Warehouse.Application.Common;
 using Warehouse.Domain.Interface;
 
 namespace Warehouse.Application.Products.Commands.ArchiveProduct;
@@ -7,22 +8,24 @@ namespace Warehouse.Application.Products.Commands.ArchiveProduct;
 public class ArchiveProductHandler
     : IRequestHandler<ArchiveProductCommand, ArchiveProductResponse>
 {
+    private readonly IDistributedCache _cache;
     private readonly IProductRepository _repository;
 
-
     public ArchiveProductHandler(
-        IProductRepository repository)
+        IProductRepository repository,
+        IDistributedCache cache)
     {
         _repository = repository;
+        _cache = cache;
     }
-
 
     public async Task<ArchiveProductResponse> Handle(
         ArchiveProductCommand request,
         CancellationToken cancellationToken)
     {
         var product = await _repository.GetById(
-            request.ProductId
+            request.ProductId,
+            cancellationToken
         );
 
 
@@ -33,7 +36,26 @@ public class ArchiveProductHandler
         product.Archive();
 
 
-        await _repository.Update(product);
+        await _repository.Update(
+            product,
+            cancellationToken
+        );
+
+
+        // Remove Redis cache because product data changed
+        await _cache.RemoveAsync(
+            CacheKeys.Product(request.ProductId),
+            cancellationToken);
+
+
+        await _cache.RemoveAsync(
+            "products:True",
+            cancellationToken);
+
+
+        await _cache.RemoveAsync(
+            "products:False",
+            cancellationToken);
 
 
         return new ArchiveProductResponse(true);

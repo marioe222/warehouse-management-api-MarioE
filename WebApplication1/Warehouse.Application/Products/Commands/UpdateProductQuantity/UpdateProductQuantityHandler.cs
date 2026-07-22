@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Warehouse.Application.Products.Commands;
+using Microsoft.Extensions.Caching.Distributed;
 using Warehouse.Domain.Interface;
 
 namespace Warehouse.Application.Products.Commands.UpdateProductQuantity;
@@ -7,22 +7,24 @@ namespace Warehouse.Application.Products.Commands.UpdateProductQuantity;
 public class UpdateProductQuantityHandler
     : IRequestHandler<UpdateProductQuantityCommand, UpdateProductQuantityResponse>
 {
+    private readonly IDistributedCache _cache;
     private readonly IProductRepository _repository;
 
-
     public UpdateProductQuantityHandler(
-        IProductRepository repository)
+        IProductRepository repository,
+        IDistributedCache cache)
     {
         _repository = repository;
+        _cache = cache;
     }
-
 
     public async Task<UpdateProductQuantityResponse> Handle(
         UpdateProductQuantityCommand request,
         CancellationToken cancellationToken)
     {
         var product = await _repository.GetById(
-            request.ProductId
+            request.ProductId,
+            cancellationToken
         );
 
 
@@ -35,7 +37,26 @@ public class UpdateProductQuantityHandler
         );
 
 
-        await _repository.Update(product);
+        await _repository.Update(
+            product,
+            cancellationToken
+        );
+
+
+        // Remove Redis cache because product quantity changed
+        await _cache.RemoveAsync(
+            $"product:{request.ProductId}",
+            cancellationToken);
+
+
+        await _cache.RemoveAsync(
+            "products:True",
+            cancellationToken);
+
+
+        await _cache.RemoveAsync(
+            "products:False",
+            cancellationToken);
 
 
         return new UpdateProductQuantityResponse(true);

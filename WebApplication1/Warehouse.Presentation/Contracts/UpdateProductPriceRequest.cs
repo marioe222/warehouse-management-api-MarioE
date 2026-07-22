@@ -1,6 +1,8 @@
-﻿namespace Warehouse.Presentation.Contracts;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Warehouse.Presentation.Contracts;
 
 public class UpdateProductPriceRequest
 {
-    public decimal Price { get; set; }
+    [Required] [Range(0, double.MaxValue)] public decimal Price { get; set; }
 }
