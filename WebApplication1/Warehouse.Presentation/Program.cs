@@ -18,10 +18,12 @@ using Warehouse.Presentation.Jobs;
 using Warehouse.Presentation.Middleware;
 using Warehouse.Presentation.Services;
 using Warehouse.Presentation.Swagger;
+using Microsoft.IdentityModel.Logging;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
+IdentityModelEventSource.ShowPII = true;
 
 // Serilog Configuration
 
@@ -164,45 +166,68 @@ builder.Services.AddScoped<ILocalizationService, LocalizationService>();
 // Firebase JWT Authentication
 
 builder.Services
-    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme =
+            JwtBearerDefaults.AuthenticationScheme;
+
+        options.DefaultChallengeScheme =
+            JwtBearerDefaults.AuthenticationScheme;
+    })
     .AddJwtBearer(options =>
     {
-        options.Authority =
-            "https://securetoken.google.com/warehouse-api-5f159";
+        var projectId = "warehouse-api-5f159";
+        
+        options.MapInboundClaims = false;
+        
+        options.RequireHttpsMetadata = true;
 
-        options.TokenValidationParameters =
-            new TokenValidationParameters
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = $"https://securetoken.google.com/{projectId}",
+
+            ValidateAudience = true,
+            ValidAudience = projectId,
+
+            ValidateLifetime = true,
+            RoleClaimType = "role",
+
+            IssuerSigningKeyResolver = (token, securityToken, kid, parameters) =>
             {
-                ValidateIssuer = true,
-                ValidIssuer =
-                    "https://securetoken.google.com/warehouse-api-5f159",
+                using var httpClient = new HttpClient();
+                var json = httpClient.GetStringAsync(
+                    "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com"
+                ).GetAwaiter().GetResult();
 
-                ValidateAudience = true,
-                ValidAudience =
-                    "warehouse-api-5f159",
-
-                ValidateLifetime = true
-            };
+                var jwks = new JsonWebKeySet(json);
+                return jwks.Keys;
+            }
+        };
 
         options.Events = new JwtBearerEvents
         {
-            OnAuthenticationFailed = context =>
+            OnMessageReceived = context =>
             {
-                Console.WriteLine("JWT ERROR: " + context.Exception.GetType().Name + " - " + context.Exception.Message);
+                Console.WriteLine("TOKEN RECEIVED");
                 return Task.CompletedTask;
             },
-            OnChallenge = context =>
+            OnAuthenticationFailed = context =>
             {
-                Console.WriteLine("JWT CHALLENGE: " + context.Error + " - " + context.ErrorDescription);
+                Console.WriteLine("JWT FAILED:");
+                Console.WriteLine(context.Exception.Message);
                 return Task.CompletedTask;
             },
             OnTokenValidated = context =>
             {
-                Console.WriteLine("JWT OK for user: " + context.Principal?.Identity?.Name);
+                Console.WriteLine("JWT VALIDATED SUCCESSFULLY");
+                foreach (var claim in context.Principal.Claims)
+                    Console.WriteLine($"{claim.Type}: {claim.Value}");
                 return Task.CompletedTask;
             }
         };
     });
+    
 
 // Authorization Policies
 

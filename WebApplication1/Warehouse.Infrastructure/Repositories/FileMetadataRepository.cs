@@ -39,4 +39,15 @@ public class FileMetadataRepository : IFileMetadataRepository
                 x => x.Id == id,
                 cancellationToken);
     }
+
+
+    public async Task<FileMetadata?> GetByObjectKeyAsync(
+        string objectKey,
+        CancellationToken cancellationToken = default)
+    {
+        return await _context.FileMetadata
+            .FirstOrDefaultAsync(
+                x => x.ObjectKey == objectKey,
+                cancellationToken);
+    }
 }

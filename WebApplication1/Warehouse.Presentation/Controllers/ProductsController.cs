@@ -16,6 +16,7 @@ using Warehouse.Application.ViewModels;
 using Warehouse.Presentation.Contracts;
 using Warehouse.Presentation.Resources;
 using Warehouse.Application.Interfaces;
+using Warehouse.Domain.Interface;
 
 namespace Warehouse.Presentation.Controllers;
 
@@ -28,6 +29,7 @@ public class ProductsController : ControllerBase
     private readonly IMapper _mapper;
     private readonly IMediator _mediator;
     private readonly IStorageService _storageService;
+    private readonly IFileMetadataRepository _fileMetadataRepository;
 
 
     public ProductsController(
@@ -35,13 +37,15 @@ public class ProductsController : ControllerBase
         IMapper mapper,
         IStringLocalizer<SharedResources> localizer,
         ILogger<ProductsController> logger,
-        IStorageService storageService)
+        IStorageService storageService,
+        IFileMetadataRepository fileMetadataRepository)
     {
         _mediator = mediator;
         _mapper = mapper;
         _localizer = localizer;
         _logger = logger;
         _storageService = storageService;
+        _fileMetadataRepository = fileMetadataRepository;
     }
 
 
@@ -348,8 +352,9 @@ public class ProductsController : ControllerBase
             message = _localizer["ProductUpdated"].Value
         });
     }
+
+
     // GET: api/products/files/{objectKey}
-    
     [HttpGet("files/{objectKey}")]
     [Authorize(Policy = "UserPolicy")]
     public async Task<IActionResult> DownloadFile(
@@ -360,12 +365,16 @@ public class ProductsController : ControllerBase
             objectKey,
             cancellationToken
         );
-    
-    
+
+        var metadata = await _fileMetadataRepository
+            .GetByObjectKeyAsync(objectKey, cancellationToken);
+
+        var contentType = metadata?.ContentType ?? "application/octet-stream";
+
         return File(
             stream,
-            "application/octet-stream",
+            contentType,
             objectKey
         );
     }
-}
+}   

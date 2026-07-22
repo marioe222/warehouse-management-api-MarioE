@@ -11,4 +11,8 @@ public interface IFileMetadataRepository
     Task<FileMetadata?> GetByIdAsync(
         Guid id,
         CancellationToken cancellationToken = default);
+
+    Task<FileMetadata?> GetByObjectKeyAsync(
+        string objectKey,
+        CancellationToken cancellationToken = default);
 }
