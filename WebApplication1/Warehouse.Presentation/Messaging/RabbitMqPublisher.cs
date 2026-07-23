@@ -1,10 +1,11 @@
 using System.Text;
 using System.Text.Json;
 using RabbitMQ.Client;
+using Warehouse.Application.Interfaces;
 
 namespace Warehouse.Presentation.Messaging;
 
-public class RabbitMqPublisher
+public class RabbitMqPublisher : IEventPublisher
 {
     private readonly IConfiguration _configuration;
 
@@ -21,13 +22,19 @@ public class RabbitMqPublisher
         var factory = new ConnectionFactory
         {
             HostName = "localhost",
+            Port = 5672,
             UserName = "admin",
             Password = "admin123"
         };
 
-        await using var connection = await factory.CreateConnectionAsync();
 
-        await using var channel = await connection.CreateChannelAsync();
+        await using var connection =
+            await factory.CreateConnectionAsync();
+
+
+        await using var channel =
+            await connection.CreateChannelAsync();
+
 
 
         await channel.ExchangeDeclareAsync(
@@ -36,8 +43,11 @@ public class RabbitMqPublisher
             durable: true);
 
 
-        var body = Encoding.UTF8.GetBytes(
-            JsonSerializer.Serialize(message));
+
+        var body =
+            Encoding.UTF8.GetBytes(
+                JsonSerializer.Serialize(message));
+
 
 
         await channel.BasicPublishAsync(

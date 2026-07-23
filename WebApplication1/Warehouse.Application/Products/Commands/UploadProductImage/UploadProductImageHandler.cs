@@ -120,10 +120,14 @@ public class UploadProductImageHandler
 
 
         await _publisher.PublishAsync(
-            new WarehouseFileUploaded()
+            new WarehouseFileUploaded
             {
+                EventId = Guid.NewGuid(),
+
                 FileName = request.File.FileName,
+
                 FileUrl = objectKey,
+
                 UploadedAt = DateTime.UtcNow
             },
             "file.uploaded"

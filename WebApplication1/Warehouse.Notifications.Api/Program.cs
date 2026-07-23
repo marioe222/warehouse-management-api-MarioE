@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Warehouse.Notifications.Api.Data;
+using Warehouse.Notifications.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ builder.Services.AddDbContext<NotificationDbContext>(options =>
         builder.Configuration.GetConnectionString("NotificationDb")
     ));
 
+builder.Services.AddHostedService<RabbitMqConsumer>();
 
 var app = builder.Build();
 

@@ -50,7 +50,7 @@ builder.Host.UseSerilog((context, services, configuration) =>
             rollingInterval: RollingInterval.Day);
 });
 
-builder.Services.AddSingleton<RabbitMqPublisher>();
+builder.Services.AddSingleton<IEventPublisher, RabbitMqPublisher>();
 
 // PostgreSQL timestamp compatibility
 
