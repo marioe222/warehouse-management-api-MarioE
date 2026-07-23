@@ -13,6 +13,7 @@
 
     <ItemGroup>
         <Folder Include="Common\Results\" />
+        <Folder Include="Common\Validation\StockAdjustments\" />
         <Folder Include="DTOs\" />
         <Folder Include="Storage\" />
     </ItemGroup>
