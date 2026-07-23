@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Infrastructure", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Notifications.Api", "Warehouse.Notifications.Api\Warehouse.Notifications.Api.csproj", "{C98D6418-AA3B-453D-A65A-FA12B3FC94F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.IntegrationEvents", "Warehouse.IntegrationEvents\Warehouse.IntegrationEvents.csproj", "{FD7FFCB9-16FF-4DCB-A714-A20731A3FC6D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,5 +39,9 @@ Global
 		{C98D6418-AA3B-453D-A65A-FA12B3FC94F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C98D6418-AA3B-453D-A65A-FA12B3FC94F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C98D6418-AA3B-453D-A65A-FA12B3FC94F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD7FFCB9-16FF-4DCB-A714-A20731A3FC6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD7FFCB9-16FF-4DCB-A714-A20731A3FC6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD7FFCB9-16FF-4DCB-A714-A20731A3FC6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD7FFCB9-16FF-4DCB-A714-A20731A3FC6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
