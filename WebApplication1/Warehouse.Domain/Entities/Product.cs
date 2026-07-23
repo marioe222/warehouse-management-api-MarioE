@@ -118,15 +118,16 @@ public class Product
     }
 
 
-    public void UpdateQuantity(int quantity)
+    public void UpdateQuantity(int quantityChange)
     {
-        if (quantity < 0)
+        var newQuantity = QuantityInStock + quantityChange;
+
+        if (newQuantity < 0)
             throw new BusinessRuleException(
-                "Invalid  quantity"
+                "Quantity cannot be negative"
             );
 
-
-        QuantityInStock = quantity;
+        QuantityInStock = newQuantity;
 
         LastUpdatedAt = DateTime.UtcNow;
     }

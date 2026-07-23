@@ -48,7 +48,7 @@ public class RabbitMqConsumer : BackgroundService
                     await connection.CreateChannelAsync();
 
 
-                // Exchange used by Warehouse.Presentation
+
                 await channel.ExchangeDeclareAsync(
                     exchange: "warehouse.events",
                     type: ExchangeType.Topic,
@@ -56,7 +56,6 @@ public class RabbitMqConsumer : BackgroundService
 
 
 
-                // Notification queue
                 await channel.QueueDeclareAsync(
                     queue: "warehouse.notifications",
                     durable: true,
@@ -65,11 +64,17 @@ public class RabbitMqConsumer : BackgroundService
 
 
 
-                // Connect queue with exchange
                 await channel.QueueBindAsync(
                     queue: "warehouse.notifications",
                     exchange: "warehouse.events",
                     routingKey: "file.uploaded");
+
+
+
+                await channel.QueueBindAsync(
+                    queue: "warehouse.notifications",
+                    exchange: "warehouse.events",
+                    routingKey: "stock.low");
 
 
 
@@ -96,15 +101,46 @@ public class RabbitMqConsumer : BackgroundService
 
 
 
-                        var fileUploaded =
-                            JsonSerializer.Deserialize<WarehouseFileUploaded>(
-                                json);
+                        var routingKey =
+                            args.RoutingKey;
 
 
 
-                        if (fileUploaded != null)
+                        _logger.LogInformation(
+                            "Message received with routing key: {RoutingKey}",
+                            routingKey);
+
+
+
+                        if (routingKey == "file.uploaded")
                         {
-                            await SaveNotification(fileUploaded);
+                            var fileUploaded =
+                                JsonSerializer.Deserialize<WarehouseFileUploaded>(
+                                    json);
+
+
+                            if (fileUploaded != null)
+                            {
+                                await SaveFileNotification(
+                                    fileUploaded);
+                            }
+                        }
+
+
+
+                        else if (routingKey == "stock.low")
+                        {
+                            var stockLow =
+                                JsonSerializer.Deserialize<StockLowDetected>(
+                                    json);
+
+
+
+                            if (stockLow != null)
+                            {
+                                await SaveStockLowNotification(
+                                    stockLow);
+                            }
                         }
 
 
@@ -157,14 +193,11 @@ public class RabbitMqConsumer : BackgroundService
 
 
 
-
-    private async Task SaveNotification(
+    private async Task SaveFileNotification(
         WarehouseFileUploaded file)
     {
-
         using var scope =
             _serviceProvider.CreateScope();
-
 
 
         var db =
@@ -173,7 +206,6 @@ public class RabbitMqConsumer : BackgroundService
 
 
 
-        // Prevent duplicate notifications
         var exists =
             await db.Notifications
             .AnyAsync(x =>
@@ -184,7 +216,7 @@ public class RabbitMqConsumer : BackgroundService
         if (exists)
         {
             _logger.LogInformation(
-                "Duplicate event ignored: {EventId}",
+                "Duplicate file event ignored: {EventId}",
                 file.EventId);
 
             return;
@@ -215,7 +247,70 @@ public class RabbitMqConsumer : BackgroundService
 
 
         _logger.LogInformation(
-            "Notification created for file {FileName}",
+            "File upload notification created: {FileName}",
             file.FileName);
+    }
+
+
+
+
+
+    private async Task SaveStockLowNotification(
+        StockLowDetected stock)
+    {
+        using var scope =
+            _serviceProvider.CreateScope();
+
+
+        var db =
+            scope.ServiceProvider
+            .GetRequiredService<NotificationDbContext>();
+
+
+
+        var exists =
+            await db.Notifications
+            .AnyAsync(x =>
+                x.EventId == stock.EventId.ToString());
+
+
+
+        if (exists)
+        {
+            _logger.LogInformation(
+                "Duplicate stock.low event ignored: {EventId}",
+                stock.EventId);
+
+            return;
+        }
+
+
+
+        var notification = new Notification
+        {
+            Id = Guid.NewGuid(),
+
+            EventId = stock.EventId.ToString(),
+
+            Message =
+                $"LOW STOCK ALERT: {stock.ProductName} has {stock.CurrentQuantity} items remaining.",
+
+            CreatedAt =
+                DateTime.UtcNow
+        };
+
+
+
+        db.Notifications.Add(notification);
+
+
+        await db.SaveChangesAsync();
+
+
+
+        _logger.LogInformation(
+            "StockLowDetected notification created for {ProductName}. Quantity: {Quantity}",
+            stock.ProductName,
+            stock.CurrentQuantity);
     }
 }
