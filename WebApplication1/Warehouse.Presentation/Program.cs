@@ -19,7 +19,7 @@ using Warehouse.Presentation.Middleware;
 using Warehouse.Presentation.Services;
 using Warehouse.Presentation.Swagger;
 using Microsoft.IdentityModel.Logging;
-
+using Warehouse.Presentation.Messaging;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -49,6 +49,8 @@ builder.Host.UseSerilog((context, services, configuration) =>
             "Logs/log-.txt",
             rollingInterval: RollingInterval.Day);
 });
+
+builder.Services.AddSingleton<RabbitMqPublisher>();
 
 // PostgreSQL timestamp compatibility
 
