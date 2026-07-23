@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
 using Warehouse.Application.Common;
-using Warehouse.Domain.Interface;
 using Warehouse.Application.Common.Cache;
+using Warehouse.Domain.Interface;
 
 namespace Warehouse.Application.Products.Commands.ArchiveProduct;
 
