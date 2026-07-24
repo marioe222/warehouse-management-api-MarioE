@@ -19,4 +19,6 @@ public class WarehouseDbContext : DbContext
     public DbSet<ProductImage> ProductImages { get; set; }
 
     public DbSet<StockAdjustment> StockAdjustments { get; set; }
+    
+    public DbSet<FileMetadata> FileMetadata { get; set; }
 }

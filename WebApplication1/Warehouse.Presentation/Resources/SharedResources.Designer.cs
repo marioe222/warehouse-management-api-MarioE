@@ -87,6 +87,42 @@ namespace Warehouse.Presentation.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Description is required.
+        /// </summary>
+        public static string ProductDescriptionRequired {
+            get {
+                return ResourceManager.GetString("ProductDescriptionRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expiry date must be in the future.
+        /// </summary>
+        public static string ProductExpiryDateMustBeFuture {
+            get {
+                return ResourceManager.GetString("ProductExpiryDateMustBeFuture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product name cannot exceed {MaxLength} characters.
+        /// </summary>
+        public static string ProductNameMaxLength {
+            get {
+                return ResourceManager.GetString("ProductNameMaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product name is required.
+        /// </summary>
+        public static string ProductNameRequired {
+            get {
+                return ResourceManager.GetString("ProductNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Product not found.
         /// </summary>
         public static string ProductNotFound {
@@ -96,11 +132,83 @@ namespace Warehouse.Presentation.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Price must be greater than zero.
+        /// </summary>
+        public static string ProductPriceMustBePositive {
+            get {
+                return ResourceManager.GetString("ProductPriceMustBePositive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quantity cannot be negative.
+        /// </summary>
+        public static string ProductQuantityCannotBeNegative {
+            get {
+                return ResourceManager.GetString("ProductQuantityCannotBeNegative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quantity change cannot be zero..
+        /// </summary>
+        public static string QuantityChangeCannotBeZero {
+            get {
+                return ResourceManager.GetString("QuantityChangeCannotBeZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reason is required..
+        /// </summary>
+        public static string ReasonRequired {
+            get {
+                return ResourceManager.GetString("ReasonRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SKU cannot exceed {MaxLength} characters.
+        /// </summary>
+        public static string SkuMaxLength {
+            get {
+                return ResourceManager.GetString("SkuMaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SKU is required.
+        /// </summary>
+        public static string SkuRequired {
+            get {
+                return ResourceManager.GetString("SkuRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Stock adjustment created successfully.
         /// </summary>
         public static string StockAdjustmentCreated {
             get {
                 return ResourceManager.GetString("StockAdjustmentCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Supplier country cannot exceed {MaxLength} characters.
+        /// </summary>
+        public static string SupplierCountryMaxLength {
+            get {
+                return ResourceManager.GetString("SupplierCountryMaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Supplier country is required.
+        /// </summary>
+        public static string SupplierCountryRequired {
+            get {
+                return ResourceManager.GetString("SupplierCountryRequired", resourceCulture);
             }
         }
         
@@ -123,11 +231,65 @@ namespace Warehouse.Presentation.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Supplier email format is invalid.
+        /// </summary>
+        public static string SupplierEmailInvalid {
+            get {
+                return ResourceManager.GetString("SupplierEmailInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Supplier email is required.
+        /// </summary>
+        public static string SupplierEmailRequired {
+            get {
+                return ResourceManager.GetString("SupplierEmailRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Supplier name cannot exceed {MaxLength} characters.
+        /// </summary>
+        public static string SupplierNameMaxLength {
+            get {
+                return ResourceManager.GetString("SupplierNameMaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Supplier name is required.
+        /// </summary>
+        public static string SupplierNameRequired {
+            get {
+                return ResourceManager.GetString("SupplierNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Supplier not found.
         /// </summary>
         public static string SupplierNotFound {
             get {
                 return ResourceManager.GetString("SupplierNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Supplier phone number cannot exceed {MaxLength} characters.
+        /// </summary>
+        public static string SupplierPhoneMaxLength {
+            get {
+                return ResourceManager.GetString("SupplierPhoneMaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Supplier phone number is required.
+        /// </summary>
+        public static string SupplierPhoneRequired {
+            get {
+                return ResourceManager.GetString("SupplierPhoneRequired", resourceCulture);
             }
         }
         

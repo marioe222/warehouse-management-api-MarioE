@@ -3,24 +3,28 @@ using FluentValidation;
 using Hangfire;
 using Hangfire.MemoryStorage;
 using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Localization;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Warehouse.Application.Behaviors;
+using Warehouse.Application.Interfaces;
 using Warehouse.Application.Mapping;
 using Warehouse.Application.Products.Commands.CreateProduct;
-using Warehouse.Domain.Interface;
-using Warehouse.Infrastructure.Data;
-using Warehouse.Infrastructure.Repositories;
+using Warehouse.Infrastructure;
 using Warehouse.Presentation.Filters;
 using Warehouse.Presentation.Jobs;
 using Warehouse.Presentation.Middleware;
+using Warehouse.Presentation.Services;
 using Warehouse.Presentation.Swagger;
+using Microsoft.IdentityModel.Logging;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
 
+IdentityModelEventSource.ShowPII = true;
 
 // Serilog Configuration
 
@@ -34,6 +38,17 @@ builder.Host.UseSerilog(
                 rollingInterval: RollingInterval.Day);
     });
 
+builder.Host.UseSerilog((context, services, configuration) =>
+{
+    configuration
+        .ReadFrom.Configuration(context.Configuration)
+        .ReadFrom.Services(services)
+        .Enrich.FromLogContext()
+        .WriteTo.Console()
+        .WriteTo.File(
+            "Logs/log-.txt",
+            rollingInterval: RollingInterval.Day);
+});
 
 // PostgreSQL timestamp compatibility
 
@@ -46,11 +61,11 @@ AppContext.SetSwitch(
 // Controllers + Filters
 
 builder.Services.AddControllers(options =>
-    {
-        options.Filters.Add<ValidationFilter>();
-        options.Filters.Add<ActionLoggingFilter>();
-    })
-    .AddDataAnnotationsLocalization();
+{
+    options.Filters.Add<ValidationFilter>();
+    options.Filters.Add<ActionLoggingFilter>();
+})
+.AddDataAnnotationsLocalization();
 
 
 builder.Services.AddScoped<ValidationFilter>();
@@ -62,13 +77,11 @@ builder.Services.AddScoped<ActionLoggingFilter>();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 
-// Database
+// Infrastructure
+// Database + Firebase + Repositories
 
-builder.Services.AddDbContext<WarehouseDbContext>(options =>
-    options.UseNpgsql(
-        builder.Configuration
-            .GetConnectionString("DefaultConnection")
-    ));
+builder.Services.AddInfrastructure(
+    builder.Configuration);
 
 
 // Redis Cache
@@ -147,24 +160,118 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.DefaultRequestCulture =
         new RequestCulture("en");
 
-
     options.SupportedCultures =
         supportedCultures;
-
 
     options.SupportedUICultures =
         supportedCultures;
 });
 
 
-// Dependency Injection
-// Repositories
+// Localization Service (used by Application-layer validators via ILocalizationService)
 
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ILocalizationService, LocalizationService>();
 
-builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
 
-builder.Services.AddScoped<IStockAdjustmentRepository, StockAdjustmentRepository>();
+// Firebase JWT Authentication
+
+builder.Services
+    .AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme =
+            JwtBearerDefaults.AuthenticationScheme;
+
+        options.DefaultChallengeScheme =
+            JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        var projectId = "warehouse-api-5f159";
+        
+        options.MapInboundClaims = false;
+        
+        options.RequireHttpsMetadata = true;
+
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = $"https://securetoken.google.com/{projectId}",
+
+            ValidateAudience = true,
+            ValidAudience = projectId,
+
+            ValidateLifetime = true,
+            RoleClaimType = "role",
+
+            IssuerSigningKeyResolver = (token, securityToken, kid, parameters) =>
+            {
+                using var httpClient = new HttpClient();
+                var json = httpClient.GetStringAsync(
+                    "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com"
+                ).GetAwaiter().GetResult();
+
+                var jwks = new JsonWebKeySet(json);
+                return jwks.Keys;
+            }
+        };
+
+        options.Events = new JwtBearerEvents
+        {
+            OnMessageReceived = context =>
+            {
+                Console.WriteLine("TOKEN RECEIVED");
+                return Task.CompletedTask;
+            },
+            OnAuthenticationFailed = context =>
+            {
+                Console.WriteLine("JWT FAILED:");
+                Console.WriteLine(context.Exception.Message);
+                return Task.CompletedTask;
+            },
+            OnTokenValidated = context =>
+            {
+                Console.WriteLine("JWT VALIDATED SUCCESSFULLY");
+                foreach (var claim in context.Principal.Claims)
+                    Console.WriteLine($"{claim.Type}: {claim.Value}");
+                return Task.CompletedTask;
+            }
+        };
+    });
+    
+
+// Authorization Policies
+
+builder.Services.AddAuthorization(options =>
+{
+    // Admin users:
+    // Create products
+    // Update products
+    // Delete products
+    // Upload files
+
+    options.AddPolicy(
+        "AdminPolicy",
+        policy =>
+        {
+            policy.RequireRole("admin");
+        });
+
+
+    // Normal users + admins:
+    // Read products
+    // Read suppliers
+    // Read dashboard
+    // Read stock data
+
+    options.AddPolicy(
+        "UserPolicy",
+        policy =>
+        {
+            policy.RequireRole(
+                "admin",
+                "user");
+        });
+});
 
 
 // Hangfire Configuration
@@ -220,15 +327,19 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 
-// HTTPS + Authorization
+// HTTPS + Authentication + Authorization
 
 app.UseHttpsRedirection();
 
-
-// Hangfire Dashboard
-
 app.UseHangfireDashboard();
 
+
+// Firebase Token Validation
+
+app.UseAuthentication();
+
+
+// Authorization Policy Check
 
 app.UseAuthorization();
 

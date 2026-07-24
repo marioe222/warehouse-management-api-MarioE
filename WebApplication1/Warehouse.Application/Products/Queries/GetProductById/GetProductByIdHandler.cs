@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
+using Warehouse.Application.Common.Cache;
 using Warehouse.Domain.Interface;
 
 namespace Warehouse.Application.Products.Queries.GetProductById;
@@ -23,7 +24,7 @@ public class GetProductByIdHandler
         GetProductByIdQuery request,
         CancellationToken cancellationToken)
     {
-        var cacheKey = $"product:{request.Id}";
+        var cacheKey = CacheKeys.Product(request.Id);
 
         var cacheValue = await _cache.GetStringAsync(
             cacheKey,
@@ -35,7 +36,8 @@ public class GetProductByIdHandler
                 request.Id,
                 cancellationToken);
 
-            if (product == null) return null;
+            if (product == null)
+                return null;
 
             var response = new GetProductByIdResponse(
                 product.Id,

@@ -31,4 +31,4 @@ public class ProductImage
     public Guid ProductId { get; private set; }
 
     public Product Product { get; private set; } = null!;
-}
+}   

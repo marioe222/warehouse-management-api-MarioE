@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Warehouse.Application.StockAdjustments.Commands.CreateStockAdjustment;
@@ -28,6 +29,7 @@ public class StockAdjustmentsController : ControllerBase
 
     // POST: api/stock-adjustments
     [HttpPost]
+    [Authorize(Policy = "AdminPolicy")]
     public async Task<IActionResult> Create(
         CreateStockAdjustmentCommand command,
         CancellationToken cancellationToken = default)

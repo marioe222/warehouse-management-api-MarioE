@@ -4,6 +4,7 @@ using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
 using Warehouse.Application.ViewModels;
 using Warehouse.Domain.Interface;
+using Warehouse.Application.Common.Cache;
 
 namespace Warehouse.Application.Products.Queries.ListProducts;
 
@@ -28,7 +29,7 @@ public class ListProductsHandler
         ListProductsQuery request,
         CancellationToken cancellationToken)
     {
-        var cacheKey = $"products:{request.OnlyAvailable}";
+        var cacheKey = CacheKeys.Products(request.OnlyAvailable);
 
         var cacheValue = await _cache.GetStringAsync(
             cacheKey,

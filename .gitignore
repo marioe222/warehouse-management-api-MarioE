@@ -11,4 +11,12 @@
 # User-specific files
 *.user
 *.suo
+
+# Firebase
+**/Firebase/*.json
+firebase-adminsdk*.json
+serviceAccount.json
+
+# User Secrets
+secrets.json
 WebApplication1/Warehouse.Infrastructure/Firebase/serviceAccount.json 

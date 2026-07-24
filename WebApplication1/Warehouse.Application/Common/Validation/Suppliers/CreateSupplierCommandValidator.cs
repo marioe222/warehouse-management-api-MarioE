@@ -1,4 +1,5 @@
 using FluentValidation;
+using Warehouse.Application.Interfaces;
 using Warehouse.Application.Suppliers.Commands.CreateSupplier;
 
 namespace Warehouse.Application.Common.Validation.Suppliers;
@@ -6,30 +7,30 @@ namespace Warehouse.Application.Common.Validation.Suppliers;
 public class CreateSupplierCommandValidator
     : AbstractValidator<CreateSupplierCommand>
 {
-    public CreateSupplierCommandValidator()
+    public CreateSupplierCommandValidator(ILocalizationService localizer)
     {
         RuleFor(x => x.Name)
             .NotEmpty()
-            .WithMessage("Supplier name is required")
+            .WithMessage(localizer.GetString("SupplierNameRequired"))
             .MaximumLength(100)
-            .WithMessage("Supplier name cannot exceed 100 characters");
+            .WithMessage(localizer.GetString("SupplierNameMaxLength"));
 
         RuleFor(x => x.Country)
             .NotEmpty()
-            .WithMessage("Supplier country is required")
+            .WithMessage(localizer.GetString("SupplierCountryRequired"))
             .MaximumLength(100)
-            .WithMessage("Supplier country cannot exceed 100 characters");
+            .WithMessage(localizer.GetString("SupplierCountryMaxLength"));
 
         RuleFor(x => x.ContactEmail)
             .NotEmpty()
-            .WithMessage("Supplier email is required")
+            .WithMessage(localizer.GetString("SupplierEmailRequired"))
             .EmailAddress()
-            .WithMessage("Supplier email format is invalid");
+            .WithMessage(localizer.GetString("SupplierEmailInvalid"));
 
         RuleFor(x => x.PhoneNumber)
             .NotEmpty()
-            .WithMessage("Supplier phone number is required")
+            .WithMessage(localizer.GetString("SupplierPhoneRequired"))
             .MaximumLength(20)
-            .WithMessage("Supplier phone number cannot exceed 20 characters");
+            .WithMessage(localizer.GetString("SupplierPhoneMaxLength"));
     }
 }

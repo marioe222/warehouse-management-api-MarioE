@@ -1,4 +1,5 @@
 using FluentValidation;
+using Warehouse.Application.Interfaces;
 using Warehouse.Application.StockAdjustments.Commands.CreateStockAdjustment;
 
 namespace Warehouse.Application.Common.Validation.StockAdjustments;
@@ -6,18 +7,18 @@ namespace Warehouse.Application.Common.Validation.StockAdjustments;
 public class CreateStockAdjustmentValidator
     : AbstractValidator<CreateStockAdjustmentCommand>
 {
-    public CreateStockAdjustmentValidator()
+    public CreateStockAdjustmentValidator(ILocalizationService localizer)
     {
         RuleFor(x => x.ProductId)
             .NotEmpty()
-            .WithMessage("ProductId is required.");
+            .WithMessage(localizer.GetString("ProductIdRequired"));
 
         RuleFor(x => x.QuantityChange)
             .NotEqual(0)
-            .WithMessage("Quantity change cannot be zero.");
+            .WithMessage(localizer.GetString("QuantityChangeCannotBeZero"));
 
         RuleFor(x => x.Reason)
             .NotEmpty()
-            .WithMessage("Reason is required.");
+            .WithMessage(localizer.GetString("ReasonRequired"));
     }
 }

@@ -6,16 +6,40 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\Warehouse.Domain\Warehouse.Domain.csproj"/>
-    </ItemGroup>
 
     <ItemGroup>
+        <!-- Project References -->
+        <ProjectReference Include="..\Warehouse.Domain\Warehouse.Domain.csproj" />
+        <ProjectReference Include="..\Warehouse.Application\Warehouse.Application.csproj" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+        <!-- Firebase -->
+        <PackageReference Include="FirebaseAdmin" Version="3.6.0" />
+        <PackageReference Include="Google.Apis.Auth" Version="1.75.0" />
+
+
+        <!-- Database -->
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0"/>
+
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
+
+
+        <!-- MinIO -->
+        <PackageReference Include="Minio" Version="7.0.0" />
+
     </ItemGroup>
+
+
+    <ItemGroup>
+        <None Update="Firebase\serviceAccount.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
 
 </Project>

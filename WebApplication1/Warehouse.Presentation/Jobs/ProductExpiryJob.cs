@@ -7,7 +7,6 @@ public class ProductExpiryJob
     private readonly ILogger<ProductExpiryJob> _logger;
     private readonly IProductRepository _repository;
 
-
     public ProductExpiryJob(
         ILogger<ProductExpiryJob> logger,
         IProductRepository repository)
@@ -28,13 +27,11 @@ public class ProductExpiryJob
             today,
             cancellationToken);
 
-
         var expiredProducts = products
             .Where(p =>
                 p.ExpiryDate.HasValue &&
                 DateOnly.FromDateTime(p.ExpiryDate.Value) < today)
             .ToList();
-
 
         var soonToExpireProducts = products
             .Where(p =>
@@ -43,11 +40,9 @@ public class ProductExpiryJob
                 DateOnly.FromDateTime(p.ExpiryDate.Value) <= today.AddDays(30))
             .ToList();
 
-
         _logger.LogInformation(
             "Expired products count: {Count}",
             expiredProducts.Count);
-
 
         foreach (var product in expiredProducts)
         {
@@ -60,7 +55,6 @@ public class ProductExpiryJob
         _logger.LogInformation(
             "Soon-to-expire products count: {Count}",
             soonToExpireProducts.Count);
-
 
         foreach (var product in soonToExpireProducts)
         {

@@ -1,4 +1,5 @@
 using FluentValidation;
+using Warehouse.Application.Interfaces;
 using Warehouse.Application.Products.Commands.CreateProduct;
 
 namespace Warehouse.Application.Common.Validation.Products;
@@ -6,39 +7,34 @@ namespace Warehouse.Application.Common.Validation.Products;
 public class CreateProductCommandValidator
     : AbstractValidator<CreateProductCommand>
 {
-    public CreateProductCommandValidator()
+    public CreateProductCommandValidator(ILocalizationService localizer)
     {
         RuleFor(x => x.Name)
             .NotEmpty()
-            .WithMessage("Product name is required")
+            .WithMessage(localizer.GetString("ProductNameRequired"))
             .MaximumLength(100)
-            .WithMessage("Product name cannot exceed 100 characters");
-
+            .WithMessage(localizer.GetString("ProductNameMaxLength"));
 
         RuleFor(x => x.Sku)
             .NotEmpty()
-            .WithMessage("SKU is required")
+            .WithMessage(localizer.GetString("SkuRequired"))
             .MaximumLength(50)
-            .WithMessage("SKU cannot exceed 50 characters");
-
+            .WithMessage(localizer.GetString("SkuMaxLength"));
 
         RuleFor(x => x.Description)
             .NotEmpty()
-            .WithMessage("Description is required");
-
+            .WithMessage(localizer.GetString("ProductDescriptionRequired"));
 
         RuleFor(x => x.Price)
             .GreaterThan(0)
-            .WithMessage("Price must be greater than zero");
-
+            .WithMessage(localizer.GetString("ProductPriceMustBePositive"));
 
         RuleFor(x => x.QuantityInStock)
             .GreaterThanOrEqualTo(0)
-            .WithMessage("Quantity cannot be negative");
-
+            .WithMessage(localizer.GetString("ProductQuantityCannotBeNegative"));
 
         RuleFor(x => x.ExpiryDate)
             .GreaterThan(DateTime.UtcNow)
-            .WithMessage("Expiry date must be in the future");
+            .WithMessage(localizer.GetString("ProductExpiryDateMustBeFuture"));
     }
 }
