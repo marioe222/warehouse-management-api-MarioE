@@ -1,7 +1,9 @@
 using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
-using Warehouse.Domain.Entities;
+using Microsoft.Extensions.Logging;
+using Warehouse.Application.Interfaces;
 using Warehouse.Domain.Interface;
+using Warehouse.IntegrationEvents.Events;
 
 namespace Warehouse.Application.StockAdjustments.Commands.CreateStockAdjustment;
 
@@ -10,13 +12,23 @@ public class CreateStockAdjustmentHandler
 {
     private readonly IDistributedCache _cache;
     private readonly IStockAdjustmentRepository _repository;
+    private readonly IProductRepository _productRepository;
+    private readonly IEventPublisher _eventPublisher;
+    private readonly ILogger<CreateStockAdjustmentHandler> _logger;
+
 
     public CreateStockAdjustmentHandler(
         IStockAdjustmentRepository repository,
-        IDistributedCache cache)
+        IProductRepository productRepository,
+        IDistributedCache cache,
+        IEventPublisher eventPublisher,
+        ILogger<CreateStockAdjustmentHandler> logger)
     {
         _repository = repository;
+        _productRepository = productRepository;
         _cache = cache;
+        _eventPublisher = eventPublisher;
+        _logger = logger;
     }
 
 
@@ -24,7 +36,7 @@ public class CreateStockAdjustmentHandler
         CreateStockAdjustmentCommand request,
         CancellationToken cancellationToken)
     {
-        var adjustment = new StockAdjustment
+        var adjustment = new Warehouse.Domain.Entities.StockAdjustment
         {
             Id = Guid.NewGuid(),
             ProductId = request.ProductId,
@@ -36,11 +48,67 @@ public class CreateStockAdjustmentHandler
 
         var createdAdjustment = await _repository.Add(
             adjustment,
-            cancellationToken
-        );
+            cancellationToken);
 
 
-        // Remove Redis cache because product quantity changed
+        var product = await _productRepository.GetById(
+            request.ProductId,
+            cancellationToken);
+
+
+        if (product != null)
+        {
+            _logger.LogInformation(
+                "Product quantity before update: {Quantity}",
+                product.QuantityInStock);
+
+
+            var newQuantity =
+                product.QuantityInStock + request.QuantityChange;
+
+
+            product.UpdateQuantity(newQuantity);
+
+
+            _logger.LogInformation(
+                "Product quantity after update: {Quantity}",
+                product.QuantityInStock);
+
+
+            await _productRepository.Update(
+                product,
+                cancellationToken);
+
+
+            const int minimumQuantity = 10;
+
+
+            if (product.QuantityInStock <= minimumQuantity)
+            {
+                _logger.LogInformation(
+                    "Low stock detected for product {ProductName}. Publishing event.",
+                    product.Name);
+
+
+                await _eventPublisher.PublishAsync(
+                    new StockLowDetected
+                    {
+                        EventId = Guid.NewGuid(),
+                        ProductId = product.Id,
+                        ProductName = product.Name,
+                        CurrentQuantity = product.QuantityInStock,
+                        MinimumQuantity = minimumQuantity,
+                        DetectedAt = DateTime.UtcNow
+                    },
+                    "stock.low");
+
+
+                _logger.LogInformation(
+                    "StockLowDetected event published successfully.");
+            }
+        }
+
+
         await _cache.RemoveAsync(
             $"product:{request.ProductId}",
             cancellationToken);

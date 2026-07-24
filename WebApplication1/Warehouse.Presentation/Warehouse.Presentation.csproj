@@ -27,6 +27,8 @@
 
         <PackageReference Include="Microsoft.Extensions.Localization" Version="10.0.10" />
 
+        <PackageReference Include="RabbitMQ.Client" Version="7.2.1" />
+
         <PackageReference Include="Serilog.AspNetCore" Version="10.0.0" />
 
         <PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
@@ -40,6 +42,7 @@
     <ItemGroup>
         <ProjectReference Include="..\Warehouse.Application\Warehouse.Application.csproj" />
         <ProjectReference Include="..\Warehouse.Infrastructure\Warehouse.Infrastructure.csproj" />
+        <ProjectReference Include="..\Warehouse.IntegrationEvents\Warehouse.IntegrationEvents.csproj" />
     </ItemGroup>
 
 

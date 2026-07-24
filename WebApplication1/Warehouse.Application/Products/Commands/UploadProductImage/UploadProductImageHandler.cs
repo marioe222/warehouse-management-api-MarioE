@@ -3,6 +3,7 @@ using Microsoft.Extensions.Caching.Distributed;
 using Warehouse.Application.Interfaces;
 using Warehouse.Domain.Entities;
 using Warehouse.Domain.Interface;
+using Warehouse.IntegrationEvents.Events;
 
 namespace Warehouse.Application.Products.Commands.UploadProductImage;
 
@@ -13,18 +14,21 @@ public class UploadProductImageHandler
     private readonly IProductRepository _repository;
     private readonly IStorageService _storageService;
     private readonly IFileMetadataRepository _fileRepository;
+    private readonly IEventPublisher _publisher;
 
 
     public UploadProductImageHandler(
         IProductRepository repository,
         IDistributedCache cache,
         IStorageService storageService,
-        IFileMetadataRepository fileRepository)
+        IFileMetadataRepository fileRepository,
+        IEventPublisher publisher)
     {
         _repository = repository;
         _cache = cache;
         _storageService = storageService;
         _fileRepository = fileRepository;
+        _publisher = publisher;
     }
 
 
@@ -32,7 +36,6 @@ public class UploadProductImageHandler
         UploadProductImageCommand request,
         CancellationToken cancellationToken)
     {
-        // Check product exists
 
         var product = await _repository.GetById(
             request.ProductId,
@@ -47,10 +50,8 @@ public class UploadProductImageHandler
 
 
 
-        // File size validation (5 MB)
 
-        const long maxFileSize =
-            5 * 1024 * 1024;
+        const long maxFileSize = 5 * 1024 * 1024;
 
 
         if (request.File.Length > maxFileSize)
@@ -61,7 +62,6 @@ public class UploadProductImageHandler
 
 
 
-        // Content type validation
 
         var allowedTypes = new[]
         {
@@ -70,8 +70,7 @@ public class UploadProductImageHandler
         };
 
 
-        if (!allowedTypes.Contains(
-                request.File.ContentType))
+        if (!allowedTypes.Contains(request.File.ContentType))
         {
             throw new Exception(
                 "Only JPG and PNG images are allowed");
@@ -79,7 +78,6 @@ public class UploadProductImageHandler
 
 
 
-        // Upload file to MinIO
 
         await using var stream =
             request.File.OpenReadStream();
@@ -95,29 +93,22 @@ public class UploadProductImageHandler
 
 
 
-        // Save metadata in PostgreSQL
 
         var metadata = new FileMetadata
         {
             Id = Guid.NewGuid(),
 
-            FileName =
-                request.File.FileName,
+            FileName = request.File.FileName,
 
-            ObjectKey =
-                objectKey,
+            ObjectKey = objectKey,
 
-            ContentType =
-                request.File.ContentType,
+            ContentType = request.File.ContentType,
 
-            Size =
-                request.File.Length,
+            Size = request.File.Length,
 
-            ProductId =
-                request.ProductId,
+            ProductId = request.ProductId,
 
-            UploadedDate =
-                DateTime.UtcNow
+            UploadedDate = DateTime.UtcNow
         };
 
 
@@ -128,7 +119,22 @@ public class UploadProductImageHandler
 
 
 
-        // Clear Redis cache
+        await _publisher.PublishAsync(
+            new WarehouseFileUploaded
+            {
+                EventId = Guid.NewGuid(),
+
+                FileName = request.File.FileName,
+
+                FileUrl = objectKey,
+
+                UploadedAt = DateTime.UtcNow
+            },
+            "file.uploaded"
+        );
+
+
+
 
         await _cache.RemoveAsync(
             $"product:{request.ProductId}",
