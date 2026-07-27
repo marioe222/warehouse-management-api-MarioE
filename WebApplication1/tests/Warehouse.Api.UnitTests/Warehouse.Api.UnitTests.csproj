@@ -33,4 +33,9 @@
     <ProjectReference Include="..\..\Warehouse.Domain\Warehouse.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+    <Folder Include="Suppliers\" />
+  </ItemGroup>
+
 </Project>
