@@ -25,12 +25,14 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="10.0.10" />
 
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
 
 
         <!-- MinIO -->
         <PackageReference Include="Minio" Version="7.0.0" />
+        <PackageReference Include="RabbitMQ.Client" Version="7.2.1" />
 
     </ItemGroup>
 

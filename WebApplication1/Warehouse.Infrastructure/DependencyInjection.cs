@@ -20,7 +20,15 @@ public static class DependencyInjection
     {
 
         // Firebase
-        FirebaseInitializer.Initialize();
+        var firebaseEnabled = configuration
+            .GetValue<bool>("Firebase:Enabled");
+
+
+        if (firebaseEnabled)
+        {
+            FirebaseInitializer.Initialize();
+        }
+
 
         services.AddScoped<FirebaseAdminService>();
 
@@ -62,7 +70,7 @@ public static class DependencyInjection
         // Storage Service
 
         services.AddScoped<IStorageService, MinioStorageService>();
-        
+
         services.AddScoped<
             IFileMetadataRepository,
             FileMetadataRepository>();

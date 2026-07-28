@@ -20,6 +20,8 @@ using Warehouse.Presentation.Services;
 using Warehouse.Presentation.Swagger;
 using Microsoft.IdentityModel.Logging;
 using Warehouse.Presentation.Messaging;
+using Warehouse.Infrastructure.Messaging;
+using Microsoft.Extensions.Options;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -50,7 +52,6 @@ builder.Host.UseSerilog((context, services, configuration) =>
             rollingInterval: RollingInterval.Day);
 });
 
-builder.Services.AddSingleton<IEventPublisher, RabbitMqPublisher>();
 
 // PostgreSQL timestamp compatibility
 
@@ -85,6 +86,14 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddInfrastructure(
     builder.Configuration);
 
+// RabbitMQ
+
+builder.Services.Configure<RabbitMqOptions>(
+    builder.Configuration.GetSection("RabbitMq"));
+
+builder.Services.AddSingleton<IRabbitMqConnection, RabbitMqConnection>();
+
+builder.Services.AddSingleton<IEventPublisher, RabbitMqPublisher>();
 
 // Redis Cache
 
@@ -373,13 +382,18 @@ app.MapHealthChecksUI(options =>
 // Recurring Hangfire Job
 // Hangfire injects the real CancellationToken automatically
 
-RecurringJob.AddOrUpdate<ProductExpiryJob>(
-    "check-expired-products",
-    job => job.CheckProductsAsync(CancellationToken.None),
-    Cron.Daily
-);
+if (app.Environment.IsDevelopment() &&
+    !app.Environment.IsEnvironment("Testing"))
+{
+    RecurringJob.AddOrUpdate<ProductExpiryJob>(
+        "check-expired-products",
+        job => job.CheckProductsAsync(CancellationToken.None),
+        Cron.Minutely);
+}
 
 
 // Run
 
 app.Run();
+
+public partial class Program { }
