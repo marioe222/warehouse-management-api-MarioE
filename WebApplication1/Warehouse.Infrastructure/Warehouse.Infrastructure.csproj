@@ -32,6 +32,7 @@
 
         <!-- MinIO -->
         <PackageReference Include="Minio" Version="7.0.0" />
+        <PackageReference Include="RabbitMQ.Client" Version="7.2.1" />
 
     </ItemGroup>
 
