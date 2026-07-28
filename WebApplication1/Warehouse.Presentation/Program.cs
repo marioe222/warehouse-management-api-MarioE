@@ -373,13 +373,18 @@ app.MapHealthChecksUI(options =>
 // Recurring Hangfire Job
 // Hangfire injects the real CancellationToken automatically
 
-RecurringJob.AddOrUpdate<ProductExpiryJob>(
-    "check-expired-products",
-    job => job.CheckProductsAsync(CancellationToken.None),
-    Cron.Daily
-);
+if (app.Environment.IsDevelopment() &&
+    !app.Environment.IsEnvironment("Testing"))
+{
+    RecurringJob.AddOrUpdate<ProductExpiryJob>(
+        "check-expired-products",
+        job => job.CheckProductsAsync(CancellationToken.None),
+        Cron.Minutely);
+}
 
 
 // Run
 
 app.Run();
+
+public partial class Program { }

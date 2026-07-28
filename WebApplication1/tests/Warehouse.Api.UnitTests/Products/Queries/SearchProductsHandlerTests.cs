@@ -1,3 +1,4 @@
+using System.Text;
 using AutoMapper;
 using FluentAssertions;
 using Microsoft.Extensions.Caching.Distributed;
@@ -28,6 +29,7 @@ public class SearchProductsHandlerTests
             _cacheMock.Object);
     }
 
+
     [Fact]
     public async Task SearchProducts_ByName_ShouldReturnMatches()
     {
@@ -43,6 +45,7 @@ public class SearchProductsHandlerTests
                 DateTime.UtcNow.AddDays(30))
         };
 
+
         var productViewModels = new List<ProductViewModel>
         {
             new()
@@ -54,27 +57,33 @@ public class SearchProductsHandlerTests
             }
         };
 
+
         _cacheMock
-            .Setup(x => x.GetStringAsync(
+            .Setup(x => x.GetAsync(
                 It.IsAny<string>(),
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync((string?)null);
+            .ReturnsAsync((byte[]?)null);
+
 
         _repositoryMock
             .Setup(x => x.GetAll(It.IsAny<CancellationToken>()))
             .ReturnsAsync(products);
 
+
         _mapperMock
             .Setup(x => x.Map<List<ProductViewModel>>(It.IsAny<List<Product>>()))
             .Returns(productViewModels);
 
-        var query = new SearchProductsQuery("Laptop", null);
 
-        var result = await _handler.Handle(query, CancellationToken.None);
+        var result = await _handler.Handle(
+            new SearchProductsQuery("Laptop", null),
+            CancellationToken.None);
+
 
         result.Products.Should().HaveCount(1);
         result.Products.First().Name.Should().Be("Laptop");
     }
+
 
     [Fact]
     public async Task SearchProducts_BySupplier_ShouldReturnMatches()
@@ -91,6 +100,7 @@ public class SearchProductsHandlerTests
                 DateTime.UtcNow.AddDays(30))
         };
 
+
         var productViewModels = new List<ProductViewModel>
         {
             new()
@@ -100,27 +110,33 @@ public class SearchProductsHandlerTests
             }
         };
 
+
         _cacheMock
-            .Setup(x => x.GetStringAsync(
+            .Setup(x => x.GetAsync(
                 It.IsAny<string>(),
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync((string?)null);
+            .ReturnsAsync((byte[]?)null);
+
 
         _repositoryMock
             .Setup(x => x.GetAll(It.IsAny<CancellationToken>()))
             .ReturnsAsync(products);
 
+
         _mapperMock
             .Setup(x => x.Map<List<ProductViewModel>>(It.IsAny<List<Product>>()))
             .Returns(productViewModels);
 
-        var query = new SearchProductsQuery(null, "Dell");
 
-        var result = await _handler.Handle(query, CancellationToken.None);
+        var result = await _handler.Handle(
+            new SearchProductsQuery(null, "Dell"),
+            CancellationToken.None);
+
 
         result.Products.Should().ContainSingle();
         result.Products.First().SupplierName.Should().Be("Dell");
     }
+
 
     [Fact]
     public async Task SearchProducts_ByNameAndSupplier_ShouldReturnIntersection()
@@ -137,6 +153,7 @@ public class SearchProductsHandlerTests
                 DateTime.UtcNow.AddDays(30))
         };
 
+
         var productViewModels = new List<ProductViewModel>
         {
             new()
@@ -146,55 +163,64 @@ public class SearchProductsHandlerTests
             }
         };
 
+
         _cacheMock
-            .Setup(x => x.GetStringAsync(
+            .Setup(x => x.GetAsync(
                 It.IsAny<string>(),
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync((string?)null);
+            .ReturnsAsync((byte[]?)null);
+
 
         _repositoryMock
             .Setup(x => x.GetAll(It.IsAny<CancellationToken>()))
             .ReturnsAsync(products);
 
+
         _mapperMock
             .Setup(x => x.Map<List<ProductViewModel>>(It.IsAny<List<Product>>()))
             .Returns(productViewModels);
 
-        var query = new SearchProductsQuery("Laptop", "Dell");
 
-        var result = await _handler.Handle(query, CancellationToken.None);
+        var result = await _handler.Handle(
+            new SearchProductsQuery("Laptop", "Dell"),
+            CancellationToken.None);
+
 
         result.Products.Should().HaveCount(1);
         result.Products[0].Name.Should().Be("Laptop");
         result.Products[0].SupplierName.Should().Be("Dell");
     }
 
+
     [Fact]
     public async Task SearchProducts_ShouldStoreResultsInCache()
     {
-        // Arrange
         _cacheMock
-            .Setup(x => x.GetStringAsync(
+            .Setup(x => x.GetAsync(
                 It.IsAny<string>(),
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync((string?)null);
+            .ReturnsAsync((byte[]?)null);
+
 
         _repositoryMock
             .Setup(x => x.GetAll(It.IsAny<CancellationToken>()))
             .ReturnsAsync(new List<Product>());
 
+
         _mapperMock
             .Setup(x => x.Map<List<ProductViewModel>>(It.IsAny<List<Product>>()))
             .Returns(new List<ProductViewModel>());
+
 
         await _handler.Handle(
             new SearchProductsQuery(null, null),
             CancellationToken.None);
 
+
         _cacheMock.Verify(
-            x => x.SetStringAsync(
+            x => x.SetAsync(
                 It.IsAny<string>(),
-                It.IsAny<string>(),
+                It.IsAny<byte[]>(),
                 It.IsAny<DistributedCacheEntryOptions>(),
                 It.IsAny<CancellationToken>()),
             Times.Once);

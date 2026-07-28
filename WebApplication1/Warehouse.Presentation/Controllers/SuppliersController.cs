@@ -136,19 +136,22 @@ public class SuppliersController : ControllerBase
             cancellationToken
         );
 
-
         _logger.LogInformation(
             "Supplier {SupplierId} created",
-            response.Id);
-
+            response.SupplierId);
 
         return CreatedAtAction(
             nameof(GetById),
-            new { id = response.Id },
+            new { id = response.SupplierId },
             new
             {
                 message = _localizer["SupplierCreated"].Value,
-                data = _mapper.Map<SupplierViewModel>(response)
+                data = new SupplierViewModel
+                {
+                    SupplierId = response.SupplierId,
+                    Name = response.Name,
+                    ContactEmail = response.ContactEmail
+                }
             }
         );
     }

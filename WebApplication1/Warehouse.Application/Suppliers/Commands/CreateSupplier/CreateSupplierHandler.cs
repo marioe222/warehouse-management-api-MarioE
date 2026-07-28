@@ -28,22 +28,20 @@ public class CreateSupplierHandler
             request.ContactEmail
         );
 
-
         await _repository.Add(
             supplier,
             cancellationToken
         );
 
-
         await _cache.RemoveAsync(
             "suppliers",
-            cancellationToken);
-
+            cancellationToken
+        );
 
         return new CreateSupplierResponse(
-            supplier.Id,
-            supplier.Name,
-            supplier.ContactEmail
+            SupplierId: supplier.Id,
+            Name: supplier.Name,
+            ContactEmail: supplier.ContactEmail
         );
     }
 }

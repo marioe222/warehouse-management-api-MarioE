@@ -1,6 +1,8 @@
 using AutoMapper;
 using Warehouse.Application.Products.Commands.CreateProduct;
 using Warehouse.Application.Products.Queries.GetProductById;
+using Warehouse.Application.Suppliers.Commands.CreateSupplier;
+using Warehouse.Application.Suppliers.Queries.GetSupplierById;
 using Warehouse.Application.ViewModels;
 using Warehouse.Domain.Entities;
 
@@ -12,12 +14,10 @@ public class MappingProfile : Profile
     {
         CreateMap<Supplier, SupplierViewModel>();
 
-
         CreateMap<Product, ProductViewModel>()
             .ForMember(
                 destination => destination.Quantity,
-                option => option.MapFrom(source => source.QuantityInStock
-                )
+                option => option.MapFrom(source => source.QuantityInStock)
             )
             .ForMember(
                 destination => destination.SupplierName,
@@ -28,11 +28,13 @@ public class MappingProfile : Profile
             );
 
 
-        // POST /api/products
         CreateMap<CreateProductResponse, ProductViewModel>();
 
-
-        // GET /api/products/{id}
         CreateMap<GetProductByIdResponse, ProductViewModel>();
+
+
+        CreateMap<CreateSupplierResponse, SupplierViewModel>();
+
+        CreateMap<GetSupplierByIdResponse, SupplierViewModel>();
     }
 }

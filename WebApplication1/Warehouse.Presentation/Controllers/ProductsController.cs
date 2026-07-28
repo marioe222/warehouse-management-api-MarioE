@@ -134,9 +134,7 @@ public class ProductsController : ControllerBase
             supplier);
 
 
-        return Ok(
-            _mapper.Map<List<ProductViewModel>>(products)
-        );
+        return Ok(products.Products);
     }
 
 
@@ -178,8 +176,8 @@ public class ProductsController : ControllerBase
     }
 
 
-    // POST: api/products/{id}/quantity
-    [HttpPost("{id:guid}/quantity")]
+    // PUT: api/products/{id}/quantity
+    [HttpPut("{id:guid}/quantity")]
     [Authorize(Policy = "AdminPolicy")]
     public async Task<IActionResult> UpdateQuantity(
         Guid id,
@@ -211,8 +209,8 @@ public class ProductsController : ControllerBase
     }
 
 
-    // POST: api/products/{id}/price
-    [HttpPost("{id:guid}/price")]
+    // PUT: api/products/{id}/price
+    [HttpPut("{id:guid}/price")]
     [Authorize(Policy = "AdminPolicy")]
     public async Task<IActionResult> UpdatePrice(
         Guid id,
